@@ -18,9 +18,13 @@
       <input id="senha_login" name="senha_login" type="password"/>
     </p>
     <p>
-      <label>
-      <input type="checkbox" name="manterlogado" value="sim" /> Manter logado
-      </label>
+      <label for="senha_login">Perfil: </label>
+      <select>
+         <option value="" selected>Selecione uma opção</option>
+        <option value="professor">Professor</option>
+        <option value="aluno">Aluno</option>
+        <option value="admin">Administrador</option>
+      </select>
     </p>
     <p> 
       <button type="submit" >Login</button> 
