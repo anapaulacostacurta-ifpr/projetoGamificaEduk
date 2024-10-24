@@ -27,15 +27,19 @@ async function loaduser(file, user, pwd, funcao) {
 
 //login Usuário
 function login() {
-  var urlAtual = window.location.href;
-  var urlClass = new URL(urlAtual);
-  var usuario = urlClass.searchParams.get("nome_login");
-  var senha = urlClass.searchParams.get("senha_login");
-  var perfil = urlClass.searchParams.get("perfil_usuario");
+   var usuario = document.getElementById("nome_login");
+  var senha = document.getElementById("senha_login");
+  var perfil = document.getElementById("perfil_usuario");
   if(loaduser('./assets/users.txt',usuario, senha, perfil)){
     window.location = './home.html';
   }else{
     window.alert("Usuário ou Senha inválido!");
   }
 }
+
+// Take over form submission
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  login();
+});
 
