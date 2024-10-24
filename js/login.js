@@ -6,10 +6,11 @@ async function loaduser(file, user, pwd, funcao) {
 
   lines.forEach(line => {
     const parts = line.split(';');
-    if (parts.length === 3) {
+    if (parts.length === 4) {
       const login = parseInt(parts[0]);
       const senha = parseInt(parts[1]);
       const perfil = parseInt(parts[2]);  
+      const nome = parseInt(parts[3]); 
     }
     if(user === login){
       if(senha === pwd){
@@ -23,5 +24,18 @@ async function loaduser(file, user, pwd, funcao) {
 
   
 }
-// Carregar os usuários
-const user = loadGraph('./assets/users.txt');
+
+//login Usuário
+function login() {
+  var urlAtual = window.location.href;
+  var urlClass = new URL(urlAtual);
+  var usuario = urlClass.searchParams.get("nome_login");
+  var senha = urlClass.searchParams.get("senha_login");
+  var perfil = urlClass.searchParams.get("perfil_usuario");
+  if(loaduser('./assets/users.txt',usuario, senha, perfil)){
+    window.location = './home.html';
+  }else{
+    window.alert("Usuário ou Senha inválido!");
+  }
+}
+

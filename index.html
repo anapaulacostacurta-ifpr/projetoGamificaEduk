@@ -7,7 +7,7 @@
   <title>Formulário de Login</title>
 </head>
 <body>
-  <form method="#" action="#URL">
+  <form OnSubmit="javascript:login();" action="get">
     <h1>Login</h1>
     <p>
       <label for="nome_login">Usuário: </label>
@@ -18,7 +18,7 @@
       <input id="senha_login" name="senha_login" type="password"/>
     </p>
     <p>
-      <label for="senha_login">Perfil: </label>
+      <label for="perfil_usuario">Perfil: </label>
       <select>
          <option value="" selected>Selecione uma opção</option>
         <option value="professor">Professor</option>
@@ -36,5 +36,6 @@
       <a href="#URL">Esqueceu a senha?</a>
     </p>
   </form>
+  <script src="./js/login.js"></script>
 </body>
 </html>
