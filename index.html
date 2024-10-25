@@ -1,41 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html>
+
 <head>
-  <meta charset=utf-8 />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/global.css">
-  <title>Formulário de Login</title>
+    <title>GamificaEduk</title>
+    <link rel="stylesheet" href="/assets/css/index.css">
 </head>
+
 <body>
-  <form>
-    <h1>Login</h1>
-    <p>
-      <label for="nome_login">Usuário: </label>
-      <input id="nome_login" name="nome_login" type="text"/>
-    </p>
-    <p>
-      <label for="senha_login">Senha: </label>
-      <input id="senha_login" name="senha_login" type="password"/>
-    </p>
-    <p>
-      <label for="perfil_usuario">Perfil: </label>
-      <select>
-         <option value="" selected>Selecione uma opção</option>
-        <option value="professor">Professor</option>
-        <option value="aluno">Aluno</option>
-        <option value="admin">Administrador</option>
-      </select>
-    </p>
-    <p> 
-      <button type="submit" >Login</button> 
-    </p>
-    <p> 
-      <a href="#URL">Ainda não tem conta?</a>
-    </p>
-    <p> 
-      <a href="#URL">Esqueceu a senha?</a>
-    </p>
-  </form>
-  <script src="./js/login.js"></script>
+    <header>
+        <nav class="nav-bar">
+            <div class="logo">
+                <h1>Logo</h1>
+            </div>
+            <div class="nav-list">
+                <ul>
+                    <li class="nav-item"><a href="#" class="nav-link">Início</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"> Sobre</a></li>
+                </ul>
+            </div>
+            <div class="login-button">
+                <button><a href="/html/login/login.html">Entrar</a></button>
+            </div>
+
+            <div class="mobile-menu-icon">
+                <button onclick="menuShow()"><img class="icon" src="/assets/img/menu_white_36dp.svg" alt=""></button>
+            </div>
+        </nav>
+        <div class="mobile-menu">
+            <ul>
+                <li class="nav-item"><a href="#" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
+            </ul>
+
+            <div class="login-button">
+                <button><a href="/html/login/login.html">Entrar</a></button>
+            </div>
+        </div>
+    </header>
+
+    
+
 </body>
+<script src="/assets/js/index.js"></script>
+<script src="validations.js"></script>
+<script src="loading.js"></script>
+
 </html>
