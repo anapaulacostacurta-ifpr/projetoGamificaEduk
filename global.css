@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background: rgb(45, 211, 111);
+    background: #7dcbe2;
 }
 
 header {
@@ -48,7 +48,7 @@ button:active {
     opacity: 0.8;
 }
 button[disabled] {
-    opacity: 0.8;
+    opacity: 0.3;
 }
 
 button.fab {
