@@ -13,18 +13,34 @@
             <div class="navbar-brand">
                 <h1><img src="./assets/img/AnaBiTE.svg" alt="150" width="250" style="max-width: 100%;"></h1>
             </div>
-            <div class="nav nav-pills nav-justified">
+            <div class="nav-list">
                 <ul>
-                    <li class="nav-link"><a href="#inicio" class="nav-link">Início</a></li>
-                    <li class="nav-link"><a href="#projetos" class="nav-link">Projetos</a></li>
-                    <li class="nav-link"><a href="#sobre" class="nav-link"> Sobre</a></li>
+                    <li class="nav-item"><a href="#inicio" class="nav-link">Início</a></li>
+                    <li class="nav-item"><a href="#projetos" class="nav-link">Projetos</a></li>
+                    <li class="nav-item"><a href="#sobre" class="nav-link"> Sobre</a></li>
                 </ul>
             </div>
             <div class="login-button">
-                <button class="btn btn-primary"><a href="./html/login/login.html">Portal Aluno</a></button>
-                <button class="btn btn-primary"><a href="./html/login/login.html">Portal Professor</a></button>
+                <button><a href="./html/login/login.html">Portal Aluno</a></button>
+                <button><a href="./html/login/login.html">Portal Professor</a></button>
+            </div>
+
+            <div class="mobile-menu-icon">
+                <button onclick="menuShow()"><img class="icon" src="./assets/img/menu_white_36dp.svg" alt=""></button>
             </div>
         </nav>
+        <div class="mobile-menu">
+            <ul>
+                <li class="nav-item"><a href="#inicio" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="#projetos" class="nav-link">Projetos</a></li>
+                <li class="nav-item"><a href="#sobre" class="nav-link">Sobre</a></li>
+            </ul>
+
+            <div class="login-button">
+                <button><a href="./html/login/login.html">Portal Aluno</a></button><br>
+                <button><a href="./html/login/login.html">Portal Professor</a></button>
+            </div>
+        </div>
     </header>
     <main>
         <section id="inicio"><img src="./assets/img/pagina_inicio.jpg" alt="600" width="800" style="max-width: 100%;"></section>
