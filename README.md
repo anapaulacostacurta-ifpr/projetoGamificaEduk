@@ -2,7 +2,7 @@
 
 ## Link app**: https://anapaulacostacurta-ifpr.github.io/projetoGamificaEduk/
 
-## Idéias de Protóripos:
+## Idéias de Protótipos:
 
 **Logo**: https://www.canva.com/design/DAGUlqCo5cM/0_R4Sumc9v7Iz_vCNIDeEA/view?utm_content=DAGUlqCo5cM&utm_campaign=designshare&utm_medium=link&utm_source=editor
 
