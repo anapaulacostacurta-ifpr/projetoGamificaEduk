@@ -1,7 +1,7 @@
 const questionService = {
     getAll: async () => {
         const questionsRef = firebase.firestore().collection("questions");
-        const snapshot = await getDocs(questionsRef);
+        const snapshot = await questionsRef.get();
         const questions = snapshot.docs.map(doc => ({
           uid: doc.id,
           ...doc.data()
