@@ -1,4 +1,4 @@
-const transactionService = {
+const questionService = {
     findByUid: uid => {
         return firebase.firestore()
             .collection("questions")
@@ -8,21 +8,21 @@ const transactionService = {
                 return doc.data();
             })
     },
-    remove: questions => {
+    remove: question => {
         return firebase.firestore()
             .collection("questions")
-            .doc(questions.uid)
+            .doc(question.uid)
             .delete();
     },
-    save: questions => {
-        return firebase.firestore()
-            .collection('questions')
-            .add(questions);
-    },
-    update: questions => {
+    save: question => {
         return firebase.firestore()
             .collection("questions")
-            .doc(getquestionsUid())
-            .update(questions);
+            .add(question);
+    },
+    update: question => {
+        return firebase.firestore()
+            .collection("questions")
+            .doc(question.uid)
+            .update(question);
     }
 }

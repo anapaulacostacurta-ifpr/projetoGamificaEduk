@@ -4,7 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz Viewer</title>
-  <link rel="stylesheet" href="questions.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+  <script src="../../firebase-init.js"></script>
+  <script src="../../auth-guard.js"></script>
+  <script src="../../loading.js"></script>
+  <script src="../../services/questions.service.js"></script>
 </head>
 <body>
   <div class="container">
@@ -12,13 +19,14 @@
     <div id="quiz-card">
       <p><strong>Categoria:</strong> <span id="category"></span></p>
       <p><strong>Tipo:</strong> <span id="type"></span></p>
-      <p><strong>Fase:</strong> <span id="fase"></span></p>
+      <p><strong>Fase:</strong> <span id="level"></span></p>
       <p><strong>Pergunta:</strong> <span id="question"></span></p>
       <p><strong>Opções:</strong></p>
       <ul id="options-list"></ul>
       <p><strong>Resposta correta:</strong> <span id="answer"></span></p>
     </div>
   </div>
-  <script src="questions.js"></script>
+  <script src="questions.service.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
