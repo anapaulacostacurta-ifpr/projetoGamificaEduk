@@ -1,3 +1,8 @@
+// Obter uma referência à coleção "questions"
+const questionsRef = firebase.firestore().collection('questions');
+
+
+
 const questionService = {
     findByUid: uid => {
         return firebase.firestore()
