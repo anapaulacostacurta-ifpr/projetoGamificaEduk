@@ -1,5 +1,4 @@
-import db from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { db } from './firebase-init.js';
 
 const questionService = {
     getAll: async () => {
