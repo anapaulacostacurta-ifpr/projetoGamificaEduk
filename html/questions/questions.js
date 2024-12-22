@@ -9,7 +9,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const difficulty = document.getElementById("difficulty").value;
   const question = document.getElementById("question").value;
   const options = document.getElementById("options").value.split(",").map(option => option.trim()); // Divide as opções
-  const answer = document.getElementById("answer").value;
+  const answer = document.getElementById("answer").value.split(",").map(answer => answer.trim());
   const time_answer = document.getElementById("time_answer").value;
   const feedback_correct = document.getElementById("feedback_correct").value;
   const feedback_incorrect = document.getElementById("feedback_incorrect").value;
