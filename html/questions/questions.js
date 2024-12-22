@@ -11,7 +11,7 @@ const optionsListEl = document.getElementById("options-list");
 const answerEl = document.getElementById("answer");
 
 // Função para carregar os dados e preencher o HTML
-questionService.findByUid(S4IkIXe4ULR1MAZAjyTV).then(questionData => {
+questionService.findByUid("S4IkIXe4ULR1MAZAjyTV").then(questionData => {
   if (!questionData) {
     console.error("Documento não encontrado!");
     return;
