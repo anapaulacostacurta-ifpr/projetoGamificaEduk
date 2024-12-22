@@ -35,5 +35,3 @@ const questionService = {
             .update(question);
     }
 }
-
-export default questionService;
