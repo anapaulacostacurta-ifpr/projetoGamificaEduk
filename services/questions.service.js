@@ -1,3 +1,6 @@
+import db from "./firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 const questionService = {
     getAll: async () => {
         const questionsRef = collection(db, "questions");
