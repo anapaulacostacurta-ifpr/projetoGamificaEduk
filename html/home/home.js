@@ -7,6 +7,6 @@ function logout() {
 }
 
 function newQuestion() {
-    window.location.href = "/html/questions/questions.html";
+    window.location.href = "html/questions/questions.html";
 }
 
