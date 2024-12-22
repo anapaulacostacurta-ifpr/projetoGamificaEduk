@@ -3,26 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Viewer</title>
+  <title>Cadastrar Novo Quiz</title>
   <link rel="stylesheet" href="questions.css">
-  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   <script src="../../firebase-init.js"></script>
-  <script src="../../auth-guard.js"></script>
-
 </head>
 <body>
   <div class="container">
-    <h1>Quiz Viewer</h1>
+    <h1>Cadastrar Novo Quiz</h1>
     <div id="quiz-card">
-      <p><strong>Categoria:</strong> <span id="category"></span></p>
-      <p><strong>Tipo:</strong> <span id="type"></span></p>
-      <p><strong>Fase:</strong> <span id="level"></span></p>
-      <p><strong>Pergunta:</strong> <span id="question"></span></p>
-      <p><strong>Opções:</strong></p>
-      <ul id="options-list"></ul>
-      <p><strong>Resposta correta:</strong> <span id="answer"></span></p>
+      <form id="quiz-form">
+        <p>
+          <label for="category"><strong>Categoria:</strong></label>
+          <input type="text" id="category" name="category" required>
+        </p>
+        <p>
+          <label for="type"><strong>Tipo:</strong></label>
+          <input type="text" id="type" name="type" required>
+        </p>
+        <p>
+          <label for="difficulty"><strong>Fase:</strong></label>
+          <input type="text" id="difficulty" name="difficulty" required>
+        </p>
+        <p>
+          <label for="question"><strong>Pergunta:</strong></label>
+          <input type="text" id="question" name="question" required>
+        </p>
+        <p>
+          <label for="options"><strong>Opções (separadas por vírgula):</strong></label>
+          <input type="text" id="options" name="options" required>
+        </p>
+        <p>
+          <label for="answer"><strong>Resposta correta:</strong></label>
+          <input type="text" id="answer" name="answer" required>
+        </p>
+        <p>
+          <button type="submit">Cadastrar Quiz</button>
+        </p>
+      </form>
     </div>
   </div>
   <script src="../../services/questions.service.js"></script>
