@@ -28,7 +28,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   };
 
   // Chama a função para salvar o quiz no Firestore
-  saveQuiz(newQuiz);
+  questionService.save(newQuiz);
 
   // Limpa o formulário após o envio
   document.getElementById("quiz-form").reset();
