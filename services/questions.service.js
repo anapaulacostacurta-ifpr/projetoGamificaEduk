@@ -1,8 +1,6 @@
-import { db } from '../firebase-init.js';
-
 const questionService = {
     getAll: async () => {
-        const questionsRef = collection(db, "questions");
+        const questionsRef = firebase.firestore().collection("questions");
         const snapshot = await getDocs(questionsRef);
         const questions = snapshot.docs.map(doc => ({
           uid: doc.id,

@@ -10,8 +10,3 @@ const firebaseConfig = {
   
 firebase.initializeApp(firebaseConfig);  
   
-// Exportar os serviços
-const db = firebase.firestore();
-
-export {firebase, db};
-  
