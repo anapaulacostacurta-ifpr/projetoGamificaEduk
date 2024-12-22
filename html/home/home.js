@@ -19,8 +19,8 @@ function loadQuestions() {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
           <p><strong>UID:</strong> ${question.uid}</p>
-          <p><strong>Pergunta:</strong> ${question.pergunta}</p>
-          <p><strong>Respostas:</strong> ${question.respostas}</p>
+          <p><strong>Pergunta:</strong> ${question.question}</p>
+          <p><strong>Respostas:</strong> ${question.options}</p>
         `;
         questionsList.appendChild(listItem);
       });
