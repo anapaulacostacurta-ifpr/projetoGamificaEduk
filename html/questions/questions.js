@@ -1,6 +1,6 @@
 // ID do documento a ser carregado
 //const questionUid = document.getElementById("questionUid"); // Substitua pelo UID do documento desejado
-const questionUid = "S4IkIXe4ULR1MAZAjyTV";
+const questionUid = S4IkIXe4ULR1MAZAjyTV;
 
 // Elementos do DOM
 const categoryEl = document.getElementById("category");
