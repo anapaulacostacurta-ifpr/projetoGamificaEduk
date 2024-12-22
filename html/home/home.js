@@ -10,17 +10,24 @@ function newQuestion() {
     window.location.href = "../questions/questions.html";
 }
 
-// Buscar todos os documentos da coleção
-function showQuestions(){
-    questionsRef.get().then(snapshot => {
-        // Iterar sobre os documentos
-            snapshot.forEach(doc => {
-            // Obter os dados do documento
-            const questionData = doc.data();
-            // Fazer algo com os dados, por exemplo, exibir no console
-            console.log(questionData);
-             });    
-            }).catch(error => {
-            console.error("Erro ao buscar os dados:", error);
-            });
-}
+function loadQuestions() {
+    const questionsList = document.getElementById('questionUid');
+    questionsList.innerHTML = ''; // Limpa a lista de perguntas
+
+    questionService.getAll().then(questions => {
+      questions.forEach(question => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          <p><strong>UID:</strong> ${question.uid}</p>
+          <p><strong>Descrição:</strong> ${question.description}</p>
+        `;
+        questionsList.appendChild(listItem);
+      });
+    }).catch(error => {
+      console.error('Erro ao carregar perguntas:', error);
+    });
+  }
+
+  // Chama a função para carregar as perguntas ao carregar a página
+  window.onload = loadQuestions;
+

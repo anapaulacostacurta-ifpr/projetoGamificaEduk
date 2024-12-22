@@ -1,9 +1,13 @@
-// Obter uma referência à coleção "questions"
-const questionsRef = firebase.firestore().collection('questions');
-
-
-
 const questionService = {
+    getAll: async () => {
+        const questionsRef = collection(db, "questions");
+        const snapshot = await getDocs(questionsRef);
+        const questions = snapshot.docs.map(doc => ({
+          uid: doc.id,
+          ...doc.data()
+        }));
+        return questions;
+    },
     findByUid: uid => {
         return firebase.firestore()
             .collection("questions")
@@ -31,3 +35,5 @@ const questionService = {
             .update(question);
     }
 }
+
+export default questionService;

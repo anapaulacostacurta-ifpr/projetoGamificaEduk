@@ -1,5 +1,5 @@
 // ID do documento a ser carregado
-//const questionUid = document.getElementById("questionUid"); // Substitua pelo UID do documento desejado
+const questionUid = document.getElementById("questionUid"); // Substitua pelo UID do documento desejado
 
 
 // Elementos do DOM
@@ -11,7 +11,7 @@ const optionsListEl = document.getElementById("options-list");
 const answerEl = document.getElementById("answer");
 
 // Função para carregar os dados e preencher o HTML
-questionService.findByUid("S4IkIXe4ULR1MAZAjyTV").then(questionData => {
+questionService.findByUid(questionUid).then(questionData => {
   if (!questionData) {
     console.error("Documento não encontrado!");
     return;
