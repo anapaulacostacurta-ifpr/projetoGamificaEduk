@@ -24,10 +24,13 @@ function startQuiz() {
 // Função para renderizar a pergunta atual
 function renderQuestion() {
   const question = questions[currentQuestion];
+  console.log(question);
   // Inserir o texto da pergunta na div apropriada
   const questionElement = document.querySelector('.que_text');
   questionElement.innerText = question.text;
-
+  console.log (questionElement.innerHTML)
+  console.log (question.text);
+  
   // Inserir as opções de resposta na div apropriada
   const optionsElement = document.querySelector('.option_list');
   optionsElement.innerHTML = ''; // Limpar opções anteriores
