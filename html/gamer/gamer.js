@@ -17,7 +17,7 @@
       console.error('Erro ao carregar perguntas:', error);
     });
   }
-  
+
   document.addEventListener("DOMContentLoaded", () => {loadQuestion;});
     
   let currentQuestionIndex = 0;
@@ -104,4 +104,3 @@
   };
 
   loadQuestion();
-});
