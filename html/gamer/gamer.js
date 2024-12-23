@@ -104,7 +104,7 @@ const resultContainer = document.getElementById("result-container");
 const scoreMessage = document.getElementById("score-message");
 const scoreElement = document.getElementById("score");
 const totalQuestions = document.getElementById("total-questions");
-const reponderButton = document.getElementById("respoder-button");
+const restartButton = document.getElementById("restart-button");
 const quizContainer = document.getElementById("quiz-container");
 
 
