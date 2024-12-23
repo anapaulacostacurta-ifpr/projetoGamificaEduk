@@ -25,12 +25,33 @@ function startQuiz() {
 function renderQuestion() {
   const question = questions[currentQuestion];
   // Inserir o texto da pergunta na div apropriada
-  // ...
+  const questionElement = document.querySelector('.que_text');
+  questionElement.innerText = question.text;
+
   // Inserir as opções de resposta na div apropriada
-  // ...
-  // Habilitar eventos de click nas opções
-  // ...
+  const optionsElement = document.querySelector('.option_list');
+  optionsElement.innerHTML = ''; // Limpar opções anteriores
+
+  question.options.forEach((option, index) => {
+    const optionButton = document.createElement('button');
+    optionButton.classList.add('option'); // Adicionar classe de estilo para as opções
+    optionButton.innerText = option; // Texto da opção
+    optionButton.dataset.index = index; // Adicionar um índice para referência
+
+    // Habilitar evento de clique na opção
+    optionButton.addEventListener('click', () => handleOptionClick(index));
+
+    // Adicionar o botão à lista de opções
+    optionsElement.appendChild(optionButton);
+  });
 }
+
+// Função para lidar com o clique em uma opção
+function handleOptionClick(selectedIndex) {
+  console.log('Opção ${selectedIndex} clicada!');
+  // Aqui você pode adicionar lógica para verificar se a resposta está correta
+}
+
 
 
 // Função para mostrar o resultado do quiz
