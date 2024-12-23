@@ -1,10 +1,11 @@
+// Serviço para interação com o Firestore
 const questionService = {
     getAll: async () => {
         const questionsRef = firebase.firestore().collection("questions");
         const snapshot = await questionsRef.get();
         const questions = snapshot.docs.map(doc => ({
-          uid: doc.id,
-          ...doc.data()
+            uid: doc.id,
+            ...doc.data()
         }));
         return questions;
     },
@@ -15,7 +16,7 @@ const questionService = {
             .get()
             .then(doc => {
                 return doc.data();
-            })
+            });
     },
     remove: question => {
         return firebase.firestore()
@@ -34,4 +35,4 @@ const questionService = {
             .doc(question.uid)
             .update(question);
     }
-}
+  };

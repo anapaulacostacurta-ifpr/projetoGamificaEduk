@@ -1,9 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await initializeQuiz();
   loadQuestion();
 });
 
 let currentQuestionIndex = 0;
 let score = 0;
+let questions = []; // Variável inicializada como array vazio
 
 // Seletores do DOM
 const categoryDisplay = document.getElementById("category-display");
@@ -17,7 +19,17 @@ const scoreMessage = document.getElementById("score-message");
 const scoreElement = document.getElementById("score");
 const totalQuestions = document.getElementById("total-questions");
 const restartButton = document.getElementById("restart-button");
-const quizContainer = document.getElementById("quiz-container"); // Correção: Referência ao container do quiz
+const quizContainer = document.getElementById("quiz-container");
+
+// Função para inicializar o quiz e carregar perguntas do Firestore
+async function initializeQuiz() {
+  try {
+      questions = await questionService.getAll(); // Carrega perguntas do Firestore
+  } catch (error) {
+      console.error("Erro ao carregar perguntas:", error);
+      alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
+  }
+}
 
 // Função para carregar uma pergunta
 function loadQuestion() {
@@ -76,7 +88,7 @@ function validateAnswer() {
 
 // Função para exibir os resultados
 function showResults() {
-  quizContainer.style.display = "none"; // Corrigido: usar o container do quiz
+  quizContainer.style.display = "none";
   resultContainer.style.display = "block";
   scoreElement.textContent = score;
   totalQuestions.textContent = questions.length;
@@ -87,6 +99,9 @@ restartButton.onclick = () => {
   score = 0;
   currentQuestionIndex = 0;
   resultContainer.style.display = "none";
-  quizContainer.style.display = "block"; // Corrigido: mostrar o container do quiz
+  quizContainer.style.display = "block";
   loadQuestion();
 };
+
+
+
