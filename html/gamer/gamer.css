@@ -1,0 +1,201 @@
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./black_background.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: brightness(0.2);
+    z-index: -1;
+    /* Coloca o elemento pseudo atrás do conteúdo */
+}
+
+/* Alinhar o título verticalmente */
+body {
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Alinhar o conteúdo verticalmente ao centro */
+    height: 100vh;
+    margin: 0;
+    background: #000;
+    /* Cor de fundo preto */
+}
+
+
+/* Estilização para o cabeçalho (header) */
+header {
+    background: #FFA500;
+    /* Cor de fundo do cabeçalho */
+    padding: 10px 0;
+    /* Espaçamento interno para o título */
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    /* Define a posição como fixa para que o cabeçalho permaneça no topo da página */
+    top: 0;
+    /* Fixa o cabeçalho na parte superior da janela */
+    z-index: 1000;
+    /* Garante que o cabeçalho esteja na parte superior (em relação a outros elementos) */
+}
+
+/* Estilização para o título h1 no cabeçalho */
+header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #FFFFFF;
+    display: inline;
+    position: absolute;
+    /* Define a posição como absoluta para que você possa ajustar o posicionamento */
+    left: 50%;
+    /* Move o título para o meio da tela horizontalmente */
+    transform: translateX(-50%);
+    /* Centraliza o título horizontalmente */
+}
+
+
+#logo img {
+    width: 8rem;
+    /* Tamanho maior para o logotipo */
+    height: auto;
+    /* Altura automática para manter a proporção */
+}
+
+
+
+button {
+    background-color: #e26c2d;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e26c2d;
+}
+
+/* Estilização para o quiz-container */
+#quiz-container {
+    display: flex;
+    flex-direction: column;
+    border: 4px solid #e26c2d;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #000;
+    color: #e26c2d;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    opacity: 1;
+    /* Defina a opacidade como 1 para mostrar */
+    transition: opacity 0.3s ease;
+    /* Adicione uma transição suave para a propriedade de opacidade */
+    margin-top: 70px;
+    /* Define uma margem superior para evitar que o conteúdo do quiz encubra a barra de título */
+}
+
+#restart-button {
+    display: none;
+}
+
+/* Estilização da logo "Airfix" */
+#logo {
+    background-color: transparent;
+    border: 0px solid #000;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+    color: #000;
+    position: absolute;
+    /* Define a posição como absoluta para que você possa ajustar o posicionamento */
+    left: 50px;
+    /* Ajusta a posição do logotipo no canto esquerdo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Adicione estilos para a fonte das perguntas e respostas */
+#question-text, #explanation-text {
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Estilização para os botões no container */
+#true-button, #false-button, #next-button {
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+    font-size: 20px;
+}
+
+#next-button {
+    display: none;
+    align-self: center;
+    /* Alinha o botão verticalmente ao centro */
+    margin-top: auto;
+    /* Alinha o botão verticalmente ao centro */
+    margin-bottom: 20px;
+}
+
+#start-button, #restart-button {
+    background-color: #e26c2d;
+    color: #FFFFFF;
+    border: none;
+    padding: 20px 40px;
+    /* Aumenta o preenchimento para tornar o botão maior */
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 24px;
+    /* Aumenta o tamanho da fonte */
+    width: 100%;
+    /* Ocupa toda a largura do contêiner pai */
+    max-width: 300px;
+    /* Define um limite máximo de largura */
+}
+
+/* Adicione um estilo de hover para o botão */
+#start-button:hover {
+    background-color: #FF6347;
+}
+
+/* Estilização para a pontuação */
+#result-container .score-word {
+    font-size: 1rem;
+    color: #f5f2ec;
+    border: 0px solid #FFA500;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.score {
+    font-size: 5rem;
+    margin-left: 5px;
+    color: #47ff66;
+    border: 2px solid #FFA500;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
