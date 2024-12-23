@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realizar Quiz</title>
+    <title>Quiz</title>
     <link rel="stylesheet" href="gamer.css">
 </head>
 <body>
@@ -11,29 +11,27 @@
 <header>
     <div id="logo">
         <img src="../../assets/img/AnaBiTE.svg" alt="logo">
-        <h1>Quiz Redes</h1>
     </div>
-</header>
-
-<main>
-    <div id="quiz-container">
-        <h2>Responda ao Quiz</h2>
-        <div id="question-container">
-            <p id="category-display">Categoria: Carregando...</p>
-            <p id="type-display">Tipo: Carregando...</p>
-            <p id="difficulty-display">Dificuldade: Carregando...</p>
-            <p id="question-text">Carregando pergunta...</p>
-            <div id="options-container"></div>
-        </div>
-        <button id="submit-button" style="display: none;">Responder</button>
-    </div>
-
+    
+    <p id="Level-display"></p>
     <div id="result-container" style="display: none;">
         <h2>Resultados</h2>
         <p id="score-message">
             Você acertou <span id="score">0</span> de <span id="total-questions">0</span> perguntas.
         </p>
-        <button id="restart-button">Reiniciar Quiz</button>
+        <button id="responder-button">Responder Quiz</button>
+    </div>
+</header>
+
+<main>
+    <div id="app"></div>
+    <div id="quiz-container">
+        <h2>Responda ao Quiz</h2>
+        <div id="question-container">
+            <p id="question-text"></p>
+            <div id="options-container"></div>
+        </div>
+        <button id="submit-button" style="display: none;">Responder</button>
     </div>
 </main>
 <script src="../../services/questions.service.js"></script>
