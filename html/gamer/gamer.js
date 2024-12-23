@@ -30,7 +30,7 @@ function renderQuestion() {
   questionElement.innerText = question.text;
   console.log (questionElement.innerHTML)
   console.log (question.text);
-  
+
   // Inserir as opções de resposta na div apropriada
   const optionsElement = document.querySelector('.option_list');
   optionsElement.innerHTML = ''; // Limpar opções anteriores
@@ -71,4 +71,4 @@ function showElement(element) {
 }
 
 // Iniciar o aplicativo
-window.onload = getQuestions();
+window.onload = getQuestions;
