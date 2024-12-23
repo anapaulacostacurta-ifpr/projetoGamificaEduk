@@ -40,5 +40,11 @@ function showResult() {
   // Inserir a pontuação obtida na div apropriada
   // ...
 }
+
+// Função para mostrar um elemento
+function showElement(element) {
+  element.classList.remove('hidden');
+}
+
 // Iniciar o aplicativo
 window.onload = getQuestions();
