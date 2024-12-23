@@ -24,7 +24,7 @@ const quizContainer = document.getElementById("quiz-container");
 // Função para inicializar o quiz e carregar perguntas do Firestore
 async function initializeQuiz() {
   try {
-      questions = await questionService.getAll(); // Carrega perguntas do Firestore
+      questions = questionService.getAll(); // Carrega perguntas do Firestore
   } catch (error) {
       console.error("Erro ao carregar perguntas:", error);
       alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
