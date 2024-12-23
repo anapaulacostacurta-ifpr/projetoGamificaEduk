@@ -22,7 +22,7 @@ const restartButton = document.getElementById("restart-button");
 const quizContainer = document.getElementById("quiz-container");
 
 // Função para inicializar o quiz e carregar perguntas do Firestore
-async function initializeQuiz() {
+function initializeQuiz() {
   try {
       questions = questionService.getAll(); // Carrega perguntas do Firestore
   } catch (error) {
