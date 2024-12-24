@@ -21,7 +21,7 @@ async function getQuestions() {
 
   question.options.forEach((option, index) => {
     const optionButton = document.createElement('button');
-    optionButton.classList.add('choice-text'); // Adicionar classe de estilo para as opções
+    optionButton.classList.add('option'); // Adicionar classe de estilo para as opções
     optionButton.innerText = option; // Texto da opção
     optionButton.dataset.index = index; // Adicionar um índice para referência
 
@@ -35,7 +35,7 @@ async function getQuestions() {
 
 // Função para lidar com o clique em uma opção
 function handleOptionClick(selectedIndex) {
- alert('Opção ${selectedIndex} clicada!');
+  console.log('Opção ${selectedIndex} clicada!');
   // Aqui você pode adicionar lógica para verificar se a resposta está correta
 }
 
