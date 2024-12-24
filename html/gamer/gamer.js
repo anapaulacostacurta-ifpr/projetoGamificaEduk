@@ -10,34 +10,18 @@ async function getQuestions() {
   // Utilize o questionService para buscar as perguntas
   // ...
   questions = await questionService.getAll();
-  startQuiz();
-}
-
-// Função para iniciar o quiz
-function startQuiz() {
-  // Exibir a div de quiz
   showElement(document.querySelector('.quiz_box'));
-  // Renderizar a primeira pergunta
-  renderQuestion();
-}
-
-// Função para renderizar a pergunta atual
-function renderQuestion() {
   const question = questions[currentQuestion];
-  console.log(question);
   // Inserir o texto da pergunta na div apropriada
   const questionElement = document.querySelector('.que_text');
   questionElement.innerText = question.text;
-  console.log (questionElement.innerHTML)
-  console.log (question.text);
-
   // Inserir as opções de resposta na div apropriada
   const optionsElement = document.querySelector('.option_list');
-  //optionsElement.innerHTML = ''; // Limpar opções anteriores
+  optionsElement.innerHTML = ''; // Limpar opções anteriores
 
   question.options.forEach((option, index) => {
     const optionButton = document.createElement('button');
-    optionButton.classList.add('option'); // Adicionar classe de estilo para as opções
+    optionButton.classList.add('choice-text'); // Adicionar classe de estilo para as opções
     optionButton.innerText = option; // Texto da opção
     optionButton.dataset.index = index; // Adicionar um índice para referência
 
@@ -51,7 +35,7 @@ function renderQuestion() {
 
 // Função para lidar com o clique em uma opção
 function handleOptionClick(selectedIndex) {
-  console.log('Opção ${selectedIndex} clicada!');
+ alert('Opção ${selectedIndex} clicada!');
   // Aqui você pode adicionar lógica para verificar se a resposta está correta
 }
 
