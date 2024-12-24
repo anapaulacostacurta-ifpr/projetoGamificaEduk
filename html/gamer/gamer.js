@@ -35,7 +35,7 @@ async function getQuestions() {
 
 // Função para lidar com o clique em uma opção
 function handleOptionClick(selectedIndex) {
-  console.log('Opção ${selectedIndex} clicada!');
+  Alert('Opção ${selectedIndex} clicada!');
   // Aqui você pode adicionar lógica para verificar se a resposta está correta
 }
 
