@@ -33,7 +33,7 @@ function renderQuestion() {
 
   // Inserir as opções de resposta na div apropriada
   const optionsElement = document.querySelector('.option_list');
-  optionsElement.innerHTML = ''; // Limpar opções anteriores
+  //optionsElement.innerHTML = ''; // Limpar opções anteriores
 
   question.options.forEach((option, index) => {
     const optionButton = document.createElement('button');

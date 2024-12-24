@@ -1,63 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
-    <link rel="stylesheet" href="gamer.css">
-</head>
-<body>
-
-<header>
-    <div class="logo">
-        <h1><img class="icon" src="../../assets/img/AnaBiTE.svg" alt="80" width="180" style="max-width: 80%;"></h1>
-    </div>
-    
-    <p id="Level-display"></p>
-    <div id="result-container" style="display: none;">
-        <h2>Resultados</h2>
-        <p id="score-message">
-            Você acertou <span id="score">0</span> de <span id="total-questions">0</span> perguntas.
-        </p>
-        <button id="restart-button">Responder Quiz</button>
-    </div>
-</header>
-
-<main>
-    <div id="app">
-        <section class="info_box"></section>
-        <section class="quiz_box">
-            <section>
-                <div class="que_text">
-                  <!-- Here I've inserted question from JavaScript -->
-                </div>
-                <div class="option_list">
-                  <!-- Here I've inserted options from JavaScript -->
-                </div>
-              </section>
-              <!-- footer of Quiz Box -->
-              <footer>
-                    <div class="total_que">
-                    <!-- Here I've inserted Question Count Number from JavaScript -->
-                    </div>
-                    <div id="hud-item">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz</title>
+        <link rel="stylesheet" href="gamer.css">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <h1><img class="icon" src="../../assets/img/AnaBiTE.svg" alt="80" width="180" style="max-width: 80%;"></h1>
+            </div>
+            
+            <p id="Level-display"></p>
+            <div id="result-container" style="display: none;">
+                <h2>Resultados</h2>
+                <p id="score-message">
+                    Você acertou <span id="score">0</span> de <span id="total-questions">0</span> perguntas.
+                </p>
+                <button id="restart-button">Responder Quiz</button>
+            </div>
+        </header>
+        <main>
+            <section class="info_box"></section>
+            <section class="quiz_box">
+                <div class="que_text"></div>
+                <div class="option_list"></div>
+            </section>
+            <footer>
+                <div class="total_que"></div>
+                <div id="hud-item">
                     <p class="hud-prefix">Pontuação <span class="hud-main-text" id="score">0</span></p>
-                    </div>
-                <footer>
-            <section>            
-        </section>
-        <section class="result_box"></section>
-    </div>
-    <div id="quiz-container">
-        <h2>Responda ao Quiz</h2>
-        <div id="question-container">
-            <p id="question-text"></p>
-            <div id="options-container"></div>
-        </div>
-        <button id="submit-button" style="display: none;">Responder</button>
-    </div>
-</main>
-<script src="../../services/questions.service.js"></script>
-<script src="gamer.js"></script>
-</body>
+                </div>
+            <footer>
+            <section class="result_box"></section>
+        </main>
+        <script src="../../services/questions.service.js"></script>
+        <script src="gamer.js"></script>
+    </body>
 </html>
