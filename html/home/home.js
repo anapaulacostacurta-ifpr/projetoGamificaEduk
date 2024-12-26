@@ -19,6 +19,7 @@ function loadQuestions() {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
           <p><strong>UID:</strong> ${question.uid}</p>
+          <p><strong>Level:</strong> ${question.level}</p>
           <p><strong>Pergunta:</strong> ${question.text}</p>
           <p><strong>Respostas:</strong> ${question.options}</p>
         `;

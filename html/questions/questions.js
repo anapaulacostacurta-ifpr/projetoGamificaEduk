@@ -22,7 +22,6 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
     text,
     options,
     answer,
-    time_answer,
     feedback_correct,
     feedback_incorrect
   };
