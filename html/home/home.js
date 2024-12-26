@@ -1,5 +1,5 @@
 function adm() {
-    window.location.href = "../adm/conf.html";
+    window.location.href = "../adm/conf/conf.html";
 }
 
 function quiz() {
