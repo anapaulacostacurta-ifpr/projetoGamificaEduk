@@ -39,7 +39,7 @@ continue_btn.onclick = () => {
     //loader.classList.add("hidden");
     start_btn_home.classList.remove("hidden");
     quiz_box.classList.add("activeQuiz"); //show quiz box
-    questions = questionService.getQuestionsByLevel(2);
+    questions = questionService.getQuestionsByLevel(2,"quiz");
     showQuetions(0); //calling showQestions function
     queCounter(1); //passing 1 parameter to queCounter
     startTimer(15); //calling startTimer function
