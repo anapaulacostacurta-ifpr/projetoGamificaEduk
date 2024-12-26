@@ -26,7 +26,7 @@ function loadQuestions() {
         questionsList.appendChild(listItem);
       });
     }).catch(error => {
-      console.error('Erro ao carregar perguntas:', error);
+      alert('Erro ao carregar perguntas:', error);
     });
   }
 
@@ -46,7 +46,7 @@ function loadQuestions() {
         questionsLevel.appendChild(listItem);
       });
     }).catch(error => {
-      console.error('Erro ao carregar perguntas:', error);
+      Alert('Erro ao carregar perguntas:', error);
     });
   }
 
