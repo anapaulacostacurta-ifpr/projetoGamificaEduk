@@ -31,7 +31,7 @@ function loadQuestions() {
   }
 
   function loadQuestionsbyLevel() {
-    const questionsList = document.getElementByLevel('questionLevel');
+    const questionsLevel = document.getElementByLevel('questionLevel');
     questionsList.innerHTML = ''; // Limpa a lista de perguntas
 
     questionService.getElementByLevel(2).then(questions => {
@@ -51,5 +51,5 @@ function loadQuestions() {
   }
 
   // Chama a função para carregar as perguntas ao carregar a página
-  window.onload = loadQuestions;
+  //window.onload = loadQuestions;
   window.onload = loadQuestionsbyLevel;
