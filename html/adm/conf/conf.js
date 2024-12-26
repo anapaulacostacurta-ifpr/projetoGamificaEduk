@@ -51,5 +51,5 @@ function loadQuestions() {
   }
 
   // Chama a função para carregar as perguntas ao carregar a página
-  window.onload = loadQuestions; 
-  //window.onload = loadQuestionsbyLevel;
+  //window.onload = loadQuestions; 
+  window.onload = loadQuestionsbyLevel;

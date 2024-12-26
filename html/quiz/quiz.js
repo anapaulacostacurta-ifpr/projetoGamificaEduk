@@ -246,3 +246,4 @@ function queCounter(index) {
     "</p> Questões</span>";
   bottom_ques_counter.innerHTML = totalQueCounTag; //adding new span tag inside bottom_ques_counter
 }
+
