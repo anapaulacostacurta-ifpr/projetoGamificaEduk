@@ -43,7 +43,7 @@ function loadQuestions() {
           <p><strong>Pergunta:</strong> ${question.text}</p>
           <p><strong>Respostas:</strong> ${question.options}</p>
         `;
-        questionsList.appendChild(listItem);
+        questionsLevel.appendChild(listItem);
       });
     }).catch(error => {
       console.error('Erro ao carregar perguntas:', error);
