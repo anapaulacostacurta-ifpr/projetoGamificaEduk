@@ -32,7 +32,7 @@ function loadQuestions() {
 
   function loadQuestionsbyLevel() {
     const questionsLevel = document.getElementById('questionLevel');
-    questionsList.innerHTML = ''; // Limpa a lista de perguntas
+    questionsLevel.innerHTML = ''; // Limpa a lista de perguntas
 
     questionService.getElementByLevel(2).then(questions => {
       questions.forEach(question => {
