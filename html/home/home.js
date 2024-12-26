@@ -30,6 +30,26 @@ function loadQuestions() {
     });
   }
 
+  function loadQuestionsbyLevel() {
+    const questionsList = document.getElementByLevel('questionLevel');
+    questionsList.innerHTML = ''; // Limpa a lista de perguntas
+
+    questionService.getElementByLevel(2).then(questions => {
+      questions.forEach(question => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          <p><strong>UID:</strong> ${question.uid}</p>
+          <p><strong>Level:</strong> ${question.level}</p>
+          <p><strong>Pergunta:</strong> ${question.text}</p>
+          <p><strong>Respostas:</strong> ${question.options}</p>
+        `;
+        questionsList.appendChild(listItem);
+      });
+    }).catch(error => {
+      console.error('Erro ao carregar perguntas:', error);
+    });
+  }
+
   // Chama a função para carregar as perguntas ao carregar a página
   window.onload = loadQuestions;
-
+  window.onload = loadQuestionsbyLevel;
