@@ -6,7 +6,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   // Captura os dados do formulário
   const category = document.getElementById("category").value;
   const type = document.getElementById("type").value;
-  const difficulty = document.getElementById("difficulty").value;
+  const level = document.getElementById("level").value;
   const text = document.getElementById("text").value;
   const options = document.getElementById("options").value.split(",").map(option => option.trim()); // Divide as opções
   const answer = document.getElementById("answer").value.split(",").map(answer => answer.trim());
@@ -18,7 +18,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const newQuiz = {
     category,
     type,
-    difficulty,
+    level,
     text,
     options,
     answer,

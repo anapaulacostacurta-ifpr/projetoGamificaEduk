@@ -14,11 +14,10 @@ let questions = [
       ],
     },
     {
-      numb: 2,
       category: "quiz",
       type: "multiple",
-      difficulty: "level1",
-      question: "O que pode ser colocado dentro ou sobre um pacote para que ele possa ser rastreado?",
+      level: 1,
+      text: "O que pode ser colocado dentro ou sobre um pacote para que ele possa ser rastreado?",
       answer: "tag de RFID",
       options: [
         "tag de RFID",
@@ -26,6 +25,8 @@ let questions = [
         "um atuador",
         "sensor",
       ],
+      feedback_correct:"parabens!",
+      feedback_incorreck:"você errou!",
     },
    {
       numb: 3,
