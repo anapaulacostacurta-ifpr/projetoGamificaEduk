@@ -38,7 +38,7 @@ function loadQuestions() {
       questions.forEach(question => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
-          <p><strong>UID:</strong> ${question.document}</p>
+          <p><strong>UID:</strong> ${question.id}</p>
           <p><strong>Level:</strong> ${question.level}</p>
           <p><strong>Pergunta:</strong> ${question.text}</p>
           <p><strong>Respostas:</strong> ${question.options}</p>
