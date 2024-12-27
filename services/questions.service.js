@@ -2,7 +2,7 @@
 const questionService = {
     getQuestionsByLevel: async (level, category) => {
         try {
-            ,
+            const querySnapshot = await firebase.firestore().collection("questions")
             .where('level','==',level)
             .get();
 
