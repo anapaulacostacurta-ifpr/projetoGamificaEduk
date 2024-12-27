@@ -97,6 +97,7 @@ next_btn.onclick = () => {
 function showQuetions(index) {
   //loader.classList.add("hidden");
   const que_text = document.querySelector(".que_text");
+  console.log(questions[index]);
   //creating a new span and div tag for question and option and passing the value using array index
   let que_tag = "<span>" + questions[index].text +"</span>";
   let option_tag = '';
