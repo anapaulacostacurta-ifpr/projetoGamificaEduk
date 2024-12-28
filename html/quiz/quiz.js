@@ -1,3 +1,5 @@
+const questions = questionService.getQuestionsByLevel(2,"quiz");
+
 //selecting all required elements
 const start_btn_home = document.querySelector(".start_btn");
 const start_btn = document.querySelector(".start_btn #button_play");
@@ -39,8 +41,7 @@ continue_btn.onclick = () => {
     //loader.classList.add("hidden");
     start_btn_home.classList.remove("hidden");
     quiz_box.classList.add("activeQuiz"); //show quiz box
-    questions = questionService.getQuestionsByLevel(2,"quiz");
-    showQuetions(questions[0]); //calling showQestions function
+    showQuetions(); //calling showQestions function
     //queCounter(1); //passing 1 parameter to queCounter
     //startTimer(15); //calling startTimer function
     //startTimerLine(0);
@@ -94,22 +95,24 @@ next_btn.onclick = () => {
 };
 
 // getting questions and options from array
-function showQuetions(questions) {
+function showQuetions() {
   //loader.classList.add("hidden");
   const que_text = document.querySelector(".que_text");
   
   //creating a new span and div tag for question and option and passing the value using array index
-  let que_tag = "<span>" + questions.text +"</span>";
-  let option_tag = '';
-  for (i=0; i<questions.options.length; i++){
-    option_tag = option_tag + '<div class="option"><p class="choice-text" data-number="'+i+'"><span class="question">'+questions[index].options[i]+"</span></p></div>";
-  }
-  que_text.innerHTML = que_tag; //adding new span tag inside que_tag
-  option_list.innerHTML = option_tag; //adding new div tag inside option_tag
-  const option = option_list.querySelectorAll(".option");
-  // set onclick attribute to all available options
-  for (i = 0; i < option.length; i++) {
-    option[i].setAttribute("onclick", "optionSelected(this)");
+  for (j=0; j< questions.length;j++){
+    let que_tag = "<span>" + questions[j].text +"</span>";
+    let option_tag = '';
+    for (i=0; i<questions[j].options.length; i++){
+      option_tag = option_tag + '<div class="option"><p class="choice-text" data-number="'+i+'"><span class="question">'+questions[j].options[i]+"</span></p></div>";
+    }
+    que_text.innerHTML = que_tag; //adding new span tag inside que_tag
+    option_list.innerHTML = option_tag; //adding new div tag inside option_tag
+    const option = option_list.querySelectorAll(".option");
+    // set onclick attribute to all available options
+    for (i = 0; i < option.length; i++) {
+      option[i].setAttribute("onclick", "optionSelected(this)");
+    }
   }
 }
 
