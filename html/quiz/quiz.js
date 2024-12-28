@@ -39,7 +39,7 @@ continue_btn.onclick = () => {
     //loader.classList.add("hidden");
     start_btn_home.classList.remove("hidden");
     quiz_box.classList.add("activeQuiz"); //show quiz box
-    showQuetions(); //calling showQestions function
+    showQuetions(0); //calling showQestions function
     //queCounter(1); //passing 1 parameter to queCounter
     //startTimer(15); //calling startTimer function
     //startTimerLine(0);
@@ -93,10 +93,9 @@ next_btn.onclick = () => {
 };
 
 // getting questions and options from array
-function showQuetions() {
+function showQuetions(index) {
   //loader.classList.add("hidden");
   const que_text = document.querySelector(".que_text");
-  let questions = questionService.getQuestionsByLevel(2,"quiz")
   //creating a new span and div tag for question and option and passing the value using array index
   for (j=0; j< questions.length;j++){
     let que_tag = "<span>" + questions[j].text +"</span>";
