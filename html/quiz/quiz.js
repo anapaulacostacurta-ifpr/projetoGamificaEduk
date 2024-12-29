@@ -1,3 +1,5 @@
+question = questionService.getQuestionsByLevel(2,quiz);
+
 //selecting all required elements
 const start_btn_home = document.querySelector(".start_btn");
 const start_btn = document.querySelector(".start_btn #button_play");
