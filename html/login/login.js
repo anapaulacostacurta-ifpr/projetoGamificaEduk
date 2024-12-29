@@ -1,7 +1,5 @@
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
-        console.log(user);
-        console.log(userService.findByUid(user));
         window.location.href = "../home/home.html";
     }
 })
@@ -16,12 +14,15 @@ function onChangePassword() {
     togglePasswordErrors();
 }
 
+
+
 function login() {
     showLoading();
     firebase.auth().signInWithEmailAndPassword(
         form.email().value, form.password().value
     ).then(() => {
         hideLoading();
+        
         window.location.href = "../home/home.html";
     }).catch(error => {
         hideLoading();

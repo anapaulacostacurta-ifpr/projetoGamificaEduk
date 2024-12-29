@@ -6,6 +6,12 @@ function quiz() {
     window.location.href = "../quiz/quiz.html";
 }
 
+function findNameUser(){
+    const name = document.getElementById("nameUser");
+    let user = userService.findByUid(firebase.auth().currentUser.uid)
+    name.innerHTML = "Ola, " + user.nickname;
+}
+
 function logout() {
     firebase.auth().signOut().then(() => {
         window.location.href = "../../index.html";
