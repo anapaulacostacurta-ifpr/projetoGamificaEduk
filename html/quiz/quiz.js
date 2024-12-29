@@ -1,4 +1,4 @@
-question = questionService.getQuestionsByLevel(2,"quiz");
+
 
 //selecting all required elements
 const start_btn_home = document.querySelector(".start_btn");
@@ -99,6 +99,7 @@ function showQuetions() {
   //loader.classList.add("hidden");
   const que_text = document.querySelector(".que_text");
   //creating a new span and div tag for question and option and passing the value using array index
+  const questions = questionService.getQuestionsByLevel(2,"quiz");
   for (j=0; j< questions.length;j++){
     let que_tag = "<span>" + questions[j].text +"</span>";
     let option_tag = '';
