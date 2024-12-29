@@ -14,15 +14,13 @@ function onChangePassword() {
     togglePasswordErrors();
 }
 
-
-
 function login() {
     showLoading();
     firebase.auth().signInWithEmailAndPassword(
         form.email().value, form.password().value
     ).then(() => {
         hideLoading();
-        
+        console.log("Usuário logou:" + user.uid);
         window.location.href = "../home/home.html";
     }).catch(error => {
         hideLoading();
