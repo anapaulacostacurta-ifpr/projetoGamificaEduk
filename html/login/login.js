@@ -6,7 +6,10 @@ firebase.auth().onAuthStateChanged( (user) => {
     userService.findByUid(uid).then (user=>{
         document.getElementById("nameUser").innerHTML = "Olá, " + user.nickname;
         return user;
-    })
+    }).catch(error => {
+        hideLoading();
+        alert(getErrorMessage(error));
+    });
 })
 
 function onChangeEmail() {
