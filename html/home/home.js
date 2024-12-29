@@ -29,5 +29,3 @@ function logout() {
         alert('Erro ao fazer logout');
     })
 }
-
-window.onload = firebase.auth().onAuthStateChanged();

@@ -243,6 +243,3 @@ function queCounter(index) {
     "</p> Questões</span>";
   bottom_ques_counter.innerHTML = totalQueCounTag; //adding new span tag inside bottom_ques_counter
 }
-
-questionService.getQuestionsByLevel(2,'quiz').then(questions => {
-  questions.forEach(question => {
