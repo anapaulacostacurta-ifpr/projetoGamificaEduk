@@ -18,9 +18,9 @@ function login() {
     showLoading();
     firebase.auth().signInWithEmailAndPassword(
         form.email().value, form.password().value
-    ).then((result) => {
+    ).then((userCredential) => {
         hideLoading();
-        console.log("Usuário logou:" + getAdditionalUserInfo(result));
+        console.log("Usuário logou:" + userCredential.user.uid);
         window.location.href = "../home/home.html";
     }).catch(error => {
         hideLoading();
