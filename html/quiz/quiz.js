@@ -99,22 +99,18 @@ function showQuetions() {
   //loader.classList.add("hidden");
   const que_text = document.querySelector(".que_text");
   //creating a new span and div tag for question and option and passing the value using array index
-  questionService.getQuestionsByLevel(2,'quiz').then(questions => {
-    questions.forEach(question => {
-      let que_tag = "<span>" + question.text +"</span>";
-      let option_tag = '';
-      for (i=0; i<question.options.length; i++){
-        option_tag = option_tag + '<div class="option"><p class="choice-text" data-number="'+i+'"><span class="question">'+question.options[i]+"</span></p></div>";
-      }
-      que_text.innerHTML = que_tag; //adding new span tag inside que_tag
-      option_list.innerHTML = option_tag; //adding new div tag inside option_tag
-      const option = option_list.querySelectorAll(".option");
-      // set onclick attribute to all available options
-      for (i = 0; i < option.length; i++) {
-        option[i].setAttribute("onclick", "optionSelected(this)");
-      }
-    });
-  });
+  let que_tag = "<span>" + question.numb +".</span>"+"<span>" + question.text +"</span>";
+  let option_tag = '';
+  for (i=0; i<question.options.length; i++){
+    option_tag = option_tag + '<div class="option"><p class="choice-text" data-number="'+i+'"><span class="question">'+question.options[i]+"</span></p></div>";
+  }
+  que_text.innerHTML = que_tag; //adding new span tag inside que_tag
+  option_list.innerHTML = option_tag; //adding new div tag inside option_tag
+  const option = option_list.querySelectorAll(".option");
+  // set onclick attribute to all available options
+  for (i = 0; i < option.length; i++) {
+    option[i].setAttribute("onclick", "optionSelected(this)");
+  }
 }
 // creating the new div tags which for icons
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
@@ -248,3 +244,5 @@ function queCounter(index) {
   bottom_ques_counter.innerHTML = totalQueCounTag; //adding new span tag inside bottom_ques_counter
 }
 
+questionService.getQuestionsByLevel(2,'quiz').then(questions => {
+  questions.forEach(question => {

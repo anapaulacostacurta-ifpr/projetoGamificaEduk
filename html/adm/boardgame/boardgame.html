@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastrar Novo Tabuleiro</title>
+  <link rel="stylesheet" href="boardgame.css">
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="../../firebase-init.js"></script>
+  <script src="../../auth-guard.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Cadastrar Novo Tabuleiro</h1>
+    <div id="boardgame-card">
+      <form id="boardgame-form">
+        <p>
+          <label for="round_data"><strong>Data da Rodada:</strong></label>
+          <input type="text" id="round_data" name="round_data" required>
+        </p>
+        <p>
+          <label for="level"><strong>Level:</strong></label>
+          <input type="text" id="level" name="level" required>
+        </p>
+        <p>
+          <button type="submit">Cadastrar Quiz</button>
+        </p>
+      </form>
+    </div>
+  </div>
+  <script src="../../services/boardgame.service.js"></script>
+  <script src="questions.js"></script>
+</body>
+</html>
