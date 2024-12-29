@@ -29,4 +29,4 @@ function logout() {
     })
 }
 
-findNameUser;
+window.onload = findNameUser;
