@@ -6,7 +6,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   // Captura os dados do formulário
   const round_date = document.getElementById("round_date").value;
   const level = document.getElementById("level").value;
-  const host = firebase.auth().onAuthStateChanged().uid;
+  const host = document.getElementById("userUid").value;
   const players = [];
   const state = "waiting";
   // "waiting", "started", "finished"
