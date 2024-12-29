@@ -1,6 +1,6 @@
 
 // Captura o evento de envio do formulário
-document.getElementById("bordgame-form").addEventListener("submit", function(event) {
+document.getElementById("boardgame-form").addEventListener("submit", function(event) {
   event.preventDefault();
 
   // Captura os dados do formulário
