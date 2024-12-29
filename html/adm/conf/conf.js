@@ -34,7 +34,7 @@ function loadQuestions() {
     const questionsLevel = document.getElementById('questionLevel');
     questionsLevel.innerHTML = ''; // Limpa a lista de perguntas
 
-    questionService.getQuestionsByLevel(2).then(questions => {
+    questionService.getQuestionsByLevel(2,'quiz').then(questions => {
       questions.forEach(question => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
