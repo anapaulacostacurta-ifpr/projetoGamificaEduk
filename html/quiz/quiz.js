@@ -93,7 +93,7 @@ next_btn.onclick = () => {
 };
 
 // getting questions and options from array
-function showQuetions(index) {
+function showQuetions() {
   //loader.classList.add("hidden");
   const que_text = document.querySelector(".que_text");
   //creating a new span and div tag for question and option and passing the value using array index

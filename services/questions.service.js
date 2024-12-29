@@ -3,7 +3,7 @@ const questionService = {
     getQuestionsByLevel: async (level, category) => {
         try {
             const querySnapshot = await firebase.firestore().collection("questions")
-            .where('level','==',level)
+            .where('level','==',level).where('category','==',category)
             .get();
 
             if(querySnapshot.empty){
@@ -11,6 +11,7 @@ const questionService = {
             }
             const questions = querySnapshot.docs.map(doc=>doc.data());
             console.log(questions);
+            Alert(questions);
             return questions;
         } catch (error) {
                 console.error("Erro ao carregar perguntas:", error);
