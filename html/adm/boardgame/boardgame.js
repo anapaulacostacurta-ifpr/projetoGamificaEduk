@@ -21,7 +21,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   };
 
   // Chama a função para salvar o quiz no Firestore
-  boardgame.save(newboardgame);
+  boardgameService.save(newboardgame);
 
   // Limpa o formulário após o envio
   document.getElementById("boardgame-form").reset();
