@@ -6,6 +6,14 @@ function quiz() {
     window.location.href = "../quiz/quiz.html";
 }
 
+function newQuestion() {
+    window.location.href = "../adm/questions/questions.html";
+}
+
+function newBoardGame() {
+    window.location.href = "../adm/boardgame/boardgame.html";
+}
+
 function logout() {
     firebase.auth().signOut().then(() => {
         window.location.href = "../../index.html";
