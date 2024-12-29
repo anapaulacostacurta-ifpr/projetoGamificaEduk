@@ -8,7 +8,7 @@ function quiz() {
 
 function findNameUser(){
     const name = document.getElementById("nameUser");
-    let user = userService.findByUid(firebase.auth().currentuser.uid)
+    let user = userService.findByUid(firebase.auth().onAuthStateChanged())
     name.innerHTML = "Ola, " + user.nickname;
     console.log(user);
 }
