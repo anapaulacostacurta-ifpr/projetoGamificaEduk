@@ -43,22 +43,4 @@ const boardgamesService = {
             .doc(boardgames.uid)
             .update(boardgames);
     },
-    updatePlayersEmpty: async (boardgameID, newUserUID) => {
-        try{
-            const querySnapshot = await firebase.firestore().collection("boardgames")
-            .where('boardgameid','==',boardgameID);
-            const boardgame = querySnapshot.docs.map(doc=>doc.data());
-            console.log(boardgame);
-            boardgame.player.forEach(player => {
-                player.update({
-                    players: FieldValue.arrayUnion(newUserUID)
-                });
-                return;
-            })
-        }catch (error) {
-            console.error("Erro ao carregar perguntas:", error);
-            alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
-            return [];
-        }
-    }
 };

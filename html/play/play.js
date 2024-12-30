@@ -11,17 +11,17 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   boardgamesService.getBoardGameByID(boardgame_id).then((boardgames) => {
     boardgames.forEach(boardgame => {
       console.log(boardgames);
+      console.log(boardgames.uid);
+      const uid = boardgames.uid;
       const state  = boardgame.state;
       const players = boardgame.players;
       if(state != "started"){
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
         if (players != null){
-          const player = {
-            user_UID, 
-            score_round,
-          };
-          boardgamesService.updatePlayersEmpty(boardgame_id,player);
+          const player = {'user_UID':user_UID,'score_round':0};
+          boardgame.player.push(player);
+          boardgamesService.update(boardgame);
         }else{
           alert(players);
         //

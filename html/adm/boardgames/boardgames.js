@@ -30,7 +30,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     boardgameid,
     level,
     host,
-    state,
+    state,  
   };
 
   // Chama a função para salvar o quiz no Firestore
