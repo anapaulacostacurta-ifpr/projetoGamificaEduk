@@ -11,8 +11,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   boardgamesService.getBoardGameByID(boardgame_id).then((boardgames) => {
     boardgames.forEach(boardgame => {
       console.log(boardgames);
-      console.log(boardgames.uid);
-      const uid = boardgames.uid;
       const state  = boardgame.state;
       const players = boardgame.players;
       if(state != "started"){
@@ -20,8 +18,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       }else{
         if (players != null){
           const player = {'user_UID':user_UID,'score_round':0};
-          boardgame.player.push(player);
-          boardgamesService.update(boardgame);
+          boardgamesService.updatePlayers(boardgame_id, player);
         }else{
           alert(players);
         //

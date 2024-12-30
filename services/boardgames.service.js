@@ -1,4 +1,12 @@
 const boardgamesService = {
+    findAll: () => {
+        return firebase.firestore()
+        .collection("boardgames")
+        .get()
+        .then(doc => {
+            return doc.data();
+        });
+    },
     findByUid: uid => {
         return firebase.firestore()
             .collection("boardgames")
@@ -13,6 +21,7 @@ const boardgamesService = {
             const querySnapshot = await firebase.firestore().collection("boardgames")
             .where('boardgameid','==',boardgameid)
             .get();
+            console.log(querySnapshot);
 
             if(querySnapshot.empty){
                 throw new Error("Tabuleiro não encontrador:" + boardgameid);
@@ -43,4 +52,10 @@ const boardgamesService = {
             .doc(boardgames.uid)
             .update(boardgames);
     },
+    updatePlayers:  async (boardgameid, player) => {
+        return firebase.firestore()
+            .collection("boardgames")
+            .doc(boardgameid)
+            .update(player);
+    }
 };
