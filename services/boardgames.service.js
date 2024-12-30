@@ -15,9 +15,10 @@ const boardgamesService = {
             .get();
 
             if(querySnapshot.empty){
-                throw new Error("Nenhuma pergunta encontrada para o nível "+ level+ " .");
+                throw new Error("Tabuleiro não encontrador:" + boardgameid);
             }
             const boardgame = querySnapshot.docs.map(doc=>doc.data());
+            console.log(boardgame);
             return boardgame;
         } catch (error) {
                 console.error("Erro ao carregar perguntas:", error);
