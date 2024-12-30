@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastrar Novo Tabuleiro</title>
   <link rel="stylesheet" href="boardgame.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+  <script src="../../../firebase-init.js"></script>
+  <script src="../../../auth-guard.js"></script>
 </head>
 <body>
   <span id="userUid" hidden></span>
@@ -26,13 +31,6 @@
       </form>
     </div>
   </div>
-  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
-  <script src="../../firebase-init.js"></script>
-  <script src="../../auth-guard.js"></script>
-  <script src="../../services/questions.service.js"></script>
-  <script src="../../services/user.service.js"></script>
   <script src="../../../services/boardgame.service.js"></script>
   <script src="../../../services/user.service.js"></script>
   <script src="boardgame.js"></script>
