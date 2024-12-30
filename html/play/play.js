@@ -18,7 +18,8 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       }else{
         if (players != null){
           const i = players.length + 1;
-          const player = "players['+i+'].user_UID:user_UID";
+          const player = "players["+i+"].user_UID:user_UID";
+          console.log(player);
           boardgamesService.updatePlayers(boardgame_id, player);
         }else{
           alert(players);
