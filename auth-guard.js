@@ -7,7 +7,6 @@ firebase.auth().onAuthStateChanged( (user) => {
     userService.findByUid(userUid).then (user=>{
         document.getElementById("nameUser").innerHTML = "Olá, " + user.nickname;
     }).catch(error => {
-        hideLoading();
         alert(getErrorMessage(error));
     });
 })
