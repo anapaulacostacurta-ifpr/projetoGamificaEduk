@@ -19,11 +19,12 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         if (players != null){
           const i = players.length;
           const player = 
-            "{players["+i+"].user_UID:"+user_UID+
-            ",players["+i+"].score_round:0}";
+            "players["+i+"].user_UID:"+user_UID+
+            ",players["+i+"].score_round:0";
           //const player = {'user_UID':user_UID, 'score_round':0};
-          console.log(player);
-          boardgamesService.addPlayers(boardgame_id, player.trim());
+          player.split(",").map(players =>players.trim())
+          console.log(player.split(",").map(players =>players.trim()));
+          boardgamesService.addPlayers(boardgame_id, player.split(",").map(players =>players.trim()));
         }else{
           alert(players);
         //
