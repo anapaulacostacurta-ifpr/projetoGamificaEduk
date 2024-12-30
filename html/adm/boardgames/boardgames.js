@@ -12,7 +12,9 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   for (i=0; i<6;i++){
     players = players +",user_UID:,score_round:0"; 
   }
+  console.log(players);
   players = players.split(",").map(players => players.trim());
+  console.log(players);
   /** Deverá ser controlada a log das respostas 
   answer[
     questionuid
