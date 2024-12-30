@@ -17,7 +17,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
         if (players != null){
-          const i = players.length + 1;
+          const i = players.length;
           const player = "players["+i+"].user_UID:user_UID";
           console.log(player);
           boardgamesService.updatePlayers(boardgame_id, player);
