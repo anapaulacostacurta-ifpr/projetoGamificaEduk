@@ -7,6 +7,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   const round_date = document.getElementById("round_date").value;
   const level = document.getElementById("level").value;
   const host = document.getElementById("userUid").value;
+  const boardgameid = document.getElementById("boardgameid").value;
   //const players = []; 
   // Incluido na atualização
   /** 
@@ -26,6 +27,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   // Cria o objeto para salvar o quiz
   const newboardgame = {
     round_date,
+    boardgameid,
     level,
     host,
     state,

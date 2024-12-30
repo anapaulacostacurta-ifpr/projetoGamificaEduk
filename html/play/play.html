@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastrar Novo Tabuleiro</title>
-  <link rel="stylesheet" href="boardgames.css">
+  <title>Entrar no Jogo</title>
+  <link rel="stylesheet" href="play.css">
   <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
@@ -15,30 +15,21 @@
 <body>
  
   <div class="container">
-    <h1>Cadastrar Novo Tabuleiro</h1>
-    <div id="boardgame-card">
-      <form id="boardgame-form">
+    <h1>Entrar no Jogo</h1>
+    <div id="play-card">
+      <form id="play-form">
         <span id="userUid" hidden></span>
         <p>
-          <label for="round_date"><strong>Data da Rodada:</strong></label>
-          <input type="datetime" id="round_date" name="round_date" required>
+          <label for="boargameid"><strong>Data da Rodada:</strong></label>
+          <input type="boardgameid" id="boardgameid" name="boardgameid" required>
         </p>
-        <p>
-          <label for="level"><strong>Fase:</strong></label>
-          <input type="number" id="level" name="level" required>
-        </p>
-        <p>
-          <label for="boardgameid"><strong>Tabuleiro ID:</strong></label>
-          <input type="number" id="boardgameid" name="boardgameid" required>
-        </p>
-        
-        <p>
-          <button type="submit">Cadastrar Tabuleiro</button>
+       <p>
+          <button type="submit">Entrar</button>
         </p>
       </form>
     </div>
   </div>
   <script src="../../../services/boardgames.service.js"></script>
-  <script src="boardgames.js"></script>
+  <script src="play.js"></script>
 </body>
 </html>
