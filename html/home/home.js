@@ -14,6 +14,10 @@ function newBoardGame() {
     window.location.href = "../adm/boardgames/boardgames.html";
 }
 
+function jogar() {
+    window.location.href = "../play/play.html";
+}
+
 function logout() {
     firebase.auth().signOut().then(() => {
         window.location.href = "../../index.html";
