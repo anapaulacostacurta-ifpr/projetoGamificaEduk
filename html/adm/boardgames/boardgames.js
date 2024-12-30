@@ -8,7 +8,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   const level = document.getElementById("level").value;
   const host = document.getElementById("userUid").value;
   const boardgameid = document.getElementById("boardgameid").value;
-  const players = "".map(players => players.trim());
+  const players = {}.map(players => players.trim());
   //const players = []; 
   // Incluido na atualização
   /** 
@@ -32,7 +32,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     level,
     host,
     state,
-    player,
+    players,
   };
 
   // Chama a função para salvar o quiz no Firestore
