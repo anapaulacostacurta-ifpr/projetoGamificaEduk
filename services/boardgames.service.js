@@ -49,7 +49,7 @@ const boardgamesService = {
             .where('boardgameid','==',boardgameid);
 
             const players = await querySnapshot.update({
-            players: FieldValue.arrayUnion(newUserUID);
+            players: FieldValue.arrayUnion(newUserUID)
             });
         }catch (error) {
             console.error("Erro ao carregar perguntas:", error);
