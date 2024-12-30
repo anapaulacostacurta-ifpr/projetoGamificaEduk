@@ -10,20 +10,32 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   boardgamesService.getBoardGameByID(boardgame_id).then((boardgames) => {
     boardgames.forEach(boardgame => {
       console.log(boardgames);
-      const round_date = boardgame.round_date;
-      const level = boardgame.level;
-      const host = boardgame.host;
-      const boardgameid = boardgame.boardgameid;
       const state  = boardgame.state;
       const players = boardgame.players;
-  
       if(state != "started"){
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
-        players.l
-
+        if(players.empty){
+          alert("players vazio!")
+        }else{
+          alert(players);
+        }
+      }
+        //players.forEach(player => {
+          /**[
+            useruid,
+            answer[
+              questionuid
+              optionselected
+              timeanswer
+              scorequestion
+            ],
+            scoreround,		
+          ]**/
+          //if (player.uid.)
         })
 
+      
         const updateboardgame = {
           round_date,
           boardgameid,
@@ -37,11 +49,9 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   
         // Limpa o formulário após o envio
         document.getElementById("play-form").reset();
-      }
-    }).catch(error => {
-      alert(error);
-    });
-  });     
-
-});
  
+      }).catch(error => {
+        alert(error);
+      })
+    }
+  )
