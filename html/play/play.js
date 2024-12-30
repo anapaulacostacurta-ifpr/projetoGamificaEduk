@@ -8,7 +8,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   const player = document.getElementById("userUid").value.split(",").map(players => players.trim());
   const players = new Array(player);
   
-  boardgamesService.findByUid(boardgameid).then( (boardgames) => {
+  boardgamesService.getBoardGameByID(boardgameid).then((boardgames) => {
     console.log(boardgames);
     const round_date = boardgames.round_date;
     const level = boardgames.level;
