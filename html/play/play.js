@@ -15,11 +15,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       if(state != "started"){
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
-        if(players.empty){
-          alert(players);
-        }else{
-          alert(players);
-        }
+        alert(players);
       }
         //players.forEach(player => {
           /**[
