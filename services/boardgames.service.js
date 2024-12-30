@@ -47,7 +47,9 @@ const boardgamesService = {
         try{
             const querySnapshot = await firebase.firestore().collection("boardgames")
             .where('boardgameid','==',boardgameID);
-            querySnapshot.forEach(player => {
+            const boardgame = querySnapshot.docs.map(doc=>doc.data());
+            console.log(boardgame);
+            boardgame.player.forEach(player => {
                 player.update({
                     players: FieldValue.arrayUnion(newUserUID)
                 });
