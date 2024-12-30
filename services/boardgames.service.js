@@ -63,7 +63,7 @@ const boardgamesService = {
         .collection("boardgames")
         .doc(boardgameid)
         .collection("players")
-        .add(player)
+        .arrayUnion(player)
 
         console.log(docRef);
     }
