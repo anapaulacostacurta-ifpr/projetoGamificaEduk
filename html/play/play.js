@@ -36,22 +36,21 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
           }**/
           
         
-         const updateboardgame = {
-          round_date,
-          boardgameid,
-          level,
-          host,
-          state, 
-          players,
-        };
-        // Chama a função para atualizar no Firestore
-        boardgamesService.update(updateboardgame);
-  
-        // Limpa o formulário após o envio
-        document.getElementById("play-form").reset();
+          const updateboardgame = {
+            round_date,
+            boardgameid,
+            level,
+            host,
+            state, 
+            players,
+          };
+          // Chama a função para atualizar no Firestore
+          boardgamesService.update(updateboardgame);
+    
+          // Limpa o formulário após o envio
+          document.getElementById("play-form").reset();
+        }
       }
-    }
-  }).catch(error => {
-        alert(error);
-  })
-})})
+    });
+  });
+});
