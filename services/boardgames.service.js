@@ -11,7 +11,7 @@ const boardgamesService = {
     getBoardGameByID: async (boardgameid) => {
         try {
             const querySnapshot = await firebase.firestore().collection("boardgames")
-            .where('boardgamesid','==',boardgameid)
+            .where('boardgameid','==',boardgameid)
             .get();
 
             if(querySnapshot.empty){
