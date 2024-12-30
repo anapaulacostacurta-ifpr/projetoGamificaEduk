@@ -58,15 +58,14 @@ const boardgamesService = {
             .doc(boardgameid)
             .arrayUnion(player)
     },
-    updatePlayer: async (boardgameid, player) => {
+    updatePlayer: (boardgameid, player) => {
         try {
-            const docRef = await firebase.firestore()
+            return firebase.firestore()
             .collection("boardgames")
             .doc(boardgameid)
             .collection("players")
             .add(player)
 
-            console.log(docRef);
         } catch(e) {
             console.log('Error: ', e);
         }
