@@ -47,10 +47,13 @@ const boardgamesService = {
         try{
             const querySnapshot = await firebase.firestore().collection("boardgames")
             .where('boardgameid','==',boardgameID);
-
-            const players = await querySnapshot.update({
-            players: FieldValue.arrayUnion(newUserUID)
+            console.log(querySnapshot);
+            console.log(querySnapshot.players);
+            
+            const players = await querySnapshot.players.update({
+                players: FieldValue.arrayUnion(newUserUID)
             });
+
         }catch (error) {
             console.error("Erro ao carregar perguntas:", error);
             alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
