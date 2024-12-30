@@ -20,7 +20,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
           const i = players.length;
           const p = "players["+i+"].user_UID";
           const s = "players["+i+"].score_round";
-          const player = {'p':user_UID,'s':0};
+          const player = {p:user_UID,s:0};
           //const player = {'user_UID':user_UID, 'score_round':0};
           console.log(player);
           boardgamesService.addPlayers(boardgame_id, player);
