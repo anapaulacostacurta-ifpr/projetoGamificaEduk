@@ -43,10 +43,10 @@ const boardgamesService = {
             .doc(boardgames.uid)
             .update(boardgames);
     },
-    updatePlayersEmpty: async (boardgamesID, newUserUID) => {
+    updatePlayersEmpty: async (boardgameID, newUserUID) => {
         try{
             const querySnapshot = await firebase.firestore().collection("boardgames")
-            .where('boardgameid','==',boardgameid);
+            .where('boardgameid','==',boardgameID);
 
             const players = await querySnapshot.update({
             players: FieldValue.arrayUnion(newUserUID)
