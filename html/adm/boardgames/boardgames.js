@@ -8,7 +8,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   const level = document.getElementById("level").value;
   const host = document.getElementById("userUid").value;
   const boardgameid = document.getElementById("boardgameid").value;
-  const players = "".map(players => players.trim());
+  const players = "".trim().map(players => players.trim());
   //const players = []; 
   // Incluido na atualização
   /** 
