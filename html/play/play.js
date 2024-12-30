@@ -9,31 +9,35 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   const players = new Array(player);
   
   boardgamesService.getBoardGameByID(boardgameid).then((boardgames) => {
-    console.log(boardgames);
-    const round_date = boardgames.round_date;
-    const level = boardgames.level;
-    const host = boardgames.host;
-    const boardgameid = boardgames.boardgameid;
-    const state  = boardgames.state;
+    boardgames.forEach(boardgame => {
+      console.log(boardgames);
+      const round_date = boardgame.round_date;
+      const level = boardgame.level;
+      const host = boardgame.host;
+      const boardgameid = boardgame.boardgameid;
+      const state  = boardgame.state;
+  
+      if(state != "started"){
+        alert('Tabuleiro Não disponível ainda. Fale com o professor!');
+      }else{
+        const updateboardgame = {
+          round_date,
+          boardgameid,
+          level,
+          host,
+          state, 
+          players,
+        };
+        // Chama a função para atualizar no Firestore
+        boardgamesService.update(updateboardgame);
+  
+        // Limpa o formulário após o envio
+        document.getElementById("play-form").reset();
+      }
+    }).catch(error => {
+      alert(error);
+    });
+  });     
 
-    if(state != "started"){
-      alert('Tabuleiro Não disponível ainda. Fale com o professor!');
-    }else{
-      const updateboardgame = {
-        round_date,
-        boardgameid,
-        level,
-        host,
-        state, 
-        players,
-      };
-      // Chama a função para atualizar no Firestore
-      boardgamesService.update(updateboardgame);
-
-      // Limpa o formulário após o envio
-      document.getElementById("play-form").reset();
-    }
-  }).catch(error => {
-    alert(error);
-  });
 });
+ 
