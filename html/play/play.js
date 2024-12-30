@@ -4,21 +4,23 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   event.preventDefault();
 
   // Captura os dados do formulário
-  const boardgameid = document.getElementById("boardgameid").value;
-  const players = document.getElementById("userUid").value.slip(",").map(player => player.trim());
+  const boardgame_id = document.getElementById("boardgameid").value;
+  const player = document.getElementById("userUid").value;
   
-  boardgamesService.getBoardGameByID(boardgameid).then((boardgames) => {
+  boardgamesService.getBoardGameByID(boardgame_id).then((boardgames) => {
     boardgames.forEach(boardgame => {
       console.log(boardgames);
-      const round_date = boardgame.round_date;
-      const level = boardgame.level;
-      const host = boardgame.host;
-      const boardgameid = boardgame.boardgameid;
-      const state  = boardgame.state;
-  
+        const players = boardgame.players;
+
+      players.length
+
       if(state != "started"){
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
+        
+
+        })
+
         const updateboardgame = {
           round_date,
           boardgameid,
