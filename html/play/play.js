@@ -33,10 +33,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       document.getElementById("play-form").reset();
     }
   }).catch(error => {
-    alert(getErrorMessage(error));
+    alert(error);
   });
-
-  // Atualiza o objeto
-  
-
 });
