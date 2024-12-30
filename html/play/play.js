@@ -16,27 +16,25 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
         if (players != null){
-          alert(players);
+          boardgamesService.updatePlayersEmpty(boardgame_id,player);
         }else{
-          alert("Players Vazio!");
-        }
-      }
-        //players.forEach(player => {
+          alert(players);
+        
+        //{
           /**[
-            useruid,
-            answer[
-              questionuid
-              optionselected
-              timeanswer
-              scorequestion
-            ],
-            scoreround,		
-          ]**/
-          //if (player.uid.)
-        })
-
-      
-        const updateboardgame = {
+          players =>{
+            useruid: userUID,
+            answer: {
+              questionuid :
+              optionselected : {}
+              timeanswer : 1,
+              scorequestion : 1,
+            },
+            scoreround: ,		
+          }**/
+          
+        
+         const updateboardgame = {
           round_date,
           boardgameid,
           level,
@@ -49,9 +47,9 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   
         // Limpa o formulário após o envio
         document.getElementById("play-form").reset();
- 
-      }).catch(error => {
-        alert(error);
-      })
+      }
     }
-  )
+  }).catch(error => {
+        alert(error);
+  })
+})})
