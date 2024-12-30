@@ -56,8 +56,6 @@ const boardgamesService = {
         return firebase.firestore()
             .collection("boardgames")
             .doc(boardgameid)
-            .update({
-                players : FieldValue.arrayUnion(player)
-            });
+            .update(players)
     }
 };
