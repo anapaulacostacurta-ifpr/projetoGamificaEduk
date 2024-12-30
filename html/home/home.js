@@ -11,7 +11,7 @@ function newQuestion() {
 }
 
 function newBoardGame() {
-    window.location.href = "../adm/boardgame/boardgame.html";
+    window.location.href = "../adm/boardgames/boardgames.html";
 }
 
 function logout() {
