@@ -8,26 +8,26 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   const level = document.getElementById("level").value;
   const host = document.getElementById("userUid").value;
   const boardgames_uid = document.getElementById("boardgameid").value;
-  //const players = []; 
-  // Incluido na atualização
-  /** 
-  [
-		useruid,
-		answer[
-			questionuid
-			optionselected
-			timeanswer
-			scorequestion
-		],
-		scoreround,		
-	]
-**/
+  const players = "";
+  for (i=0; i<6;i++){
+    players = players +","+"user_UID:,score_round:0"; 
+  }
+  players = players.split(",").map(players => players.trim());
+  /** Deverá ser controlada a log das respostas 
+  answer[
+    questionuid
+    optionselected
+    timeanswer
+    scorequestion
+  ],
+  **/
   const state = "waiting"; // "waiting", "started", "finished"
 
   // Cria o objeto para salvar o quiz
   const newboardgame = {
     round_date,
-    boardgamesuid,
+    boardgames_uid,
+    players,
     level,
     host,
     state,  

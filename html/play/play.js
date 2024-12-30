@@ -18,7 +18,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       }else{
         if (players != null){
           const i = players.length;
-          const player = {'players':{'user_UID':user_UID,'score_round':0}};
+          const player = {'user_UID':user_UID,'score_round':0};
           boardgamesService.updatePlayer(boardgame_id, player);
         }else{
           alert(players);
