@@ -16,36 +16,16 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
         if (players != null){
+          alert(players);
           const i = players.length;
           const player = {'user_UID':user_UID,'score_round':0};
           boardgamesService.updatePlayer(boardgame_id, player);
         }else{
+          const player = {'user_UID':user_UID,'score_round':0};
           alert(players);
-        //
-          /**[
-          players =>{
-            useruid: userUID,
-            answer: {
-              questionuid :
-              optionselected : {}
-              timeanswer : 1,
-              scorequestion : 1,
-            },
-            scoreround: ,		
-          }**/
-          
-        
-          const updateboardgame = {
-            round_date,
-            boardgameid,
-            level,
-            host,
-            state, 
-            players,
-          };
+          const players = player.split(",").map(players => players.trim());
           // Chama a função para atualizar no Firestore
-          boardgamesService.update(updateboardgame);
-    
+          boardgamesService.addPlayers(boardgame_id, players);
           // Limpa o formulário após o envio
           document.getElementById("play-form").reset();
         }
