@@ -20,7 +20,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
           boardgamesService.addPlayers(boardgame_id, players);
         }else{
           let p;
-          boardgame.players.forEach(players => {
+          players.forEach(players => {
             p = p+"players.user_UID:"+players.user_UID+"players.score_round:"+players.score_round;
           })
           let newplayer = "players.user_UID:"+user_UID+"players.score_round:0";
