@@ -20,7 +20,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
           // Chama a função para atualizar no Firestore
           boardgamesService.addPlayers(boardgame_id, players);
         }else{
-          alert(players);
           const players = {'players.user_UID':user_UID,'players.score_round':0};
           boardgamesService.updatePlayer(boardgame_id, players);
         }
