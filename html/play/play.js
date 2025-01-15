@@ -17,15 +17,15 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
         if (players_old === undefined){
-          const players = {'players.user_UID':user_UID,'players.score_round':0};
+          const players = [{'players.user_UID':user_UID,'players.score_round':0}];
           boardgamesService.addPlayers(boardgame_id, players);
         }else{
-          let p="";
+          let p="players:";
           console.log(players);
           for (i=0; i<players_old.length;i++){
-            p = p+"players.user_UID:"+players_old[0].user_UID+",players.score_round:"+players_old[0].score_round;
+            p = p+"[user_UID:"+players_old[0].user_UID+",score_round:"+players_old[0].score_round+"]";
           }
-          let newplayer = "players.user_UID:"+user_UID+",players.score_round:0";
+          let newplayer = "[user_UID:"+user_UID+",score_round:0]";
           const players = p+newplayer;
           players.split(",").map(players => players.trim());
           console.log(players);
