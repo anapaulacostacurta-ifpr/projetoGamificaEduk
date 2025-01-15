@@ -20,6 +20,8 @@ const boardgamesService = {
         try {
             const querySnapshot = await firebase.firestore().collection("boardgames")
             .where('boardgameid','==',boardgameid)
+            .where('state','==','started')
+            .where('round_date','==','15/01/2025')
             .get();
             console.log(querySnapshot);
 
