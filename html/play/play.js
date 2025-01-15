@@ -17,10 +17,15 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       }else{
         if (players === undefined){
           const players = {'players.user_UID':user_UID,'players.score_round':0};
-          // Chama a função para atualizar no Firestore
           boardgamesService.addPlayers(boardgame_id, players);
         }else{
-          const players = {'players.user_UID':user_UID,'players.score_round':0};
+          let p;
+          boardgames.players.forEach(players => {
+            p = p+"players.user_UID:"+players.user_UID+"players.score_round:"+players.score_round;
+          })
+          let newplayer = "players.user_UID:"+user_UID+"players.score_round:0";
+          const players = p+newplayer;
+          players.split(",").map(players => players.trim());
           boardgamesService.updatePlayer(boardgame_id, players);
         }
       }
