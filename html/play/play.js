@@ -24,7 +24,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
             p = p+"players.user_UID:"+i[0].user_UID+"players.score_round:"+i[0].score_round;
           }
           let newplayer = "players.user_UID:"+user_UID+"players.score_round:0";
-          const player = p+newplayer;
+          const players = p+newplayer;
           players.split(",").map(players => players.trim());
           console.log(players);
           boardgamesService.updatePlayer(boardgame_id, players);
