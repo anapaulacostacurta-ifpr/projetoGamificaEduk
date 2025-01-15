@@ -7,7 +7,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   const round_date = document.getElementById("round_date").value;
   const level = document.getElementById("level").value;
   const host = document.getElementById("userUid").value;
-  const boardgames_uid = document.getElementById("boardgameid").value;
+  const boardgameid = document.getElementById("boardgameid").value;
   let players = "";
   for (i=0; i<6;i++){
     players = players +",user_UID:,score_round:0"; 
@@ -28,7 +28,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   // Cria o objeto para salvar o quiz
   const newboardgame = {
     round_date,
-    boardgames_uid,
+    boardgameid,
     players,
     level,
     host,
@@ -36,8 +36,8 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   };
 
   // Chama a função para salvar o quiz no Firestore
-  boardgamesService.save(newboardgame);
-
+  //boardgamesService.save(newboardgame);
+  boardgamesService.save(newboardgame, boardgameid);
   // Limpa o formulário após o envio
   document.getElementById("boardgame-form").reset();
 });
