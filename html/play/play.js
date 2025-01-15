@@ -15,21 +15,19 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       if(state != "started"){
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
-        if (players != null){
+        if (players === undefined){
+          const player = {'user_UID':user_UID,'score_round':0};
+          const players = player.split(",").map(players => players.trim());
+          // Chama a função para atualizar no Firestore
+          boardgamesService.addPlayers(boardgame_id, players);
+        }else{
           alert(players);
           const i = players.length;
           const player = {'user_UID':user_UID,'score_round':0};
           boardgamesService.updatePlayer(boardgame_id, player);
-        }else{
-          const player = {'user_UID':user_UID,'score_round':0};
-          alert(players);
-          const players = player.split(",").map(players => players.trim());
-          // Chama a função para atualizar no Firestore
-          boardgamesService.addPlayers(boardgame_id, players);
-          // Limpa o formulário após o envio
-          document.getElementById("play-form").reset();
         }
       }
+      document.getElementById("play-form").reset();
     });
   });
 });
