@@ -1,6 +1,6 @@
 firebase.auth().onAuthStateChanged( (user) => {
     if (!user) {
-        window.location.href = "/html/login/login.html";
+        window.location.href = "../../html/login/login.html";
     }
     const userUid = user.uid;
     document.getElementById("userUid").value = user.uid;
