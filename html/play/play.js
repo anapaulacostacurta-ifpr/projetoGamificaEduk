@@ -19,9 +19,9 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
           const players = {'players.user_UID':user_UID,'players.score_round':0};
           boardgamesService.addPlayers(boardgame_id, players);
         }else{
-          let p;
+          let p="";
           for (i=0; i<players_old.length;i++){
-            p = p+"players.user_UID:"+i[0].user_UID+"players.score_round:"+i[0].score_round;
+            p = p+"players.user_UID:"+i[0].user_UID+",players.score_round:"+i[0].score_round;
           }
           let newplayer = "players.user_UID:"+user_UID+"players.score_round:0";
           const players = p+newplayer;
