@@ -45,7 +45,7 @@ const boardgamesService = {
         return firebase.firestore()
             .collection("boardgames")
             .doc(boardgameid)
-            .add(boardgames);
+            .set(boardgames);
     },
     update: boardgames => {
         return firebase.firestore()
