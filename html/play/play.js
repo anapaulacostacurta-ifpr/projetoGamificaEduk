@@ -20,13 +20,13 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
           let p="players:[{user_UID:"+user_UID+",score_round':0}]";
           boardgamesService.addPlayers(boardgame_id, players);
         }else{
-          let p="players:";
+          let p="";
           console.log(players);
           for (i=0; i<players_old.length;i++){
-            p = p+"[user_UID:"+players_old[0].user_UID+",score_round:"+players_old[0].score_round+"]";
+            p = p+"{user_UID:"+players_old[0].user_UID+",score_round:"+players_old[0].score_round+"}";
           }
-          let newplayer = "[user_UID:"+user_UID+",score_round:0]";
-          const players = p+newplayer;
+          let newplayer = "{user_UID:"+user_UID+",score_round:0}";
+          const players = "players:["+p+newplayer+"]";
           console.log(players);
           boardgamesService.updatePlayer(boardgame_id, players);
         }
