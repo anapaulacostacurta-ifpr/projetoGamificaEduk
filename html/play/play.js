@@ -17,7 +17,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
         if (players_old === undefined){
-          const players = [{'players.user_UID':user_UID,'players.score_round':0}];
+          let p="players:[{user_UID:"+user_UID+",score_round':0}]";
           boardgamesService.addPlayers(boardgame_id, players);
         }else{
           let p="players:";
@@ -27,7 +27,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
           }
           let newplayer = "[user_UID:"+user_UID+",score_round:0]";
           const players = p+newplayer;
-          players.split(",").map(players => players.trim());
           console.log(players);
           boardgamesService.updatePlayer(boardgame_id, players);
         }
