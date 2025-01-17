@@ -18,7 +18,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       }else{
         if (players_old === undefined){
           let player = "user_UID:"+user_UID+",score_round:0";
-          const players = player)};
           boardgamesService.addPlayers(boardgame_id, player);
         }else{
           let p="";
