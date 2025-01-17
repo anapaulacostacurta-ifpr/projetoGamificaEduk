@@ -18,8 +18,8 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       }else{
         if (players_old === undefined){
           let player = "user_UID:"+user_UID+",score_round:0";
-          const players = {players: FieldValue.arrayUnion(player)};
-          boardgamesService.addPlayers(boardgame_id, players);
+          const players = player)};
+          boardgamesService.addPlayers(boardgame_id, player);
         }else{
           let p="";
           for (i=0; i<players_old.length;i++){
