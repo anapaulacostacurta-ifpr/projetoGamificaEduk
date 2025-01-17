@@ -66,7 +66,7 @@ const boardgamesService = {
             return firebase.firestore()
             .collection("boardgames")
             .doc(boardgameid)
-            .update(players);
+            .arr(players);
 
         } catch(e) {
             console.log('Error: ', e);
