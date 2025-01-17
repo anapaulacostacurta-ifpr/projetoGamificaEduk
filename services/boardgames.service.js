@@ -55,7 +55,7 @@ const boardgamesService = {
             .doc(boardgameid)
             .update(boardgames);
     },
-    addPlayers:  async (boardgameid, players) => {
+    addPlayers:  (boardgameid, players) => {
         return firebase.firestore()
             .collection("boardgames")
             .doc(boardgameid)
