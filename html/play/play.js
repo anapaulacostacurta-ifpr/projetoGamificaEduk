@@ -11,7 +11,10 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     boardgames.forEach(boardgame => {
       console.log(boardgames);
       const state  = boardgame.state;
-      let i = arrayLength(boardgame.players);
+      let i = 0;
+      for (const element of (boardgame.players)) {
+        i++;
+      }
       if(state != "started"){
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
@@ -22,11 +25,3 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       document.getElementById("play-form").reset();
     });
   });
-
-  function arrayLength(arr) {
-    let count = 0;
-    for (const element of arr) {
-      count++;
-    }
-    return count; 
- }
