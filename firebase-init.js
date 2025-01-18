@@ -8,9 +8,5 @@ const firebaseConfig = {
     measurementId: "G-2TY4YPL585"
   };
 
-// [START firestore_deps]
-const {FieldValue} = require('firebase-admin/firestore');
-// [END firestore_deps]
-
 firebase.initializeApp(firebaseConfig);  
   
