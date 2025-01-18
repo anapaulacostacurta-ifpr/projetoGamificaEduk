@@ -11,8 +11,9 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     boardgames.forEach(boardgame => {
       console.log(boardgames);
       const state  = boardgame.state;
+      const  players_old = boardgame.players;
       let i = 0;
-      for (const element of (boardgame.players)) {
+      for (const element of (players_old)) {
         i++;
       }
       if(state != "started"){
