@@ -17,9 +17,8 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
         if (players_old === undefined){
-          let player = "user_UID:"+user_UID+",score_round:0";
-          player.split(",").map(player => player.trim());
-          boardgamesService.addPlayers(boardgame_id, player);
+          const players = {players:{0:{user_UID:user_UID,score_round:0}}};
+          boardgamesService.addPlayers(boardgame_id, players);
         }else{
           let p="";
           for (i=0; i<players_old.length;i++){

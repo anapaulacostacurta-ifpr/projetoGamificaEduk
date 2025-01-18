@@ -55,11 +55,11 @@ const boardgamesService = {
             .doc(boardgameid)
             .update(boardgames);
     },
-    addPlayers:  (boardgameid, player) => {
+    addPlayers:  (boardgameid, players) => {
         return firebase.firestore()
             .collection("boardgames")
             .doc(boardgameid)
-            .update({players: { "0": {player} } });
+            .update(players);
     },
     updatePlayer: (boardgameid, players) => {
         try {
