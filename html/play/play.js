@@ -18,6 +18,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       }else{
         if (players_old === undefined){
           let player = "user_UID:"+user_UID+",score_round:0";
+          player.split(",").map(player => player.trim());
           boardgamesService.addPlayers(boardgame_id, player);
         }else{
           let p="";
