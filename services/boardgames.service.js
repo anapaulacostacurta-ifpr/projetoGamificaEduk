@@ -59,7 +59,7 @@ const boardgamesService = {
         return firebase.firestore()
             .collection("boardgames")
             .doc(boardgameid)
-            .update({players: { "0": player}});
+            .update({players: { "0": {player} } });
     },
     updatePlayer: (boardgameid, players) => {
         try {
