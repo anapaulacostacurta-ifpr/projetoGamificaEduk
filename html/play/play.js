@@ -22,7 +22,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         }else{
           addPlayers.push({user_UID:user_UID,score_round:0});
         }
-        boardgamesService.addPlayers(boardgame_id, players);
+        boardgamesService.addPlayers(boardgame_id, {players});
       }
       })
       document.getElementById("play-form").reset();
