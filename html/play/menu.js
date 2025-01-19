@@ -1,3 +1,6 @@
+function quiz() {
+  window.location.href = "../quiz/quiz.html";
+}
 
 // Captura o evento de envio do formulário
 document.getElementById("play-form").addEventListener("submit", function(event) {
@@ -37,6 +40,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         }
       }
       });
-      window.location.href = "..//home.html";
+      window.location.href = "./menu.html";
     });
   });

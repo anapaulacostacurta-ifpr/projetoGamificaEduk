@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo de Redes de Computadores</title>
+  <link rel="stylesheet" href="menu.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+  <script src="../../firebase-init.js"></script>
+  <script src="../../auth-guard.js"></script>
+  <script src="../../services/user.service.js"></script>
+</head>
+<body>
+ 
+  <div class="container">
+    <h1>Jogo de Redes de Computadores</h1>
+    <div id="menu-card">
+      <form id="menu-form">
+        <span id="userUid" hidden></span>
+        <button id="AppQuiz" onclick="quiz()">Quiz</button>
+        <button id="AppDesafio" onclick="quiz()">Desafio</button>
+        <button id="AppSorte" onclick="quiz()">Sorte/Revez</button>
+        <button id="Quizfinal" onclick="quiz()">Quiz Final</button>
+      </form>
+    </div>
+  </div>
+  <script src="../../services/boardgames.service.js"></script>
+  <script src="menu.js"></script>
+</body>
+</html>
