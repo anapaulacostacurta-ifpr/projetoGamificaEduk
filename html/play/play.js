@@ -19,12 +19,24 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         if (players === undefined){
           players = new Array();
           players[0] = {user_UID:user_UID,score_round:0};
+          boardgamesService.addPlayers(boardgame_id, {players});
         }else{
-          players.push({user_UID:user_UID,score_round:0});
+          //variável para verficar se o jogador já entrou no tabuleiro
+          let isOnPlayer = false;
+          players.forEach(player => {
+            if(player.user_UID == user_UID){
+              isOnPlayer = true;
+            }
+          });
+          if (isOnPlayer){
+            alert('Você já entrou no jogo!Fale com o professor!');
+          }else{
+            players.push({user_UID:user_UID,score_round:0});
+            boardgamesService.addPlayers(boardgame_id, {players});
+          }
         }
-        boardgamesService.addPlayers(boardgame_id, {players});
       }
-      })
+      });
       document.getElementById("play-form").reset();
     });
   });
