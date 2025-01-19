@@ -10,18 +10,18 @@
         <header>
             <nav class="navbar navbar-expand-sm">
                 <div class="container-fluid">
-                    <img class="navbar-brand" src="./assets/img/AnaBiTE.svg" alt="80" width="180">
-                    <button type="button" class="clear" onclick="newBoardGame()">Novo Tabuleiro</button>
-                    <button type="button" class="clear" onclick="newQuestion()">Cadastrar Questões</button>
-                    <button type="button" class="clear" onclick="logout()">Sair</button>       
+                    <img class="navbar-brand" src="../../assets/img/AnaBiTE.svg" alt="80" width="180">
+                    <button class="btn btn-link" type="button" class="clear" onclick="newBoardGame()">Novo Tabuleiro</button>
+                    <button class="btn btn-link" type="button" class="clear" onclick="newQuestion()">Cadastrar Questões</button>
+                    <button class="btn btn-link" type="button" class="clear" onclick="logout()">Sair</button>       
                 </div>
             </nav>
         </header>
         <h1 id="nameUser"></h1>
         <span id="userUid" hidden></span>
-        <button id="appRankingGeral" onclick="quiz()">Ranking Geral</button>
-        <button id="appJogar" onclick="jogar()">Jogar</button>
-        <button id="appTrocarCoin" onclick="adm()">Adm</button>
+        <button class="btn btn-primary" id="appRankingGeral" onclick="quiz()">Ranking Geral</button>
+        <button class="btn btn-primary" id="appJogar" onclick="jogar()">Jogar</button>
+        <button class="btn btn-primary" id="appTrocarCoin" onclick="adm()">Adm</button>
     </body>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
