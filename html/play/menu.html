@@ -5,12 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogo de Redes de Computadores</title>
   <link rel="stylesheet" href="menu.css">
-  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
-  <script src="../../firebase-init.js"></script>
-  <script src="../../auth-guard.js"></script>
-  <script src="../../services/user.service.js"></script>
+  
 </head>
 <body>
  
@@ -26,4 +21,39 @@
   <script src="../../services/boardgames.service.js"></script>
   <script src="menu.js"></script>
 </body>
+</html>
+
+<!doctype html>
+<html>
+    <head>
+        <title>AnaBite</title>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <header>
+            <nav class="nav-bar">
+                <div class="logo">
+                    <h1><img class="icon" src="../../assets/img/AnaBiTE.svg" alt="80" width="180" style="max-width: 80%;"></h1>
+                </div>
+                <h1 id="nameUser"></h1>
+                <span id="userUid" hidden></span>
+                <button type="button" class="clear" onclick="newBoardGame()">Novo Tabuleiro</button>
+                <button type="button" class="clear" onclick="newQuestion()">Cadastrar Questões</button>
+                <button type="button" class="clear" onclick="logout()">Sair</button>       
+            </nav>
+        </header>
+        <button id="appRankingGeral" onclick="quiz()">Ranking Geral</button>
+        <button id="appJogar" onclick="jogar()">Jogar</button>
+        <button id="appTrocarCoin" onclick="adm()">Adm</button>
+     
+    </body>
+    <link rel="stylesheet" href="../../global.css">
+    <link rel="stylesheet" href="home.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="../../firebase-init.js"></script>
+    <script src="../../auth-guard.js"></script>
+    <script src="../../services/user.service.js"></script>
 </html>
