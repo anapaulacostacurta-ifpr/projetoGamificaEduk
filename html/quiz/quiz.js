@@ -3,11 +3,12 @@ const que_text = document.querySelector(".que_text");
 const option_list = document.querySelector(".option_list");
 
 function getQuestions(){
-  const questions = questionsService.getQuestionsByLevel();
-  //Verificar o que o usuário já respondeu
-  questions.forEach(question => {
-    alert(question);
-    showQuestion(question);
+  const questions = questionsService.getQuestionsByLevel().then(questions =>{
+    //Verificar o que o usuário já respondeu
+    questions.forEach(question => {
+      alert(question);
+      showQuestion(question);
+    });
   });
 }
 
@@ -64,4 +65,4 @@ function optionSelected(answer) {
 }
 
 //Buscar as questions para apresentar na tela
-getQuestions();
+getQuestions;
