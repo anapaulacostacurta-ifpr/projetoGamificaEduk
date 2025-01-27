@@ -67,3 +67,13 @@ function optionSelected(answer) {
 
 //Buscar as questions para apresentar na tela
 getQuestions();
+
+function saveAnswer(){
+  if(quizzes.empety){
+  quizzes = new Array();
+  quizzes[0] = {numb:1,option:1,token:"a",data:""};
+  questionsService.addQuizzes(boardgame_id, {quizzes});
+  }else{
+    players.push({numb:1,option:1,token:"a",data:""});
+  }
+}
