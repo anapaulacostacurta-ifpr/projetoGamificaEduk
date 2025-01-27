@@ -13,11 +13,21 @@
   <script src="../../services/user.service.js"></script>
 </head>
 <body>
- 
+  <header>
+    <nav class="navbar navbar-expand-sm">
+        <div class="container-fluid">
+            <img class="navbar-brand" src="../../assets/img/AnaBiTE.svg" alt="80" width="180">
+            <button class="btn btn-link" type="button" class="clear" onclick="newBoardGame()">Novo Tabuleiro</button>
+            <button class="btn btn-link" type="button" class="clear" onclick="newQuestion()">Cadastrar Questões</button>
+            <button class="btn btn-link" type="button" class="clear" onclick="logout()">Sair</button>       
+        </div>
+    </nav>
+  </header>
   <div class="container">
     <h1>Quiz</h1>
     <div id="play-card">
       <form id="play-form">
+        <h1 id="nameUser"></h1>
         <span id="userUid" hidden></span>
         <!-- Quiz Box -->
         <div class="quiz_box">
