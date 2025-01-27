@@ -23,18 +23,23 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         }else{
           //variável para verficar se o jogador já entrou no tabuleiro
           let isOnPlayer = false;
+          let score = 0;
           players.forEach(player => {
             if(player.user_UID == user_UID){
               isOnPlayer = true;
+              score = player.score_round;
             }
           });
           if (isOnPlayer){
             alert('Você já entrou no jogo!Fale com o professor!');
+            
           }else{
             players.push({user_UID:user_UID,score_round:0});
             boardgamesService.addPlayers(boardgame_id, {players});
           }
         }
+        sessionStorage.setItem("boardgame_id",boardgame_id);
+        sessionStorage.setItem("score_round",score);
       }
       });
       window.location.href = "./menu.html";
