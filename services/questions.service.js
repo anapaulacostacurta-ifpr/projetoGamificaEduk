@@ -1,10 +1,10 @@
 // Serviço para interação com o Firestore
 const questionsService = {
-    getQuizzesByLevel: async (level) => {
+    getQuizzesByLevel: async (level, category) => {
         try {
             const querySnapshot = await firebase.firestore().collection("questions")
             .where('level','==',level)
-            .where('category','==',"quiz")
+            .where('category','===',category)
             .get();
 
             if(querySnapshot.empty){
