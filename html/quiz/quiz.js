@@ -2,16 +2,27 @@ const quiz_box = document.querySelector(".quiz_box");
 const que_text = document.querySelector(".que_text");
 const option_list = document.querySelector(".option_list");
 
-function getQuestions(){
-  const level = 1;
-  const category = "quiz";
-  questionsService.getQuestionsByLevel(level, category).then(questions =>{
-    //Verificar o que o usuário já respondeu
+//Ranking Nível
+const scoreLevelPoint = document.getElementById("score_round");
+scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.getItem("score_round");
+
+const level = document.getElementById("level");
+level.innerHTML = "Nível: "+sessionStorage.getItem("level");
+
+//Ranking Geral
+const scorePoint = document.getElementById("score_total");
+scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
+
+const category = "quiz";
+
+questionsService.getQuestionsByLevel(level, category).then(questions =>{
+
+  //Verificar o que o usuário já respondeu
     questions.forEach(question => {
       showQuestion(question);
     });
   });
-}
+
 
 function showQuestion(question){
   //creating a new span and div tag for question and option and passing the value using array index
@@ -67,8 +78,6 @@ function optionSelected(answer) {
   next_btn.classList.add("show"); //show the next button if user selected any option
 }
 
-//Buscar as questions para apresentar na tela
-getQuestions();
 
 function saveAnswer(){
   if(quizzes.empety){
