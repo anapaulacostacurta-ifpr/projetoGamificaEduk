@@ -1,5 +1,13 @@
-const scoreTextPoint = document.getElementById("score");
-scoreTextPoint.innerHTML = "Level Score: "+sessionStorage.getItem("score_round");
+//Ranking Nível
+const scoreLevelPoint = document.getElementById("score_round");
+scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.getItem("score_round");
+
+const level = document.getElementById("level");
+level.innerHTML = "Nível: "+sessionStorage.getItem("level");
+
+//Ranking Geral
+const scorePoint = document.getElementById("scoreTotal");
+scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
 
 function token() {
   window.location.href = "../quiz/token/token.html";

@@ -12,11 +12,12 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       console.log(boardgames);
       const state  = boardgame.state;
       var players = boardgame.players;
-         
+      
       if(state != "started"){
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
         let score = 0;
+        
         if (players === undefined){
           players = new Array();
           players[0] = {user_UID:user_UID,score_round:0};
@@ -40,6 +41,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
           }
         }
         sessionStorage.setItem("boardgame_id",boardgame_id);
+        sessionStorage.setItem("level",boardgame.level);
         sessionStorage.setItem("score_round",score);
       }
       });
