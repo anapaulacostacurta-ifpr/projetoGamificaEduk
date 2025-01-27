@@ -1,3 +1,7 @@
+//Ranking Geral
+const scorePoint = document.getElementById("scoreTotal");
+scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
+
 function adm() {
     window.location.href = "../adm/conf/conf.html";
 }
