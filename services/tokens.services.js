@@ -2,7 +2,7 @@ const tokenService = {
     getTokensQuiz:  async (tokenid) => {
     try {
         const querySnapshot = await firebase.firestore().collection("tokens")
-        .where('quiz','array-contains',tokenid)
+        .where('quiz','==',tokenid)
         .get();
 
         if(querySnapshot.empty){
