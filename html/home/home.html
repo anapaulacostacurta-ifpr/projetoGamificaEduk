@@ -11,9 +11,14 @@
             <nav class="navbar navbar-expand-sm">
                 <div class="container-fluid">
                     <img class="navbar-brand" src="../../assets/img/AnaBiTE.svg" alt="80" width="180">
-                    <button class="btn btn-link" type="button" class="clear" onclick="newBoardGame()">Novo Tabuleiro</button>
-                    <button class="btn btn-link" type="button" class="clear" onclick="newQuestion()">Cadastrar Questões</button>
-                    <button class="btn btn-link" type="button" class="clear" onclick="logout()">Sair</button>       
+                    <div class="btn-group" >
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Config</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="../adm/boardgames/boardgames.html">Novo Tabuleiro</a>
+                            <a class="dropdown-item" href="../adm/questions/questions.html">Cadastrar Questões</a>
+                        </div>
+                    </div>       
+                    <button class="btn btn-link" type="button" class="clear" onclick="logout()">Sair</button>
                 </div>
             </nav>
         </header>
@@ -21,9 +26,10 @@
             <p id="nameUser"></p>
             <p id="score_total"></p>
         </div>
-        <button class="btn btn-primary" id="appRankingGeral" onclick="quiz()">Ranking Geral</button>
-        <button class="btn btn-primary" id="appJogar" onclick="jogar()">Jogar</button>
-        <button class="btn btn-primary" id="appTrocarCoin" onclick="adm()">Adm</button>
+        <div class="btn-group-vertical">
+            <button type="button" class="btn btn-primary" id="appRankingGeral" onclick="jogar()">Ranking Geral</button>
+            <button type="button" class="btn btn-primary" id="appJogar" onclick="jogar()">Jogar</button>
+        </div>
     </body>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
