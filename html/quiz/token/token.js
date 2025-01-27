@@ -9,7 +9,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     tokenService.getTokensQuiz(tokenid).then(tokens => {
       alert(tokens);
       tokens.forEach(token => {
-        alert(token);        
+        alert(token.quiz);        
         });
         window.location.href = "./menu.html";
       });
