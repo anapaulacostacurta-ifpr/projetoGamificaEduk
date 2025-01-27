@@ -6,10 +6,16 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     const tokenid = document.getElementById("tokenid").value;
     const user_UID = document.getElementById("userUid").value;
     
-    tokenService.getTokensQuiz(tokenid).then(tokens => {
+    tokenService.getTokensQuiz().then(tokens => {
       alert(tokens);
       tokens.forEach(token => {
-        alert(token.quiz);        
+        alert(token.quiz);
+        const tokens_quiz = token.quiz;
+        if (tokens_quiz.findIndex(tokenid) == 1){
+            alert("Token Válido!");
+        }else{
+            alert("Token inválido!");
+        }
         });
         window.location.href = "./menu.html";
       });

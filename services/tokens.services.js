@@ -2,14 +2,12 @@ const tokenService = {
     getTokensQuiz:  async (tokenid) => {
     try {
         const querySnapshot = await firebase.firestore().collection("tokens")
-        .where('quiz','==',tokenid)
         .get();
 
         if(querySnapshot.empty){
-            throw new Error("Token inválido!");
+            throw new Error("Banco de Token vazio!");
         }
         const tokens = querySnapshot.docs.map(doc=>doc.data());
-        alert(tokens);
         return tokens;
     } catch (error) {
             console.error("Erro ao carregar perguntas:", error);
