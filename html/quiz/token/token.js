@@ -13,11 +13,13 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         const tokens_quiz = token.quiz;
         if (tokens_quiz.indexOf(tokenid) > 0){
             alert("Token Válido!");
+            window.location.href = "../../play/play.html";
         }else{
             alert("Token inválido!");
+            window.location.href = "../../play/menu.html";
         }
         });
-        window.location.href = "../../play/menu.html";
+        
       });
     });
   
