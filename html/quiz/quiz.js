@@ -6,7 +6,6 @@ function getQuestions(){
   const questions = questionsService.getQuestionsByLevel().then(questions =>{
     //Verificar o que o usuário já respondeu
     questions.forEach(question => {
-      alert(question);
       showQuestion(question);
     });
   });

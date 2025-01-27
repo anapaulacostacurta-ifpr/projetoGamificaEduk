@@ -11,7 +11,7 @@ const tokenService = {
         return tokens;
     } catch (error) {
             console.error("Erro ao carregar perguntas:", error);
-            alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
+            alert("Erro ao carregar perguntas:" + error);
             return [];
     }
    },
