@@ -5,7 +5,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
 
   // Captura os dados do formulário
   const boardgame_id = document.getElementById("boardgameid").value;
-  const user_UID = sessionStorage.getItem("user_UID");
+  const user_UID = sessionStorage.getItem("userUid");
   
   boardgamesService.getBoardGameByID(boardgame_id).then((boardgames) => {
     boardgames.forEach(boardgame => {
@@ -17,7 +17,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
         let score = 0;
-        
         if (players === undefined){
           players = new Array();
           players[0] = {user_UID:user_UID,score_round:0};
