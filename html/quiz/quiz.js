@@ -13,9 +13,7 @@ level.innerHTML = "Nível: "+sessionStorage.getItem("level");
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
 
-const category = "quiz";
-
-questionsService.getQuestionsByLevel(level, category).then(questions =>{
+questionsService.getQuizzesByLevel(level).then(questions =>{
 
   //Verificar o que o usuário já respondeu
     questions.forEach(question => {
@@ -44,8 +42,6 @@ function showQuestion(question){
 
 //if user clicked on option
 function optionSelected(answer) {
-  clearInterval(counter); //clear counter
-  clearInterval(counterLine); //clear counterLine
   let userAns = answer.querySelector(".choice-text").textContent; //getting user selected option
   let correcAns = questions[que_count].answer; //getting correct answer from array
   const allOptions = option_list.children.length; //getting all option items
