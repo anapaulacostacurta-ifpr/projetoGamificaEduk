@@ -64,4 +64,4 @@ function optionSelected(answer) {
 }
 
 //Buscar as questions para apresentar na tela
-getQuestions;
+getQuestions();
