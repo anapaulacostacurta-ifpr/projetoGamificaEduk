@@ -3,7 +3,9 @@ const que_text = document.querySelector(".que_text");
 const option_list = document.querySelector(".option_list");
 
 function getQuestions(){
-  const questions = questionsService.getQuestionsByLevel().then(questions =>{
+  const level = 1;
+  const category = "quiz";
+  questionsService.getQuestionsByLevel(level, category).then(questions =>{
     //Verificar o que o usuário já respondeu
     questions.forEach(question => {
       showQuestion(question);
