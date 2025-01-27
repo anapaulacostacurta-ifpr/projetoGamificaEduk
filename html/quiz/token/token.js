@@ -11,7 +11,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       tokens.forEach(token => {
         alert(token.quiz);
         const tokens_quiz = token.quiz;
-        if (tokens_quiz.findIndex(tokenid) == 1){
+        if (tokens_quiz.indexOf(tokenid) == 1){
             alert("Token Válido!");
         }else{
             alert("Token inválido!");
