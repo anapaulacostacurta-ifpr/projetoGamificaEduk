@@ -4,7 +4,7 @@ const questionsService = {
         try {
             const querySnapshot = await firebase.firestore().collection("questions")
             .where('level','==',level)
-            .where('category','===',category)
+            .where('category','==',category)
             .get();
 
             if(querySnapshot.empty){
