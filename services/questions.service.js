@@ -11,7 +11,7 @@ const questionsService = {
             }
             const questions = querySnapshot.docs.map(doc=>doc.data());
             console.log(questions);
-            Alert(questions)
+            alert(questions)
             return questions;
         } catch (error) {
                 console.error("Erro ao carregar perguntas:", error);

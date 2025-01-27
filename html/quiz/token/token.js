@@ -19,7 +19,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
             window.location.href = "../../play/menu.html";
         }
         });
-        
       });
     });
   
