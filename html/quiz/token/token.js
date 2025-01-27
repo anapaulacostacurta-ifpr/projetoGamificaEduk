@@ -17,7 +17,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
             alert("Token inválido!");
         }
         });
-        window.location.href = "./menu.html";
+        window.location.href = "../../play/menu.html";
       });
     });
   
