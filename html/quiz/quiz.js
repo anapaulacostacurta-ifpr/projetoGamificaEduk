@@ -1,7 +1,6 @@
 const quiz_box = document.querySelector(".quiz_box");
 const que_text = document.querySelector(".que_text");
 const option_list = document.querySelector(".option_list");
-const scoreTextPoint = document.getElementById("score");
 
 function getQuestions(){
   const level = 1;
@@ -23,8 +22,7 @@ function showQuestion(question){
   }
   que_text.innerHTML = que_tag; //adding new span tag inside que_tag
   option_list.innerHTML = option_tag; //adding new div tag inside option_tag
-  const score_round = sessionStorage.getItem("score_round");
-  scoreTextPoint.innerHTML = score_round;
+
   const option = option_list.querySelectorAll(".option");
   // set onclick attribute to all available options
   for (i = 0; i < option.length; i++) {
