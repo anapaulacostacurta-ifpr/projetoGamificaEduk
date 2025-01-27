@@ -16,6 +16,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       if(state != "started"){
         alert('Tabuleiro Não disponível ainda. Fale com o professor!');
       }else{
+        let score = 0;
         if (players === undefined){
           players = new Array();
           players[0] = {user_UID:user_UID,score_round:0};
@@ -23,7 +24,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         }else{
           //variável para verficar se o jogador já entrou no tabuleiro
           let isOnPlayer = false;
-          let score = 0;
+          
           players.forEach(player => {
             if(player.user_UID == user_UID){
               isOnPlayer = true;
