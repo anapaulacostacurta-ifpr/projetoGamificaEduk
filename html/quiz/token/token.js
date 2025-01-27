@@ -10,6 +10,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         const tokens_quiz = token.quiz;
         if (tokens_quiz.indexOf(tokenid) > 0){
             alert("Token Válido!");
+            sessionStorage.setItem("token",tokenid);
             //passar o token para a pagina do quiz e gravar no banco de dados.
             window.location.href = "../quiz.html";
         }else{
