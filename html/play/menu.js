@@ -1,3 +1,3 @@
-function quiz() {
-  window.location.href = "../quiz/quiz.html";
+function token() {
+  window.location.href = "../quiz/token/token.html";
 }

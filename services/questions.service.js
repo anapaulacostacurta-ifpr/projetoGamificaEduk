@@ -1,5 +1,5 @@
 // Serviço para interação com o Firestore
-const questionService = {
+const questionsService = {
     getQuestionsByLevel: async (level, category) => {
         try {
             const querySnapshot = await firebase.firestore().collection("questions")
