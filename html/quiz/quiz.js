@@ -13,7 +13,7 @@ level.innerHTML = "Nível: "+sessionStorage.getItem("level");
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
 
-questionsService.getQuizzesByLevel(sessionStorage.getItem("level"),"quiz").then(questions =>{
+questionsService.getQuizzesByLevel(parseInt(sessionStorage.getItem("level")),"quiz").then(questions =>{
   //Verificar o que o usuário já respondeu
     questions.forEach(question => {
       showQuestion(question);
