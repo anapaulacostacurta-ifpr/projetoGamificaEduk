@@ -38,7 +38,6 @@ function getAtualQuestion(){
     // Parse the string back into an object
   let question = JSON.parse(questionString);
   console.log(question);
-  question.map(question=>question);
   return question;
 }
 
