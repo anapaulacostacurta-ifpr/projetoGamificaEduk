@@ -3,6 +3,6 @@ const logboardgamesService = {
         return firebase.firestore()
             .collection("logboardgames")
             .doc(boardgameid)
-            .add(logboardgames);
+            .set(logboardgames);
     }
 };
