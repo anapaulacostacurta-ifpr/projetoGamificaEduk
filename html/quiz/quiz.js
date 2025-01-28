@@ -113,27 +113,13 @@ function optionSelected(answer) {
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
   event.preventDefault()
-      console.log(boardgame);
-      const state  = boardgame.state;
-      const boardgame_id = boardgame.boardgameid;
-      var players = boardgame.players;
-      players.forEach(player => {
-        var quizzes = player.quizzes;
-        if(player.user_UID == sessionStorage.userUid){
-          if(quizzes === undefined){
-            quizzes = new Array();
-            quizzes[0] = {'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')};
-            players.push(quizzes);
-            boardgamesService.addPlayers(boardgame_id, {players});
-          }else{
-            quizzes.push({'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')})
-            players.push(quizzes);
-            boardgamesService.addPlayers(boardgame_id, {players});
-          }
-        }
-        window.location.href = "../play/menu.html";
-      });
-    });
+      
+  const boardgame_id = boardgame.boardgameid;
+  const log = {'boardgameid':boardgame_id,'user_UID': user_UID, 'type': question.type, 'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')};
+  // Salvar no banco de dados.
+  window.location.href = "../play/menu.html";
+
+});
 
 function startTimer(time) {
   counter = setInterval(timer, 1000);
