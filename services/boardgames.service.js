@@ -54,5 +54,6 @@ const boardgamesService = {
             .collection("boardgames")
             .doc(boardgameid)
             .update(players);
+            
     }
 };

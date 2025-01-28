@@ -104,9 +104,28 @@ function optionSelected(answer) {
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
   event.preventDefault();
-  quizzes = new Array();
-  quizzes[0] = {'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')};
-  console.log(quizzes);
+  boardgamesService.getBoardGameByID(sessionStorage.boardgame_id).then((boardgames) => {
+    boardgames.forEach(boardgame => {   
+      console.log(boardgames);
+      const state  = boardgame.state;
+      var players = boardgame.players;
+      players.forEach(player => {
+        var quizzes = player.quizzes;
+        if(player.user_UID == user_UID){
+          if(quizzes === undefined){
+            quizzes = new Array();
+            quizzes[0] = {'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')};
+            player.push(quizzes);
+            boardgamesService.addPlayers(boardgame_id, {players});
+          }else{
+            quizzes.push({'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')})
+            players.push(quizzes);
+            boardgamesService.addQuizzes(boardgame_id, {players});
+          }
+        }
+      });
+    });
+  });
   /** 
   questionsService.addQuizzes(boardgame_id, {quizzes});
   }else{
