@@ -77,7 +77,7 @@ function optionSelected(answer) {
   const allOptions = option_list.children.length; //getting all option items
 
   if (userAns == correcAns) {
-    scoreTextPoint.innerHTML = sessionStorage.scoreLevelPoint + 10 ;
+    scoreLevelPoint.innerHTML = sessionStorage.scoreLevelPoint + 10 ;
     answer.classList.add("correct"); //adding green color to correct selected option
     answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
     console.log("Correct Answer");
