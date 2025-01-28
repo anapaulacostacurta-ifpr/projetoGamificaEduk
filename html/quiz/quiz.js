@@ -4,8 +4,6 @@ const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 
-
-
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
 scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.score_round;
@@ -102,18 +100,19 @@ function optionSelected(answer) {
   for (i = 0; i < allOptions; i++) {
     option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
   }
-  window.location.href = "../play/menu.html";
 }
 
-
 function saveAnswer(){
-  if(quizzes.empety){
+  /**
+   * if(quizzes.empety){
   quizzes = new Array();
   quizzes[0] = {numb:1,option:1,token:"a",data:""};
   questionsService.addQuizzes(boardgame_id, {quizzes});
   }else{
     players.push({numb:1,option:1,token:"a",data:""});
   }
+    **/
+  window.location.href = "../play/menu.html";
 }
 
 function startTimer(time) {
