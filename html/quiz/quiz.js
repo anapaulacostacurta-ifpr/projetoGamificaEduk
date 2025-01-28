@@ -122,7 +122,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
           if(quizzes === undefined){
             quizzes = new Array();
             quizzes[0] = {'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')};
-            player.push(quizzes);
+            players.push(quizzes);
             boardgamesService.addPlayers(boardgame_id, {players});
           }else{
             quizzes.push({'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')})
