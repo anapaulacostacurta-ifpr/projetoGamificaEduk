@@ -17,9 +17,8 @@ scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 
 questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(questions =>{
   questions.forEach(question => {
-    alert(question);
     setAtualQuestion(question);
-    console.log (getAtualQuestion);
+    console.log(getAtualQuestion());
     showQuestion();
     startTimer(15);
   });
@@ -28,7 +27,6 @@ questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(q
 function setAtualQuestion(question){
 // Convert the user object into a string
 let questionString = JSON.stringify(question);
-
 // Store the stringified object in sessionStorage
 sessionStorage.setItem('user', questionString);
 return questionString;
