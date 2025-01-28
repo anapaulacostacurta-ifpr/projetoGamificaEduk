@@ -1,7 +1,3 @@
-//Ranking Nível
-const scoreLevelPoint = document.getElementById("score_round");
-scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.getItem("score_round");
-
 const level = document.getElementById("level");
 level.innerHTML = "Nível: "+sessionStorage.getItem("level");
 
