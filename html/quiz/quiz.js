@@ -18,7 +18,8 @@ scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz");
 
 
-const questions = sessionStorage.questions;
+let questions = new Array;
+questions = sessionStorage.questions;
 showQuestion(questions[0]);
 startTimer(15);
 
