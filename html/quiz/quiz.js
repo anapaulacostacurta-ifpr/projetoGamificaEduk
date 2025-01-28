@@ -113,7 +113,7 @@ function optionSelected(answer) {
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
   event.preventDefault();
-  const user_answer = {user_UID: sessionStorage.userUid, boardgameid:boardgame.boardgameid, level:level, category: question_type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token, data:(new Date()).toLocaleDateString('pt-BR')};
+  const user_answer = {user_UID: sessionStorage.userUid, boardgameid:boardgame.boardgameid, level:level, category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token, data:(new Date()).toLocaleDateString('pt-BR')};
   console.log(user_answer);
   // Salvar no banco de dados.
   logboardgamesService.save(boardgame.boardgameid, user_answer);
