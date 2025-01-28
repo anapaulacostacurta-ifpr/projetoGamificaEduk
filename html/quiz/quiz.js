@@ -17,6 +17,7 @@ scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 
 questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(questions =>{
   questions.forEach(question => {
+    alert(question);
     sessionStorage.setItem("question", question);
     showQuestion();
     startTimer(15);
