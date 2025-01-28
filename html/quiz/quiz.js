@@ -6,25 +6,23 @@ const timeCount = document.querySelector(".timer .timer_sec");
 
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
-scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.getItem("score_round");
+scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.score_round;
 
 const level = document.getElementById("level");
-level.innerHTML = "Nível: "+sessionStorage.getItem("level");
+level.innerHTML = "Nível: "+sessionStorage.level;
 
 //Ranking Geral
 const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
+scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 
-questionsService.getQuizzesByLevel(parseInt(sessionStorage.getItem("level")),"quiz");
+questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz");
 
-
-const questions = sessionStorage.getItem("questions");
-
+/**
 questions.forEach(question => {
   showQuestion(question);
   startTimer(15);
 });
-
+**/
 
 function showQuestion(question){
   //creating a new span and div tag for question and option and passing the value using array index
