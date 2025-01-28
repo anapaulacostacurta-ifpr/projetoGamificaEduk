@@ -25,20 +25,18 @@ questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(q
 });
 
 function setAtualQuestion(question){
-// Convert the user object into a string
-let questionString = JSON.stringify(question);
-// Store the stringified object in sessionStorage
-sessionStorage.setItem('user', questionString);
-return questionString;
+  // Convert the user object into a string
+  let questionString = JSON.stringify(question);
+  // Store the stringified object in sessionStorage
+  sessionStorage.setItem('question', questionString);
+  return questionString;
 }
 
 function getAtualQuestion(){
   // Get the stringified object from sessionStorage
   let questionString = sessionStorage.question;
-  
-  // Parse the string back into an object
+    // Parse the string back into an object
   let question = JSON.parse(questionString);
-  
   console.log(question);
   question.map(question=>question);
   return question;
