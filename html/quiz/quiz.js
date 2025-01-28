@@ -4,6 +4,8 @@ const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 
+
+
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
 scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.score_round;
@@ -67,8 +69,11 @@ function showQuestion(){
   for (i = 0; i < option.length; i++) {
     option[i].setAttribute("onclick", "optionSelected(this)");
   }
-
 }
+
+// creating the new div tags which for icons
+let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
+let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 
 //if user clicked on option
 function optionSelected(answer) {
