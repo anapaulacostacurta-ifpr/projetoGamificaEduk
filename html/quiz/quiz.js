@@ -78,9 +78,9 @@ function optionSelected(answer) {
   let userAns = answer.querySelector(".choice-text").textContent; //getting user selected option
   let correcAns =  question.answer[0];   
   const allOptions = option_list.children.length; //getting all option items
+  sessionStorage.setItem("userAnswer",userAns);
 
   if (userAns == correcAns) {
-    scoreLevelPoint.innerHTML = sessionStorage.scoreLevelPoint + 10 ;
     answer.classList.add("correct"); //adding green color to correct selected option
     answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
   } else {
@@ -104,15 +104,15 @@ function optionSelected(answer) {
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
   event.preventDefault();
-  /**
-   * if(quizzes.empety){
   quizzes = new Array();
-  quizzes[0] = {numb:1,option:1,token:"a",data:""};
+  quizzes[0] = {'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')};
+  console.log(quizzes);
+  /** 
   questionsService.addQuizzes(boardgame_id, {quizzes});
   }else{
     players.push({numb:1,option:1,token:"a",data:""});
   }
-    **/
+  **/
   window.location.href = "../play/menu.html";
 });
 
