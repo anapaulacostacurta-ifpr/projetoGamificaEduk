@@ -112,13 +112,11 @@ function optionSelected(answer) {
 }
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
-  event.preventDefault()
-      
-  const boardgame_id = boardgame.boardgameid;
-  const log = {'boardgameid':boardgame_id,'user_UID': user_UID, 'type': question.type, 'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')};
+  event.preventDefault();
+  const log = {'boardgameid':boardgame.boardgameid,'user_UID': sessionStorage.userUid, 'type': question.type, 'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')};
+  console.log(log);
   // Salvar no banco de dados.
   window.location.href = "../play/menu.html";
-
 });
 
 function startTimer(time) {
