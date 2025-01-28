@@ -102,7 +102,8 @@ function optionSelected(answer) {
   }
 }
 
-function saveAnswer(){
+document.getElementById("quiz-form").addEventListener("submit", function(event) {
+  event.preventDefault();
   /**
    * if(quizzes.empety){
   quizzes = new Array();
@@ -113,7 +114,7 @@ function saveAnswer(){
   }
     **/
   window.location.href = "../play/menu.html";
-}
+});
 
 function startTimer(time) {
   counter = setInterval(timer, 1000);
