@@ -39,7 +39,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
             boardgamesService.addPlayers(boardgame_id, {players});
           }
         }
-        sessionStorage.setItem('boardgame', boardgame);
+        setBoardGame(boardgame);
         sessionStorage.setItem("boardgame_id",boardgame_id);
         sessionStorage.setItem("level",boardgame.level);
         sessionStorage.setItem("score_round",score);
