@@ -41,7 +41,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         }
         sessionStorage.setItem('boardgame', boardgame);
         sessionStorage.setItem("boardgame_id",boardgame_id);
-        sessionStorage.setItem("level",level);
+        sessionStorage.setItem("level",boardgame.level);
         sessionStorage.setItem("score_round",score);
       });
       window.location.href = "./menu.html";
