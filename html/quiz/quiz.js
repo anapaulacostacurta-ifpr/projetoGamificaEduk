@@ -15,30 +15,29 @@ level.innerHTML = "Nível: "+sessionStorage.level;
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 
-questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz");
+questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(questions =>{
+  questions.forEach(question => {
+    sessionStorage.setItem("question", question);
+    showQuestion();
+    startTimer(15);
+  });
+});
 
-
-let questions = new Array();
-questions = sessionStorage.questions;
-showQuestion(questions[0]);
-startTimer(15);
-
-
-function showQuestion(question){
+function showQuestion(){
   //creating a new span and div tag for question and option and passing the value using array index
-  let que_tag = "<span>" + question.numb +".</span>"+"<span>" + question.text +"</span>";
+  let que_tag = "<span>" +  sessionStorage.question.numb +".</span>"+"<span>" + sessionStorage.question.text +"</span>";
   let option_tag = 
   '<div class="option"><p class="choice-prefix">A</p><p class="choice-text" data-number="1"><span class="question">' +
-    question.options[0] +
+    sessionStorage.question.options[0] +
     "</span></div>" +
     '<div class="option"><p class="choice-prefix">B</p><p class="choice-text" data-number="2"><span class="question">' +
-    question.options[1] +
+    sessionStorage.question.options[1] +
     "</span></p></div>" +
     '<div class="option"><p class="choice-prefix">C</p><p class="choice-text" data-number="3"><span class="question">' +
-    question.options[2] +
+    sessionStorage.question.options[2] +
     "</span></p></div>" +
     '<div class="option"><p class="choice-prefix">D</p><p class="choice-text" data-number="4"><span class="question">' +
-    question.options[3] +
+    sessionStorage.question.options[3] +
     "</span></p></div>";
   
   que_text.innerHTML = que_tag; //adding new span tag inside que_tag
@@ -55,7 +54,7 @@ function showQuestion(question){
 //if user clicked on option
 function optionSelected(answer) {
   let userAns = answer.querySelector(".choice-text").textContent; //getting user selected option
-  let correcAns = questions[que_count].answer; //getting correct answer from array
+  let correcAns = sessionStorage.question.answer; //getting correct answer from array
   const allOptions = option_list.children.length; //getting all option items
 
   if (userAns == correcAns) {
@@ -112,7 +111,7 @@ function startTimer(time) {
       clearInterval(counter); //clear counter
       timeText.textContent = "Intervalo"; //change the time text to time off
       const allOptions = option_list.children.length; //getting all option items
-      let correcAns = questions[que_count].answer; //getting correct answer from array
+      let correcAns = sessionStorage.question.answer; //getting correct answer from array
       for (i = 0; i < allOptions; i++) {
         if (option_list.children[i].textContent == correcAns) {
           //if there is an option which is matched to an array answer
