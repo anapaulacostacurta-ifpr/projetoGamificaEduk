@@ -118,7 +118,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
       var players = boardgame.players;
       players.forEach(player => {
         var quizzes = player.quizzes;
-        if(player.user_UID == sessionStorage.sessionStorage.userUid){
+        if(player.user_UID == sessionStorage.userUid){
           if(quizzes === undefined){
             quizzes = new Array();
             quizzes[0] = {'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')};
