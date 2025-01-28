@@ -39,8 +39,9 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
             boardgamesService.addPlayers(boardgame_id, {players});
           }
         }
+        sessionStorage.setItem('boardgame', boardgame);
         sessionStorage.setItem("boardgame_id",boardgame_id);
-        sessionStorage.setItem("level",boardgame.level);
+        sessionStorage.setItem("level",level);
         sessionStorage.setItem("score_round",score);
       });
       window.location.href = "./menu.html";
@@ -49,6 +50,19 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       document.getElementById("play-form").reset();
     })
   });
+
+function setBoardGame(boardgame){
+  let boardgameString = JSON.stringify(boardgame);
+  sessionStorage.setItem('boardgame', boardgameString);
+  return boardgameString;
+}
+
+function getBoardgame(){
+  let boardgameString = sessionStorage.boardgame;
+  let boardgame = JSON.parse(boardgameString);
+  console.log(boardgame);
+  return boardgame;
+}
   
 function logout() {
     firebase.auth().signOut().then(() => {

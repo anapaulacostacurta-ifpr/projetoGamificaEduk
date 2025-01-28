@@ -21,6 +21,8 @@ questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(q
   });
 });
 
+const boardgame = getBoardgame();
+
 const question = getAtualQuestion();
 showQuestion();
 startTimer(15);
@@ -40,6 +42,13 @@ function getAtualQuestion(){
   let question = JSON.parse(questionString);
   console.log(question);
   return question;
+}
+
+function getBoardgame(){
+  let boardgameString = sessionStorage.boardgame;
+  let boardgame = JSON.parse(boardgameString);
+  console.log(boardgame);
+  return boardgame;
 }
 
 function showQuestion(){
@@ -103,10 +112,8 @@ function optionSelected(answer) {
 }
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
-  event.preventDefault();
-  boardgamesService.getBoardGameByID(sessionStorage.boardgame_id).then((boardgames) => {
-    boardgames.forEach(boardgame => {   
-      console.log(boardgames);
+  event.preventDefault()
+      console.log(boardgame);
       const state  = boardgame.state;
       var players = boardgame.players;
       players.forEach(player => {
@@ -123,19 +130,9 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
             boardgamesService.addQuizzes(boardgame_id, {players});
           }
         }
+        window.location.href = "../play/menu.html";
       });
     });
-  }).catch( (error) =>{
-    alert(error);
-  });
-  /** 
-  questionsService.addQuizzes(boardgame_id, {quizzes});
-  }else{
-    players.push({numb:1,option:1,token:"a",data:""});
-  }
-  **/
-  window.location.href = "../play/menu.html";
-});
 
 function startTimer(time) {
   counter = setInterval(timer, 1000);

@@ -1,6 +1,8 @@
+const boardgame = getBoardgame;
+
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
-scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.score_round;
+scoreLevelPoint.innerHTML = "Level Score: "+boardgame.score_round;
 
 const level = document.getElementById("level");
 level.innerHTML = "Nível: "+sessionStorage.level;
@@ -11,6 +13,13 @@ scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 
 function token() {
   window.location.href = "../quiz/token/token.html";
+}
+
+function getBoardgame(){
+  let boardgameString = sessionStorage.boardgame;
+  let boardgame = JSON.parse(boardgameString);
+  console.log(boardgame);
+  return boardgame;
 }
 
 function logout() {
