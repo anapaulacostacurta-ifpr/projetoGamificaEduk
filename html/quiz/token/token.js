@@ -16,7 +16,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     const tokenid = document.getElementById("tokenid").value;
     const user_UID = sessionStorage.getItem("userUid");
     
-    tokenService.getTokensQuiz().then(tokens => {
+    tokenService.getTokens().then(tokens => {
       tokens.forEach(token => {
         const tokens_quiz = token.quiz;
         if (tokens_quiz.indexOf(tokenid) > 0){
