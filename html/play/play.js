@@ -9,7 +9,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
 
   // Captura os dados do formulário
   const boardgame_id = document.getElementById("boardgameid").value;
-  const user_UID = sessionStorage.getItem("userUid");
+  const user_UID = sessionStorage.userUid;
   
   boardgamesService.getBoardGameByID(boardgame_id).then((boardgames) => {
     boardgames.forEach(boardgame => {
