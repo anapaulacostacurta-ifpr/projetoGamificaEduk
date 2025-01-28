@@ -1,6 +1,3 @@
-const level = document.getElementById("level");
-level.innerHTML = "Nível: "+sessionStorage.getItem("level");
-
 //Ranking Geral
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
