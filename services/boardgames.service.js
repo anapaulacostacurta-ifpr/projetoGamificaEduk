@@ -17,7 +17,6 @@ const boardgamesService = {
             });
     },
     getBoardGameByID: async (boardgameid) => {
-        try {
             const querySnapshot = await firebase.firestore().collection("boardgames")
             .where('boardgameid','==',boardgameid)
             .where('state','==','started')
@@ -31,11 +30,6 @@ const boardgamesService = {
             const boardgame = querySnapshot.docs.map(doc=>doc.data());
             console.log(boardgame);
             return boardgame;
-        } catch (error) {
-                console.error("Erro ao carregar perguntas:", error);
-                alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
-                return error;
-        }
     },
     remove: boardgames => {
         return firebase.firestore()
