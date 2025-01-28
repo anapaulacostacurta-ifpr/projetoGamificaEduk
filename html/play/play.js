@@ -46,6 +46,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       window.location.href = "./menu.html";
     }).catch( (error) => {
       console.log (error);
+      document.getElementById("play-form").reset();
     })
   });
   
