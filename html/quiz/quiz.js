@@ -15,14 +15,14 @@ level.innerHTML = "Nível: "+sessionStorage.level;
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 
-questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz");
+if(sessionStorage.questions == null){
+  questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz");
+}
 
-/**
-questions.forEach(question => {
-  showQuestion(question);
-  startTimer(15);
-});
-**/
+const questions = sessionStorage.questions;
+showQuestion(question[0]);
+startTimer(15);
+
 
 function showQuestion(question){
   //creating a new span and div tag for question and option and passing the value using array index
