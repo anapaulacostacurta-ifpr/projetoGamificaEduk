@@ -15,12 +15,11 @@ level.innerHTML = "Nível: "+sessionStorage.level;
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 
-if(sessionStorage.questions === null){
-  questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz");
-}
+questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz");
+
 
 const questions = sessionStorage.questions;
-showQuestion(question[0]);
+showQuestion(questions[0]);
 startTimer(15);
 
 
