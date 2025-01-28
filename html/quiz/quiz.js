@@ -115,6 +115,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   event.preventDefault()
       console.log(boardgame);
       const state  = boardgame.state;
+      const boardgame_id = boardgame.boardgameid;
       var players = boardgame.players;
       players.forEach(player => {
         var quizzes = player.quizzes;
