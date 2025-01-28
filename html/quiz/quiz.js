@@ -125,6 +125,8 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
         }
       });
     });
+  }).catch( (error) =>{
+    alert(error);
   });
   /** 
   questionsService.addQuizzes(boardgame_id, {quizzes});
