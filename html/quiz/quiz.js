@@ -19,6 +19,7 @@ questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(q
   questions.forEach(question => {
     alert(question);
     sessionStorage.setItem("question", question);
+    console.log (sessionStorage.question);
     showQuestion();
     startTimer(15);
   });
