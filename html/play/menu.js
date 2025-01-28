@@ -12,4 +12,13 @@ scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
 function token() {
   window.location.href = "../quiz/token/token.html";
 }
+
+function logout() {
+  firebase.auth().signOut().then(() => {
+      sessionStorage.clear();
+      window.location.href = "../../index.html";
+  }).catch(() => {
+      alert('Erro ao fazer logout');
+  })
+}
         

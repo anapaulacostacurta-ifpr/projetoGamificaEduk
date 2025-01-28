@@ -10,3 +10,4 @@ firebase.auth().onAuthStateChanged( (user) => {
         console.log(error);
     });
 })
+

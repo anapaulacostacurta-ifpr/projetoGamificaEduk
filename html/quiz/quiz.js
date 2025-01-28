@@ -15,16 +15,8 @@ level.innerHTML = "Nível: "+sessionStorage.getItem("level");
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
 
-if(sessionStorage.getItem("questions") == null){
-  questionsService.getQuizzesByLevel(parseInt(sessionStorage.getItem("level")),"quiz").then(questions =>{
-    //Verificar o que o usuário já respondeu
-    let arrayquestions = new Array();
-    questions.forEach(question =>{
-      arrayquestions.push(question);
-    })
-    sessionStorage.setItem("questions", arrayquestions);
-    });
-}
+questionsService.getQuizzesByLevel(parseInt(sessionStorage.getItem("level")),"quiz");
+
 
 const questions = sessionStorage.getItem("questions");
 
@@ -149,4 +141,13 @@ function startTimerLine(time) {
       clearInterval(counterLine); //clear counterLine
     }
   }
+}
+
+function logout() {
+  firebase.auth().signOut().then(() => {
+      sessionStorage.clear();
+      window.location.href = "../../index.html";
+  }).catch(() => {
+      alert('Erro ao fazer logout');
+  })
 }

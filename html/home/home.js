@@ -8,6 +8,7 @@ function jogar() {
 
 function logout() {
     firebase.auth().signOut().then(() => {
+        sessionStorage.clear();
         window.location.href = "../../index.html";
     }).catch(() => {
         alert('Erro ao fazer logout');

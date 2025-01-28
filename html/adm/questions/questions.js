@@ -31,3 +31,12 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   // Limpa o formulário após o envio
   document.getElementById("quiz-form").reset();
 });
+
+function logout() {
+  firebase.auth().signOut().then(() => {
+      sessionStorage.clear();
+      window.location.href = "../../index.html";
+  }).catch(() => {
+      alert('Erro ao fazer logout');
+  })
+}

@@ -41,3 +41,12 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   // Limpa o formulário após o envio
   document.getElementById("boardgame-form").reset();
 });
+
+function logout() {
+  firebase.auth().signOut().then(() => {
+      sessionStorage.clear();
+      window.location.href = "../../index.html";
+  }).catch(() => {
+      alert('Erro ao fazer logout');
+  })
+}
