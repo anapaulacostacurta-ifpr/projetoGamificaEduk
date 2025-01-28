@@ -127,7 +127,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
           }else{
             quizzes.push({'question_numb':question.numb,'user_answer':sessionStorage.userAnswer,'tokenid': sessionStorage.token,'data':(new Date()).toLocaleDateString('pt-BR')})
             players.push(quizzes);
-            boardgamesService.addQuizzes(boardgame_id, {players});
+            boardgamesService.addPlayers(boardgame_id, {players});
           }
         }
         window.location.href = "../play/menu.html";
