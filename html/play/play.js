@@ -17,9 +17,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       const state  = boardgame.state;
       var players = boardgame.players;
       
-      if(state != "started"){
-        alert('Tabuleiro Não disponível ainda. Fale com o professor!');
-      }else{
         let score = 0;
         if (players === undefined){
           players = new Array();
@@ -45,10 +42,11 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
         sessionStorage.setItem("boardgame_id",boardgame_id);
         sessionStorage.setItem("level",boardgame.level);
         sessionStorage.setItem("score_round",score);
-      }
       });
       window.location.href = "./menu.html";
-    });
+    }).catch( (error) => {
+      console.log (error);
+    })
   });
   
 function logout() {

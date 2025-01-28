@@ -34,7 +34,7 @@ const boardgamesService = {
         } catch (error) {
                 console.error("Erro ao carregar perguntas:", error);
                 alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
-                return [];
+                return error;
         }
     },
     remove: boardgames => {
