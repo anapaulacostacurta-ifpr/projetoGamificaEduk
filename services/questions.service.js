@@ -11,8 +11,7 @@ const questionsService = {
                 throw new Error("Nenhuma pergunta encontrada para o nível "+ level+ " .");
             }
             const questions = querySnapshot.docs.map(doc=>doc.data());
-            console.log(questions);
-                        
+            console.log(questions);            
             return questions;
         } catch (error) {
                 console.error("Erro ao carregar perguntas:", error);
@@ -47,3 +46,4 @@ const questionsService = {
             .update(question);
     }
 };
+

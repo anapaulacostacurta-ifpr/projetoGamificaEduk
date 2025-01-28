@@ -18,12 +18,33 @@ scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(questions =>{
   questions.forEach(question => {
     alert(question);
-    sessionStorage.setItem("question", question);
-    console.log (sessionStorage.question);
+    setAtualQuestion(question);
+    console.log (getAtualQuestion);
     showQuestion();
     startTimer(15);
   });
 });
+
+function setAtualQuestion(question){
+// Convert the user object into a string
+let questionString = JSON.stringify(question);
+
+// Store the stringified object in sessionStorage
+sessionStorage.setItem('user', questionString);
+return questionString;
+}
+
+function getAtualQuestion(){
+  // Get the stringified object from sessionStorage
+  let questionString = sessionStorage.question;
+  
+  // Parse the string back into an object
+  let question = JSON.parse(questionString);
+  
+  console.log(question);
+  question.map(question=>question);
+  return question;
+}
 
 function showQuestion(){
   //creating a new span and div tag for question and option and passing the value using array index
