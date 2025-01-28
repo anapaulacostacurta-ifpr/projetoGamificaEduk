@@ -1,6 +1,8 @@
 const quiz_box = document.querySelector(".quiz_box");
 const que_text = document.querySelector(".que_text");
 const option_list = document.querySelector(".option_list");
+const timeText = document.querySelector(".timer .time_left_txt");
+const timeCount = document.querySelector(".timer .timer_sec");
 
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
@@ -13,13 +15,20 @@ level.innerHTML = "Nível: "+sessionStorage.getItem("level");
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
 
-questionsService.getQuizzesByLevel(parseInt(sessionStorage.getItem("level")),"quiz").then(questions =>{
-  //Verificar o que o usuário já respondeu
-    questions.forEach(question => {
-      showQuestion(question);
-      startTimer(15);
+if(sessionStorage.getItem("questions").empety){
+  questionsService.getQuizzesByLevel(parseInt(sessionStorage.getItem("level")),"quiz").then(questions =>{
+    //Verificar o que o usuário já respondeu
+    sessionStorage.setItem("questions", questions);
     });
-  });
+}
+
+const questions = sessionStorage.getItem("questions");
+
+
+questions.forEach(question => {
+  showQuestion(question);
+  startTimer(15);
+});
 
 
 function showQuestion(question){
