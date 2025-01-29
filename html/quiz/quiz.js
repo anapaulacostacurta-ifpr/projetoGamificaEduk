@@ -123,7 +123,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   user_answer.push(log);
   const log_answers = {boardgame_id: boardgame_id, level: level, user_answer};
   // Salvar no banco de dados.
-  var res = logboardgamesService.save(user_UID, {data: {log_answers}});
+  var res = logboardgamesService.save(user_UID, data, {log_answers});
   window.location.href = "../play/menu.html";
 });
 

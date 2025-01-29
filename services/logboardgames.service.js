@@ -1,12 +1,15 @@
 const logboardgamesService = {
-    save: (user_UID, logboardgames) => {
+    save: (user_UID, data, logboardgames) => {
         return firebase.firestore()
             .collection("logboardgames")
             .doc(user_UID)
+            .doc(data)
             .set(logboardgames);
     },
     getlogboardgameByUserUID: async (user_UID,boardgame_id,level,data) => {
-        const querySnapshot = await firebase.firestore().collection("logboardgames");
+        const querySnapshot = await firebase.firestore().collection("logboardgames").
+        .doc(user_UID)
+        
         if(querySnapshot.empty){
             console.log("Log vazia:" + user_UID +","+boardgame_id+","+level+","+data);
             return [];
