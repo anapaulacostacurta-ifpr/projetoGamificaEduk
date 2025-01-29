@@ -127,8 +127,11 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
 });
 
 function getUserAnswers(user_UID){
+  alert(user_UID);
   var log_answers = []
+  alert(log_answers);
   logboardgamesService.getlogboardgameByUserUID(user_UID).then(logboardgames => {
+    alert(logboardgames);
     logboardgames.forEach(logboardgame => {
       alert(logboardgame);
       log_answers = logboardgame.log_answers;
@@ -138,6 +141,7 @@ function getUserAnswers(user_UID){
         log_answers = []; 
       }
       alert("Log não está Vazia!");
+      alert(log_answers);
     });  
   }); 
   alert("Retornando!");
