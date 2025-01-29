@@ -119,10 +119,29 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const data = (new Date()).toLocaleDateString('pt-BR');
   var log_answers = {user_UID: user_UID, data: data, level: level, boardgame_id: boardgame_id, category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
   // Salvar no banco de dados.
-  logboardgamesService.save(log_answers);
+  saveLogAnswer(log_answers);
   window.location.href = "../play/menu.html";
 });
 
+function saveLogAnswers(log_answers){
+  setlogAnswers(log_answers);
+  logboardgamesService.save(log_answers);
+}
+
+function setlogAnswers(log_answers){
+  // Convert the user object into a string
+  let loganswersString = JSON.stringify(log_answers);
+  // Store the stringified object in sessionStorage
+  sessionStorage.setItem('log_answers', loganswersString);
+  return loganswersString;
+}
+
+function getLogAnswers(){
+  let loganswersString = sessionStorage.log_answers;
+  let log_answers = JSON.parse(loganswersString);
+  console.log(log_answers);
+  return log_answers;
+}
 
 function startTimer(time) {
   counter = setInterval(timer, 1000);
