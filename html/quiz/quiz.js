@@ -116,12 +116,14 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const user_UID = sessionStorage.userUid;
   const boardgame_id = boardgame.boardgameid;
   const level = boardgame.level;
+  const data = (new Date()).toLocaleDateString('pt-BR')};
   const user_answer = getUserAnswers(); 
-  user_answer.push({category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token, data:(new Date()).toLocaleDateString('pt-BR')});
+  user_answer.push({category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token});
   console.log(user_answer);
   const log_answers = {
     boardgame_id,
     level,
+    data,
     user_answer
   }
   // Salvar no banco de dados.
