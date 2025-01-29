@@ -119,7 +119,9 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const data = (new Date()).toLocaleDateString('pt-BR');
   var log_answers;
   try{
-    log_answers = logboardgamesService.getlogboardgameByUserUID(user_UID);
+    logboardgamesService.getlogboardgameByUserUID(user_UID).then(logboardgames =>{
+      log_answers = logboardgames.log_answers;
+    });
   }catch (error){
     console.log(error);
     log_answers = new Array ();
