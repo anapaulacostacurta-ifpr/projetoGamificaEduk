@@ -1,24 +1,18 @@
 const logboardgamesService = {
-    save: (user_UID, logboardgames) => {
+    save: (user_UID, log_answers) => {
         return firebase.firestore()
             .collection("logboardgames")
             .doc(user_UID)
-            .set(logboardgames);
+            .set(log_answers);
     },
     getlogboardgameByUserUID: async (user_UID) => {
         const querySnapshot = firebase.firestore().collection("logboardgames")
         .doc(user_UID);
-        alert(querySnapshot);
-        alert("Consulta ok!");
 
         if(querySnapshot.empty){
-            console.log("Log vazia:" + user_UID);
-            alert("Vazio");
-            return [];
+            throw new Error("Nenhuma log encontrada para o usuario "+ user_UID+ " .");
         }
         const logboardgames = querySnapshot.docs.map(doc=>doc.data());
-        alert(logboardgames);
-        alert("Retornando!");
         return logboardgames;
     },
 };

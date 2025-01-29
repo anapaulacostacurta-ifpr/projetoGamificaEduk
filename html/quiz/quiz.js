@@ -117,8 +117,13 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const boardgame_id = boardgame.boardgameid;
   const level = boardgame.level;
   const data = (new Date()).toLocaleDateString('pt-BR');
-  var log_answers = new Array ();
-  log_answers = getUserAnswers(user_UID);
+  var log_answers;
+  try{
+    log_answers = logboardgamesService.getlogboardgameByUserUID(user_UID);
+  }catch (error){
+    console.log(error);
+    log_answers = new Array ();
+  }
   const log = {data: data, level: level, boardgame_id: boardgame_id, category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
   log_answers.push(log);
   // Salvar no banco de dados.
@@ -126,24 +131,8 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   window.location.href = "../play/menu.html";
 });
 
-function getUserAnswers(user_UID){
-  alert(user_UID);
-  var log_answers = []
-  alert(log_answers);
-  logboardgamesService.getlogboardgameByUserUID(user_UID).then(logboardgames => {
-    alert(logboardgames);
-    logboardgames.forEach(logboardgame => {
-      alert(logboardgame);
-      log_answers = logboardgame.log_answers;
-      alert(log_answers);
-      if (log_answers === undefined){
-        alert("Log Vázia: undefined");
-        log_answers = []; 
-      }
-      alert("Log não está Vazia!");
-      alert(log_answers);
-    });  
-  }); 
+ 
+  
   alert("Retornando getAnswers!");
   return log_answers;
 }
