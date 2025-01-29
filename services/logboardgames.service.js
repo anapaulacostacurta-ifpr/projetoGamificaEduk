@@ -3,7 +3,8 @@ const logboardgamesService = {
         return firebase.firestore()
             .collection("logboardgames")
             .doc(user_UID)
-            .doc(data)
+            .collection(data)
+            .doc()
             .set(logboardgames);
     },
     getlogboardgameByUserUID: async (user_UID,boardgame_id,level,data) => {
