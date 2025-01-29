@@ -131,11 +131,6 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   window.location.href = "../play/menu.html";
 });
 
- 
-  
-  alert("Retornando getAnswers!");
-  return log_answers;
-}
 
 function startTimer(time) {
   counter = setInterval(timer, 1000);
