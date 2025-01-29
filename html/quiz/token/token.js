@@ -53,6 +53,7 @@ function setTokens(tokens_quiz, pos_token){
     // Convert the user object into a string
   let tokensString = JSON.stringify(tokens_quiz.slice(pos_token,1));
   // Store the stringified object in sessionStorage
+  console.log(tokensString);
   sessionStorage.setItem('tokens', tokensString);
 }
 
