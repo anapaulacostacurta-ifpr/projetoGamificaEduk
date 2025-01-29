@@ -141,6 +141,7 @@ function getUserAnswers(user_UID){
       if (log_answers === undefined){
         log_answers = []; 
       }
+    });  
   }); 
   return log_answers;
 }
