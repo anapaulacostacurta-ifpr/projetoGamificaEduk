@@ -135,10 +135,9 @@ function getUserAnswers(user_UID,boardgame_id,level,data){
   logboardgamesService.getlogboardgameByUserUID(user_UID,boardgame_id,level,data).then( (logboardgame) => {
     const user_answer = logboardgame.user_answer;
     if (user_answer === undefined){
-      return new Array();
-    }else{
-      return user_answer;
+      user_answer = new Array();
     }
+    return user_answer;
   });
 }
 
