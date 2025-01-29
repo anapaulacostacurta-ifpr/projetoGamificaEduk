@@ -117,27 +117,32 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const boardgame_id = boardgame.boardgameid;
   const level = boardgame.level;
   const data = (new Date()).toLocaleDateString('pt-BR');
-  var user_answer = getUserAnswers(user_UID,boardgame_id,level,data);
-  //var user_answer = new Array(); 
-  const log = {category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
-  user_answer.push(log);
-  const log_answers = {boardgame_id: boardgame_id, level: level, data: data, user_answer};
+  var log_answers = getUserAnswers(user_UID);
+  const log = 
+   {data: data
+    level: level
+    boardgame_id: boardgame_id
+    category: question.type, 
+    question_numb:question.numb,  
+    user_answer:sessionStorage.userAnswer, 
+    tokenid: sessionStorage.token}
+  var log_answers = new Array ();
+  log_answers.push(log);
   // Salvar no banco de dados.
   var res = logboardgamesService.save(user_UID, {log_answers});
   window.location.href = "../play/menu.html";
 });
 
-function getUserAnswers(user_UID,boardgame_id,level,data){
-  var user_answer = [];
-  logboardgamesService.getlogboardgameByUserUID(user_UID,boardgame_id,level,data).then(logboardgames => {
+function getUserAnswers(user_UID){
+  var log_answers = []
+  logboardgamesService.getlogboardgameByUserUID(user_UID).then(logboardgames => {
     logboardgames.forEach(logboardgame => {
-      user_answer = logboardgame.user_answer;
-      if (user_answer === undefined){
-        user_answer = []; 
+      log_answers = logboardgame.log_answers;
+      if (log_answers === undefined){
+        log_answers = []; 
       }
-    });
-  });
-  return user_answer;  
+  }); 
+  return log_answers;
 }
 
 function startTimer(time) {
