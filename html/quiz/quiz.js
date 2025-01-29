@@ -113,16 +113,25 @@ function optionSelected(answer) {
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
   event.preventDefault();
-  const user_UID = ;
-  const boardgameid = ;
-  const level = ;
-  const user_answer = new Array(); 
-  user_answer[0]={category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token, data:(new Date()).toLocaleDateString('pt-BR')};
+  const user_UID = sessionStorage.userUid;
+  const boardgame_id = boardgame.boardgameid;
+  const level = boardgame.level;
+  const user_answer = getUserAnswers(); 
+  user_answer.push({category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token, data:(new Date()).toLocaleDateString('pt-BR')});
   console.log(user_answer);
+  const log_answers = {
+    boardgame_id,
+    level,
+    user_answer
+  }
   // Salvar no banco de dados.
-  logboardgamesService.save(user_UID,);
+  logboardgamesService.save(user_UID, {log_answers});
   window.location.href = "../play/menu.html";
 });
+
+function getUserAnswers(){
+  return new Array();
+}
 
 function startTimer(time) {
   counter = setInterval(timer, 1000);
