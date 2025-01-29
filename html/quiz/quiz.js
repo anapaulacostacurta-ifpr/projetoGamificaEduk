@@ -145,7 +145,7 @@ function setScore(corret){
   //Salvar Score na variável
   players[count].score_round = score;
   //Atualizar no banco de dados
-  boardgamesService.addPlayers(boardgame.boardgame_id, {players});
+  boardgamesService.addPlayers(boardgame.boardgameid, {players});
   //Atualizar Sessão
   sessionStorage.setItem("score_round",score);
 
