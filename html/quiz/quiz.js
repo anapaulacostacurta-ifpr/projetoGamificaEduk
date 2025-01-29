@@ -122,7 +122,6 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const log = {category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
   user_answer.push(log);
   const log_answers = {user_UID: user_UID, boardgame_id: boardgame_id, level: level, data: data, user_answer};
-  
   // Salvar no banco de dados.
   var res = logboardgamesService.save(user_UID, {log_answers});
   window.location.href = "../play/menu.html";
@@ -130,15 +129,15 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
 
 function getUserAnswers(user_UID,boardgame_id,level,data){
   var user_answer = [];
-  logboardgamesService.getlogboardgameByUserUID(user_UID,boardgame_id,level,data).then(logboardgame => {
-  if (logboardgame != null){ // Log vazia para esse usuário para os parametros.
+  logboardgamesService.getlogboardgameByUserUID(user_UID,boardgame_id,level,data).then(logboardgames => {
+    logboardgames.forEach(logboardgame => {
       user_answer = logboardgame.user_answer;
       if (user_answer === undefined){
         user_answer = []; 
       }
-  }  
+    });
   }).catch( error => {
-    alert(error);
+    console.log(error);
   });
   return user_answer;  
 }

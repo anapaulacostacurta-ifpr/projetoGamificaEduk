@@ -15,7 +15,7 @@ const logboardgamesService = {
         console.log(querySnapshot);
 
         if(querySnapshot.empty){
-           return null;
+            throw new Error("Log vazia:" + user_UID +","+boardgame_id+","+level+","+data);
         }
         const logboardgame = querySnapshot.docs.map(doc=>doc.data());
         console.log(logboardgame);
