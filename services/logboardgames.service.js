@@ -2,7 +2,8 @@ const logboardgamesService = {
     save: (user_UID, logboardgames) => {
         return firebase.firestore()
             .collection("logboardgames")
-            .add(logboardgames);
+            .doc(user_UID)
+            .set(logboardgames);
     },
     getlogboardgameByUserUID: async (user_UID,boardgame_id,level,data) => {
         const querySnapshot = await firebase.firestore().collection("logboardgames")
