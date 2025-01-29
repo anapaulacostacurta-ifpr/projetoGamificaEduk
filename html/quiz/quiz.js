@@ -143,6 +143,7 @@ function setScore(corret){
     }
   });
   count = count -1;
+
   //Salvar Score na variável
   players[count].score_round = score;
   //Atualizar no banco de dados
@@ -153,7 +154,7 @@ function setScore(corret){
   //Log da resposta
   const boardgame_id = boardgame.boardgameid;
   const level = boardgame.level;
-  const data = (new Date()).toLocaleDateString('pt-BR');
+  const data = (new Date()).toUTCString();
   var log_answers = {user_UID: user_UID, data: data, level: level, boardgame_id: boardgame_id, category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, score_old: score_old, score_round: score, tokenid: sessionStorage.token};
   // Salvar no banco de dados.
   saveLogAnswers(log_answers);
