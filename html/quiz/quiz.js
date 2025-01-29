@@ -117,8 +117,8 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const boardgame_id = boardgame.boardgameid;
   const level = boardgame.level;
   const data = (new Date()).toLocaleDateString('pt-BR');
-  //var user_answer = getUserAnswers(user_UID,boardgame_id,level,data);
-  var user_answer = new Array(); 
+  var user_answer = getUserAnswers(user_UID,boardgame_id,level,data);
+  //var user_answer = new Array(); 
   const log = {category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
   user_answer.push(log);
   const log_answers = {
