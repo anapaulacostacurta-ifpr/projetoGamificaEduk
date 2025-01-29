@@ -122,13 +122,14 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const log = {category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
   user_answer.push(log);
   const log_answers = {
+    user_UID,
     boardgame_id,
     level,
     data,
     user_answer
   }
   // Salvar no banco de dados.
-  var res = logboardgamesService.save(user_UID, {log_answers});
+  var res = logboardgamesService.save({log_answers});
   alert(res);
   window.location.href = "../play/menu.html";
 });
