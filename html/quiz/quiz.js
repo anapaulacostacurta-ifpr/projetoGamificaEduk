@@ -121,13 +121,8 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   //var user_answer = new Array(); 
   const log = {category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
   user_answer.push(log);
-  const key = {user_UID: user_UID, boardgame_id: boardgame_id, level: level, data: data};
-  var keylog = new Array();
-  keylog.push(keylog);
-  const log_answers = {
-    keylog,
-    user_answer
-  }
+  const log_answers = {user_UID: user_UID, boardgame_id: boardgame_id, level: level, data: data, user_answer: {user_answer}};
+  
   // Salvar no banco de dados.
   var res = logboardgamesService.save(user_UID, {log_answers});
   window.location.href = "../play/menu.html";
