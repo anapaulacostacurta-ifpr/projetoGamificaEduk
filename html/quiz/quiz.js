@@ -136,8 +136,6 @@ function getUserAnswers(user_UID,boardgame_id,level,data){
         user_answer = []; 
       }
     });
-  }).catch( error => {
-    console.log(error);
   });
   return user_answer;  
 }
