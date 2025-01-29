@@ -16,21 +16,38 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     const tokenid = document.getElementById("tokenid").value;
     const user_UID = sessionStorage.getItem("userUid");
     
-    tokenService.getTokens().then(tokens => {
-      tokens.forEach(token => {
-        const tokens_quiz = token.quiz;
-        if (tokens_quiz.indexOf(tokenid) > 0){
-            alert("Token Válido!");
-            sessionStorage.setItem("token",tokenid);
-            //passar o token para a pagina do quiz e gravar no banco de dados.
-            window.location.href = "../quiz.html";
-        }else{
-            alert("Token inválido!");
-            window.location.href = "../../play/menu.html";
-        }
-        });
-      });
+    var tokens_quiz = getTokens();
+    let pos_token = tokens_quiz.indexOf(tokenid);
+    if ( pos_token > -1){
+        alert("Token Válido!");
+        sessionStorage.setItem("token",tokenid); // Manter o token durante a resposta da pergunta
+        tokens_quiz.slice(pos_token,1); //removendo da sessão o token utilizado.
+        window.location.href = "../quiz.html";
+    }else{
+        alert("Token inválido!");
+        window.location.href = "../../play/menu.html";
+    }
+    
     });
+function getTokens(){
+    var tokensString = sessionStorage.tokens;
+    var tokens_quiz;
+    if (tokensString === undefined){
+        tokenService.getTokens().then(tokens => {
+            tokens.forEach(token => {
+                tokens_quiz = token.quiz;
+                let tokensString = JSON.stringify(tokens_quiz);
+                // Store the stringified object in sessionStorage
+                sessionStorage.setItem('tokens', tokensString);
+            });
+        });
+    }else{
+        // Convert the user object into a string
+        tokens_quiz = JSON.parse(tokensString);
+        console.log(tokens_quiz);
+    }
+    return tokens_quiz;
+}
 
 function logout() {
     firebase.auth().signOut().then(() => {

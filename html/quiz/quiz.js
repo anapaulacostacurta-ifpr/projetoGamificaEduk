@@ -120,6 +120,8 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   var log_answers = {user_UID: user_UID, data: data, level: level, boardgame_id: boardgame_id, category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
   // Salvar no banco de dados.
   saveLogAnswers(log_answers);
+  //limpar token da sessão
+  sessionStorage.removeItem('token');
   window.location.href = "../play/menu.html";
 });
 
