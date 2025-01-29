@@ -129,7 +129,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
     user_answer
   }
   // Salvar no banco de dados.
-  var res = logboardgamesService.save({log_answers});
+  var res = logboardgamesService.save(user_UID, {log_answers});
   window.location.href = "../play/menu.html";
 });
 
