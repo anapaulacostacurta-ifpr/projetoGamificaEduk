@@ -118,11 +118,8 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const level = boardgame.level;
   const data = (new Date()).toLocaleDateString('pt-BR');
   var user_answer = getUserAnswers(user_UID,boardgame_id,level,data); 
-  console.log(user_answer);
-  alert(user_answer);
   const log = {category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
   user_answer.push(log);
-  console.log(user_answer);
   const log_answers = {
     boardgame_id,
     level,
@@ -136,7 +133,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
 
 function getUserAnswers(user_UID,boardgame_id,level,data){
   var user_answer = [];
-  logboardgamesService.getlogboardgameByUserUID(user_UID,boardgame_id,level,data).then( (logboardgame) => {
+  logboardgamesService.getlogboardgameByUserUID(user_UID,boardgame_id,level,data).then( logboardgame => {
   if (logboardgame != null){
       user_answer = logboardgame.user_answer;
       if (user_answer === undefined){
