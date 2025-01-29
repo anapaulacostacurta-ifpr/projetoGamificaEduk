@@ -6,7 +6,7 @@ const logboardgamesService = {
             .set(log_answers);
     },
     getlogboardgameByUserUID: async (user_UID) => {
-        const querySnapshot = firebase.firestore().collection("logboardgames")
+        const querySnapshot = await firebase.firestore().collection("logboardgames")
         .doc(user_UID);
 
         if(querySnapshot.empty){
