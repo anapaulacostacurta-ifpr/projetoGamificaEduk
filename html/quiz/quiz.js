@@ -142,6 +142,7 @@ function setScore(corret){
       return [];
     }
   });
+  count = count -1;
   //Salvar Score na variável
   players[count].score_round = score;
   //Atualizar no banco de dados
