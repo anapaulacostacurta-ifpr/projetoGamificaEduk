@@ -144,7 +144,7 @@ function getUserAnswers(user_UID){
       alert(log_answers);
     });  
   }); 
-  alert("Retornando!");
+  alert("Retornando getAnswers!");
   return log_answers;
 }
 
