@@ -135,16 +135,16 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
 });
 
 function getUserAnswers(user_UID,boardgame_id,level,data){
+  var user_answer = [];
   logboardgamesService.getlogboardgameByUserUID(user_UID,boardgame_id,level,data).then( (logboardgame) => {
-    var user_answer = [];
-    if (logboardgame != null){
+  if (logboardgame != null){
       user_answer = logboardgame.user_answer;
       if (user_answer === undefined){
         user_answer = []; 
       }
-    }
-    return user_answer;    
+    }  
   });
+  return user_answer;  
 }
 
 function startTimer(time) {
