@@ -15,7 +15,7 @@ const logboardgamesService = {
         console.log(querySnapshot);
 
         if(querySnapshot.empty){
-            return null
+            return null;
             //throw new Error("Nenhum resposta registrada ainda.");
         }
         const logboardgame = querySnapshot.docs.map(doc=>doc.data());
