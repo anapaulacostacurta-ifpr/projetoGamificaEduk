@@ -54,7 +54,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
 function setBoardGame(boardgame){
   let boardgameString = JSON.stringify(boardgame);
   sessionStorage.setItem('boardgame', boardgameString);
-  return boardgameString;
 }
 
 function getBoardgame(){

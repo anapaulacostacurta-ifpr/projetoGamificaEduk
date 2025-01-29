@@ -3,6 +3,7 @@ const que_text = document.querySelector(".que_text");
 const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
+const user_UID = sessionStorage.userUid;
 
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
@@ -92,11 +93,12 @@ function optionSelected(answer) {
   if (userAns == correcAns) {
     answer.classList.add("correct"); //adding green color to correct selected option
     answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
+    setScore(true);
   } else {
     answer.classList.add("incorrect"); //adding red color to correct selected option
     answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
     console.log("Wrong Answer");
-
+    setScore(false);
     for (i = 0; i < allOptions; i++) {
       if (option_list.children[i].textContent == correcAns) {
         //if there is an option which is matched to an array answer
@@ -113,7 +115,6 @@ function optionSelected(answer) {
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
   event.preventDefault();
-  const user_UID = sessionStorage.userUid;
   const boardgame_id = boardgame.boardgameid;
   const level = boardgame.level;
   const data = (new Date()).toLocaleDateString('pt-BR');
@@ -131,6 +132,32 @@ function saveLogAnswers(log_answers){
   console.log(res);
 }
 
+function setScore(corret){
+  var log_answers = getLogAnswers();
+  var boardgame = getBoardgame();
+  var players = boardgame.players;
+  var count = 0;
+  let score = sessionStorage.score_round;
+  var splayer;
+  players.forEach(player => {
+    splayer = player;
+    if(player.user_UID == user_UID){
+      if (corret){
+        score = score + 10;
+      }else{
+        score = score - 5;
+      }
+    }
+    count ++;
+  });
+  //Salvar Score na variável
+  players[count].score_round = score;
+  //Atualizar no banco de dados
+  boardgamesService.addPlayers(boardgame.boardgame_id, {players});
+  //Atualizar Sessão
+  sessionStorage.setItem("score_round",score);
+}
+
 function setlogAnswers(log_answers){
   // Convert the user object into a string
   let loganswersString = JSON.stringify(log_answers);
@@ -144,6 +171,18 @@ function getLogAnswers(){
   let log_answers = JSON.parse(loganswersString);
   console.log(log_answers);
   return log_answers;
+}
+
+function setBoardGame(boardgame){
+  let boardgameString = JSON.stringify(boardgame);
+  sessionStorage.setItem('boardgame', boardgameString);
+}
+
+function getBoardgame(){
+  let boardgameString = sessionStorage.boardgame;
+  let boardgame = JSON.parse(boardgameString);
+  console.log(boardgame);
+  return boardgame;
 }
 
 function startTimer(time) {
