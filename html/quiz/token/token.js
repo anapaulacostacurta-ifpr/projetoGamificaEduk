@@ -21,7 +21,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     if ( pos_token > -1){
         alert("Token Válido!");
         sessionStorage.setItem("token",tokenid); // Manter o token durante a resposta da pergunta
-        tokens_quiz.slice(pos_token,1); //removendo da sessão o token utilizado.
+        setTokens(tokens_quiz, pos_token);//removendo apenas da sessão o token utilizado.
         window.location.href = "../quiz.html";
     }else{
         alert("Token inválido!");
@@ -47,6 +47,14 @@ function getTokens(){
         console.log(tokens_quiz);
     }
     return tokens_quiz;
+}
+
+function setTokens(tokens_quiz, pos_token){
+  tokens_quiz.slice(pos_token,1);
+    // Convert the user object into a string
+  let tokensString = JSON.stringify(tokens_quiz);
+  // Store the stringified object in sessionStorage
+  sessionStorage.setItem('tokens', tokensString);
 }
 
 function logout() {
