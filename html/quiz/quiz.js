@@ -130,12 +130,17 @@ function getUserAnswers(user_UID){
   var log_answers = []
   logboardgamesService.getlogboardgameByUserUID(user_UID).then(logboardgames => {
     logboardgames.forEach(logboardgame => {
+      alert(logboardgame);
       log_answers = logboardgame.log_answers;
+      alert(log_answers);
       if (log_answers === undefined){
+        alert("Log Vázia: undefined");
         log_answers = []; 
       }
+      alert("Log não está Vazia!");
     });  
   }); 
+  alert("Retornando!");
   return log_answers;
 }
 

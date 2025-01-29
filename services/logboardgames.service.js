@@ -9,6 +9,7 @@ const logboardgamesService = {
         const querySnapshot = await firebase.firestore().collection("logboardgames")
         .doc(user_UID);
         console.log(querySnapshot);
+        alert("Consulta ok!");
 
         if(querySnapshot.empty){
             console.log("Log vazia:" + user_UID);
@@ -17,6 +18,7 @@ const logboardgamesService = {
         }
         const logboardgames = querySnapshot.docs.map(doc=>doc.data());
         console.log(logboardgames);
+        alert("Retornando!");
         return logboardgames;
     },
 };
