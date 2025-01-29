@@ -115,38 +115,28 @@ function optionSelected(answer) {
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
   event.preventDefault();
-  const boardgame_id = boardgame.boardgameid;
-  const level = boardgame.level;
-  const data = (new Date()).toLocaleDateString('pt-BR');
-  var log_answers = {user_UID: user_UID, data: data, level: level, boardgame_id: boardgame_id, category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
-  // Salvar no banco de dados.
-  saveLogAnswers(log_answers);
   //limpar token da sessão
   sessionStorage.removeItem('token');
   window.location.href = "../play/menu.html";
 });
 
-function saveLogAnswers(log_answers){
-  setlogAnswers(log_answers);
-  var res = logboardgamesService.save(log_answers);
-  console.log(res);
-}
+
 
 function setScore(corret){
-  var log_answers = getLogAnswers();
   var boardgame = getBoardgame();
   var players = boardgame.players;
   var count = 0;
-  let score = parseInt(sessionStorage.score_round);
+  let score_old = parseInt(sessionStorage.score_round);
+  let score;
   var splayer;
   players.forEach(player => {
     splayer = player;
     if(player.user_UID == user_UID){
       if (corret){
-        score = score + 10;
+        score = score_old + 10;
         count ++;
       }else{
-        score = score - 5;
+        score = score_old - 5;
         count ++;
       }
       return [];
@@ -158,21 +148,18 @@ function setScore(corret){
   boardgamesService.addPlayers(boardgame.boardgame_id, {players});
   //Atualizar Sessão
   sessionStorage.setItem("score_round",score);
+
+  //Log da resposta
+  const boardgame_id = boardgame.boardgameid;
+  const level = boardgame.level;
+  const data = (new Date()).toLocaleDateString('pt-BR');
+  var log_answers = {user_UID: user_UID, data: data, level: level, boardgame_id: boardgame_id, category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, score_old: score_old, score_round: score, tokenid: sessionStorage.token};
+  // Salvar no banco de dados.
+  saveLogAnswers(log_answers);
 }
 
-function setlogAnswers(log_answers){
-  // Convert the user object into a string
-  let loganswersString = JSON.stringify(log_answers);
-  // Store the stringified object in sessionStorage
-  sessionStorage.setItem('log_answers', loganswersString);
-  return loganswersString;
-}
-
-function getLogAnswers(){
-  let loganswersString = sessionStorage.log_answers;
-  let log_answers = JSON.parse(loganswersString);
-  console.log(log_answers);
-  return log_answers;
+function saveLogAnswers(log_answers){
+  logboardgamesService.save(log_answers);
 }
 
 function setBoardGame(boardgame){
