@@ -144,11 +144,13 @@ function setScore(corret){
     if(player.user_UID == user_UID){
       if (corret){
         score = score + 10;
+        count ++;
       }else{
         score = score - 5;
+        count ++;
       }
+      return [];
     }
-    count ++;
   });
   //Salvar Score na variável
   players[count].score_round = score;
