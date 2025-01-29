@@ -128,7 +128,8 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
     user_answer
   }
   // Salvar no banco de dados.
-  logboardgamesService.save(user_UID, {log_answers});
+  var res = logboardgamesService.save(user_UID, {log_answers});
+  alert(res);
   window.location.href = "../play/menu.html";
 });
 
