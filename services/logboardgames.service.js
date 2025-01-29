@@ -14,6 +14,5 @@ const logboardgamesService = {
         }
         const logboardgames = querySnapshot.docs.map(doc=>doc.data());
         return logboardgames;
-        
     },
 };

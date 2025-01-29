@@ -125,7 +125,8 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
 
 function saveLogAnswers(log_answers){
   setlogAnswers(log_answers);
-  logboardgamesService.save(log_answers);
+  var res = logboardgamesService.save(log_answers);
+  console.log(res);
 }
 
 function setlogAnswers(log_answers){
