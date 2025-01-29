@@ -113,11 +113,14 @@ function optionSelected(answer) {
 
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
   event.preventDefault();
+  const user_UID = ;
+  const boardgameid = ;
+  const level = ;
   const user_answer = new Array(); 
-  user_answer[0]={level: parseInt(sessionStorage.level), category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token, data:(new Date()).toLocaleDateString('pt-BR')};
+  user_answer[0]={category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token, data:(new Date()).toLocaleDateString('pt-BR')};
   console.log(user_answer);
   // Salvar no banco de dados.
-  logboardgamesService.save(boardgame.boardgameid, {user_UID: sessionStorage.userUid, user_answer});
+  logboardgamesService.save(user_UID,);
   window.location.href = "../play/menu.html";
 });
 
