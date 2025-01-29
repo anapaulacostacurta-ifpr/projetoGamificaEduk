@@ -119,7 +119,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const data = (new Date()).toLocaleDateString('pt-BR');
   var log_answers = {user_UID: user_UID, data: data, level: level, boardgame_id: boardgame_id, category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token};
   // Salvar no banco de dados.
-  saveLogAnswer(log_answers);
+  saveLogAnswers(log_answers);
   window.location.href = "../play/menu.html";
 });
 
