@@ -15,7 +15,7 @@ const logboardgamesService = {
         console.log(querySnapshot);
 
         if(querySnapshot.empty){
-           return [];
+           return null;
         }
         const logboardgame = querySnapshot.docs.map(doc=>doc.data());
         console.log(logboardgame);

@@ -136,11 +136,14 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
 
 function getUserAnswers(user_UID,boardgame_id,level,data){
   logboardgamesService.getlogboardgameByUserUID(user_UID,boardgame_id,level,data).then( (logboardgame) => {
-    var user_answer = logboardgame.user_answer;
-    if (user_answer === undefined){
-      user_answer = [];
+    var user_answer = [];
+    if (logboardgame != null){
+      user_answer = logboardgame.user_answer;
+      if (user_answer === undefined){
+        user_answer = []; 
+      }
     }
-    return user_answer;
+    return user_answer;    
   });
 }
 
