@@ -116,7 +116,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   const user_UID = sessionStorage.userUid;
   const boardgame_id = boardgame.boardgameid;
   const level = boardgame.level;
-  const data = (new Date()).toLocaleDateString('pt-BR')};
+  const data = (new Date()).toLocaleDateString('pt-BR');
   const user_answer = getUserAnswers(); 
   user_answer.push({category: question.type, question_numb:question.numb, user_answer:sessionStorage.userAnswer, tokenid: sessionStorage.token});
   console.log(user_answer);
@@ -131,8 +131,15 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
   window.location.href = "../play/menu.html";
 });
 
-function getUserAnswers(){
-  return new Array();
+function getUserAnswers(user_UID,boardgame_id,level,data){
+  logboardgamesService.getlogboardgameByUserUID(user_UID,boardgame_id,level,data).then( (logboardgame) => {
+    const user_answer = logboardgame.user_answer;
+    if (user_answer == null){
+      return new Array();
+    }else{
+      return user_answer;
+    }
+  });
 }
 
 function startTimer(time) {

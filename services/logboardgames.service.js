@@ -5,19 +5,19 @@ const logboardgamesService = {
             .doc(user_UID)
             .set(logboardgames);
     },
-    getBoardGameByID: async (user_UID) => {
-        const querySnapshot = await firebase.firestore().collection("boardgames")
-        .where('boardgameid','==',boardgameid)
-        .where('state','==','started')
-        .where('round_date','==',(new Date()).toLocaleDateString('pt-BR'))
+    getlogboardgameByUserUID: async (user_UID,boardgame_id,level,data) => {
+        const querySnapshot = await firebase.firestore().collection("boardgames").doc(user_UID)
+        .where('boardgame_id','==',boardgame_id)
+        .where('level','==',level)
+        .where('data','==',data)
         .get();
         console.log(querySnapshot);
 
         if(querySnapshot.empty){
-            throw new Error("Tabuleiro não encontrador:" + boardgameid);
+            throw new Error("Nenhum resposta registrada ainda.");
         }
-        const boardgame = querySnapshot.docs.map(doc=>doc.data());
-        console.log(boardgame);
-        return boardgame;
+        const logboardgame = querySnapshot.docs.map(doc=>doc.data());
+        console.log(logboardgame);
+        return logboardgame;
 },
 };
