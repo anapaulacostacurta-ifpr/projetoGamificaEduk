@@ -7,10 +7,10 @@ const logboardgamesService = {
     },
     getlogboardgameByUserUID: async (user_UID,boardgame_id,level,data) => {
         const querySnapshot = await firebase.firestore().collection("logboardgames")
-        .where('user_UID','==', user_UID)
-        .where('boardgame_id','==',boardgame_id)
-        .where('level','==',level)
-        .where('data','==',data)
+        .where('log_answers.user_UID','==', user_UID)
+        .where('log_answers.boardgame_id','==',boardgame_id)
+        .where('log_answers.level','==',level)
+        .where('log_answers.data','==',data)
         .get();
         console.log(querySnapshot);
 
