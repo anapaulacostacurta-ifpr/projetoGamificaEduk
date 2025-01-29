@@ -137,7 +137,7 @@ function setScore(corret){
   var boardgame = getBoardgame();
   var players = boardgame.players;
   var count = 0;
-  let score = sessionStorage.score_round;
+  let score = parseInt(sessionStorage.score_round);
   var splayer;
   players.forEach(player => {
     splayer = player;
