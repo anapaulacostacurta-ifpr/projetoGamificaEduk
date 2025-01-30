@@ -76,7 +76,7 @@ function setAtualQuiz(){
 function getAtualQuiz(){
   let quizString = sessionStorage.quiz;
   let quiz;
-  if (quizString  === undefined){
+  if (quizString === undefined){
     quizString = setAtualQuiz();
   }
   JSON.parse(quizString);
