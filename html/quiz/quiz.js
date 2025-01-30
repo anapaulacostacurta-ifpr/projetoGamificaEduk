@@ -79,7 +79,7 @@ function getAtualQuiz(){
   if (quizString === undefined){
     quizString = setAtualQuiz();
   }
-  JSON.parse(quizString);
+  quiz = JSON.parse(quizString);
   console.log(quiz);
   return quiz;
 }
