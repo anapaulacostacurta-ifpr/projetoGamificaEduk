@@ -6,7 +6,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   // Captura os dados do formulário
   const round_date = (new Date()).toLocaleDateString('pt-BR');
   const level = document.getElementById("level").value;
-  const host = document.getElementById("userUid").value;
+  const host = sessionStorage.userUid;
   const boardgameid = document.getElementById("boardgameid").value;
   /** Deverá ser controlada a log das respostas 
   answer[
