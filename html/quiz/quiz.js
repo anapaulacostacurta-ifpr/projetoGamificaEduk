@@ -74,10 +74,12 @@ function setAtualQuiz(){
 }
 
 function getAtualQuiz(){
-    // Get the stringified object from sessionStorage
   let quizString = sessionStorage.quiz;
-    // Parse the string back into an object
-  let quiz = JSON.parse(quizString);
+  let quiz;
+  if (quizString  === undefined){
+    quizString = setAtualQuiz();
+  }
+  JSON.parse(quizString);
   console.log(quiz);
   return quiz;
 }
