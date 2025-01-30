@@ -24,10 +24,11 @@ function getQuizzes(){
   var quizzes;
   if (quizzesString  === undefined){
     questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(questions =>{
+      console.log(questions);
       setQuizzes(questions);
     });
   }else{
-    JSON.parse(quizzesString);
+    quizzes = JSON.parse(quizzesString);
     console.log(quizzes);
   }
   return quizzes;
