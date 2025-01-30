@@ -33,9 +33,9 @@ function getQuizzes(){
   return quizzes;
 }
 
-function setQuizzes(quizzes){
+function setQuizzes(questions){
     // Convert the user object into a string
-    let quizzesString = JSON.stringify(quizzes);
+    let quizzesString = JSON.stringify(questions);
     // Store the stringified object in sessionStorage
     sessionStorage.setItem('quizzes', quizzesString);
     sessionStorage.setItem('answered_quizzes', JSON.stringify(new Array()));
