@@ -2,14 +2,14 @@ const boardgame = getBoardgame();
 
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
-scoreLevelPoint.innerHTML = "Level Score: "+boardgame.score_round;
+scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.score_round;
 
 const level = document.getElementById("level");
-level.innerHTML = "Nível: "+boardgame.level;
+level.innerHTML = "Nível: "+sessionStorage.level;
 
 //Ranking Geral
 const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = "Score Total: "+boardgame.score_total;
+scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 
 function token() {
   window.location.href = "../quiz/token/token.html";
