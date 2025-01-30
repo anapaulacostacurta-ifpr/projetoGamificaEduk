@@ -19,6 +19,13 @@ scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 //Buscar questões e colocar na sessão;
 var quizzes = getQuizzes();
 
+const boardgame = getBoardgame();
+
+const quiz = getAtualQuiz();
+showQuiz();
+startTimer(15);
+
+
 function getQuizzes(){
   var quizzesString = sessionStorage.quizzes;
   var quizzes;
@@ -75,11 +82,6 @@ function getAtualQuiz(){
   return quiz;
 }
 
-const quiz = getAtualQuiz();
-showQuiz();
-startTimer(15);
-
-const boardgame = getBoardgame();
 
 function getBoardgame(){
   let boardgameString = sessionStorage.boardgame;
