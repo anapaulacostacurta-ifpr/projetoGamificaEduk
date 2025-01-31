@@ -5,8 +5,6 @@ const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 const user_UID = sessionStorage.userUid;
 sessionStorage.setItem('hasquiz',true);
-let hasquiz = sessionStorage.hasquiz;
-
 
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
@@ -27,7 +25,7 @@ const boardgame = getBoardgame();
 const quiz = getAtualQuiz();
 
 
-if(hasquiz){
+if(new Boolean(sessionStorage.hasquiz)){
   showQuiz();
   startTimer(15);
 }else{
