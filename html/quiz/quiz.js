@@ -76,11 +76,6 @@ function setAtualQuiz(){
       quizString = JSON.stringify(quiz);
     }
   });
-  if(quizString === undefined){
-    sessionStorage.setItem('hasquiz',false);
-  }else {
-    sessionStorage.setItem('hasquiz',true);
-  }
   //Coloca quiz atual na sessão.
     sessionStorage.setItem('quiz', quizString);
     return quizString;
@@ -89,10 +84,10 @@ function setAtualQuiz(){
 function getAtualQuiz(){
   let quizString = sessionStorage.quiz;
   let quiz;
-  if (quizString === undefined){
+  if (quizString === undefined || quizString === "undefined"){
     quizString = setAtualQuiz();
   }
-  if(quizString === undefined){
+  if(quizString === undefined || quizString === "undefined"){
     sessionStorage.setItem('hasquiz',false);
   }else {
     sessionStorage.setItem('hasquiz',true);
