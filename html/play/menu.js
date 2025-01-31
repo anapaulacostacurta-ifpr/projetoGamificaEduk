@@ -11,6 +11,11 @@ level.innerHTML = "Nível: "+sessionStorage.level;
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.score_total;
 
+if(!sessionStorage.hasquiz){
+  //Não tem mais Quiz para apresentar desativa o botão
+  document.getElementById("AppQuiz").disabled = true;
+}
+
 function token() {
   window.location.href = "../quiz/token/token.html";
 }

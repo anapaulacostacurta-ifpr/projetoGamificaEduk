@@ -4,6 +4,7 @@ const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 const user_UID = sessionStorage.userUid;
+let hasQuiz = true; 
 
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
@@ -22,8 +23,15 @@ var quizzes = getQuizzes();
 const boardgame = getBoardgame();
 
 const quiz = getAtualQuiz();
-showQuiz();
-startTimer(15);
+if(hasQuiz){
+  showQuiz();
+  startTimer(15);
+}else{
+  sessionStorage.setItem('hasquiz',false);
+  sessionStorage.removeItem('token');
+  sessionStorage.removeItem('quiz');
+  window.location.href = "../play/menu.html";
+}
 
 
 function getQuizzes(){
@@ -32,6 +40,7 @@ function getQuizzes(){
   if (quizzesString  === undefined){
     questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(questions =>{
       console.log(questions);
+      hasQuiz = true;
       setQuizzes(questions);
     });
   }else{
@@ -62,15 +71,22 @@ function getAnsweredQuizzes(){
 function setAtualQuiz(){
   let answered_quizzes = getAnsweredQuizzes();
   let quizString;
+  let count_quiz=0;
+  let count_answer=0;
   //buscar as questões da sessão
   quizzes.forEach(quiz => {
-    if(answered_quizzes.indexOf(quiz.numb) == -1){
+    count++
+    if(answered_quizzes.indexOf(quiz.numb) == -1){ //Não foi respondida
       quizString = JSON.stringify(quiz);
     }
   });
   //Coloca quiz atual na sessão.
-  sessionStorage.setItem('quiz', quizString);
-  return quizString;
+  if(quizString === undefined){
+    hasQuiz = false;
+  }else {
+    sessionStorage.setItem('quiz', quizString);
+    return quizString;
+  }
 }
 
 function getAtualQuiz(){
