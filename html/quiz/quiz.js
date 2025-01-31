@@ -71,11 +71,8 @@ function getAnsweredQuizzes(){
 function setAtualQuiz(){
   let answered_quizzes = getAnsweredQuizzes();
   let quizString;
-  let count_quiz=0;
-  let count_answer=0;
   //buscar as questões da sessão
   quizzes.forEach(quiz => {
-    count++
     if(answered_quizzes.indexOf(quiz.numb) == -1){ //Não foi respondida
       quizString = JSON.stringify(quiz);
     }
