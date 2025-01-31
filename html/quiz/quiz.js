@@ -25,7 +25,18 @@ const boardgame = getBoardgame();
 const quiz = getAtualQuiz();
 
 
-if(new Boolean(sessionStorage.hasquiz)){
+let hasquiz;
+if (sessionStorage.hasquiz === undefined) {
+  sessionStorage.setItem("hasquiz",true);
+}else{
+  if(sessionStorage.hasquiz == "true"){
+    hasquiz = true;
+  }else{
+    hasquiz = false;
+  }
+}
+
+if(hasquiz){
   showQuiz();
   startTimer(15);
 }else{
