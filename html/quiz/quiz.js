@@ -77,13 +77,8 @@ function setAtualQuiz(){
     }
   });
   //Coloca quiz atual na sessão.
-  if(quizString === undefined){
-    sessionStorage.setItem('hasquiz',false);
-  }else {
-    sessionStorage.setItem('hasquiz',true);
     sessionStorage.setItem('quiz', quizString);
     return quizString;
-  }
 }
 
 function getAtualQuiz(){
@@ -92,8 +87,13 @@ function getAtualQuiz(){
   if (quizString === undefined){
     quizString = setAtualQuiz();
   }
-  quiz = JSON.parse(quizString);
-  console.log(quiz);
+  if(quizString === undefined){
+    sessionStorage.setItem('hasquiz',false);
+  }else {
+    sessionStorage.setItem('hasquiz',true);
+    quiz = JSON.parse(quizString);
+    console.log(quiz);
+  }
   return quiz;
 }
 
