@@ -24,7 +24,7 @@ var quizzes = getQuizzes();
 const boardgame = getBoardgame();
 
 const quiz = getAtualQuiz();
-if(sessionStorage.hasQuiz){
+if(sessionStorage.hasquiz){
   showQuiz();
   startTimer(15);
 }else{
