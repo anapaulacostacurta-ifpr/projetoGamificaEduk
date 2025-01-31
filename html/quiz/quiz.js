@@ -4,7 +4,8 @@ const option_list = document.querySelector(".option_list");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 const user_UID = sessionStorage.userUid;
-let hasQuiz = true; 
+sessionStorage.setItem('hasquiz',true);
+let hasQuiz = sessionStorage.hasQuiz; 
 
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
@@ -80,6 +81,7 @@ function setAtualQuiz(){
   //Coloca quiz atual na sessão.
   if(quizString === undefined){
     hasQuiz = false;
+    sessionStorage.setItem('hasquiz',false);
   }else {
     sessionStorage.setItem('quiz', quizString);
     return quizString;
