@@ -5,7 +5,7 @@ const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 const user_UID = sessionStorage.userUid;
 sessionStorage.setItem('hasquiz',true);
-let hasQuiz = sessionStorage.hasQuiz; 
+
 
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
@@ -24,11 +24,10 @@ var quizzes = getQuizzes();
 const boardgame = getBoardgame();
 
 const quiz = getAtualQuiz();
-if(hasQuiz){
+if(sessionStorage.hasQuiz){
   showQuiz();
   startTimer(15);
 }else{
-  sessionStorage.setItem('hasquiz',false);
   sessionStorage.removeItem('token');
   sessionStorage.removeItem('quiz');
   window.location.href = "../play/menu.html";
@@ -41,7 +40,6 @@ function getQuizzes(){
   if (quizzesString  === undefined){
     questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(questions =>{
       console.log(questions);
-      hasQuiz = true;
       setQuizzes(questions);
     });
   }else{
@@ -80,9 +78,9 @@ function setAtualQuiz(){
   });
   //Coloca quiz atual na sessão.
   if(quizString === undefined){
-    hasQuiz = false;
     sessionStorage.setItem('hasquiz',false);
   }else {
+    sessionStorage.setItem('hasquiz',true);
     sessionStorage.setItem('quiz', quizString);
     return quizString;
   }
