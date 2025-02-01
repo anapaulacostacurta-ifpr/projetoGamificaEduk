@@ -3,20 +3,24 @@ var status_profile = sessionStorage.profile_atualizar;
 var user_UID = sessionStorage.userUid;
 var score_total = sessionStorage.score_total;
 
+var dados = document.getElementById("profile");
+dados.style.display = "none";   
+var menu_center = document.getElementById("menu-center");
+menu_center.style.display = "none"; 
+var form_perfil = document.getElementById("form-profile");
+form_perfil.style.display = "none"; 
+
 if(status_profile == "true"){
     status_profile =true;
 }else{
     status_profile =false;
 }
 
-if(status_profile){
-    var dados = document.getElementById("profile");
-    dados.style.display = "none";   
-    var menu_center = document.getElementById("menu-center");
-    menu_center.style.display = "none"; 
+if(!status_profile){
+    dados.style.display = "inline";   
+    menu_center.style.display = "inline"; 
 }else{
-    var form_perfil = document.getElementById("form-profile");
-    form_perfil.style.display = "none"; 
+    form_perfil.style.display = "inline"; 
 }
 
 const scorePoint = document.getElementById("score_total");
