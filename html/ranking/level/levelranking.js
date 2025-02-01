@@ -25,10 +25,9 @@ document.getElementById("extrato-form").addEventListener("submit", function(even
         let tokenid = '<td><span>'+logboardgame.tokenid;+'</span></td>';
         linhas = linhas +'<tr>'+data_hora+boardgame_id+quiz+score_old+score_round+tokenid+'</tr>';
     });
-});
     let tbody = '<tbody>'+linhas+'</tbody>';
     let thead = '<thead><tr><th>Data/Hota</th><th>Tabuleiro</th><th>Quiz</th><th>Pontuação anterior</th><th>Pontuação nova</th><th>Token</th></tr></thead>';     
     let table = '<table class="table table-bordered">'+ thead + tbody+'</table>';
     extrato.innerHTML = table;
-    
+});
 });
