@@ -27,7 +27,8 @@ document.getElementById("extrato-form").addEventListener("submit", function(even
     });
 });
     let tbody = '<tbody>'+linhas+'</tbody>';
-    let table = '<table class="table table-bordered">'+ thead + tbody+'</table>';
     let thead = '<thead><tr><th>Data/Hota</th><th>Tabuleiro</th><th>Quiz</th><th>Pontuação anterior</th><th>Pontuação nova</th><th>Token</th></tr></thead>';     
+    let table = '<table class="table table-bordered">'+ thead + tbody+'</table>';
     extrato.innerHTML = table;
+    
 });
