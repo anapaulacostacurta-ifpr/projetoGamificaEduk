@@ -29,14 +29,28 @@
                 <p id="score_total"></p>
             </div>
             <br/>
-            <div class="btn-group">
-                <div class="btn-group-vertical">
-                    <button type="button" class="btn btn-outline-primary" id="appRankingGeral" onclick="ranking_geral()">Ranking Geral</button>
-                    <button type="button" class="btn btn-outline-primary" id="appRankingNivel" onclick="ranking_nivel()">Ranking Níveis</button>
-                    <button type="button" class="btn btn-outline-primary" id="appRankingNivel" onclick="extrato()">Ranking Níveis</button>
-                    <button type="button" class="btn btn-outline-primary" id="appJogar" onclick="jogar()">Jogar</button>
-                </div>
+            <div id="card-seach-extrato">
+                <form id="extrato-form">
+                    <fieldset>
+                        <p>
+                          Selecione o nível:
+                          <select id="level" name="level">
+                            <option value="1">Nível 1</option>
+                            <option value="2">Nível 2</option>
+                            <option value="3">Nível 3</option>
+                            <option value="4">Nível 4</option>
+                            <option value="5">Nível 5</option>
+                            <option value="6">Nível 6</option>
+                            <option value="6">Nível 7</option>
+                          </select>
+                        </p>
+                    </fieldset>
+                    <p>
+                        <button type="submit">Pesquisar</button>
+                    </p>
+                  </form>
             </div>
+            <div class="card-extrato"></div>
         </div>
     </body>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
@@ -44,7 +58,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
     <script src="../../firebase-init.js"></script>
     <script src="../../auth-guard.js"></script>
-    <script src="../../services/questions.service.js"></script>
+    <script src="../../services/logboardgames.service.js"></script>
     <script src="../../services/user.service.js"></script>
-    <script src="home.js"></script>
+    <script src="extrato.js"></script>
 </html>

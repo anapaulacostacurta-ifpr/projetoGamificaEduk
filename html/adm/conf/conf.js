@@ -8,8 +8,19 @@ function logout() {
 }
 
 function newQuestion() {
-    window.location.href = "../questions/questions.html";
+  window.location.href = "../questions/questions.html";
 }
+
+document.getElementById("boardgame-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  // Captura os dados do formulário
+  const level = document.getElementById("level").value;
+  const category = document.getElementById("category").value;
+
+  loadQuestionsbyCategoryandLevel(category,level);
+
+});
 
 function loadQuestions() {
     const questionsList = document.getElementById('questionUid');
@@ -31,18 +42,20 @@ function loadQuestions() {
     });
   }
 
-  function loadQuestionsbyLevel() {
+  function loadQuestionsbyCategoryandLevel(category,level) {
     const questionsLevel = document.getElementById('questionLevel');
-    questionsLevel.innerHTML = ''; // Limpa a lista de perguntas
 
-    questionService.getQuestionsByLevel(2,'quiz').then(questions => {
+    questionService.getQuestionsByLevel(level,category).then(questions => {
       questions.forEach(question => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
-          <p><strong>UID:</strong> ${question.id}</p>
+          <p><strong>numb:</strong> ${question.numb}</p>
           <p><strong>Level:</strong> ${question.level}</p>
+          <p><strong>Category:</strong> ${question.category}</p>
           <p><strong>Pergunta:</strong> ${question.text}</p>
           <p><strong>Respostas:</strong> ${question.options}</p>
+          <p><strong>Resposta Correta:</strong> ${question.answer}</p>
+          <p><strong>Resposta Correta:</strong> ${question.type}</p>
         `;
         questionsLevel.appendChild(listItem);
       });
@@ -50,7 +63,3 @@ function loadQuestions() {
       Alert('Erro ao carregar perguntas:', error);
     });
   }
-
-  // Chama a função para carregar as perguntas ao carregar a página
-  //window.onload = loadQuestions; 
-  window.onload = loadQuestionsbyLevel;

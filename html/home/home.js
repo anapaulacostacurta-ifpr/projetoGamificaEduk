@@ -14,6 +14,10 @@ function ranking_nivel() {
     window.location.href = "../ranking/level/levelranking.html";
 }
 
+function extrato() {
+    window.location.href = "../extrato/extrato.html";
+}
+
 function logout() {
     firebase.auth().signOut().then(() => {
         sessionStorage.clear();
