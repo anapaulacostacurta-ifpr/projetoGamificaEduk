@@ -6,6 +6,10 @@ firebase.auth().onAuthStateChanged( (user) => {
     userService.findByUid(userUid).then (user=>{
         document.getElementById("nameUser").innerHTML = "Olá, " + user.nickname;
         sessionStorage.setItem("score_total",user.score);
+        const profiles = user.profiles;
+        sessionStorage.setItem("admin",profiles.admin);
+        sessionStorage.setItem("professor",profiles.admin);
+        sessionStorage.setItem("aluno",profiles.admin);
     }).catch(error => {
         console.log(error);
     });

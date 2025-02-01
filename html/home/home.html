@@ -10,16 +10,16 @@
     <body>
         <div class="container-sm">
             <header>
-                <nav class="navbar navbar-expand-sm">
+                <nav id="admin" class="navbar navbar-expand-sm">
                     <div class="container-fluid">
                         <img class="navbar-brand" src="../../assets/img/AnaBiTE.svg" alt="80" width="180">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Config</button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="../adm/boardgames/boardgames.html">Novo Tabuleiro</a>
-                              <a class="dropdown-item" href="../adm/questions/questions.html">Cadastrar Questões</a>
-                            </div>
-                          </div>   
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav">
+                                <li class="nav-item"><a class="nav-link" href="../adm/boardgames/boardgames.html">Cadastrar Rodada</a></li>
+                                <li class="nav-item"><a class="nav-link" href="../adm/boardgames/startboardgames.html">Iniciar Rodada</a></li>
+                                <li class="nav-item"><a class="nav-link" href="../adm/boardgames/closeboardgames.html">Encerrar Rodada</a></li>
+                            </ul>
+                        </div>
                         <button class="btn btn-link" type="button" class="clear" onclick="logout()">Sair</button>
                     </div>
                 </nav>
