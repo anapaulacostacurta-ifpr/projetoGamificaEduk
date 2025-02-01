@@ -62,11 +62,15 @@ function getBoardgame(){
   console.log(boardgame);
   return boardgame;
 }
-  
+
+function voltar(){
+  window.location.href = "../home/home.html";
+}
+
 function logout() {
     firebase.auth().signOut().then(() => {
         sessionStorage.clear();
-        window.location.href = "../../index.html";
+        window.location.href = "../login/login.html";
     }).catch(() => {
         alert('Erro ao fazer logout');
     })
