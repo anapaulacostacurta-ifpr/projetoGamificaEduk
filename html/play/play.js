@@ -4,10 +4,6 @@ firebase.auth().onAuthStateChanged( (user) => {
   }
   const uid = user.uid; 
   userService.findByUid(uid).then (user=>{
-      if(user === undefined){
-          sessionStorage.setItem("profile_atualizar",true);
-      }else{
-          sessionStorage.setItem("profile_atualizar",false);
           document.getElementById("nameUser").innerHTML = user.name;
           sessionStorage.setItem("score_total",user.score);
           const profiles = user.profiles;
