@@ -10,7 +10,7 @@ firebase.auth().onAuthStateChanged( (user) => {
           sessionStorage.setItem("admin",profiles.admin);
           sessionStorage.setItem("professor",profiles.admin);
           sessionStorage.setItem("aluno",profiles.admin);
-      }
+
       return user;
   }).catch(error => {
       console.log(getErrorMessage(error));
