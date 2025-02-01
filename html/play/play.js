@@ -4,15 +4,15 @@ firebase.auth().onAuthStateChanged( (user) => {
   }
   const uid = user.uid; 
   userService.findByUid(uid).then (user=>{
-          document.getElementById("nameUser").innerHTML = user.name;
-          sessionStorage.setItem("score_total",user.score);
-          const profiles = user.profiles;
-          sessionStorage.setItem("admin",profiles.admin);
-          sessionStorage.setItem("professor",profiles.admin);
-          sessionStorage.setItem("aluno",profiles.admin);
-      return user;
+    document.getElementById("nameUser").innerHTML = user.name;
+    sessionStorage.setItem("score_total",user.score);
+    const profiles = user.profiles;
+    sessionStorage.setItem("admin",profiles.admin);
+    sessionStorage.setItem("professor",profiles.admin);
+    sessionStorage.setItem("aluno",profiles.admin);
+    return user;
   }).catch(error => {
-      console.log(getErrorMessage(error));
+    console.log(getErrorMessage(error));
   });
 })
 
