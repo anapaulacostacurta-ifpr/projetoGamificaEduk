@@ -1,8 +1,11 @@
 firebase.auth().onAuthStateChanged( (user) => {
-    if (!user) {
+    if (user) {
+        sessionStorage.setItem("userUid", user.uid);
+        window.location.href = "../home/home.html";
+    }else{
+        sessionStorage.clear;
         window.location.href = "../login/login.html";
     }
-    const uid = user.uid; 
     userService.findByUid(uid).then (user=>{
         if(user === undefined){
             sessionStorage.setItem("profile_atualizar",true);
@@ -15,8 +18,6 @@ firebase.auth().onAuthStateChanged( (user) => {
             sessionStorage.setItem("professor",profiles.admin);
             sessionStorage.setItem("aluno",profiles.admin);
         }
-        location.reload();
-        return user;
     }).catch(error => {
         console.log(getErrorMessage(error));
     });

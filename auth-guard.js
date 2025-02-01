@@ -1,8 +1,12 @@
 firebase.auth().onAuthStateChanged( (user) => {
-    const userUid = user.uid;
-    sessionStorage.setItem("userUid", user.uid);
-    
-    userService.findByUid(userUid).then (user=>{
+    if (user) {
+        sessionStorage.setItem("userUid", user.uid);
+        window.location.href = "../home/home.html";
+    }else{
+        sessionStorage.clear;
+        window.location.href = "../login/login.html";
+    }
+    userService.findByUid(uid).then (user=>{
         if(user === undefined){
             sessionStorage.setItem("profile_atualizar",true);
         }else{
@@ -15,7 +19,8 @@ firebase.auth().onAuthStateChanged( (user) => {
             sessionStorage.setItem("aluno",profiles.admin);
         }
     }).catch(error => {
-        console.log(error);
+        console.log(getErrorMessage(error));
     });
 })
+
 

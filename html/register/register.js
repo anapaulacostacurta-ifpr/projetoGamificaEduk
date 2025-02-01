@@ -1,27 +1,5 @@
-firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        window.location.href = "../home/home.html";
-    }
-})
-
 function voltar(){
     window.location.href = "../login/login.html";
-}
-
-
-function onChangePassword() {
-    const password = form.password().value;
-    form.passwordRequiredError().style.display = password ? "none" : "block";
-
-    form.passwordMinLengthError().style.display = password.length >= 6 ? "none" : "block";
-
-    validatePasswordsMatch();
-    toggleRegisterButtonDisable();
-}
-
-function onChangeConfirmPassword() {
-    validatePasswordsMatch();
-    toggleRegisterButtonDisable();
 }
 
 function register() {
@@ -51,28 +29,6 @@ function validatePasswordsMatch() {
         password == confirmPassword ? "none" : "block";
 }
 
-function toggleRegisterButtonDisable() {
-    form.registerButton().disabled = !isFormValid();
-}
-
-function isFormValid() {
-    const email = form.email().value;
-    if (!email) {
-        return false;
-    }
-
-    const password = form.password().value;
-    if (!password || password.length < 6) {
-        return false;
-    }
-
-    const confirmPassword = form.confirmPassword().value;
-    if (password != confirmPassword) {
-        return false;
-    }
-
-    return true;
-}
 
 const form = {
     confirmPassword: () => document.getElementById('confirmPassword'),
