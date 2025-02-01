@@ -27,7 +27,7 @@ document.getElementById("extrato-form").addEventListener("submit", function(even
     let table = '<table class="table table-bordered">'+ thead + tbody+'</table>';
     extrato.innerHTML = table;
 }).catch((error) => {
-    let error = '<span>'+ error+'<span>';
-    extrato.innerHTML = error;
+    let e = '<span>'+ error+'<span>';
+    extrato.innerHTML = e;
 });
 });
