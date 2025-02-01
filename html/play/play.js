@@ -1,6 +1,6 @@
 //Ranking Geral
 const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = "Score: "+sessionStorage.getItem("score_total") +" points";
+scorePoint.innerHTML = sessionStorage.getItem("score_total") +" points";
 
 var admin = sessionStorage.admin;
 if (admin == "true"){
