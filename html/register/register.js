@@ -8,12 +8,6 @@ function voltar(){
     window.location.href = "../login/login.html";
 }
 
-function onChangeEmail() {
-    const email = form.email().value;
-    form.emailRequiredError().style.display = email ? "none" : "block";
-
-    toggleRegisterButtonDisable();
-}
 
 function onChangePassword() {
     const password = form.password().value;
