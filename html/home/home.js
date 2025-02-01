@@ -8,12 +8,14 @@ if(status_profile == "true"){
     status_profile =false;
 }
 
-
 if(status_profile){
-    dados = document.getElementById("profile");
+    var dados = document.getElementById("profile");
     dados.style.display = "none";   
-    menu_center = document.getElementById("menu-center");
+    var menu_center = document.getElementById("menu-center");
     menu_center.style.display = "none"; 
+}else{
+    var form_perfil = document.getElementById("form-profile");
+    form_perfil.style.display = "none"; 
 }
 
 const scorePoint = document.getElementById("score_total");
