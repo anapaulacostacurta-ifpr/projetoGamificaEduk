@@ -1,6 +1,6 @@
 //Ranking Geral
 const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
+scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total") +" points";
 
 
 // Captura o evento de envio do formulário
