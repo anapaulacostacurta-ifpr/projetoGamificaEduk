@@ -14,6 +14,7 @@ let questions = [
       ],
     },
     {
+      numb: 2,
       category: "quiz",
       type: "multiple",
       level: 1,
