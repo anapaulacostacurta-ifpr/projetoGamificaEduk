@@ -38,7 +38,6 @@ if(!professor){
     menu.style.display = "none";    
 }
 
-
 function jogar() {
     window.location.href = "../play/play.html";
 }
@@ -76,7 +75,7 @@ function save_profile(){
  }
  var profile = {admin:admin, aluno: aluno, professor: professor};
  var user = {name: name, profile, score:0, status:false};
- userService.save(user_UID);
+ userService.save(user_UID,user);
  alert("Aguarde seu perfil ser ativado pelo administrador!");
  logout();
 
