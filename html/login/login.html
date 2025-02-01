@@ -40,14 +40,11 @@
                     <form class="was-validated">
                         <hr class="colorgraph">
                         <div class="form-group">
-                            <div><label>Email</label></div>
                             <input type="email" name="email" id="email" placeholder="seu@email.com" onchange="onChangeEmail()" required/>
                             <div class="invalid-feedback" id="email-invalid-error" disabled="true">Email é inválido</div>
                         </div>
                         <div class="form-group">
-                            <div><label>Senha</label></div>
-                            <input type="password" name="password" id="password" placeholder="Senha" onchange="onChangePassword()"/>
-                            <div class="error" id="password-required-error" disabled="true">Senha é obrigatória</div>
+                            <input type="password" name="password" id="password" placeholder="Senha" onchange="onChangePassword()" required/>
                         </div>
                         <div>
                             <button type="button" class="btn btn-link pull-right" id="recover-password-button" onclick="recoverPassword()" disabled="true">Esqueceu a Senha?</button>
