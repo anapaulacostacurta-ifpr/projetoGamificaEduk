@@ -34,7 +34,7 @@ function extrato() {
 function logout() {
     firebase.auth().signOut().then(() => {
         sessionStorage.clear();
-        window.location.href = "../login.html";
+        window.location.href = "../login/login.html";
     }).catch(() => {
         alert('Erro ao fazer logout');
     })
