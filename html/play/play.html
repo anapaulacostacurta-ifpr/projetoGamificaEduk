@@ -21,15 +21,16 @@
         <header>
             <nav class="navbar navbar-expand-sm">
                 <div class="container-fluid">
-                    <div id="admin">
+                    <div >
                         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" aria-expanded="false">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul class="navbar-nav">
-                                <li class="nav-item"><a class="nav-link" href="../adm/boardgames/boardgames.html">Cadastrar Rodada</a></li>
-                                <li class="nav-item"><a class="nav-link" href="../adm/boardgames/startboardgames.html">Iniciar Rodada</a></li>
-                                <li class="nav-item"><a class="nav-link" href="../adm/boardgames/closeboardgames.html">Encerrar Rodada</a></li>
+                                <li id="admin" class="nav-item"><a class="nav-link" href="../adm/boardgames/boardgames.html">Cadastrar Rodada</a></li>
+                                <li id="admin" class="nav-item"><a class="nav-link" href="../adm/boardgames/startboardgames.html">Iniciar Rodada</a></li>
+                                <li id="admin" class="nav-item"><a class="nav-link" href="../adm/boardgames/closeboardgames.html">Encerrar Rodada</a></li>
+                                <li class="nav-item"><a class="nav-link" onclick="logout()">Sair</a></li>
                             </ul>
                         </div>
                     </div>
@@ -37,7 +38,6 @@
                       <p id="nameUser"></p>
                       <p><img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/coin.png" width="30" height="30"><span id="score_total"></span></p>
                     </div>
-                    <button class="btn btn-link" type="button" class="clear" onclick="logout()">Sair</button>
                 </div>
             </nav>
         </header>
