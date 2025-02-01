@@ -7,7 +7,7 @@ function getregistros(level){
 
 
 // Captura o evento de envio do formulário
-document.getElementById("quiz-form").addEventListener("submit", function(event) {
+document.getElementById("extrato-form").addEventListener("submit", function(event) {
     event.preventDefault();
  // Captura os dados do formulário
  const select = document.getElementById("level");

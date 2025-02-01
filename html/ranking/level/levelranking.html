@@ -12,12 +12,12 @@
             <header>
                 <nav class="navbar navbar-expand-sm">
                     <div class="container-fluid">
-                        <img class="navbar-brand" src="../../../../assets/img/AnaBiTE.svg" alt="80" width="180">
+                        <img class="navbar-brand" src="../../../assets/img/AnaBiTE.svg" alt="80" width="180">
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Config</button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="../../../adm/boardgames/boardgames.html">Novo Tabuleiro</a>
-                              <a class="dropdown-item" href="../../../adm/questions/questions.html">Cadastrar Questões</a>
+                              <a class="dropdown-item" href="../../adm/boardgames/boardgames.html">Novo Tabuleiro</a>
+                              <a class="dropdown-item" href="../../adm/questions/questions.html">Cadastrar Questões</a>
                             </div>
                           </div>   
                         <button class="btn btn-link" type="button" class="clear" onclick="logout()">Sair</button>
@@ -30,7 +30,7 @@
             </div>
             <br/>
             <div id="card-search">
-                <form action="test.php" method="post">
+                <form id="extrato-form">
                     <fieldset>
                         <p>
                           Selecione o nível:
@@ -56,8 +56,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
-    <script src="../../../../firebase-init.js"></script>
-    <script src="../../../../auth-guard.js"></script>
-    <script src="../../../../services/logboardgames.service.js"></script>
+    <script src="../../../firebase-init.js"></script>
+    <script src="../../../auth-guard.js"></script>
+    <script src="../../../services/logboardgames.service.js"></script>
     <script src="levelranking.js"></script>
 </html>
