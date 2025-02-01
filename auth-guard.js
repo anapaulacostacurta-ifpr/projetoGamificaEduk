@@ -4,7 +4,7 @@ firebase.auth().onAuthStateChanged( (user) => {
     sessionStorage.setItem("nameUser",user.nickname);
     
     userService.findByUid(userUid).then (user=>{
-        document.getElementById("nameUser").innerHTML = user.nickname;
+        document.getElementById("nameUser").innerHTML = user.name;
         sessionStorage.setItem("score_total",user.score);
         const profiles = user.profiles;
         sessionStorage.setItem("admin",profiles.admin);
