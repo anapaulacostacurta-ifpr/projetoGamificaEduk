@@ -26,22 +26,19 @@
                 <div class="form-field">
                     <div><label>Senha</label></div>
                     <input type="password" placeholder="Senha"
-                        id="password" onchange="onChangePassword()"/>
+                        id="password" class="form-control" onchange="onChangePassword()"/>
                 </div>
                 <div class="form-field">
                     <div><label>Confirmar senha</label></div>
                     <input type="password" placeholder="Confirmar senha"
-                        id="confirmPassword" onchange="onChangeConfirmPassword()"/>
-                </div>
-                <div>
-                    <button type="button" class="solid" disabled="true"
-                        onclick="register()" id="register-button">
-                        Registrar
-                    </button>
+                        id="confirmPassword"  class="form-control" onchange="onChangeConfirmPassword()"/>
                 </div>
                 <div>
                     <button class="btn btn-secondary" type="button" onclick="voltar()">Voltar</button>
-                    <button type="button" class="clear">Login</button>
+                    <button type="button" class="btn btn-lg btn-primary btn-block btn-signin" disabled="true"
+                        onclick="register()" id="register-button">
+                        Registrar
+                    </button>
                 </div>
     </form>
 </body>
