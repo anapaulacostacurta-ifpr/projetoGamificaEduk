@@ -19,7 +19,7 @@ if(status_profile){
 }
 
 const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = sessionStorage.getItem("score_total") +" points";
+scorePoint.innerHTML = sessionStorage.score_total +" points";
 
 var professor = sessionStorage.professor;
 if(professor === undefined){
