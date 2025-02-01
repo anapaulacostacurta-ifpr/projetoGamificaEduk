@@ -8,7 +8,7 @@ const menu = document.getElementById("admin");
 if(!admin){
     menu.style.display = "none";    
 }
-menu.style.display = "none";
+
 
 function jogar() {
     window.location.href = "../play/play.html";
