@@ -1,11 +1,5 @@
 const user_UID = sessionStorage.userUid;
 
-function getregistros(level){
-    
-}
-
-
-
 // Captura o evento de envio do formulário
 document.getElementById("extrato-form").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -29,5 +23,8 @@ document.getElementById("extrato-form").addEventListener("submit", function(even
     let thead = '<thead><tr><th>Data/Hota</th><th>Tabuleiro</th><th>Quiz</th><th>Pontuação anterior</th><th>Pontuação nova</th><th>Token</th></tr></thead>';     
     let table = '<table class="table table-bordered">'+ thead + tbody+'</table>';
     extrato.innerHTML = table;
+}).catch((error) => {
+    let error = '<span>'+ error+'<span>';
+    extrato.innerHTML = error;
 });
 });
