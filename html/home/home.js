@@ -20,6 +20,7 @@ firebase.auth().onAuthStateChanged( (user) => {
         console.log(getErrorMessage(error));
     });
 })
+location.reload();
 
 //Ranking Geral
 var status_profile = sessionStorage.profile_atualizar;
