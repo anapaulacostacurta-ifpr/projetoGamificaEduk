@@ -29,9 +29,8 @@ function register() {
     const password = form.password().value;
     firebase.auth().createUserWithEmailAndPassword(
         email, password
-    ).then((user) => {
-        alert(user);
-        window.location.href = "../../pages/home/home.html";
+    ).then(() => {
+        window.location.href = "../home/home.html";
     }).catch(error => {
         alert(getErrorMessage(error));
     })
