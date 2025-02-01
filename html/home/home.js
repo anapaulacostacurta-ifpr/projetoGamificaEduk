@@ -1,6 +1,7 @@
 //Ranking Geral
 var status_profile = sessionStorage.profile_atualizar;
 var user_UID = sessionStorage.userUid;
+var score_total = sessionStorage.score_total;
 
 if(status_profile == "true"){
     status_profile =true;
@@ -19,7 +20,7 @@ if(status_profile){
 }
 
 const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = sessionStorage.score_total +" points";
+scorePoint.innerHTML = score_total +" points";
 
 var professor = sessionStorage.professor;
 if(professor === undefined){
