@@ -2,15 +2,15 @@
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = sessionStorage.getItem("score_total") +" points";
 
-var admin = sessionStorage.admin;
-if (admin == "true"){
-    admin = true;
+var professor = sessionStorage.professor;
+if (professor == "true"){
+    professor = true;
 }else{
-    admin = false;
+    professor = false;
 }
 
-const menu = document.getElementById("admin");
-if(!admin){
+const menu = document.getElementById("professor");
+if(!professor){
     menu.style.display = "none";    
 }
 
