@@ -5,6 +5,9 @@ scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
 var admin = sessionStorage.admin;
 
 const menu = document.getElementById("admin");
+if(!admin){
+    menu.style.display = "none";    
+}
 menu.style.display = "none";
 
 function jogar() {
