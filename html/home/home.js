@@ -2,7 +2,10 @@
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
 
+var admin = sessionStorage.admin;
 
+const menu = document.getElementById("admin");
+menu.style.display = "none";
 
 function jogar() {
     window.location.href = "../play/play.html";
