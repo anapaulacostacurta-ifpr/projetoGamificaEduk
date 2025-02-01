@@ -6,6 +6,14 @@ function jogar() {
     window.location.href = "../play/play.html";
 }
 
+function ranking_geral() {
+    window.location.href = "../ranking/geral/geralranking.html";
+}
+
+function ranking_nível() {
+    window.location.href = "../ranking/level/levelranking.html";
+}
+
 function logout() {
     firebase.auth().signOut().then(() => {
         sessionStorage.clear();
