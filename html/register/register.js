@@ -12,8 +12,6 @@ function onChangeEmail() {
     const email = form.email().value;
     form.emailRequiredError().style.display = email ? "none" : "block";
 
-    form.emailInvalidError().style.display = validateEmail(email) ? "none" : "block";
-
     toggleRegisterButtonDisable();
 }
 
@@ -33,8 +31,6 @@ function onChangeConfirmPassword() {
 }
 
 function register() {
-    showLoading();
-
     const email = form.email().value;
     const password = form.password().value;
     firebase.auth().createUserWithEmailAndPassword(
@@ -69,7 +65,7 @@ function toggleRegisterButtonDisable() {
 
 function isFormValid() {
     const email = form.email().value;
-    if (!email || !validateEmail(email)) {
+    if (!email) {
         return false;
     }
 
