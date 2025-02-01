@@ -2,6 +2,17 @@
 const scorePoint = document.getElementById("score_total");
 scorePoint.innerHTML = "Score: "+sessionStorage.getItem("score_total") +" points";
 
+var admin = sessionStorage.admin;
+if (admin == "true"){
+    admin = true;
+}else{
+    admin = false;
+}
+
+const menu = document.getElementById("admin");
+if(!admin){
+    menu.style.display = "none";    
+}
 
 // Captura o evento de envio do formulário
 document.getElementById("play-form").addEventListener("submit", function(event) {
