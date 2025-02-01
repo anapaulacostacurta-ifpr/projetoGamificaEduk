@@ -9,7 +9,7 @@
     <header>
         <nav class="navbar navbar-expand-sm">
             <div class="container-fluid">
-                <img class="navbar-brand" src="/assets/img/AnaBiTE.svg" alt="80" width="180">
+                <img class="navbar-brand" src="../../assets/img/AnaBiTE.svg" alt="80" width="180">
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -28,32 +28,39 @@
     </header>
 
     <body class="centralize">
-        <form>
-            <div class="form-field">
-                <div><label>Email</label></div>
-                <input type="email" name="email" id="email" placeholder="seu@email.com" onchange="onChangeEmail()"/>
-                <div class="error" id="email-required-error">Email é obrigatório</div>
-                <div class="error" id="email-invalid-error">Email é inválido</div>
+        <div class="container">
+            <div class="row" style="margin-top:20px">
+                <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                    <form role="form">
+                        <hr class="colorgraph">
+                        <div class="form-group">
+                            <div><label>Email</label></div>
+                            <input type="email" name="email" id="email" placeholder="seu@email.com" onchange="onChangeEmail()"/>
+                            <div class="error" id="email-required-error">Email é obrigatório</div>
+                            <div class="error" id="email-invalid-error">Email é inválido</div>
+                        </div>
+                        <div class="form-group">
+                            <div><label>Senha</label></div>
+                            <input type="password" name="password" id="password" placeholder="Senha" onchange="onChangePassword()"/>
+                            <div class="error" id="password-required-error">Senha é obrigatória</div>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-link pull-right" id="recover-password-button" onclick="recoverPassword()" disabled="true">Esqueceu a Senha?</button>
+                        </div>
+                        <hr class="colorgraph">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button type="button" class="btn btn-lg btn-success btn-block" id="login-button" disabled="true" onclick="login()">Entrar</button>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button type="button" class="btn btn-lg btn-primary btn-block" onclick="register()">Registrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-field">
-                <div><label>Senha</label></div>
-                <input type="password" name="password" id="password" placeholder="Senha" onchange="onChangePassword()"/>
-                <div class="error" id="password-required-error">Senha é obrigatória</div>
-            </div>
-            <div>
-                <button type="button" class="clear" id="recover-password-button" onclick="recoverPassword()" disabled="true">Recuperar senha</button>
-            </div>
-            <div>
-                <button type="button" class="solid" id="login-button" disabled="true" onclick="login()">Entrar</button>
-            </div>
-            <div>
-                <button type="button" class="outline" onclick="register()">Registrar</button>
-            </div>
-        </form>
+        </div>
     </body>
-
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="../../global.css">
 
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
