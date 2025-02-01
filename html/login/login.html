@@ -11,9 +11,7 @@
         <script src="../../firebase-init.js"></script>
         <script src="../../auth-guard.js"></script>
         <script src="login.js"></script>
-        <script src="../../validations.js"></script>
-        <script src="../../loading.js"></script>
-    </head>
+     </head>
     <header>
         <nav class="navbar navbar-expand-sm">
             <div class="container-fluid">
@@ -39,18 +37,18 @@
         <div class="container">
             <div class="row" style="margin-top:20px">
                 <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                    <form role="form">
+                    <form class="was-validated">
                         <hr class="colorgraph">
                         <div class="form-group">
                             <div><label>Email</label></div>
-                            <input type="email" name="email" id="email" placeholder="seu@email.com" onchange="onChangeEmail()"/>
-                            <div class="error" id="email-required-error">Email é obrigatório</div>
-                            <div class="error" id="email-invalid-error">Email é inválido</div>
+                            <input type="email" name="email" id="email" placeholder="seu@email.com" onchange="onChangeEmail()" required/>
+                            <div class="error" id="email-required-error" disabled="true">Email é obrigatório</div>
+                            <div class="error" id="email-invalid-error" disabled="true">Email é inválido</div>
                         </div>
                         <div class="form-group">
                             <div><label>Senha</label></div>
                             <input type="password" name="password" id="password" placeholder="Senha" onchange="onChangePassword()"/>
-                            <div class="error" id="password-required-error">Senha é obrigatória</div>
+                            <div class="error" id="password-required-error" disabled="true">Senha é obrigatória</div>
                         </div>
                         <div>
                             <button type="button" class="btn btn-link pull-right" id="recover-password-button" onclick="recoverPassword()" disabled="true">Esqueceu a Senha?</button>

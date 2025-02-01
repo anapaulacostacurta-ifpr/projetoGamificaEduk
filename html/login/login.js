@@ -23,7 +23,6 @@ function onChangePassword() {
 }
 
 function login() {
-    showLoading();
     firebase.auth().signInWithEmailAndPassword(
         form.email().value, form.password().value
     ).then((userCredential) => {
@@ -41,7 +40,6 @@ function register() {
 }
 
 function recoverPassword() {
-    showLoading();
     firebase.auth().sendPasswordResetEmail(form.email().value).then(() => {
         hideLoading();
         alert('Email enviado com sucesso');
@@ -64,7 +62,6 @@ function getErrorMessage(error) {
 function toggleEmailErrors() {
     const email = form.email().value;
     form.emailRequiredError().style.display = email ? "none" : "block";
-    
     form.emailInvalidError().style.display = validateEmail(email) ? "none" : "block";
 }
 
