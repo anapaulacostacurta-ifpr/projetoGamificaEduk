@@ -1,6 +1,6 @@
 firebase.auth().onAuthStateChanged( (user) => {
-    const userUid = user.uid;
-    sessionStorage.setItem("userUid", user.uid);
+    //const userUid = user.uid;
+    //sessionStorage.setItem("userUid", user.uid);
     
     userService.findByUid(userUid).then (user=>{
         if(user === undefined){
