@@ -15,12 +15,13 @@ firebase.auth().onAuthStateChanged( (user) => {
             sessionStorage.setItem("professor",profiles.admin);
             sessionStorage.setItem("aluno",profiles.admin);
         }
+        location.reload();
         return user;
     }).catch(error => {
         console.log(getErrorMessage(error));
     });
 })
-location.reload();
+
 
 //Ranking Geral
 var status_profile = sessionStorage.profile_atualizar;
