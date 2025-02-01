@@ -10,7 +10,7 @@ function ranking_geral() {
     window.location.href = "../ranking/geral/geralranking.html";
 }
 
-function ranking_nível() {
+function ranking_nivel() {
     window.location.href = "../ranking/level/levelranking.html";
 }
 
