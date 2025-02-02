@@ -58,12 +58,9 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   if(!error){
     // Chama a função para salvar o quiz no Firestore
     //boardgamesService.save(newboardgame);
-    boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames =>{
-      boardgames.forEach(boardgame => {
-          msg_sucesso.innerHTML= "Cadastro realizado com sucesso da Rodada ID:"+ boardgame.boardgameid; 
-          alert_sucesso.classList.add("show");
-      })
-    });
+    msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgame.boardgameid; 
+    alert_sucesso.classList.add("show");
+    
   }else{
     msg_error.innerHTML= msg_txt;
     alert_error.classList.add("show");
