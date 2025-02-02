@@ -8,6 +8,8 @@ var msg_sucesso = document.getElementById("res_sucesso");
 var msg_error = document.getElementById("res_error");
 var error = false;   
 
+setBoardGames();
+const boardgames = getBoardgames();
 
 firebase.auth().onAuthStateChanged( (user) => {
   if (!user) {
@@ -25,14 +27,6 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   const level = document.getElementById("level").value;
   const host = sessionStorage.userUid;
   const boardgameid = document.getElementById("boardgameid").value;
-  /** Deverá ser controlada a log das respostas 
-  answer[
-    questionuid
-    optionselected
-    timeanswer
-    scorequestion
-  ],
-  **/
   const state = "waiting"; // "waiting", "started", "finished"
 
   // Cria o objeto para salvar o quiz
@@ -45,16 +39,14 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   };
 
   var msg_txt = '';
-  boardgamesService.getBoardgameRounds(boardgameid, round_date, host, level).then(boardgames =>{
-    boardgames.forEach(boardgame => {
-      if(boardgame.state !== "finished"){
-        //alert(boardgame.boardgameid);
-        msg_txt= msg_txt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
-        error = true;
-      } 
-    })
-  });
-
+  boardgames.forEach(boardgame =>{
+    if(boardgame.state !== "finished"){
+      //alert(boardgame.boardgameid);
+      msg_txt= msg_txt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
+      error = true;
+    } 
+  })
+  
   if(!error){
     // Chama a função para salvar o quiz no Firestore
     //boardgamesService.save(newboardgame);
@@ -90,4 +82,19 @@ boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
   } 
 }
 
+
+function setBoardGames(){
+  boardgamesService.getBoardgameRounds(boardgameid, round_date, host, level).then(boardgames =>{
+      let boardgamesString = JSON.stringify(boardgames);
+      sessionStorage.setItem('boardgames', boardgamesString);
+    });
+  
+}
+
+function getBoardgames(){
+  let boardgamestring = sessionStorage.boardgames;
+  let boardgames = JSON.parse(boardgamestring);
+  console.log(boardgames);
+  return boardgames;
+}
   
