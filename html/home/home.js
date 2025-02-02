@@ -8,9 +8,9 @@ var user_UID = sessionStorage.userUid;
 if (sessionStorage.nameUser === undefined){
     getCurrentUser(user_UID);
 }
-
 showMenuProfessor();
 showBody();
+
 
 function showBody(){ 
     var status_profile = sessionStorage.profile_atualizar;
