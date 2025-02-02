@@ -4,34 +4,15 @@ firebase.auth().onAuthStateChanged( (user) => {
         window.location.href = "../login/login.html";
     }
 })
+
+getCurrentUser();
+setDadosUser();
+var professor = sessionStorage.professor;
 var user_UID = sessionStorage.userUid;
 var status_profile = sessionStorage.profile_atualizar;
 var score_total = sessionStorage.score_total;
-var professor = sessionStorage.professor;
-
-getCurrentUser();
 showMenuProfessor();
 showBody();
-
-function getCurrentUser(){
-    userService.findByUid(user_UID).then (user=>{
-        if(user === undefined){
-            sessionStorage.setItem("profile_atualizar",true);
-        }else{
-            sessionStorage.setItem("profile_atualizar",false);
-            document.getElementById("nameUser").innerHTML = user.name;
-            sessionStorage.setItem("nameUser") = user.name;
-            document.getElementById("score_total").innerHTML = user.score +" points";
-            sessionStorage.setItem("score_total",user.score);
-            const profiles = user.profiles;
-            sessionStorage.setItem("admin",profiles.admin);
-            sessionStorage.setItem("professor",profiles.admin);
-            sessionStorage.setItem("aluno",profiles.admin);
-        }
-    }).catch(error => {
-        console.log(error);
-    });
-}
 
 function showBody(){ 
     var dados = document.getElementById("profile");
@@ -121,4 +102,27 @@ function logout() {
     }).catch(() => {
         alert('Erro ao fazer logout');
     })
+}
+
+function setDadosUser(){
+    document.getElementById("nameUser").innerHTML = user.name;
+    sessionStorage.setItem("nameUser") = user.name;
+    document.getElementById("score_total").innerHTML = user.score +" points";
+    sessionStorage.setItem("score_total",user.score);
+    const profiles = user.profiles;
+    sessionStorage.setItem("admin",profiles.admin);
+    sessionStorage.setItem("professor",profiles.admin);
+    sessionStorage.setItem("aluno",profiles.admin);
+}
+
+function getCurrentUser(){
+    userService.findByUid(user_UID).then (user=>{
+        if(user === undefined){
+            sessionStorage.setItem("profile_atualizar",true);
+        }else{
+            sessionStorage.setItem("profile_atualizar",false);
+        }
+    }).catch(error => {
+        console.log(error);
+    });
 }
