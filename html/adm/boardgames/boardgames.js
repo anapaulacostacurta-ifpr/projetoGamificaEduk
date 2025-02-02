@@ -84,7 +84,7 @@ boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
 
 
 function setBoardGames(){
-  boardgamesService.getBoardgameRounds(boardgameid, round_date, host, level).then(boardgames =>{
+  boardgamesService.findAll().then(boardgames =>{
       let boardgamesString = JSON.stringify(boardgames);
       sessionStorage.setItem('boardgames', boardgamesString);
     });
