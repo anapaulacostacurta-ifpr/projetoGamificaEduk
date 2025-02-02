@@ -45,14 +45,14 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
 
   if(getBoardgamebyID(boardgameid,round_date, host, level)){
     msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado!"; 
-    alert_error.classList.add("show");
-    setTimeout(resetar("error"),200000);
+    alert_error.fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
+    //resetar("error");
   }else{
     //Inserir
     //saveBoardgame(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
-    alert_sucesso.classList.add("show");
-    setTimeout(resetar("sucesso"),200000);
+    alert_sucesso.fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
+    //resetar("sucesso");
   }
   
 });
