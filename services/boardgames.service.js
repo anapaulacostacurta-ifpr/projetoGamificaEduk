@@ -48,7 +48,7 @@ const boardgamesService = {
         console.log(boardgame);
         return boardgame;
 },
-getBoaadgame: async (boardgameid,round_date, host, level) => {
+    getBoardgameRounds: async (boardgameid,round_date, host, level) => {
     const querySnapshot = await firebase.firestore().collection("boardgames")
     .where('boardgameid','==',boardgameid)
     .where('round_date','==',round_date)

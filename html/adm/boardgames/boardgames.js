@@ -44,7 +44,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     state,  
   };
   var msg_txt = '';
-  boardgamesService.getBoardGameByID(boardgameid, round_date, host, level).then(boardgames =>{
+  boardgamesService.getBoardgameRounds(boardgameid, round_date, host, level).then(boardgames =>{
     boardgames.forEach(boardgame => {
       alert(boardgame.boardgameid);
       msg_txt= msg_mxt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
