@@ -61,3 +61,7 @@ function logout() {
       alert('Erro ao fazer logout');
   })
 }
+
+function voltar(){
+  window.location.href = "../../login/login.html";
+}
