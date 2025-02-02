@@ -49,7 +49,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     boardgames.forEach(boardgame => {
       if(boardgame.state !== "finished"){
         alert(boardgame.boardgameid);
-        msg_txt= msg_mxt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
+        msg_txt= msg_txt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
         error = true;
       } 
     })
