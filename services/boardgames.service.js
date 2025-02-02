@@ -37,10 +37,10 @@ const boardgamesService = {
             .doc(boardgames.uid)
             .delete();
     },
-    save: (boardgames, boardgameid) => {
+    save: (boardgames) => {
         return firebase.firestore()
             .collection("boardgames")
-            .doc(boardgameid)
+            .doc()
             .set(boardgames);
     },
     update: boardgames => {
