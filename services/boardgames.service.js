@@ -54,7 +54,7 @@ getBoaadgame: async (boardgameid,round_date, host, level) => {
     .where('round_date','==',round_date)
     .where('host','==',host)
     .where('level','==',level)
-    .where(('state','==', 'waiting' ) || ('state','==', 'starting'))
+    .where(('state','==', 'waiting' ) || ('state','==', 'started'))
     .get();
     console.log(querySnapshot);
 
