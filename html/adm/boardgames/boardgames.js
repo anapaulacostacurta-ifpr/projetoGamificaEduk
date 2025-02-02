@@ -10,7 +10,6 @@ var msg_error = document.getElementById("res_error");
 
 if(sessionStorage.boardgames === undefined){
   setBoardGames();
-  setTimeout(console.log("Aguardando finalizar a consulta!!"), 2000);
 }
 var boardgames = getBoardgames();
 
@@ -103,19 +102,15 @@ function setBoardGames(){
       let boardgamesString = JSON.stringify(boardgames);
       sessionStorage.setItem('boardgames', boardgamesString);
     });
-  
 }
 
 function getBoardgames(){
   let boardgamestring;
   let boardgames;
-  if(sessionStorage.boardgames === undefined){
-    setBoardGames();
-  }else{
-    boardgamestring = sessionStorage.boardgames;
+  boardgamestring = sessionStorage.boardgames;
+  if (!(boardgamestring === undefined)){
     boardgames = JSON.parse(boardgamestring);
   }
-    console.log(boardgames);
-    return boardgames;
+  return boardgames;
 }
   
