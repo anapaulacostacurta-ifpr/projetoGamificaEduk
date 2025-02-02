@@ -45,13 +45,13 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
 
   if(getBoardgamebyID(boardgameid,round_date, host, level)){
     msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado!"; 
-    alert_error.fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
+    $("div#alert_error").fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
     //resetar("error");
   }else{
     //Inserir
     //saveBoardgame(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
-    alert_sucesso.fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
+    $("div#alert_sucesso").fadeIn(300).delay(1500).fadeOut(400);
     //resetar("sucesso");
   }
   
@@ -62,7 +62,7 @@ function resetar(tipo){
     var alert_sucesso = document.getElementById("alert_sucesso");
     var msg_sucesso = document.getElementById("res_sucesso");
     msg_sucesso.innerHTML="";
-    alert_sucesso.classList.remove("show");
+   alert_sucesso.classList.remove("show");
   }else{
     var alert_error = document.getElementById("alert_error");
     var msg_error = document.getElementById("res_error");
