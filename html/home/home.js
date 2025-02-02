@@ -4,8 +4,9 @@ firebase.auth().onAuthStateChanged( (user) => {
         window.location.href = "../login/login.html";
     }
 })
+var user_UID = sessionStorage.userUid;
 
-userService.findByUid(user.uid).then (user=>{
+userService.findByUid(user_UID).then (user=>{
     if(user === undefined){
         sessionStorage.setItem("profile_atualizar",true);
     }else{
@@ -23,7 +24,6 @@ userService.findByUid(user.uid).then (user=>{
 
 //Ranking Geral
 var status_profile = sessionStorage.profile_atualizar;
-var user_UID = sessionStorage.userUid;
 var score_total = sessionStorage.score_total;
 
 var dados = document.getElementById("profile");
