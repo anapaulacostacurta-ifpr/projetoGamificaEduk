@@ -63,5 +63,5 @@ function logout() {
 }
 
 function voltar(){
-  window.location.href = "../../login/login.html";
+  window.location.href = "../../home/home.html";
 }
