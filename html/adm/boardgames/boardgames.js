@@ -60,7 +60,6 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     //boardgamesService.save(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
     alert_sucesso.classList.add("show");
-    
   }else{
     msg_error.innerHTML= msg_txt;
     alert_error.classList.add("show");
