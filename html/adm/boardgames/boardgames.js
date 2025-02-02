@@ -78,6 +78,7 @@ boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
 }
 
 function getBoardgamebyID(boardgameid,round_date, host, level){
+  var existe = false;
   if(boardgames === undefined){
     getBoardgames();
   }
@@ -87,14 +88,14 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
         if(boardgame.host == host){
           if(boardgame.level == level){
             if(boardgame.state !== "finished"){
-              return true;
+              existe = true;
             }
           }
         }
       }
     }
   });
-  return false;
+  return existe;
 }
 
 function setBoardGames(){
