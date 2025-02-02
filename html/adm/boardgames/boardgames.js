@@ -44,7 +44,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   };
 
   if(getBoardgamebyID(boardgameid,round_date, host, level)){
-    msg_error.innerHTML="Rodada ID: "+ boardgame.boardgameid + " está já esta cadastrado!"; 
+    msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado!"; 
     alert_error.classList.add("show");
   }else{
     //Inserir
