@@ -26,11 +26,11 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
   boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames => {
     boardgames.forEach(boardgame => {
             let boardgame_id = '<td><span>'+boardgame.boardgameid+'</span></td>';
-            let host = '<td><span>'+boardgame.host+'</span></td>';
+            let professor = '<td><span>'+nameUser+'</span></td>';
             let level = '<td><span>'+boardgame.level+'</span></td>';
             let round_data = '<td><span>'+boardgame.round_date+'</span></td>';
             let state = '<td><span>'+boardgame.state+'</span></td>';
-            linhas = linhas +'<tr>'+boardgame_id+host+level+round_data+state+'</tr>';
+            linhas = linhas +'<tr>'+boardgame_id+professor+level+round_data+state+'</tr>';
         })
         let tbody = '<tbody>'+linhas+'</tbody>';
         let thead = '<thead><tr><th>BoardgameID</th><th>Professor</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
