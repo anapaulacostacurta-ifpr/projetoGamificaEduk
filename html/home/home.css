@@ -10,6 +10,7 @@
 }
 
 body, html {
+    min-width: 600px;
     height: 100%;
     font-size: 100% ;
     background-repeat: no-repeat;
