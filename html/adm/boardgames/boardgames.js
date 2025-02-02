@@ -3,7 +3,10 @@ var score_total = sessionStorage.score_total + " points";
 var nameUser = sessionStorage.nameUser;
 
 var alert_sucesso = document.getElementById("alert_sucesso");
-alert_sucesso.style.display = "none";   
+var msg_sucesso = document.getElementById("res_sucesso");
+alert_sucesso.style.display = "none";
+var error = false;   
+
 
 firebase.auth().onAuthStateChanged( (user) => {
   if (!user) {
@@ -40,20 +43,24 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     state,  
   };
 
-  boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames =>{
+  boardgamesService.getBoardGameByID(boardgameid, round_date, host, level).then(boardgames =>{
     boardgames.forEach(boardgame => {
-      alert(boardgames);   
+      msg_sucesso.innerHTML= "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
+      alert_sucesso.style.display = "inline";
+      error = true;    
     })
   });
-  // Chama a função para salvar o quiz no Firestore
-  boardgamesService.save(newboardgame);
-  boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames =>{
-    boardgames.forEach(boardgame => {
-      var alert_sucesso = document.getElementById("res_sucesso");
-      alert_sucesso.innerHTML= "Cadastro realizado Rodada ID:"+ boardgame.boardgameid; 
-      alert_sucesso.style.display = "inline";   
-    })
-  });
+
+  if(!error){
+    // Chama a função para salvar o quiz no Firestore
+    boardgamesService.save(newboardgame);
+    boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames =>{
+      boardgames.forEach(boardgame => {
+        msg_sucesso.innerHTML= "Cadastro realizado com sucesso da Rodada ID:"+ boardgame.boardgameid; 
+        alert_sucesso.style.display = "inline";   
+      })
+    });
+  }
   
 });
 
