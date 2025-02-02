@@ -51,8 +51,22 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     //boardgamesService.save(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
     alert_sucesso.classList.add("show");
+    
   }
+  setInterval(setInterval(resetar(),2000));
 });
+
+function resetar(){
+  var alert_sucesso = document.getElementById("alert_sucesso");
+  var alert_error = document.getElementById("alert_error");
+  var msg_sucesso = document.getElementById("res_sucesso");
+  var msg_error = document.getElementById("res_error");
+  document.getElementById("boardgame-form").reset();
+  msg_error.innerHTML="";
+  msg_sucesso.innerHTML="";
+  alert_error.classList.remove("show");
+  alert_sucesso.classList.remove("show");
+}
 
 function logout() {
   firebase.auth().signOut().then(() => {
