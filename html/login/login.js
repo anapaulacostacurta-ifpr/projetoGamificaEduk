@@ -23,16 +23,6 @@ firebase.auth().onAuthStateChanged( (user) => {
     });
 })
 
-function onChangeEmail() {
-    toggleButtonsDisable();
-    toggleEmailErrors();
-}
-
-function onChangePassword() {
-    toggleButtonsDisable();
-    togglePasswordErrors();
-}
-
 function login() {
     firebase.auth().signInWithEmailAndPassword(
         form.email().value, form.password().value
@@ -68,37 +58,6 @@ function getErrorMessage(error) {
         return "Senha inválida";
     }
     return error.message;
-}
-
-function toggleEmailErrors() {
-    const email = form.email().value;
-    form.emailRequiredError().style.display = email ? "none" : "block";
-    form.emailInvalidError().style.display = validateEmail(email) ? "none" : "block";
-}
-
-function togglePasswordErrors() {
-    const password = form.password().value;
-    form.passwordRequiredError().style.display = password ? "none" : "block";
-}
-
-function toggleButtonsDisable() {
-    const emailValid = isEmailValid();
-    form.recoverPasswordButton().disabled = !emailValid;
-
-    const passwordValid = isPasswordValid();
-    form.loginButton().disabled = !emailValid || !passwordValid;
-}
-
-function isEmailValid() {
-    const email = form.email().value;
-    if (!email) {
-        return false;
-    }
-    return validateEmail(email);
-}
-
-function isPasswordValid() {
-    return form.password().value ? true : false;
 }
 
 const form = {
