@@ -46,25 +46,30 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   if(getBoardgamebyID(boardgameid,round_date, host, level)){
     msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado!"; 
     alert_error.classList.add("show");
+    setTimeout(resetar("error"),200000);
   }else{
     //Inserir
     //saveBoardgame(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
     alert_sucesso.classList.add("show");
+    setTimeout(resetar("sucesso"),200000);
   }
-  setTimeout(resetar(),200000);
+  
 });
 
-function resetar(){
-  var alert_sucesso = document.getElementById("alert_sucesso");
-  var alert_error = document.getElementById("alert_error");
-  var msg_sucesso = document.getElementById("res_sucesso");
-  var msg_error = document.getElementById("res_error");
+function resetar(tipo){
+  if(tipo == "error"){
+    var alert_sucesso = document.getElementById("alert_sucesso");
+    var msg_sucesso = document.getElementById("res_sucesso");
+    msg_sucesso.innerHTML="";
+    alert_sucesso.classList.remove("show");
+  }else{
+    var alert_error = document.getElementById("alert_error");
+    var msg_error = document.getElementById("res_error");
+    msg_error.innerHTML="";
+    alert_error.classList.remove("show");
+  }
   document.getElementById("boardgame-form").reset();
-  msg_error.innerHTML="";
-  msg_sucesso.innerHTML="";
-  alert_error.classList.remove("show");
-  alert_sucesso.classList.remove("show");
 }
 
 function logout() {
@@ -95,7 +100,7 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
     if(boardgame.boardgameid == boardgameid){
       if(boardgame.round_date == round_date){
         if(boardgame.host == host){
-          if(boardgame.level == level){
+          if(boardgame.level == level){a
             if(boardgame.state !== "finished"){
               existe = true;
             }
