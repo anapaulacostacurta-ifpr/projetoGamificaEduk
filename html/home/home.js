@@ -9,14 +9,12 @@ if (sessionStorage.nameUser === undefined){
     getCurrentUser(user_UID);
     
 }
-var professor = sessionStorage.professor;
 
-var status_profile = sessionStorage.profile_atualizar;
-var score_total = sessionStorage.score_total;
 showMenuProfessor();
 showBody();
 
 function showBody(){ 
+    var status_profile = sessionStorage.profile_atualizar;
     var dados = document.getElementById("profile");
     dados.style.display = "none";   
     var menu_center = document.getElementById("menu-center");
@@ -39,6 +37,7 @@ function showBody(){
 }
 
 function showMenuProfessor(){
+    var professor = sessionStorage.professor;
     if(professor === undefined){
         professor = false;
     }else{
