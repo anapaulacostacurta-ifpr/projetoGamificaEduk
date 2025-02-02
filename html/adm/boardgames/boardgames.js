@@ -48,7 +48,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   boardgamesService.getBoardgameRounds(boardgameid, round_date, host, level).then(boardgames =>{
     boardgames.forEach(boardgame => {
       if(boardgame.state !== "finished"){
-        alert(boardgame.boardgameid);
+        //alert(boardgame.boardgameid);
         msg_txt= msg_txt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
         error = true;
       } 
@@ -64,7 +64,6 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   }else{
     msg_error.innerHTML= msg_txt;
     alert_error.classList.add("show");
-    error = true; 
   }
   
 });
