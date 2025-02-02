@@ -1,11 +1,9 @@
 firebase.auth().onAuthStateChanged( (user) => {
-    if (user) {
-        sessionStorage.setItem("userUid", user.uid);
-    }else{
+    if (!user) {
         sessionStorage.clear;
         window.location.href = "../login/login.html";
     }
-    userService.findByUid(uid).then (user=>{
+    userService.findByUid(user.uid).then (user=>{
         if(user === undefined){
             sessionStorage.setItem("profile_atualizar",true);
         }else{

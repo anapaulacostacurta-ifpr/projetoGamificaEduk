@@ -9,6 +9,7 @@ function login() {
         form.email().value, form.password().value
     ).then((userCredential) => {
         var user_UID = userCredential.user.auth.currentUser.uid;
+        sessionStorage.setItem("userUid", user_UID);
         console.log("Usuário logou:" + userCredential.user.uid);
         window.location.href = "../home/home.html";
     }).catch(error => {
