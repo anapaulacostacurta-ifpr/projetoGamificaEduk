@@ -6,7 +6,11 @@ var nameUser = sessionStorage.nameUser;
 if(sessionStorage.boardgames === undefined){
   setBoardGames();
 }
+// Verificar se o usuário tem acesso a funcionalidade
+isAcessoBoargames();
+
 var boardgames = getBoardgames();
+
 
 firebase.auth().onAuthStateChanged( (user) => {
   if (!user) {
@@ -64,7 +68,7 @@ function recarregarAPagina(){
 function logout() {
   firebase.auth().signOut().then(() => {
       sessionStorage.clear();
-      window.location.href = "../../index.html";
+      window.location.href = "../../login/login.html";
   }).catch(() => {
       alert('Erro ao fazer logout');
   })
@@ -116,5 +120,15 @@ function getBoardgames(){
     boardgames = JSON.parse(boardgamestring);
   }
   return boardgames;
+}
+
+function isAcessoBoargames(){
+  var user_UID = sessionStorage.userUid;
+  var perfil_professor = sessionStorage.professor;
+  if ( (perfil_professor) && !(user_UID === undefined)){
+    return true;
+  }else{
+    return false;
+  }
 }
   
