@@ -4,11 +4,11 @@ firebase.auth().onAuthStateChanged( (user) => {
         window.location.href = "../login/login.html";
     }
 })
-
-getCurrentUser();
+var user_UID = sessionStorage.userUid;
+getCurrentUser(user_UID);
 setDadosUser();
 var professor = sessionStorage.professor;
-var user_UID = sessionStorage.userUid;
+
 var status_profile = sessionStorage.profile_atualizar;
 var score_total = sessionStorage.score_total;
 showMenuProfessor();
@@ -115,7 +115,7 @@ function setDadosUser(){
     sessionStorage.setItem("aluno",profiles.admin);
 }
 
-function getCurrentUser(){
+function getCurrentUser(user_UID){
     userService.findByUid(user_UID).then (user=>{
         if(user === undefined){
             sessionStorage.setItem("profile_atualizar",true);
