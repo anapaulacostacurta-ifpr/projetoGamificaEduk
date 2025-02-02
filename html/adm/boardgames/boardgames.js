@@ -44,11 +44,12 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   boardgamesService.save(newboardgame);
   boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames =>{
     boardgames.forEach(boardgame => {
-      alert(boardgame.boardgameid);
+      var alert_sucesso = document.getElementById("res_sucesso");
+      alert_sucesso.innerHTML= "Cadastro realizado Rodada ID:"+ boardgame.boardgameid; 
+      alert_sucesso.style.display = "inline";   
     })
   });
-  var alert_sucesso = document.getElementById("res_sucesso");
-  alert_sucesso.innerHTML= "Confirme o cadastramento!"; 
+  
 });
 
 function logout() {
