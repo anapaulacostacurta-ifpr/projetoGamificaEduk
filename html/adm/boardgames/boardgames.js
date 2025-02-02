@@ -12,7 +12,7 @@ if(sessionStorage.boardgames === undefined){
   setBoardGames();
   setTimeout(console.log("Aguardando finalizar a consulta!!"), 2000);
 }
-const boardgames = getBoardgames();
+var boardgames = getBoardgames();
 
 firebase.auth().onAuthStateChanged( (user) => {
   if (!user) {
@@ -24,6 +24,9 @@ firebase.auth().onAuthStateChanged( (user) => {
 // Captura o evento de envio do formulário
 document.getElementById("boardgame-form").addEventListener("submit", function(event) {
   event.preventDefault();
+  if(boardgames === undefined){
+    getBoardgames();
+  }
 
   // Captura os dados do formulário
   const round_date = (new Date()).toLocaleDateString('pt-BR');
@@ -76,6 +79,9 @@ boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
 }
 
 function getBoardgamebyID(boardgameid,round_date, host, level){
+  if(boardgames === undefined){
+    getBoardgames();
+  }
   boardgames.forEach(boardgame =>{
     if(boardgame.boardgameid == boardgameid){
       if(boardgame.round_date == round_date){
