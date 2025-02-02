@@ -7,7 +7,11 @@ var alert_error = document.getElementById("alert_error");
 var msg_sucesso = document.getElementById("res_sucesso");
 var msg_error = document.getElementById("res_error");  
 
-setBoardGames();
+
+if(sessionStorage.boardgames === undefined){
+  setBoardGames();
+  setTimeout(console.log("Aguardando finalizar a consulta!!"), 2000);
+}
 const boardgames = getBoardgames();
 
 firebase.auth().onAuthStateChanged( (user) => {
@@ -97,9 +101,15 @@ function setBoardGames(){
 }
 
 function getBoardgames(){
-  let boardgamestring = sessionStorage.boardgames;
-  let boardgames = JSON.parse(boardgamestring);
-  console.log(boardgames);
-  return boardgames;
+  let boardgamestring;
+  let boardgames;
+  if(sessionStorage.boardgames === undefined){
+    setBoardGames();
+  }else{
+    boardgamestring = sessionStorage.boardgames;
+    boardgames = JSON.parse(boardgamestring);
+  }
+    console.log(boardgames);
+    return boardgames;
 }
   
