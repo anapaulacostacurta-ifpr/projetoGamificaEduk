@@ -29,7 +29,7 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
             let level = '<td><span>'+boardgame.level+'</span></td>';
             let round_data = '<td><span>'+boardgame.round_date+'</span></td>';
             let state = '<td><span>'+boardgame.state+'</span></td>';
-            linhas = linhas +'<tr>'+boardgame_id+professor_name+level+round_data+state+'</tr>';
+            linhas = linhas +'<tr>'+boardgame_id+level+round_data+state+'</tr>';
         })
         let tbody = '<tbody>'+linhas+'</tbody>';
         let thead = '<thead><tr><th>BoardgameID</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
