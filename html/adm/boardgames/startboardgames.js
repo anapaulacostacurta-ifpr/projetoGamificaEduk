@@ -25,15 +25,18 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
   let linhas = ''; 
   boardgamesService.getBoardGameByID(boardgameid, round_date, professor, level, state).then(boardgames => {
     boardgames.forEach(boardgame => {
+            var option = boardgame.boardgameid+";"+boardgame.level+";"+boardgame.round_date+";"+professor;
             let boardgame_id = '<td><span>'+boardgame.boardgameid+'</span></td>';
             let level = '<td><span>'+boardgame.level+'</span></td>';
             let round_data = '<td><span>'+boardgame.round_date+'</span></td>';
             let state = '<td><span>'+boardgame.state+'</span></td>';
-            linhas = linhas +'<tr>'+boardgame_id+level+round_data+state+'</tr>';
+            let radio = '<input type="radio" class="form-check-activate" id="'+boardgame.boardgameid+'" name="'+boardgame.boardgameid+'" value="'+option+'" checked">';
+            let label = '<label class="form-check-label" for="'+boardgame.boardgameid+'">'+'<tr>'+boardgame_id+level+round_data+state+'</tr>'+'</label>';
+            linhas = linhas + radio + label;
         })
         let tbody = '<tbody>'+linhas+'</tbody>';
         let thead = '<thead><tr><th>BoardgameID</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
-        let table = '<table class="table table-bordered">'+ thead + tbody+'</table>';
+        let table = '<table class="table table-bordered">'+ thead + tbody+'</table><hr class="colorgraph">';
         lista_boardgames.innerHTML = table;
     }).catch((error) => {
         let errorString = '<span>'+ error+'<span>';
@@ -54,4 +57,13 @@ function voltar(){
   window.location.href = "../../home/home.html";
 }
 
-  
+document.getElementById("ativarboardgame-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+  let userselect = answer.querySelector(".form-check-activate").textContent;
+  const option = userselect.split(";");
+    let boardgame_id = option[0];
+    let level = option[1];
+    let round_data = option[2];
+    let professor = option[3];
+    
+});

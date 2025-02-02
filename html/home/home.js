@@ -29,7 +29,7 @@ function getCurrentUser(){
             sessionStorage.setItem("aluno",profiles.admin);
         }
     }).catch(error => {
-        console.log(getErrorMessage(error));
+        console.log(error);
     });
 }
 
