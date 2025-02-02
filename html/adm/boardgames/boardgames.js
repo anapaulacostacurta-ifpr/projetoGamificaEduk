@@ -2,6 +2,9 @@ var user_UID = sessionStorage.userUid;
 var score_total = sessionStorage.score_total + " points";
 var nameUser = sessionStorage.nameUser;
 
+var alert_sucesso = document.getElementById("alert_sucesso");
+alert_sucesso.style.display = "none";   
+
 firebase.auth().onAuthStateChanged( (user) => {
   if (!user) {
     sessionStorage.clear;
@@ -39,10 +42,15 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
 
   // Chama a função para salvar o quiz no Firestore
 
-  var res = boardgamesService.save(newboardgame);
+  boardgamesService.save(newboardgame);
 
-  
-  
+  var boardgames = boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
+  if(boardgames == undefined){
+    boardgames.array.forEach(boardgames => {
+      var alert_sucesso = document.getElementById("res_sucesso");
+      alert_sucesso.innerHTML= boardgame.boardgameid + " cadastrado com sucesso!";
+    });
+  }   
 });
 
 function logout() {
