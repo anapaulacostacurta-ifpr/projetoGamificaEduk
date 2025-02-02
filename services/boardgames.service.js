@@ -53,11 +53,11 @@ const boardgamesService = {
             .doc(boardgames.uid)
             .delete();
     },
-    save: (boardgames) => {
-        return firebase.firestore()
+    save: async (boardgames) => {
+        return await firebase.firestore()
             .collection("boardgames")
             .doc()
-            .set(boardgames);
+            .set(boardgames)
     },
     update: boardgames => {
         return firebase.firestore()

@@ -43,7 +43,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   // Chama a função para salvar o quiz no Firestore
 
   boardgamesService.save(newboardgame);
-
+  
   var boardgames = boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
   if(boardgames == undefined){
     boardgames.array.forEach(boardgames => {
