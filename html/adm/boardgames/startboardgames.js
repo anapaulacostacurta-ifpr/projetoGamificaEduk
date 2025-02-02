@@ -2,7 +2,6 @@ var user_UID = sessionStorage.userUid;
 var score_total = sessionStorage.score_total + " points";
 var nameUser = sessionStorage.nameUser;
 var lista_boardgames = document.getElementById("lista_boardgames");
-lista_boardgames.style.display = "none";  
 
 
 firebase.auth().onAuthStateChanged( (user) => {
