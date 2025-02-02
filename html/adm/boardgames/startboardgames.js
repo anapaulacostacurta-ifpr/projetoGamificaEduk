@@ -4,8 +4,6 @@ var nameUser = sessionStorage.nameUser;
 var lista_boardgames = document.getElementById("lista_boardgames");
 lista_boardgames.style.display = "none";  
 
-var alert_sucesso = document.getElementById("alert_sucesso");
-alert_sucesso.style.display = "none";   
 
 firebase.auth().onAuthStateChanged( (user) => {
   if (!user) {
