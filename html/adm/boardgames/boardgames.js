@@ -100,7 +100,7 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
     if(boardgame.boardgameid == boardgameid){
       if(boardgame.round_date == round_date){
         if(boardgame.host == host){
-          if(boardgame.level == level){a
+          if(boardgame.level == level){
             if(boardgame.state !== "finished"){
               existe = true;
             }
