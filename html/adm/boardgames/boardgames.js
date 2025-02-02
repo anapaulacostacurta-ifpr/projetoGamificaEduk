@@ -52,7 +52,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
     alert_sucesso.classList.add("show");
   }
-  setInterval(resetar(),200000);
+  setTimeout(resetar(),200000);
 });
 
 function resetar(){
