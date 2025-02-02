@@ -26,6 +26,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   var alert_error = document.getElementById("alert_error");
   var msg_sucesso = document.getElementById("res_sucesso");
   var msg_error = document.getElementById("res_error");  
+  var bt_success = document.getElementById("bt-success");
 
   // Captura os dados do formulário
   const round_date = (new Date()).toLocaleDateString('pt-BR');
@@ -44,33 +45,21 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   };
 
   if(getBoardgamebyID(boardgameid,round_date, host, level)){
-    msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado!"; 
-    $("div#alert_error").fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
-    //resetar("error");
+    msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado. Limpe a Página!"; 
+    alert_error.classList.add("show");
+    bt_success.disabled = true;
   }else{
     //Inserir
     //saveBoardgame(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
-    $("div#alert_sucesso").fadeIn(300).delay(1500).fadeOut(400);
-    //resetar("sucesso");
+    alert_sucesso.classList.add("show");
+    bt_success.disabled = true;
   }
-  
 });
 
-function resetar(tipo){
-  if(tipo == "error"){
-    var alert_sucesso = document.getElementById("alert_sucesso");
-    var msg_sucesso = document.getElementById("res_sucesso");
-    msg_sucesso.innerHTML="";
-   alert_sucesso.classList.remove("show");
-  }else{
-    var alert_error = document.getElementById("alert_error");
-    var msg_error = document.getElementById("res_error");
-    msg_error.innerHTML="";
-    alert_error.classList.remove("show");
-  }
-  document.getElementById("boardgame-form").reset();
-}
+function recarregarAPagina(){
+  window.location.reload();
+} 
 
 function logout() {
   firebase.auth().signOut().then(() => {
