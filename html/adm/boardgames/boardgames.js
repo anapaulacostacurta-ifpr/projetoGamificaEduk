@@ -48,10 +48,9 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     alert_error.classList.add("show");
   }else{
     //Inserir
-    //boardgamesService.save(newboardgame);
+    //saveBoardgame(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
     alert_sucesso.classList.add("show");
-    
   }
   setInterval(setInterval(resetar(),2000));
 });
@@ -82,13 +81,9 @@ function voltar(){
 }
 
 
-function buscarBordgames(){
-boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
-  if(boardgames == undefined){
-    boardgames.array.forEach(boardgames => {
-      
-    });
-  } 
+function saveBoardgame(newboardgame){
+  boardgamesService.save(newboardgame);
+  setBoardGames();
 }
 
 function getBoardgamebyID(boardgameid,round_date, host, level){
