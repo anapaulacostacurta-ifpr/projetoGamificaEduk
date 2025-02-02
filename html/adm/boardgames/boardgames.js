@@ -57,7 +57,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     //saveBoardgame(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid+"!";
     alert_sucesso.classList.add("show");
-    bt_success.disabled = true;
+    //bt_success.disabled = true;
   }
 });
 
