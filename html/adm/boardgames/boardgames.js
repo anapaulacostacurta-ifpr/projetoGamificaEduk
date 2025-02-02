@@ -3,8 +3,9 @@ var score_total = sessionStorage.score_total + " points";
 var nameUser = sessionStorage.nameUser;
 
 var alert_sucesso = document.getElementById("alert_sucesso");
+var alert_error = document.getElementById("alert_error");
 var msg_sucesso = document.getElementById("res_sucesso");
-alert_sucesso.style.display = "none";
+var msg_error = document.getElementById("res_error");
 var error = false;   
 
 
@@ -45,8 +46,9 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
 
   boardgamesService.getBoardGameByID(boardgameid, round_date, host, level).then(boardgames =>{
     boardgames.forEach(boardgame => {
-      msg_sucesso.innerHTML= "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
-      alert_sucesso.style.display = "inline";
+      alert(boardgame.boardgameid);
+      msg_error.innerHTML= "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
+      alert_error.classList.add("show");
       error = true;    
     })
   });
@@ -57,7 +59,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames =>{
       boardgames.forEach(boardgame => {
         msg_sucesso.innerHTML= "Cadastro realizado com sucesso da Rodada ID:"+ boardgame.boardgameid; 
-        alert_sucesso.style.display = "inline";   
+        alert_sucesso.classList.add("show");   
       })
     });
   }
