@@ -3,23 +3,23 @@ firebase.auth().onAuthStateChanged( (user) => {
         sessionStorage.clear;
         window.location.href = "../login/login.html";
     }
-    userService.findByUid(user.uid).then (user=>{
-        if(user === undefined){
-            sessionStorage.setItem("profile_atualizar",true);
-        }else{
-            sessionStorage.setItem("profile_atualizar",false);
-            document.getElementById("nameUser").innerHTML = user.name;
-            sessionStorage.setItem("score_total",user.score);
-            const profiles = user.profiles;
-            sessionStorage.setItem("admin",profiles.admin);
-            sessionStorage.setItem("professor",profiles.admin);
-            sessionStorage.setItem("aluno",profiles.admin);
-        }
-    }).catch(error => {
-        console.log(getErrorMessage(error));
-    });
 })
 
+userService.findByUid(user.uid).then (user=>{
+    if(user === undefined){
+        sessionStorage.setItem("profile_atualizar",true);
+    }else{
+        sessionStorage.setItem("profile_atualizar",false);
+        document.getElementById("nameUser").innerHTML = user.name;
+        sessionStorage.setItem("score_total",user.score);
+        const profiles = user.profiles;
+        sessionStorage.setItem("admin",profiles.admin);
+        sessionStorage.setItem("professor",profiles.admin);
+        sessionStorage.setItem("aluno",profiles.admin);
+    }
+}).catch(error => {
+    console.log(getErrorMessage(error));
+});
 
 //Ranking Geral
 var status_profile = sessionStorage.profile_atualizar;
