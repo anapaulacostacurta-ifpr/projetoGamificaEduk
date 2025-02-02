@@ -5,8 +5,7 @@ var nameUser = sessionStorage.nameUser;
 var alert_sucesso = document.getElementById("alert_sucesso");
 var alert_error = document.getElementById("alert_error");
 var msg_sucesso = document.getElementById("res_sucesso");
-var msg_error = document.getElementById("res_error");
-var error = false;   
+var msg_error = document.getElementById("res_error");  
 
 setBoardGames();
 const boardgames = getBoardgames();
@@ -38,25 +37,15 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     state,  
   };
 
-  var msg_txt = '';
-  boardgames.forEach(boardgame =>{
-    if(boardgame.state !== "finished"){
-      //alert(boardgame.boardgameid);
-      msg_txt= msg_txt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
-      error = true;
-    } 
-  })
-  
-  if(!error){
-    // Chama a função para salvar o quiz no Firestore
+  if(getBoardgamebyID(boardgameid,round_date, host, level)){
+    msg_error.innerHTML="Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
+    alert_error.classList.add("show");
+  }else{
+    //Inserir
     //boardgamesService.save(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
     alert_sucesso.classList.add("show");
-  }else{
-    msg_error.innerHTML= msg_txt;
-    alert_error.classList.add("show");
   }
-  
 });
 
 function logout() {
@@ -82,6 +71,22 @@ boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
   } 
 }
 
+function getBoardgamebyID(boardgameid,round_date, host, level){
+  boardgames.forEach(boardgame =>{
+    if(boardgame.boardgameid == boardgameid){
+      if(boardgame.round_date == round_date){
+        if(boardgame.host == host){
+          if(boardgame.level == level){
+            if(boardgame.state !== "finished"){
+              return true;
+            }
+          }
+        }
+      }
+    }
+  });
+  return false;
+}
 
 function setBoardGames(){
   boardgamesService.findAll().then(boardgames =>{
