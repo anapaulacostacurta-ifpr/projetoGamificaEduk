@@ -5,7 +5,7 @@ firebase.auth().onAuthStateChanged( (user) => {
     }
 })
 var user_UID = sessionStorage.userUid;
-if (sessionStorage.user.name === undefined){
+if (sessionStorage.nameUser === undefined){
     var userCurrent = getCurrentUser(user_UID);
     setDadosUser(userCurrent);
 }
