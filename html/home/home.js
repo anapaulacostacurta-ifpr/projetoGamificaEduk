@@ -5,8 +5,8 @@ firebase.auth().onAuthStateChanged( (user) => {
     }
 })
 var user_UID = sessionStorage.userUid;
-getCurrentUser(user_UID);
-setDadosUser();
+var userCurrent = getCurrentUser(user_UID);
+setDadosUser(userCurrent);
 var professor = sessionStorage.professor;
 
 var status_profile = sessionStorage.profile_atualizar;
@@ -122,6 +122,7 @@ function getCurrentUser(user_UID){
         }else{
             sessionStorage.setItem("profile_atualizar",false);
         }
+        return user;
     }).catch(error => {
         console.log(error);
     });
