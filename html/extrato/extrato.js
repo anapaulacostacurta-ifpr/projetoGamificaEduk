@@ -5,10 +5,13 @@ firebase.auth().onAuthStateChanged( (user) => {
     }
 })
 
-const user_UID = sessionStorage.userUid;
+var user_UID = sessionStorage.userUid;
+var score_total = sessionStorage.score_total + " points";
+var nameUser = sessionStorage.nameUser;
+
 //Ranking Geral
 const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
+scorePoint.innerHTML = score_total
 
 // Captura o evento de envio do formulário
 document.getElementById("extrato-form").addEventListener("submit", function(event) {

@@ -4,6 +4,9 @@ firebase.auth().onAuthStateChanged( (user) => {
       window.location.href = "../login/login.html";
   }
 })
+var user_UID = sessionStorage.userUid;
+var score_total = sessionStorage.score_total + " points";
+var nameUser = sessionStorage.nameUser;
 
 // Captura o evento de envio do formulário
 document.getElementById("quiz-form").addEventListener("submit", function(event) {

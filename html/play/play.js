@@ -6,10 +6,12 @@ firebase.auth().onAuthStateChanged( (user) => {
 })
 
 var user_UID = sessionStorage.userUid;
+var score_total = sessionStorage.score_total + " points";
+var nameUser = sessionStorage.nameUser;
 
 //Ranking Geral
 const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = sessionStorage.getItem("score_total") +" points";
+scorePoint.innerHTML = score_total
 
 var professor = sessionStorage.professor;
 if (professor == "true"){

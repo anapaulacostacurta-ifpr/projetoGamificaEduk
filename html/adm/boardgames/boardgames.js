@@ -1,3 +1,6 @@
+var user_UID = sessionStorage.userUid;
+var score_total = sessionStorage.score_total + " points";
+var nameUser = sessionStorage.nameUser;
 
 firebase.auth().onAuthStateChanged( (user) => {
   if (!user) {

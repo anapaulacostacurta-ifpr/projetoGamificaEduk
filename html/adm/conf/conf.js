@@ -5,6 +5,10 @@ firebase.auth().onAuthStateChanged( (user) => {
   }
 })
 
+var user_UID = sessionStorage.userUid;
+var score_total = sessionStorage.score_total + " points";
+var nameUser = sessionStorage.nameUser;
+
 function logout() {
   firebase.auth().signOut().then(() => {
       sessionStorage.clear();
