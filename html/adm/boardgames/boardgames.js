@@ -49,13 +49,13 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   };
 
   if(getBoardgamebyID(boardgameid,round_date, host, level)){
-    msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado. Limpe a Página!"; 
+    msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado. Limpe a pagina e digite os dados novamente!"; 
     alert_error.classList.add("show");
     bt_success.disabled = true;
   }else{
     //Inserir
     //saveBoardgame(newboardgame);
-    msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid;
+    msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid+"!";
     alert_sucesso.classList.add("show");
     bt_success.disabled = true;
   }
