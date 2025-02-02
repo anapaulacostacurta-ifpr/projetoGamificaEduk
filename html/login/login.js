@@ -24,7 +24,7 @@ function login() {
     firebase.auth().signInWithEmailAndPassword(
         form.email().value, form.password().value
     ).then((userCredential) => {
-        var user_UID = userCredential.user.auth.currentUser.uid
+        var user_UID = userCredential.user.auth.currentUser.uid;
         userService.findByUid(user_UID).then (user=>{
             if(user === undefined){
                 sessionStorage.setItem("profile_atualizar",true);
