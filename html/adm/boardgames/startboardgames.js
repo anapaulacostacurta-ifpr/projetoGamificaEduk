@@ -18,19 +18,19 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
   // Captura os dados do formulário
   const round_date = (new Date()).toLocaleDateString('pt-BR');
   const level = document.getElementById("level").value;
-  const host = sessionStorage.userUid;
+  const professor = sessionStorage.userUid;
   const boardgameid = document.getElementById("boardgameid").value;
   const state = "waiting"; // "waiting", "started", "finished"
 
   let linhas = ''; 
-  boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames => {
+  boardgamesService.getBoardGameByID(boardgameid, round_date, professor, level, state).then(boardgames => {
     boardgames.forEach(boardgame => {
             let boardgame_id = '<td><span>'+boardgame.boardgameid+'</span></td>';
-            let professor = '<td><span>'+nameUser+'</span></td>';
+            let professor_name = '<td><span>'+nameUser+'</span></td>';
             let level = '<td><span>'+boardgame.level+'</span></td>';
             let round_data = '<td><span>'+boardgame.round_date+'</span></td>';
             let state = '<td><span>'+boardgame.state+'</span></td>';
-            linhas = linhas +'<tr>'+boardgame_id+professor+level+round_data+state+'</tr>';
+            linhas = linhas +'<tr>'+boardgame_id+professor_name+level+round_data+state+'</tr>';
         })
         let tbody = '<tbody>'+linhas+'</tbody>';
         let thead = '<thead><tr><th>BoardgameID</th><th>Professor</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
