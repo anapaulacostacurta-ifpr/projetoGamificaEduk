@@ -1,11 +1,16 @@
 const boardgamesService = {
-    findAll: () => {
-        return firebase.firestore()
+    findAll: async () => {
+        const querySnapshot =  await firebase.firestore()
         .collection("boardgames")
         .get()
-        .then(doc => {
-            return doc.data();
-        });
+        console.log(querySnapshot);
+        
+        if(querySnapshot.empty){
+            throw new Error("Retornou sem conteúdo");
+        }
+        const boardgame = querySnapshot.docs.map(doc=>doc.data());
+        console.log(boardgame);
+        return boardgame;
     },
     findByUid: uid => {
         return firebase.firestore()
