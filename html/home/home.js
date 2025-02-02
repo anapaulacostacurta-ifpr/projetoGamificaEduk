@@ -6,7 +6,6 @@ firebase.auth().onAuthStateChanged( (user) => {
 })
 var user_UID = sessionStorage.userUid;
 if (sessionStorage.nameUser === undefined){
-    getCurrentUser(user_UID);
     var usercurrent = getCurrentUser(user_UID);
     if ( !(usercurrent === undefined)){
         showMenuProfessor();
