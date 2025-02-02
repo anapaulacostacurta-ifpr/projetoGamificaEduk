@@ -41,16 +41,9 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   };
 
   // Chama a função para salvar o quiz no Firestore
-
   boardgamesService.save(newboardgame);
-  
-  var boardgames = boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
-  if(boardgames == undefined){
-    boardgames.array.forEach(boardgames => {
-      var alert_sucesso = document.getElementById("res_sucesso");
-      alert_sucesso.innerHTML= boardgame.boardgameid + " cadastrado com sucesso!";
-    });
-  }   
+  var alert_sucesso = document.getElementById("res_sucesso");
+  alert_sucesso.innerHTML= "Confirme o cadastramento!"; 
 });
 
 function logout() {
@@ -65,3 +58,15 @@ function logout() {
 function voltar(){
   window.location.href = "../../home/home.html";
 }
+
+
+function buscarBordgames(){
+boardgamesService.getBoardGameByID(boardgameid, round_date, host, level);
+  if(boardgames == undefined){
+    boardgames.array.forEach(boardgames => {
+      
+    });
+  } 
+}
+
+  
