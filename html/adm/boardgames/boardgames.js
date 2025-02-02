@@ -2,11 +2,6 @@ var user_UID = sessionStorage.userUid;
 var score_total = sessionStorage.score_total + " points";
 var nameUser = sessionStorage.nameUser;
 
-var alert_sucesso = document.getElementById("alert_sucesso");
-var alert_error = document.getElementById("alert_error");
-var msg_sucesso = document.getElementById("res_sucesso");
-var msg_error = document.getElementById("res_error");  
-
 
 if(sessionStorage.boardgames === undefined){
   setBoardGames();
@@ -26,6 +21,11 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   if(boardgames === undefined){
     getBoardgames();
   }
+
+  var alert_sucesso = document.getElementById("alert_sucesso");
+  var alert_error = document.getElementById("alert_error");
+  var msg_sucesso = document.getElementById("res_sucesso");
+  var msg_error = document.getElementById("res_error");  
 
   // Captura os dados do formulário
   const round_date = (new Date()).toLocaleDateString('pt-BR');
