@@ -106,7 +106,7 @@ function logout() {
     })
 }
 
-function setDadosUser(){
+function setDadosUser(user){
     document.getElementById("nameUser").innerHTML = user.name;
     sessionStorage.setItem("nameUser") = user.name;
     document.getElementById("score_total").innerHTML = user.score +" points";
