@@ -4,6 +4,16 @@ firebase.auth().onAuthStateChanged( (user) => {
         window.location.href = "../login/login.html";
     }
 })
+var status_profile = sessionStorage.profile_atualizar;
+var dados = document.getElementById("profile");
+dados.style.display = "none";   
+var menu_center = document.getElementById("menu-center");
+menu_center.style.display = "none"; 
+var form_perfil = document.getElementById("form-profile");
+form_perfil.style.display = "none"; 
+const menu = document.getElementById("menu_top");
+menu.style.display = "none"; 
+
 var user_UID = sessionStorage.userUid;
 if (sessionStorage.nameUser === undefined){
     var usercurrent = getCurrentUser(user_UID);
@@ -15,14 +25,6 @@ if (sessionStorage.nameUser === undefined){
 
 
 function showBody(){ 
-    var status_profile = sessionStorage.profile_atualizar;
-    var dados = document.getElementById("profile");
-    dados.style.display = "none";   
-    var menu_center = document.getElementById("menu-center");
-    menu_center.style.display = "none"; 
-    var form_perfil = document.getElementById("form-profile");
-    form_perfil.style.display = "none"; 
-    
     if(status_profile == "true"){
         status_profile =true;
     }else{
@@ -48,9 +50,10 @@ function showMenuProfessor(){
             professor = false;
         }
     }
-    const menu = document.getElementById("menu_top");
     if(!professor){
         menu.style.display = "none";    
+    }else{
+        menu.style.display = "inline"; 
     }    
 }
 
