@@ -57,8 +57,10 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     boardgamesService.save(newboardgame);
     boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames =>{
       boardgames.forEach(boardgame => {
-        msg_sucesso.innerHTML= "Cadastro realizado com sucesso da Rodada ID:"+ boardgame.boardgameid; 
-        alert_sucesso.classList.add("show");   
+        if(boardgame.state !== "finished"){
+          msg_sucesso.innerHTML= "Cadastro realizado com sucesso da Rodada ID:"+ boardgame.boardgameid; 
+          alert_sucesso.classList.add("show");
+        }   
       })
     });
   }else{

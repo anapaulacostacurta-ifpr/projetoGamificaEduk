@@ -54,7 +54,6 @@ const boardgamesService = {
     .where('round_date','==',round_date)
     .where('host','==',host)
     .where('level','==',level)
-    .where('state','!=', 'finished')
     .get();
     console.log(querySnapshot);
 
