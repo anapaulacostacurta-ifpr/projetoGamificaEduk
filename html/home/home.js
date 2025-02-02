@@ -6,10 +6,8 @@ firebase.auth().onAuthStateChanged( (user) => {
 })
 var user_UID = sessionStorage.userUid;
 if (sessionStorage.nameUser === undefined){
-    var userCurrent = getCurrentUser(user_UID);
-    if (!(userCurrent === undefined)){
-        setDadosUser(userCurrent);
-    }
+    getCurrentUser(user_UID);
+    
 }
 var professor = sessionStorage.professor;
 
@@ -109,14 +107,7 @@ function logout() {
 }
 
 function setDadosUser(user){
-    document.getElementById("nameUser").innerHTML = user.name;
-    sessionStorage.setItem("nameUser") = user.name;
-    document.getElementById("score_total").innerHTML = user.score +" points";
-    sessionStorage.setItem("score_total",user.score);
-    const profiles = user.profiles;
-    sessionStorage.setItem("admin",profiles.admin);
-    sessionStorage.setItem("professor",profiles.admin);
-    sessionStorage.setItem("aluno",profiles.admin);
+    
 }
 
 function getCurrentUser(user_UID){
@@ -125,6 +116,14 @@ function getCurrentUser(user_UID){
             sessionStorage.setItem("profile_atualizar",true);
         }else{
             sessionStorage.setItem("profile_atualizar",false);
+            document.getElementById("nameUser").innerHTML = user.name;
+            sessionStorage.setItem("nameUser") = user.name;
+            document.getElementById("score_total").innerHTML = user.score +" points";
+            sessionStorage.setItem("score_total",user.score);
+            const profiles = user.profiles;
+            sessionStorage.setItem("admin",profiles.admin);
+            sessionStorage.setItem("professor",profiles.admin);
+            sessionStorage.setItem("aluno",profiles.admin);
         }
         return user;
     }).catch(error => {
