@@ -25,24 +25,11 @@ function login() {
         form.email().value, form.password().value
     ).then((userCredential) => {
         var user_UID = userCredential.user.auth.currentUser.uid;
-        userService.findByUid(user_UID).then (user=>{
-            if(user === undefined){
-                sessionStorage.setItem("profile_atualizar",true);
-            }else{
-                sessionStorage.setItem("profile_atualizar",false);
-                document.getElementById("nameUser").innerHTML = user.name;
-                sessionStorage.setItem("score_total",user.score);
-                const profiles = user.profiles;
-                sessionStorage.setItem("admin",profiles.admin);
-                sessionStorage.setItem("professor",profiles.admin);
-                sessionStorage.setItem("aluno",profiles.admin);
-            }
         console.log("Usuário logou:" + userCredential.user.uid);
         window.location.href = "../home/home.html";
     }).catch(error => {
         console.log(getErrorMessage(error));
     });
-});
 }
 
 function register() {
