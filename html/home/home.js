@@ -64,7 +64,7 @@ function showMenuProfessor(){
             professor = false;
         }
     }
-    const menu = document.getElementById("menu-top");
+    const menu = document.getElementById("menu_top");
     if(!professor){
         menu.style.display = "none";    
     }    
