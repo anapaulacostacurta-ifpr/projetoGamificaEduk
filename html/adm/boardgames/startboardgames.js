@@ -25,7 +25,7 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
 
   let linhas = ''; 
   var boardgames = boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state);
-  boardgames.array.forEach(boardgames => {
+  boardgames.forEach(boardgames => {
     boardgames.forEach(boardgame => {
             let boardgame_id = '<td><span>'+boardgame.boardgame_id+'</span></td>';
             let host = '<td><span>'+boardgame.host+'</span></td>';
