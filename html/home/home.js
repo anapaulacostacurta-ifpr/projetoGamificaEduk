@@ -10,7 +10,7 @@ var score_total = sessionStorage.score_total;
 var professor = sessionStorage.professor;
 
 getCurrentUser();
-showMenu();
+showMenuProfessor();
 showBody();
 
 function getCurrentUser(){
