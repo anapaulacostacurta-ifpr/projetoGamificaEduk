@@ -14,4 +14,4 @@ const userService = {
             .doc(user_UID)
             .set(user);
     }
-}
+};
