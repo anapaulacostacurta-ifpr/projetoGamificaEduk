@@ -20,6 +20,7 @@ function getCurrentUser(){
         }else{
             sessionStorage.setItem("profile_atualizar",false);
             document.getElementById("nameUser").innerHTML = user.name;
+            document.getElementById("score_total").innerHTML = user.score +" points";
             sessionStorage.setItem("score_total",user.score);
             const profiles = user.profiles;
             sessionStorage.setItem("admin",profiles.admin);
@@ -31,10 +32,7 @@ function getCurrentUser(){
     });
 }
 
-function showBody(){
-    //Ranking Geral
-    const scorePoint = document.getElementById("score_total");
-    scorePoint.innerHTML = score_total +" points";
+function showBody(){ 
     var dados = document.getElementById("profile");
     dados.style.display = "none";   
     var menu_center = document.getElementById("menu-center");
