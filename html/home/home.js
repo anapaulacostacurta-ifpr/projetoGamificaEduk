@@ -5,8 +5,13 @@ firebase.auth().onAuthStateChanged( (user) => {
     }
 })
 var user_UID = sessionStorage.userUid;
+var status_profile = sessionStorage.profile_atualizar;
+var score_total = sessionStorage.score_total;
+var professor = sessionStorage.professor;
 
 getCurrentUser();
+showMenu();
+showBody();
 
 function getCurrentUser(){
     userService.findByUid(user_UID).then (user=>{
@@ -26,48 +31,48 @@ function getCurrentUser(){
     });
 }
 
-//Ranking Geral
-var status_profile = sessionStorage.profile_atualizar;
-var score_total = sessionStorage.score_total;
-
-var dados = document.getElementById("profile");
-dados.style.display = "none";   
-var menu_center = document.getElementById("menu-center");
-menu_center.style.display = "none"; 
-var form_perfil = document.getElementById("form-profile");
-form_perfil.style.display = "none"; 
-
-if(status_profile == "true"){
-    status_profile =true;
-}else{
-    status_profile =false;
-}
-
-if(!status_profile){
-    dados.style.display = "inline";   
-    menu_center.style.display = "inline"; 
-}else{
-    form_perfil.style.display = "inline"; 
-}
-
-const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = score_total +" points";
-
-var professor = sessionStorage.professor;
-if(professor === undefined){
-    professor = false;
-}else{
-    if (professor == "true"){
-        professor = true;
+function showBody(){
+    //Ranking Geral
+    const scorePoint = document.getElementById("score_total");
+    scorePoint.innerHTML = score_total +" points";
+    var dados = document.getElementById("profile");
+    dados.style.display = "none";   
+    var menu_center = document.getElementById("menu-center");
+    menu_center.style.display = "none"; 
+    var form_perfil = document.getElementById("form-profile");
+    form_perfil.style.display = "none"; 
+    
+    if(status_profile == "true"){
+        status_profile =true;
     }else{
-        professor = false;
+        status_profile =false;
     }
+    
+    if(!status_profile){
+        dados.style.display = "inline";   
+        menu_center.style.display = "inline"; 
+    }else{
+        form_perfil.style.display = "inline"; 
+    }    
 }
 
-const menu = document.getElementById("professor");
-if(!professor){
-    menu.style.display = "none";    
+function showMenuProfessor(){
+    if(professor === undefined){
+        professor = false;
+    }else{
+        if (professor == "true"){
+            professor = true;
+        }else{
+            professor = false;
+        }
+    }
+    
+    const menu = document.getElementById("professor");
+    if(!professor){
+        menu.style.display = "none";    
+    }    
 }
+
 
 function jogar() {
     window.location.href = "../play/play.html";
@@ -86,30 +91,29 @@ function extrato() {
 }
 
 function save_profile(){
- const name = document.getElementById("nome");
- const select = document.getElementById("profile");
- const profileUser = select.options[select.selectedIndex].value;
- 
- var admin = false;
- var aluno = false;
- var professor = false;
+    const name = document.getElementById("nome");
+    const select = document.getElementById("profile");
+    const profileUser = select.options[select.selectedIndex].value;
+    
+    var admin = false;
+    var aluno = false;
+    var professor = false;
 
- if(profileUser == "professor"){
-    professor = true;
- }else{
-    if (profileUser == "aluno"){
-        aluno = true;
+    if(profileUser == "professor"){
+        professor = true;
+    }else{
+        if (profileUser == "aluno"){
+            aluno = true;
+        }
+        if (profileUser == "admin"){
+            admin = true;
+        }
     }
-    if (profileUser == "admin"){
-        admin = true;
-    }
- }
- var profile = {admin:admin, aluno: aluno, professor: professor};
- var user = {name: name, profile, score:0, status:false};
- userService.save(user_UID,user);
- alert("Aguarde seu perfil ser ativado pelo administrador!");
- logout();
-
+    var profile = {admin:admin, aluno: aluno, professor: professor};
+    var user = {name: name, profile, score:0, status:false};
+    userService.save(user_UID,user);
+    alert("Aguarde seu perfil ser ativado pelo administrador!");
+    logout();
 }
 
 function logout() {
