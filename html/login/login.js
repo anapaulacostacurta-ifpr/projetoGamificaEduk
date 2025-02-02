@@ -24,12 +24,10 @@ function login() {
     firebase.auth().signInWithEmailAndPassword(
         form.email().value, form.password().value
     ).then((userCredential) => {
-        hideLoading();
         console.log("Usuário logou:" + userCredential.user.uid);
         window.location.href = "../home/home.html";
     }).catch(error => {
-        hideLoading();
-        alert(getErrorMessage(error));
+        console.log(getErrorMessage(error));
     });
 }
 
@@ -39,11 +37,9 @@ function register() {
 
 function recoverPassword() {
     firebase.auth().sendPasswordResetEmail(form.email().value).then(() => {
-        hideLoading();
         alert('Email enviado com sucesso');
     }).catch(error => {
-        hideLoading();
-        alert(getErrorMessage(error));
+        console.log(getErrorMessage(error));
     });
 }
 
