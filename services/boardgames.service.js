@@ -31,12 +31,13 @@ const boardgamesService = {
             console.log(boardgame);
             return boardgame;
     },
-    getBoardGameByID: async (boardgameid,round_date, host, level) => {
+    getBoardGameByID: async (boardgameid,round_date, host, level,state) => {
         const querySnapshot = await firebase.firestore().collection("boardgames")
         .where('boardgameid','==',boardgameid)
         .where('round_date','==',round_date)
         .where('host','==',host)
         .where('level','==',level)
+        .where('state','==',state)
         .get();
         console.log(querySnapshot);
 
@@ -46,6 +47,22 @@ const boardgamesService = {
         const boardgame = querySnapshot.docs.map(doc=>doc.data());
         console.log(boardgame);
         return boardgame;
+},
+getBoardGameByID: async (boardgameid,round_date, host, level) => {
+    const querySnapshot = await firebase.firestore().collection("boardgames")
+    .where('boardgameid','==',boardgameid)
+    .where('round_date','==',round_date)
+    .where('host','==',host)
+    .where('level','==',level)
+    .get();
+    console.log(querySnapshot);
+
+    if(querySnapshot.empty){
+        throw new Error("Tabuleiro não encontrador:" + boardgameid);
+    }
+    const boardgame = querySnapshot.docs.map(doc=>doc.data());
+    console.log(boardgame);
+    return boardgame;
 },
     remove: boardgames => {
         return firebase.firestore()
