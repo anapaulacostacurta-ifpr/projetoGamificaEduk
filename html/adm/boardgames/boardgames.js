@@ -43,13 +43,11 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     host,
     state,  
   };
-
+  var msg_txt = '';
   boardgamesService.getBoardGameByID(boardgameid, round_date, host, level).then(boardgames =>{
     boardgames.forEach(boardgame => {
       alert(boardgame.boardgameid);
-      msg_error.innerHTML= "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
-      alert_error.classList.add("show");
-      error = true;    
+      msg_txt= msg_mxt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
     })
   });
 
@@ -62,6 +60,10 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
         alert_sucesso.classList.add("show");   
       })
     });
+  }else{
+    msg_error.innerHTML= msg_txt;
+    alert_error.classList.add("show");
+    error = true; 
   }
   
 });
