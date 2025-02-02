@@ -43,24 +43,25 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     host,
     state,  
   };
+
   var msg_txt = '';
   boardgamesService.getBoardgameRounds(boardgameid, round_date, host, level).then(boardgames =>{
     boardgames.forEach(boardgame => {
-      alert(boardgame.boardgameid);
-      msg_txt= msg_mxt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
-      error = true; 
+      if(boardgame.state !== "finished"){
+        alert(boardgame.boardgameid);
+        msg_txt= msg_mxt + "Rodada ID: "+ boardgame.boardgameid + " está com status: " + boardgame.state + "!"; 
+        error = true;
+      } 
     })
   });
 
   if(!error){
     // Chama a função para salvar o quiz no Firestore
-    boardgamesService.save(newboardgame);
+    //boardgamesService.save(newboardgame);
     boardgamesService.getBoardGameByID(boardgameid, round_date, host, level, state).then(boardgames =>{
       boardgames.forEach(boardgame => {
-        if(boardgame.state !== "finished"){
           msg_sucesso.innerHTML= "Cadastro realizado com sucesso da Rodada ID:"+ boardgame.boardgameid; 
           alert_sucesso.classList.add("show");
-        }   
       })
     });
   }else{
