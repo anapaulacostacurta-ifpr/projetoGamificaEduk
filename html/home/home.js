@@ -106,10 +106,6 @@ function logout() {
     })
 }
 
-function setDadosUser(user){
-    
-}
-
 function getCurrentUser(user_UID){
     userService.findByUid(user_UID).then (user=>{
         if(user === undefined){
@@ -117,7 +113,7 @@ function getCurrentUser(user_UID){
         }else{
             sessionStorage.setItem("profile_atualizar",false);
             document.getElementById("nameUser").innerHTML = user.name;
-            sessionStorage.setItem("nameUser") = user.name;
+            sessionStorage.setItem("nameUser", user.name);
             document.getElementById("score_total").innerHTML = user.score +" points";
             sessionStorage.setItem("score_total",user.score);
             const profiles = user.profiles;
