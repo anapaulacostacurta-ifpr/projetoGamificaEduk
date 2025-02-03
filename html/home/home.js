@@ -39,7 +39,7 @@ function showMenuProfessor(){
     const menu = document.getElementById("menu_top");
     document.getElementById("nameUser").innerHTML = User.name;
     document.getElementById("score_total").innerHTML = User.score_total +" points";
-    const profiles = user.profiles;
+    const profiles = User.profiles;
     sessionStorage.setItem("admin",profiles.admin);
     sessionStorage.setItem("professor",profiles.admin);
     sessionStorage.setItem("aluno",profiles.admin);
