@@ -124,6 +124,7 @@ function getCurrentUser(user_UID){
             console.log(error);
         });
     }
+    return getUser();
 }
 
 function setUser(User){
