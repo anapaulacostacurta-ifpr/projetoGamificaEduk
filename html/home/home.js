@@ -41,8 +41,8 @@ function showMenuProfessor(){
     document.getElementById("score_total").innerHTML = User.score_total +" points";
     const profiles = User.profiles;
     sessionStorage.setItem("admin",profiles.admin);
-    sessionStorage.setItem("professor",profiles.admin);
-    sessionStorage.setItem("aluno",profiles.admin);
+    sessionStorage.setItem("professor",profiles.professor);
+    sessionStorage.setItem("aluno",profiles.aluno);
     var professor = sessionStorage.professor;
     if(professor === undefined){
         professor = false;
