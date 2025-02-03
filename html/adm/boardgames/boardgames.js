@@ -2,15 +2,9 @@ var user_UID = sessionStorage.userUid;
 var score_total = sessionStorage.score_total + " points";
 var nameUser = sessionStorage.nameUser;
 
-
-if(sessionStorage.boardgames === undefined){
-  setBoardGames();
-}
+var boardgames = getBoardgames();
 // Verificar se o usuário tem acesso a funcionalidade
 isAcessoBoargames();
-
-var boardgames = getBoardgames();
-
 
 firebase.auth().onAuthStateChanged( (user) => {
   if (!user) {
@@ -22,15 +16,11 @@ firebase.auth().onAuthStateChanged( (user) => {
 // Captura o evento de envio do formulário
 document.getElementById("boardgame-form").addEventListener("submit", function(event) {
   event.preventDefault();
-  if(boardgames === undefined){
-    getBoardgames();
-  }
-
+ 
   var alert_sucesso = document.getElementById("alert_sucesso");
   var alert_error = document.getElementById("alert_error");
   var msg_sucesso = document.getElementById("res_sucesso");
   var msg_error = document.getElementById("res_error");  
-  var bt_success = document.getElementById("bt-success");
 
   // Captura os dados do formulário
   const round_date = (new Date()).toLocaleDateString('pt-BR');
@@ -87,19 +77,19 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
   if(boardgames === undefined){
     getBoardgames();
   }
-  boardgames.forEach(boardgame =>{
-    if(boardgame.boardgameid == boardgameid){
-      if(boardgame.round_date == round_date){
-        if(boardgame.host == host){
-          if(boardgame.level == level){
-            if(boardgame.state !== "finished"){
-              existe = true;
+    boardgames.forEach(boardgame =>{
+      if(boardgame.boardgameid == boardgameid){
+        if(boardgame.round_date == round_date){
+          if(boardgame.host == host){
+            if(boardgame.level == level){
+              if(boardgame.state !== "finished"){
+                existe = true;
+              }
             }
           }
         }
       }
-    }
-  });
+    });
   return existe;
 }
 
@@ -111,14 +101,16 @@ function setBoardGames(){
 }
 
 function getBoardgames(){
-  let boardgamestring;
+  let boardgamesString = sessionStorage.boardgames;
   let boardgames;
-  boardgamestring = sessionStorage.boardgames;
-  if (!(boardgamestring === undefined)){
-    boardgames = JSON.parse(boardgamestring);
+  if (boardgamesString === undefined){
+    setBoardGames();
+  }else{
+    boardgames = JSON.parse(boardgamesString);
   }
   return boardgames;
 }
+
 
 function isAcessoBoargames(){
   var user_UID = sessionStorage.userUid;
