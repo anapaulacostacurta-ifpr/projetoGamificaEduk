@@ -46,15 +46,17 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     host,
     state,  
   };
-
-  if(getBoardgamebyID(boardgameid,round_date, host, level)){
+  var existe = getBoardgamebyID(boardgameid,round_date, host, level);
+  if(existe){
     msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado. Limpe a pagina e digite os dados novamente!"; 
     alert_error.classList.add("show");
+    return[];
   }else{
     //Inserir
     saveBoardgame(newboardgame);
     msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid+"!";
     alert_sucesso.classList.add("show");
+    return[];
   }
 });
 
