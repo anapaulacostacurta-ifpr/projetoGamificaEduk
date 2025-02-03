@@ -46,20 +46,20 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
 
 
 function getTokens(){
-    var tokensQuizString = sessionStorage.tokensQuiz;
+    var tokensString = sessionStorage.tokens;
     var tokens_quiz;
-    if (tokensQuizStrin === undefined){
+    if (tokensString === undefined){
         tokenService.getTokens().then(tokens => {
             tokens.forEach(token => {
                 tokens_quiz = token.quiz;
-                tokensQuizString = JSON.stringify(tokens_quiz);
+                tokensString = JSON.stringify(tokens_quiz);
                 // Store the stringified object in sessionStorage
-                sessionStorage.setItem('tokens', tokensQuizString);
+                sessionStorage.setItem('tokens', tokensString);
             });
         });
     }else{
         // Convert the user object into a string
-        tokens_quiz = JSON.parse(tokensQuizString);
+        tokens_quiz = JSON.parse(tokensString);
     }
     return tokens_quiz;
 }
