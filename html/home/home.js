@@ -15,13 +15,12 @@ const menu = document.getElementById("menu_top");
 menu.style.display = "none"; 
 
 var user_UID = sessionStorage.userUid;
-if (sessionStorage.nameUser === undefined){
-    var usercurrent = getCurrentUser(user_UID);
-    if ( !(usercurrent === undefined)){
-        showMenuProfessor();
-        showBody();
-    }
+var User;
+if (User === undefined){
+    getCurrentUser(user_UID);
 }
+showMenuProfessor(); 
+showBody();
 
 
 function showBody(){ 
@@ -40,6 +39,14 @@ function showBody(){
 }
 
 function showMenuProfessor(){
+    document.getElementById("nameUser").innerHTML = user.name;
+    document.getElementById("score_total").innerHTML = user.score +" points";
+    sessionStorage.setItem("nameUser", user.name);
+    sessionStorage.setItem("score_total",user.score);
+    const profiles = user.profiles;
+    sessionStorage.setItem("admin",profiles.admin);
+    sessionStorage.setItem("professor",profiles.admin);
+    sessionStorage.setItem("aluno",profiles.admin);
     var professor = sessionStorage.professor;
     if(professor === undefined){
         professor = false;
@@ -115,17 +122,26 @@ function getCurrentUser(user_UID){
             sessionStorage.setItem("profile_atualizar",true);
         }else{
             sessionStorage.setItem("profile_atualizar",false);
-            document.getElementById("nameUser").innerHTML = user.name;
-            sessionStorage.setItem("nameUser", user.name);
-            document.getElementById("score_total").innerHTML = user.score +" points";
-            sessionStorage.setItem("score_total",user.score);
-            const profiles = user.profiles;
-            sessionStorage.setItem("admin",profiles.admin);
-            sessionStorage.setItem("professor",profiles.admin);
-            sessionStorage.setItem("aluno",profiles.admin);
+            setUser(user);
+            User = getUser();
         }
-        return user;
     }).catch(error => {
         console.log(error);
     });
 }
+
+function setUser(User){
+    let UserString = JSON.stringify(User);
+    sessionStorage.setItem('User', UserString);
+  }
+  
+function getUser(){
+    let UserString = sessionStorage.User;
+    let User = JSON.parse(UserString);
+    console.log(User);
+    return User;
+}
+
+
+
+
