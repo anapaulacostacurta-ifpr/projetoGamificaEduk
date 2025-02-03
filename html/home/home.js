@@ -110,7 +110,7 @@ function logout() {
 }
 
 function getCurrentUser(user_UID){
-    User = getUser();
+    User = sessionStorage.User;
     if (User === undefined) {
         userService.findByUid(user_UID).then (user=>{
             if(user === undefined){
@@ -118,14 +118,12 @@ function getCurrentUser(user_UID){
             }else{
                 sessionStorage.setItem("profile_atualizar",false);
                 setUser(user);
-                User = getUser();
             }
         }).catch(error => {
             console.log(error);
         });
-    }else{
-        return User;
     }
+    return getUser();
 }
 
 function setUser(User){
