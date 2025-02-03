@@ -30,7 +30,7 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
             let level = '<td><span>'+boardgame.level+'</span></td>';
             let round_data = '<td><span>'+boardgame.round_date+'</span></td>';
             let state = '<td><span>'+boardgame.state+'</span></td>';
-            let radio = '<input type="radio" class="form-check-activate" id="'+boardgame.boardgameid+'" name="'+boardgame.boardgameid+'" value="'+option+'" checked">';
+            let radio = '<input type="radio" class="form-check-activate" id="radio_id" name="radio_id" value="'+option+'" checked">';
             let label = '<label class="form-check-label" for="'+boardgame.boardgameid+'">'+'<tr>'+boardgame_id+level+round_data+state+'</tr>'+'</label>';
             linhas = linhas + radio + label;
         })
@@ -59,8 +59,8 @@ function voltar(){
 
 document.getElementById("ativarboardgame-form").addEventListener("submit", function(event) {
   event.preventDefault();
-  let userselect = answer.querySelector(".form-check-activate").textContent;
-  const option = userselect.split(";");
+    let userselect = document.querySelector('input[name="radio_id"]:checked').value;
+    const option = userselect.split(";");
     let boardgame_id = option[0];
     let level = option[1];
     let round_data = option[2];
