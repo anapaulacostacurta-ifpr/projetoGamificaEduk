@@ -4,15 +4,6 @@ firebase.auth().onAuthStateChanged( (user) => {
         window.location.href = "../login/login.html";
     }
 })
-var status_profile = sessionStorage.profile_atualizar;
-var dados = document.getElementById("profile");
-dados.style.display = "none";   
-var menu_center = document.getElementById("menu-center");
-menu_center.style.display = "none"; 
-var form_perfil = document.getElementById("form-profile");
-form_perfil.style.display = "none"; 
-const menu = document.getElementById("menu_top");
-menu.style.display = "none"; 
 
 var user_UID = sessionStorage.userUid;
 var User;
@@ -24,25 +15,30 @@ showBody();
 
 
 function showBody(){ 
+    var menu_center = document.getElementById("menu-center");
+    var form_perfil = document.getElementById("form-profile");
+    var dados = document.getElementById("profile");
+    var status_profile = sessionStorage.profile_atualizar;
     if(status_profile == "true"){
         status_profile =true;
     }else{
         status_profile =false;
     }
-    
     if(!status_profile){
         dados.style.display = "inline";   
         menu_center.style.display = "inline"; 
+        form_perfil.style.display = "none"; 
     }else{
+        dados.style.display = "none";   
+        menu_center.style.display = "none"; 
         form_perfil.style.display = "inline"; 
     }    
 }
 
 function showMenuProfessor(){
-    document.getElementById("nameUser").innerHTML = user.name;
-    document.getElementById("score_total").innerHTML = user.score +" points";
-    sessionStorage.setItem("nameUser", user.name);
-    sessionStorage.setItem("score_total",user.score);
+    const menu = document.getElementById("menu_top");
+    document.getElementById("nameUser").innerHTML = User.name;
+    document.getElementById("score_total").innerHTML = User.score_total +" points";
     const profiles = user.profiles;
     sessionStorage.setItem("admin",profiles.admin);
     sessionStorage.setItem("professor",profiles.admin);
