@@ -35,7 +35,7 @@ function showBody(){
 function showMenuProfessor(){
     const menu = document.getElementById("menu_top");
     document.getElementById("nameUser").innerHTML = User.name;
-    document.getElementById("score_total").innerHTML = User.score_total +" points";
+    document.getElementById("score_total").innerHTML = User.score +" points";
     const profiles = User.profiles;
     sessionStorage.setItem("admin",profiles.admin);
     sessionStorage.setItem("professor",profiles.professor);
