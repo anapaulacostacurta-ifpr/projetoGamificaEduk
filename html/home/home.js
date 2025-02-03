@@ -110,7 +110,7 @@ function logout() {
 }
 
 function getCurrentUser(user_UID){
-    User = sessionStorage.User;
+    User = getUser();
     if (User === undefined) {
         userService.findByUid(user_UID).then (user=>{
             if(user === undefined){
@@ -123,8 +123,9 @@ function getCurrentUser(user_UID){
         }).catch(error => {
             console.log(error);
         });
+    }else{
+        return User;
     }
-    return getUser();
 }
 
 function setUser(User){
