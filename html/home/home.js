@@ -6,7 +6,7 @@ firebase.auth().onAuthStateChanged( (user) => {
 })
 
 var user_UID = sessionStorage.userUid;
-var User;
+var User = sessionStorage.User;
 if (User === undefined){
     getCurrentUser(user_UID);
 }
