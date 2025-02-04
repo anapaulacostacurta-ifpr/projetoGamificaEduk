@@ -101,7 +101,7 @@ function logout() {
 }
 
 async function getCurrentUser(user_UID){
-    if (UsessionStorage.User === undefined) {
+    if (sessionStorage.User === undefined) {
         userService.findByUid(user_UID).then (user=>{
             if(user === undefined){
                 sessionStorage.setItem("profile_atualizar",true);
