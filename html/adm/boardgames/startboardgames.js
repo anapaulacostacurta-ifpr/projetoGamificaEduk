@@ -1,6 +1,6 @@
 var user_UID = sessionStorage.userUid;
-var score_total = sessionStorage.score_total + " points";
-var nameUser = sessionStorage.nameUser;
+var User = getUser();
+
 var lista_boardgames = document.getElementById("lista_boardgames");
 var pesquisa_boardgames = document.getElementById("startboardgame-form");
 var ativar_boardgames = document.getElementById("ativarboardgame-form");
@@ -98,4 +98,19 @@ function getBoardgames(){
   let boardgames;
   boardgames = JSON.parse(boardgamesString);
   return boardgames;
+}
+
+function getUser(){
+  let UserString = sessionStorage.User;
+  let User = JSON.parse(UserString);
+  console.log(User);
+  return User;
+}
+
+function getProfile(){
+  if(User === undefined){
+      User = getUser();
+  }
+  document.getElementById("nameUser").innerHTML = User.name;
+  document.getElementById("score_total").innerHTML = User.score +" points";
 }
