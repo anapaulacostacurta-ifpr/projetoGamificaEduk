@@ -6,7 +6,8 @@ firebase.auth().onAuthStateChanged( (user) => {
 })
 
 var user_UID = sessionStorage.userUid;
-var User = getCurrentUser(user_UID).then(showBody());
+var User = getCurrentUser(user_UID)
+showBody();
 
 function showBody(){ 
     var menu_center = document.getElementById("menu-center");
