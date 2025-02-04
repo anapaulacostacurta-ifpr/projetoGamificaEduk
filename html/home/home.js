@@ -6,7 +6,8 @@ firebase.auth().onAuthStateChanged( (user) => {
 });
 
 var user_UID = sessionStorage.userUid;
-var User = getCurrentUser(user_UID).then(showBody);
+var User = getCurrentUser(user_UID)
+showBody;
 
 function showBody(){ 
     var status_profile = sessionStorage.profile_atualizar;
@@ -120,9 +121,9 @@ function logout() {
     })
 }
 
-async function getCurrentUser(user_UID){
+function getCurrentUser(user_UID){
     if (sessionStorage.User === undefined) {
-        return await userService.findByUid(user_UID).then (user=>{
+        return userService.findByUid(user_UID).then (user=>{
             if(user === undefined){
                 sessionStorage.setItem("profile_atualizar",true);
             }else{
