@@ -30,7 +30,7 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
             let level = '<td><span>'+boardgame.level+'</span></td>';
             let round_data = '<td><span>'+boardgame.round_date+'</span></td>';
             let state = '<td><span>'+boardgame.state+'</span></td>';
-            let radio = '<input type="radio" class="form-check-activate" id="radio_id" name="radio_id" value="'+option+'" checked">';
+            let radio = '<td><input type="radio" class="form-check-activate" id="radio_id" name="radio_id" value="'+option+'" checked"></td>';
             linhas = linhas + '<tr>'+radio+boardgame_id+level+round_data+state+'</tr>';
         })
         let tbody = '<tbody>'+linhas+'</tbody>';
