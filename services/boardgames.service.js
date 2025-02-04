@@ -10,7 +10,7 @@ const boardgamesService = {
         }
 
         var boardgames = new Array();
-        snapshot.forEach(doc => {
+        querySnapshot.forEach(doc => {
             var boardgameid = doc.id;
             var boarddados = doc.data();
             var boardgame = {boardgameid,boarddados};
@@ -40,7 +40,7 @@ const boardgamesService = {
                 throw new Error("Tabuleiro não encontrador:" + boardgameid);
             }
             var boardgames = new Array();
-            snapshot.forEach(doc => {
+            querySnapshot.forEach(doc => {
                 var boardgameid = doc.id;
                 var boarddados = doc.data();
                 var boardgame = {boardgameid,boarddados};
@@ -63,7 +63,7 @@ const boardgamesService = {
             throw new Error("Tabuleiro não encontrador:" + boardgameid);
         }
         var boardgames = new Array();
-        snapshot.forEach(doc => {
+        querySnapshot.forEach(doc => {
             var boardgameid = doc.id;
             var boarddados = doc.data();
             var boardgame = {boardgameid,boarddados};
@@ -85,12 +85,12 @@ const boardgamesService = {
         throw new Error("Tabuleiro não encontrador:" + boardgameid);
     }
     var boardgames = new Array();
-        snapshot.forEach(doc => {
+    querySnapshot.forEach(doc => {
             var boardgameid = doc.id;
             var boarddados = doc.data();
             var boardgame = {boardgameid,boarddados};
             boardgames.push(boardgame);
-        });
+    });
     console.log(boardgame);
     return boardgame;
 },
