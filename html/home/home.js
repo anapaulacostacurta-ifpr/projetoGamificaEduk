@@ -10,7 +10,7 @@ var User = getCurrentUser(user_UID);
 showBody();
 User = getCurrentUser(user_UID);
 showMenuProfessor(); 
-if(User === undefined){
+if(sessionStorage.User === undefined){
     window.location.reload(false);
 }
 
