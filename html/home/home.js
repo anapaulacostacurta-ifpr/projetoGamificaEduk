@@ -7,12 +7,12 @@ firebase.auth().onAuthStateChanged( (user) => {
 
 var user_UID = sessionStorage.userUid;
 var User = getCurrentUser(user_UID)
+do{
+    setTimeout(User = getUser(), 200000);
+}while (User === undefined)
 showBody();
 
 function showBody(){ 
-    var menu_center = document.getElementById("menu-center");
-    var form_perfil = document.getElementById("form-profile");
-    var dados = document.getElementById("profile");
     var status_profile = sessionStorage.profile_atualizar;
     if(status_profile == "true"){
         status_profile =true;
@@ -20,17 +20,34 @@ function showBody(){
         status_profile =false;
     }
     if(!status_profile){
-        dados.style.display = "inline";   
-        menu_center.style.display = "inline"; 
-        form_perfil.style.display = "none"; 
+       getMenuCenter();
     }else{
-        dados.style.display = "none";   
-        menu_center.style.display = "none"; 
-        form_perfil.style.display = "inline"; 
+        getFormAtualizar();
     } 
+}
 
+function getMenuCenter(){
+    var menu_center = document.getElementById("menu-center");
+    var dados = document.getElementById("profile");
+    var form_perfil = document.getElementById("form-profile");
+    dados.style.display = "inline";   
+    menu_center.style.display = "inline"; 
+    form_perfil.style.display = "none"; 
+}
+
+function getFormAtualizar(){
+    var form_perfil = document.getElementById("form-profile");
+    dados.style.display = "none";   
+    menu_center.style.display = "none"; 
+    form_perfil.style.display = "inline"; 
+}
+
+function getProfile(){
     document.getElementById("nameUser").innerHTML = User.name;
     document.getElementById("score_total").innerHTML = User.score +" points";
+}
+
+function getMenuTop(){
     var professor = User.profileUser.professor;
     if(professor === undefined){
         professor = false;
@@ -45,9 +62,8 @@ function showBody(){
         document.getElementById("menu_top").style.display = "none";    
     }else{
         document.getElementById("menu_top").style.display = "inline"; 
-    }    
+    }
 }
-
 
 function jogar() {
     window.location.href = "../play/play.html";
