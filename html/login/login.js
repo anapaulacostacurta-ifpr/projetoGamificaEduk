@@ -10,7 +10,9 @@ function login() {
         form.email().value, form.password().value
     ).then((userCredential) => {
         user_UID = userCredential.user.auth.currentUser.uid;
+        user = userCredential.user.auth.currentUser;
         sessionStorage.setItem("userUid", user_UID);
+        sessionStorage.setItem("user", user_UID);
         console.log("Usuário logou:" + userCredential.user.uid);
         getCurrentUser(user_UID)
     }).catch(error => {
