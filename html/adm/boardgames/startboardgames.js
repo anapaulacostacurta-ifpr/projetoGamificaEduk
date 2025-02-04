@@ -56,6 +56,7 @@ function logout() {
 }
 
 function voltar(){
+  sessionStorage.removeItem('boardgames');
   window.location.href = "../../home/home.html";
 }
 
