@@ -112,7 +112,6 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
         }
       }
     });
-  }
   return existe;
 }
 
