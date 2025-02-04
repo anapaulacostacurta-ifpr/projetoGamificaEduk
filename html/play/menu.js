@@ -5,8 +5,8 @@ firebase.auth().onAuthStateChanged( (user) => {
   }
 })
 var user_UID = sessionStorage.userUid;
-var score_total = sessionStorage.score_total + " points";
-var nameUser = sessionStorage.nameUser;
+var User = getUser();
+getProfile();
 
 const boardgame = getBoardgame();
 
@@ -16,11 +16,6 @@ scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.score_round;
 
 const level = document.getElementById("level");
 level.innerHTML = "Nível: "+sessionStorage.level;
-
-//Ranking Geral
-const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = score_total
-
 
 
 function logout() {
@@ -118,4 +113,19 @@ function extra(){
 function quizfinal(){
   sessionStorage.setItem("question_category","quiz_final");
   window.location.href = "../question/token/token.html";
+}
+
+function getUser(){
+  let UserString = sessionStorage.User;
+  let User = JSON.parse(UserString);
+  console.log(User);
+  return User;
+}
+
+function getProfile(){
+  if(User === undefined){
+      User = getUser();
+  }
+  document.getElementById("nameUser").innerHTML = User.name;
+  document.getElementById("score_total").innerHTML = User.score +" points";
 }
