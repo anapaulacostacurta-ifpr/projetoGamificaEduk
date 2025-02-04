@@ -11,9 +11,6 @@ var User = getUser();
 showBody();
 
 function showBody(){ 
-    if(User === undefined){
-        User = getUser();
-    }
     var status_profile = sessionStorage.profile_atualizar;
     if(status_profile == "true"){
         status_profile =true;
