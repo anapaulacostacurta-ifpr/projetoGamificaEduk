@@ -13,45 +13,12 @@ function login() {
         user = userCredential.user.auth.currentUser;
         sessionStorage.setItem("userUid", user_UID);
         sessionStorage.setItem("user", user_UID);
+        window.location.href = "../home/home.html";
         console.log("Usuário logou:" + userCredential.user.uid);
         getCurrentUser(user_UID)
     }).catch(error => {
         console.log(getErrorMessage(error));
     });
-}
-
-
-function getCurrentUser(user_UID){
-    if (sessionStorage.User === undefined) {
-        return userService.findByUid(user_UID).then (user=>{
-            if(user === undefined){
-                sessionStorage.setItem("profile_atualizar",true);
-            }else{
-                sessionStorage.setItem("profile_atualizar",false);
-                setUser(user);
-                window.location.href = "../home/home.html";
-            }
-        }).catch(error => {
-            console.log(error);
-        });
-    }else{
-        window.location.href = "../home/home.html";
-    }
-}
-
-function setUser(User){
-    let UserString = JSON.stringify(User);
-    sessionStorage.setItem('User', UserString);
-}
-  
-function getUser(){
-    let userString = sessionStorage.User;
-    let user;
-    if(!(userString === undefined)){
-        user = JSON.parse(userString);
-    }
-    console.log(user);
-    return user;
 }
 
 function register() {

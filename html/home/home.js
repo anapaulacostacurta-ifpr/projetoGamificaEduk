@@ -10,6 +10,9 @@ var User = getCurrentUser(user_UID)
 showBody;
 
 function showBody(){ 
+    if(User === undefined){
+        User = getUser();
+    }
     var status_profile = sessionStorage.profile_atualizar;
     if(status_profile == "true"){
         status_profile =true;
@@ -26,6 +29,9 @@ function showBody(){
 }
 
 function getMenuCenter(){
+    if(User === undefined){
+        User = getUser();
+    }
     var menu_center = document.getElementById("menu-center");
     var dados = document.getElementById("profile");
     var form_perfil = document.getElementById("form-profile");
@@ -35,6 +41,9 @@ function getMenuCenter(){
 }
 
 function getFormAtualizar(){
+    if(User === undefined){
+        User = getUser();
+    }
     var form_perfil = document.getElementById("form-profile");
     dados.style.display = "none";   
     menu_center.style.display = "none"; 
