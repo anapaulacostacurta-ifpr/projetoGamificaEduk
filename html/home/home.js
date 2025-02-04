@@ -6,11 +6,7 @@ firebase.auth().onAuthStateChanged( (user) => {
 })
 
 var user_UID = sessionStorage.userUid;
-var User = getCurrentUser(user_UID);
-showBody();
-showMenuProfessor(); 
-
-
+var User = getCurrentUser(user_UID).then(showBody());
 
 function showBody(){ 
     User = getUser();
@@ -33,9 +29,6 @@ function showBody(){
         form_perfil.style.display = "inline"; 
     } 
 
-}
-
-function showMenuProfessor(){
     document.getElementById("nameUser").innerHTML = sessionStorage.User.name;
     document.getElementById("score_total").innerHTML = sessionStorage.User.score +" points";
     var professor = sessionStorage.professor;
