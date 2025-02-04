@@ -8,7 +8,6 @@ firebase.auth().onAuthStateChanged( (user) => {
 var user_UID = sessionStorage.userUid;
 var User = getCurrentUser(user_UID);
 showBody();
-User = getCurrentUser(user_UID);
 showMenuProfessor(); 
 if(sessionStorage.User === undefined){
     window.location.reload(true);
