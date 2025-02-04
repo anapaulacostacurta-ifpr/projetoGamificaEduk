@@ -13,6 +13,7 @@ showMenuProfessor();
 
 
 function showBody(){ 
+    User = getUser();
     var menu_center = document.getElementById("menu-center");
     var form_perfil = document.getElementById("form-profile");
     var dados = document.getElementById("profile");
