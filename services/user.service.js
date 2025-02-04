@@ -1,6 +1,6 @@
 const userService = {
-    findByUid: uid => {
-        return firebase.firestore()
+    findByUid: async uid => {
+        return await firebase.firestore()
             .collection("users")
             .doc(uid)
             .get()
