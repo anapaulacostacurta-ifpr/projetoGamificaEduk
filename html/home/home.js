@@ -9,9 +9,7 @@ var user_UID = sessionStorage.userUid;
 var User = getCurrentUser(user_UID);
 showBody();
 showMenuProfessor(); 
-if(sessionStorage.User === undefined){
-    window.location.reload(true);
-}
+
 
 
 function showBody(){ 
@@ -32,10 +30,12 @@ function showBody(){
         dados.style.display = "none";   
         menu_center.style.display = "none"; 
         form_perfil.style.display = "inline"; 
-    }    
+    } 
+
 }
 
 function showMenuProfessor(){
+    User = getUser();
     const menu = document.getElementById("menu_top");
     document.getElementById("nameUser").innerHTML = User.name;
     document.getElementById("score_total").innerHTML = User.score +" points";
