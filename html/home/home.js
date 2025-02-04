@@ -9,7 +9,6 @@ var user_UID = sessionStorage.userUid;
 var User = getCurrentUser(user_UID).then(showBody());
 
 function showBody(){ 
-    User = getUser();
     var menu_center = document.getElementById("menu-center");
     var form_perfil = document.getElementById("form-profile");
     var dados = document.getElementById("profile");
@@ -31,7 +30,7 @@ function showBody(){
 
     document.getElementById("nameUser").innerHTML = sessionStorage.User.name;
     document.getElementById("score_total").innerHTML = sessionStorage.User.score +" points";
-    var professor = sessionStorage.professor;
+    var professor = sessionStorage.sessionStorage.User.profileUser.professor;
     if(professor === undefined){
         professor = false;
     }else{
