@@ -46,7 +46,13 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     host,
     state,  
   };
-  var existe = getBoardgamebyID(boardgameid,round_date, host, level);
+
+  var existe;
+  if (boardgames === undefined){
+    getBoardgames();
+  }
+  existe = getBoardgamebyID(boardgameid,round_date, host, level);
+  
   if(existe){
     msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado. Limpe a pagina e digite os dados novamente!"; 
     alert_error.classList.add("show");
@@ -58,7 +64,12 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     alert_sucesso.classList.add("show");
     return[];
   }
-});
+}).catch (error =>{
+    msg_error.innerHTML= error; 
+    alert_error.classList.add("show");
+    return[];
+  }
+);
 
 function recarregarAPagina(){
   window.location.reload();
@@ -86,8 +97,8 @@ function saveBoardgame(newboardgame){
 function getBoardgamebyID(boardgameid,round_date, host, level){
   var existe = false;
   if(boardgames === undefined){
-    getBoardgames();
-  }else{
+    throw new Error("Funcionalidade indisponível. Tente novamente!");
+  }
     boardgames.forEach(boardgame =>{
       if(boardgame.boardgameid == boardgameid){
         if(boardgame.round_date == round_date){
