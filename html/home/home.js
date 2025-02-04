@@ -6,7 +6,7 @@ firebase.auth().onAuthStateChanged( (user) => {
 });
 
 var user_UID = sessionStorage.userUid;
-var User = await getCurrentUser(user_UID).then (showBody);
+var User = getCurrentUser(user_UID).then(showBody);
 
 function showBody(){ 
     var status_profile = sessionStorage.profile_atualizar;
