@@ -10,7 +10,9 @@ var User = getCurrentUser(user_UID);
 showBody();
 User = getCurrentUser(user_UID);
 showMenuProfessor(); 
-
+if(User === undefined){
+    window.location.reload(false);
+}
 
 
 function showBody(){ 
