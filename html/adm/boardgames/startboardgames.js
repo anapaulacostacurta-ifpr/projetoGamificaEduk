@@ -25,16 +25,16 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
   let linhas = ''; 
   boardgamesService.getBoardGameByID(boardgameid, round_date, professor, level, state).then(boardgames => {
     setBoardGames(boardgames);
-    boardgames.forEach(boardGame => {
-            var boardgameid = boardGame.id;
-            var boardgame = boardGame.dados;
+    boardgames.forEach(boardgame => {
+            var boardgame_id = boardGame.id;
+            var boardgame_dados = boardGame.dados;
             var option = boardgameid;
-            let boardgame_id = '<td><span>'+'<label class="form-check-label" for="'+boardgame.boardgameid+'">'+boardgame.boardgameid+'</span></label></td>';
-            let level = '<td><span>'+boardgame.level+'</span></td>';
-            let round_data = '<td><span>'+boardgame.round_date+'</span></td>';
-            let state = '<td><span>'+boardgame.state+'</span></td>';
+            let round_id = '<td><span>'+'<label class="form-check-label" for="'+boardgame_dados.boardgameid+'">'+boardgame_dados.boardgameid+'</span></label></td>';
+            let level = '<td><span>'+boardgame_dados.level+'</span></td>';
+            let round_data = '<td><span>'+boardgame_dados.round_date+'</span></td>';
+            let state = '<td><span>'+boardgame_dados.state+'</span></td>';
             let radio = '<td><input type="radio" class="form-check-activate" id="radio_id" name="radio_id" value="'+option+'" checked"></td>';
-            linhas = linhas + '<tr>'+radio+boardgame_id+level+round_data+state+'</tr>';
+            linhas = linhas + '<tr>'+radio+round_id+level+round_data+state+'</tr>';
         })
         let tbody = '<tbody>'+linhas+'</tbody>';
         let thead = '<thead><tr><th></th><th>BoardgameID</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
