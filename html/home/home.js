@@ -36,14 +36,8 @@ function showBody(){
 }
 
 function showMenuProfessor(){
-    User = getUser();
-    const menu = document.getElementById("menu_top");
-    document.getElementById("nameUser").innerHTML = User.name;
-    document.getElementById("score_total").innerHTML = User.score +" points";
-    const profiles = User.profiles;
-    sessionStorage.setItem("admin",profiles.admin);
-    sessionStorage.setItem("professor",profiles.professor);
-    sessionStorage.setItem("aluno",profiles.aluno);
+    document.getElementById("nameUser").innerHTML = sessionStorage.User.name;
+    document.getElementById("score_total").innerHTML = sessionStorage.User.score +" points";
     var professor = sessionStorage.professor;
     if(professor === undefined){
         professor = false;
@@ -55,9 +49,9 @@ function showMenuProfessor(){
         }
     }
     if(!professor){
-        menu.style.display = "none";    
+        document.getElementById("menu_top").style.display = "none";    
     }else{
-        menu.style.display = "inline"; 
+        document.getElementById("menu_top").style.display = "inline"; 
     }    
 }
 
