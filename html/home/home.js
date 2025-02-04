@@ -3,7 +3,7 @@ firebase.auth().onAuthStateChanged( (user) => {
         sessionStorage.clear;
         window.location.href = "../login/login.html";
     }
-})
+});
 
 var user_UID = sessionStorage.userUid;
 getCurrentUser(user_UID);
@@ -126,6 +126,7 @@ function getCurrentUser(user_UID){
         }).catch(error => {
             console.log(error);
         });
+    }
 }
 
 function setUser(User){
