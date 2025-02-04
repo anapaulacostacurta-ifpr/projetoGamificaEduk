@@ -1,15 +1,6 @@
-function getUser(){
-  let UserString = sessionStorage.User;
-  let User = JSON.parse(UserString);
-  console.log(User);
-  return User;
-}
-
 var User = getUser();
-
 var user_UID = sessionStorage.userUid;
-var score_total = User.score + " points";
-var nameUser = User.name;
+
 
 var boardgames = getBoardgames();
 // Verificar se o usuário tem acesso a funcionalidade
@@ -144,3 +135,18 @@ function isAcessoBoargames(){
   }
 }
   
+
+function getUser(){
+  let UserString = sessionStorage.User;
+  let User = JSON.parse(UserString);
+  console.log(User);
+  return User;
+}
+
+function getProfile(){
+  if(User === undefined){
+      User = getUser();
+  }
+  document.getElementById("nameUser").innerHTML = User.name;
+  document.getElementById("score_total").innerHTML = User.score +" points";
+}
