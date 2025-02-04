@@ -12,12 +12,12 @@ function login() {
         user_UID = userCredential.user.auth.currentUser.uid;
         sessionStorage.setItem("userUid", user_UID);
         console.log("Usuário logou:" + userCredential.user.uid);
-        window.location.href = "../home/home.html";
+        getCurrentUser(user_UID)
     }).catch(error => {
         console.log(getErrorMessage(error));
     });
-    getCurrentUser(user_UID);
 }
+
 
 function getCurrentUser(user_UID){
     if (sessionStorage.User === undefined) {
@@ -27,13 +27,13 @@ function getCurrentUser(user_UID){
             }else{
                 sessionStorage.setItem("profile_atualizar",false);
                 setUser(user);
-                getUser();
+                window.location.href = "../home/home.html";
             }
         }).catch(error => {
             console.log(error);
         });
     }else{
-        return getUser();
+        window.location.href = "../home/home.html";
     }
 }
 
