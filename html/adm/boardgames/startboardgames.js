@@ -26,9 +26,9 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
   boardgamesService.getBoardGameByID(boardgameid, round_date, professor, level, state).then(boardgames => {
     setBoardGames(boardgames);
     boardgames.forEach(boardgame => {
-            var boardgame_id = boardGame.id;
-            var boardgame_dados = boardGame.dados;
-            var option = boardgameid;
+            var boardgame_id = boardgame.id;
+            var boardgame_dados = boardgame.dados;
+            var option = boardgame_id;
             let round_id = '<td><span>'+'<label class="form-check-label" for="'+boardgame_dados.boardgameid+'">'+boardgame_dados.boardgameid+'</span></label></td>';
             let level = '<td><span>'+boardgame_dados.level+'</span></td>';
             let round_data = '<td><span>'+boardgame_dados.round_date+'</span></td>';
