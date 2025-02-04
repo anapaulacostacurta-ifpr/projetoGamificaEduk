@@ -28,16 +28,16 @@ const boardgamesService = {
                 return doc.data();
             });
     },
-    getBoardGameByID: async (boardgameid) => {
+    getBoardGameByRodadaID: async (rodadaid) => {
             const querySnapshot = await firebase.firestore().collection("boardgames")
-            .where('boardgameid','==',boardgameid)
+            .where('boardgameid','==',rodadaid)
             .where('state','==','started')
             .where('round_date','==',(new Date()).toLocaleDateString('pt-BR'))
             .get();
             console.log(querySnapshot);
 
             if(querySnapshot.empty){
-                throw new Error("Tabuleiro não encontrador:" + boardgameid);
+                throw new Error("Tabuleiro não encontrador:" + rodadaid);
             }
             var boardgames = new Array();
             querySnapshot.forEach(doc => {
@@ -49,7 +49,7 @@ const boardgamesService = {
             console.log(boardgames);
             return boardgames;
     },
-    getBoardGameByID: async (boardgameid,round_date, host, level,state) => {
+    getBoardGameByDados: async (boardgameid,round_date, host, level,state) => {
         const querySnapshot = await firebase.firestore().collection("boardgames")
         .where('boardgameid','==',boardgameid)
         .where('round_date','==',round_date)

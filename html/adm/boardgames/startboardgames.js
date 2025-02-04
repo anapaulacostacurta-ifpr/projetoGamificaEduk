@@ -26,7 +26,7 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
   const state = "waiting"; // "waiting", "started", "finished"
 
   let linhas = ''; 
-  boardgamesService.getBoardGameByID(boardgameid, round_date, professor, level, state).then(boardgames => {
+  boardgamesService.getBoardGameByDados(boardgameid, round_date, professor, level, state).then(boardgames => {
     setBoardGames(boardgames);
     boardgames.forEach(boardgame => {
             var boardgame_id = boardgame.id;

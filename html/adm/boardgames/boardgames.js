@@ -86,7 +86,7 @@ function saveBoardgame(newboardgame){
   setBoardGames();
 }
 
-function getBoardgamebyID(boardgameid,round_date, host, level){
+function getBoardgameRounds(boardgameid,round_date, host, level){
   var existe = "não";
   if(boardgames === undefined){
     existe = "indisponível";

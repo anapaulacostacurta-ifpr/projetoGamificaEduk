@@ -16,7 +16,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   // Captura os dados do formulário
   const rodada_id = document.getElementById("boardgameid").value;
   
-  boardgamesService.getBoardGameByID(rodada_id).then((boardgames) => {
+  boardgamesService.getBoardGameByRodadaID(rodada_id).then((boardgames) => {
     boardgames.forEach(boardgame => {
         let boardgameid = boardgame.dados.boardgameid;
         if(boardgameid == rodada_id){
