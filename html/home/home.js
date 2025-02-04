@@ -131,18 +131,14 @@ function getCurrentUser(user_UID){
 function setUser(User){
     let UserString = JSON.stringify(User);
     sessionStorage.setItem('User', UserString);
-  }
+}
   
 function getUser(){
-    let UserString = sessionStorage.User;
-    let User;
-    if(!(UserString === undefined)){
-        User = JSON.parse(UserString);
+    let userString = sessionStorage.User;
+    let user;
+    if(!(userString === undefined)){
+        User = JSON.parse(userString);
     }
-    console.log(User);
-    return User;
+    console.log(user);
+    return user;
 }
-
-
-
-
