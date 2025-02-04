@@ -43,24 +43,24 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
     getBoardgames();
   }
   existe = getBoardgamebyID(boardgameid,round_date, host, level);
-  
-  if(existe){
-    msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado. Limpe a pagina e digite os dados novamente!"; 
-    alert_error.classList.add("show");
-    return[];
+  if(existe === "indisponível"){
+      msg_error.innerHTML= "Funcionalidade indisponível. Tente novamente!"; 
+      alert_error.classList.add("show");
+      return[];
   }else{
-    //Inserir
-    saveBoardgame(newboardgame);
-    msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid+"!";
-    alert_sucesso.classList.add("show");
-    return[];
+    if(existe =="sim"){
+      msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado. Limpe a pagina e digite os dados novamente!"; 
+      alert_error.classList.add("show");
+      return[];
+    }else{
+      //Inserir
+      saveBoardgame(newboardgame);
+      msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid+"!";
+      alert_sucesso.classList.add("show");
+      return[];
+    }
   }
-}).catch (error =>{
-    msg_error.innerHTML= error; 
-    alert_error.classList.add("show");
-    return[];
-  }
-);
+})
 
 function recarregarAPagina(){
   window.location.reload();
@@ -86,9 +86,9 @@ function saveBoardgame(newboardgame){
 }
 
 function getBoardgamebyID(boardgameid,round_date, host, level){
-  var existe = false;
+  var existe;
   if(boardgames === undefined){
-    throw new Error("Funcionalidade indisponível. Tente novamente!");
+    existe = "indisponível";
   }
     boardgames.forEach(boardgame =>{
       if(boardgame.boardgameid == boardgameid){
@@ -96,14 +96,14 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
           if(boardgame.host == host){
             if(boardgame.level == level){
               if(boardgame.state !== "finished"){
-                existe = true;
+                existe = "true";
               }
             }
           }
         }
       }
     });
-  return existe;
+  return "não";
 }
 
 function setBoardGames(){
