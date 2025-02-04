@@ -1,5 +1,6 @@
 var User = getUser();
 var user_UID = sessionStorage.userUid;
+getProfile();
 
 
 var boardgames = getBoardgames();

@@ -1,5 +1,6 @@
 var user_UID = sessionStorage.userUid;
 var User = getUser();
+getProfile();
 
 var lista_boardgames = document.getElementById("lista_boardgames");
 var pesquisa_boardgames = document.getElementById("startboardgame-form");
