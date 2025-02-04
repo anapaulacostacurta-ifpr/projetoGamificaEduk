@@ -101,7 +101,7 @@ function logout() {
 
 async function getCurrentUser(user_UID){
     if (sessionStorage.User === undefined) {
-        userService.findByUid(user_UID).then (user=>{
+        return await userService.findByUid(user_UID).then (user=>{
             if(user === undefined){
                 sessionStorage.setItem("profile_atualizar",true);
             }else{
@@ -111,8 +111,9 @@ async function getCurrentUser(user_UID){
         }).catch(error => {
             console.log(error);
         });
+    }else{
+        return getUser();
     }
-    return await getUser();
 }
 
 function setUser(User){
