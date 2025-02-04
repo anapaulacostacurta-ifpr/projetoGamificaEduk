@@ -3,7 +3,7 @@ var score_total = sessionStorage.score_total + " points";
 var nameUser = sessionStorage.nameUser;
 var lista_boardgames = document.getElementById("lista_boardgames");
 var pesquisa_boardgames = document.getElementById("startboardgame-form");
-
+lista_boardgames.style.display = "none";
 
 firebase.auth().onAuthStateChanged( (user) => {
   if (!user) {
