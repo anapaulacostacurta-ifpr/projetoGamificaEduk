@@ -18,10 +18,12 @@ function showBody(){
         status_profile =false;
     }
     if(!status_profile){
-       getMenuCenter();
+        getMenuCenter();
+        getProfile();
     }else{
         getFormAtualizar();
     } 
+    getMenuTop();
 }
 
 function getMenuCenter(){
