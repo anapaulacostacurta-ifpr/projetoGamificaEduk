@@ -11,9 +11,9 @@ const boardgamesService = {
 
         var boardgames = new Array();
         querySnapshot.forEach(doc => {
-            var boardgameid = doc.id;
-            var boarddados = doc.data();
-            var boardgame = {boardgameid,boarddados};
+            var id = doc.id;
+            var dados = doc.data();
+            var boardgame = {id,dados};
             boardgames.push(boardgame);
         });
         console.log(boardgames);
@@ -106,11 +106,11 @@ const boardgamesService = {
             .doc()
             .set(boardgames)
     },
-    update: boardgames => {
+    update: (id,boardgame)  => {
         return firebase.firestore()
             .collection("boardgames")
-            .doc(boardgameid)
-            .update(boardgames);
+            .doc(id)
+            .update(boardgame);
     },
     addPlayers:  (boardgameid, players) => {
         return firebase.firestore()

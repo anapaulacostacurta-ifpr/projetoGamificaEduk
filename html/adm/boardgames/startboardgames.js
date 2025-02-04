@@ -24,8 +24,11 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
 
   let linhas = ''; 
   boardgamesService.getBoardGameByID(boardgameid, round_date, professor, level, state).then(boardgames => {
-    boardgames.forEach(boardgame => {
-            var option = boardgame.boardgameid+";"+boardgame.level+";"+boardgame.round_date+";"+professor;
+    setBoardGames(boardgames);
+    boardgames.forEach(boardGame => {
+            var boardgameid = boardGame.id;
+            var boardgame = boardGame.dados;
+            var option = boardgameid;
             let boardgame_id = '<td><span>'+'<label class="form-check-label" for="'+boardgame.boardgameid+'">'+boardgame.boardgameid+'</span></label></td>';
             let level = '<td><span>'+boardgame.level+'</span></td>';
             let round_data = '<td><span>'+boardgame.round_date+'</span></td>';
@@ -59,10 +62,24 @@ function voltar(){
 document.getElementById("ativarboardgame-form").addEventListener("submit", function(event) {
   event.preventDefault();
     let userselect = document.querySelector('input[name="radio_id"]:checked').value;
-    const option = userselect.split(";");
-    let boardgame_id = option[0];
-    let level = option[1];
-    let round_data = option[2];
-    let professor = option[3];
-    
+        var boardgames = {state: "started"};
+        boardgamesService.update(userselect, boardgames);
 });
+
+function setBoardGames(){
+  boardgamesService.findAll().then(boardgames =>{
+      let boardgamesString = JSON.stringify(boardgames);
+      sessionStorage.setItem('boardgames', boardgamesString);
+    });
+}
+
+function getBoardgames(){
+  let boardgamesString = sessionStorage.boardgames;
+  let boardgames;
+  if (boardgamesString === undefined){
+    setBoardGames();
+  }else{
+    boardgames = JSON.parse(boardgamesString);
+  }
+  return boardgames;
+}
