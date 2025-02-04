@@ -10,12 +10,13 @@ function login() {
     ).then((userCredential) => {
         var user_UID = userCredential.user.auth.currentUser.uid;
         sessionStorage.setItem("userUid", user_UID);
-        getCurrentUser(user_UID);
+   
         console.log("Usuário logou:" + userCredential.user.uid);
         window.location.href = "../home/home.html";
     }).catch(error => {
         console.log(getErrorMessage(error));
     });
+    getCurrentUser(user_UID);
 }
 
 function getCurrentUser(user_UID){
