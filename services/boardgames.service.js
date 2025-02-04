@@ -41,8 +41,8 @@ const boardgamesService = {
             }
             var boardgames = new Array();
             querySnapshot.forEach(doc => {
-                var boardgameid = doc.id;
-                var boarddados = doc.data();
+                var id = doc.id;
+                var dados = doc.data();
                 var boardgame = {id,dados};
                 boardgames.push(boardgame);
             });
@@ -64,8 +64,8 @@ const boardgamesService = {
         }
         var boardgames = new Array();
         querySnapshot.forEach(doc => {
-            var boardgameid = doc.id;
-            var boarddados = doc.data();
+            var id = doc.id;
+            var dados = doc.data();
             var boardgame = {id,dados};
             boardgames.push(boardgame);
         });
@@ -86,8 +86,8 @@ const boardgamesService = {
     }
     var boardgames = new Array();
     querySnapshot.forEach(doc => {
-            var boardgameid = doc.id;
-            var boarddados = doc.data();
+            var id = doc.id;
+            var dados = doc.data();
             var boardgame = {id,dados};
             boardgames.push(boardgame);
     });
