@@ -29,9 +29,9 @@ function showBody(){
         form_perfil.style.display = "inline"; 
     } 
 
-    document.getElementById("nameUser").innerHTML = sessionStorage.User.name;
-    document.getElementById("score_total").innerHTML = sessionStorage.User.score +" points";
-    var professor = sessionStorage.User.profileUser.professor;
+    document.getElementById("nameUser").innerHTML = User.name;
+    document.getElementById("score_total").innerHTML = User.score +" points";
+    var professor = User.profileUser.professor;
     if(professor === undefined){
         professor = false;
     }else{
