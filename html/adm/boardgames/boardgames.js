@@ -44,7 +44,7 @@ document.getElementById("boardgame-form").addEventListener("submit", function(ev
   }
   existe = getBoardgamebyID(boardgameid,round_date, host, level);
   if(existe === "indisponível"){
-      msg_error.innerHTML= "Funcionalidade indisponível. Tente novamente!"; 
+      msg_error.innerHTML= "Funcionalidade indisponível. Limpe a página e Tente novamente!"; 
       alert_error.classList.add("show");
       return[];
   }else{
