@@ -46,8 +46,8 @@ const boardgamesService = {
                 var boardgame = {boardgameid,boarddados};
                 boardgames.push(boardgame);
             });
-            console.log(boardgame);
-            return boardgame;
+            console.log(boardgames);
+            return boardgames;
     },
     getBoardGameByID: async (boardgameid,round_date, host, level,state) => {
         const querySnapshot = await firebase.firestore().collection("boardgames")
@@ -69,8 +69,8 @@ const boardgamesService = {
             var boardgame = {boardgameid,boarddados};
             boardgames.push(boardgame);
         });
-        console.log(boardgame);
-        return boardgame;
+        console.log(boardgames);
+        return boardgames;
 },
     getBoardgameRounds: async (boardgameid,round_date, host, level) => {
     const querySnapshot = await firebase.firestore().collection("boardgames")
@@ -91,8 +91,8 @@ const boardgamesService = {
             var boardgame = {boardgameid,boarddados};
             boardgames.push(boardgame);
     });
-    console.log(boardgame);
-    return boardgame;
+    console.log(boardgames);
+    return boardgams;
 },
     remove: boardgames => {
         return firebase.firestore()
