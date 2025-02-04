@@ -1,4 +1,6 @@
 var User = getCurrentUser(user_UID);
+window.location.href = "../home/home.html";
+
 
 function getCurrentUser(user_UID){
     if (sessionStorage.User === undefined) {
