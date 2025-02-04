@@ -87,7 +87,7 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
   var existe = false;
   if(boardgames === undefined){
     getBoardgames();
-  }
+  }else{
     boardgames.forEach(boardgame =>{
       if(boardgame.boardgameid == boardgameid){
         if(boardgame.round_date == round_date){
@@ -101,6 +101,7 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
         }
       }
     });
+  }
   return existe;
 }
 
