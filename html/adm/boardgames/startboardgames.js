@@ -40,7 +40,7 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
         })
         let tbody = '<tbody>'+linhas+'</tbody>';
         let thead = '<thead><tr><th></th><th>Rodada ID</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
-        let table = '<table class="table table-hover">'+ thead + tbody+'</table>';
+        let table = '<table class="table table-hover" align="center">'+ thead + tbody+'</table>';
         lista_boardgames.innerHTML = table;
         pesquisa_boardgames.style.display = "none";
         ativar_boardgames.style.display = "inline";
