@@ -16,8 +16,8 @@ const boardgamesService = {
             var boardgame = {boardgameid,boarddados};
             boardgames.push(boardgame);
         });
-        console.log(boardgame);
-        return boardgame;
+        console.log(boardgames);
+        return boardgames;
     },
     findByUid: uid => {
         return firebase.firestore()
