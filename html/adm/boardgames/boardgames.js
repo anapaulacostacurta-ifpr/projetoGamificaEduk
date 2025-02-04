@@ -86,8 +86,9 @@ function saveBoardgame(newboardgame){
 }
 
 function getBoardgamebyID(boardgameid,round_date, host, level){
+  var existe = "não";
   if(boardgames === undefined){
-    return "indisponível";
+    existe = "indisponível";
   }else{
     boardgames.forEach(boardgame =>{
       if(boardgame.boardgameid == boardgameid){
@@ -95,16 +96,15 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
           if(boardgame.host == host){
             if(boardgame.level == level){
               if(boardgame.state !== "finished"){
-                existe = "sim";
-                return "sim";
+                existe= "sim";
               }
             }
           }
         }
       }
     });
-    return "não";
   }
+  return existe;
 }
 
 function setBoardGames(){
