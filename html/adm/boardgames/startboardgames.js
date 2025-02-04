@@ -67,7 +67,7 @@ document.getElementById("ativarboardgame-form").addEventListener("submit", funct
         boardgamesService.update(userselect, boardgames);
 });
 
-function setBoardGames(){
+function setBoardGames(boardgames){
   let boardgamesString = JSON.stringify(boardgames);
   sessionStorage.setItem('boardgames', boardgamesString);
 }
