@@ -9,7 +9,7 @@ const userService = {
                 throw new Error("Usuário não encontrado!");
             }
             
-            const user = querySnapshot.docs.map(doc=>doc.data());
+            const user = await querySnapshot.docs.map(doc=>doc.data());
             return user;
     },
     save: (user_UID, user) => {
