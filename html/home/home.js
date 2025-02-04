@@ -43,11 +43,17 @@ function getFormAtualizar(){
 }
 
 function getProfile(){
+    if(User === undefined){
+        User = getUser();
+    }
     document.getElementById("nameUser").innerHTML = User.name;
     document.getElementById("score_total").innerHTML = User.score +" points";
 }
 
 function getMenuTop(){
+    if(User === undefined){
+        User = getUser();
+    }
     var professor = User.profileUser.professor;
     if(professor === undefined){
         professor = false;
