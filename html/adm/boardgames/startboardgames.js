@@ -67,19 +67,13 @@ document.getElementById("ativarboardgame-form").addEventListener("submit", funct
 });
 
 function setBoardGames(){
-  boardgamesService.findAll().then(boardgames =>{
-      let boardgamesString = JSON.stringify(boardgames);
-      sessionStorage.setItem('boardgames', boardgamesString);
-    });
+  let boardgamesString = JSON.stringify(boardgames);
+  sessionStorage.setItem('boardgames', boardgamesString);
 }
 
 function getBoardgames(){
   let boardgamesString = sessionStorage.boardgames;
   let boardgames;
-  if (boardgamesString === undefined){
-    setBoardGames();
-  }else{
-    boardgames = JSON.parse(boardgamesString);
-  }
+  boardgames = JSON.parse(boardgamesString);
   return boardgames;
 }
