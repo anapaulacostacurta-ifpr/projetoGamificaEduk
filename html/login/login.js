@@ -13,7 +13,7 @@ function login() {
         user = userCredential.user.auth.currentUser;
         sessionStorage.setItem("userUid", user_UID);
         sessionStorage.setItem("user", user_UID);
-        window.location.href = "../perfil.html";
+        window.location.href = "../login/perfil.html";
         console.log("Usuário logou:" + userCredential.user.uid);
         getCurrentUser(user_UID)
     }).catch(error => {
