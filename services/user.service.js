@@ -1,12 +1,16 @@
 const userService = {
     findByUid: async uid => {
-        return await firebase.firestore()
+        const querySnapshot = await firebase.firestore()
             .collection("users")
             .doc(uid)
-            .get()
-            .then(doc => {
-                return doc.data();
-            });
+            .get();
+            
+            if(querySnapshot.empty){
+                throw new Error("Usuário não encontrado!");
+            }
+            
+            const user = querySnapshot.docs.map(doc=>doc.data());
+            return user;
     },
     save: (user_UID, user) => {
         return firebase.firestore()
