@@ -2,6 +2,7 @@ var user_UID = sessionStorage.userUid;
 var score_total = sessionStorage.score_total + " points";
 var nameUser = sessionStorage.nameUser;
 var lista_boardgames = document.getElementById("lista_boardgames");
+var pesquisa_boardgames = document.getElementById("startboardgame-form");
 
 
 firebase.auth().onAuthStateChanged( (user) => {
@@ -40,6 +41,7 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
         let thead = '<thead><tr><th></th><th>BoardgameID</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
         let table = '<table class="table table-bordered">'+ thead + tbody+'</table><hr class="colorgraph">';
         lista_boardgames.innerHTML = table;
+        pesquisa_boardgames.style.display = "none";
     }).catch((error) => {
         let errorString = '<span>'+ error+'<span>';
         lista_boardgames.innerHTML = errorString;
@@ -58,6 +60,11 @@ function logout() {
 function voltar(){
   sessionStorage.removeItem('boardgames');
   window.location.href = "../../home/home.html";
+}
+
+function limpar(){
+  sessionStorage.removeItem('boardgames');
+  window.location.reload();
 }
 
 document.getElementById("ativarboardgame-form").addEventListener("submit", function(event) {
