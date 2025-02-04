@@ -107,6 +107,7 @@ async function getCurrentUser(user_UID){
             }else{
                 sessionStorage.setItem("profile_atualizar",false);
                 setUser(user);
+                return getUser();
             }
         }).catch(error => {
             console.log(error);
