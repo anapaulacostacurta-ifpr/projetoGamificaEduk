@@ -63,8 +63,20 @@ function voltar(){
 document.getElementById("ativarboardgame-form").addEventListener("submit", function(event) {
   event.preventDefault();
     let userselect = document.querySelector('input[name="radio_id"]:checked').value;
-        var boardgames = {state: "started"};
-        boardgamesService.update(userselect, boardgames);
+    var boardgames = {state: "started"};
+
+    var alert_sucesso = document.getElementById("alert_sucesso");
+    var alert_error = document.getElementById("alert_error");
+    var msg_sucesso = document.getElementById("res_sucesso");
+    var msg_error = document.getElementById("res_error");  
+
+    boardgamesService.update(userselect, boardgames).then(() => {
+      msg_sucesso.innerHTML= "Iniciada Rodada com sucesso!";
+      alert_sucesso.classList.add("show");
+    }).catch((error) => {
+      msg_error.innerHTML= error;
+      alert_error.classList.add("show");
+    });
 });
 
 function setBoardGames(boardgames){
