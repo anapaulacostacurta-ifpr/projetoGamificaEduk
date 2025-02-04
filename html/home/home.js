@@ -6,10 +6,7 @@ firebase.auth().onAuthStateChanged( (user) => {
 })
 
 var user_UID = sessionStorage.userUid;
-var User = getCurrentUser(user_UID)
-do{
-    setTimeout(User = getUser(), 200000);
-}while (User === undefined)
+var User = getCurrentUser(user_UID);
 showBody();
 
 function showBody(){ 
