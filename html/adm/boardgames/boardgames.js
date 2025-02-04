@@ -89,7 +89,7 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
   var existe;
   if(boardgames === undefined){
     existe = "indisponível";
-  }
+  }else{
     boardgames.forEach(boardgame =>{
       if(boardgame.boardgameid == boardgameid){
         if(boardgame.round_date == round_date){
@@ -103,7 +103,9 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
         }
       }
     });
-  return "não";
+    return "não";
+  }
+ return existe;
 }
 
 function setBoardGames(){
