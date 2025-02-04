@@ -6,7 +6,7 @@ firebase.auth().onAuthStateChanged( (user) => {
 })
 
 var user_UID = sessionStorage.userUid;
-var User = getuser();
+var User = getUser();
 getProfile();
 
 // Captura o evento de envio do formulário
