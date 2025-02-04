@@ -66,7 +66,7 @@ const boardgamesService = {
     if(querySnapshot.empty){
         throw new Error("Tabuleiro não encontrador:" + boardgameid);
     }
-    const boardgame = querySnapshot.docs.map(doc=>doc.data());
+    const boardgame = querySnapshot.docs.map(doc=>{doc.id, doc.data()});
     console.log(boardgame);
     return boardgame;
 },
