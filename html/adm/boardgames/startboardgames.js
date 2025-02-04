@@ -39,7 +39,7 @@ document.getElementById("startboardgame-form").addEventListener("submit", functi
             linhas = linhas + '<tr>'+radio+round_id+level+round_data+state+'</tr>';
         })
         let tbody = '<tbody>'+linhas+'</tbody>';
-        let thead = '<thead><tr><th></th><th>BoardgameID</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
+        let thead = '<thead><tr><th></th><th>Rodada ID</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
         let table = '<table class="table table-bordered">'+ thead + tbody+'</table><hr class="colorgraph">';
         lista_boardgames.innerHTML = table;
         pesquisa_boardgames.style.display = "none";
