@@ -91,11 +91,12 @@ function getBoardgamebyID(boardgameid,round_date, host, level){
     existe = "indisponível";
   }else{
     boardgames.forEach(boardgame =>{
-      if(boardgame.boardgameid == boardgameid){
-        if(boardgame.round_date == round_date){
-          if(boardgame.host == host){
-            if(boardgame.level == level){
-              if(boardgame.state !== "finished"){
+      let boardgame_dados = boardgame.dados;
+      if(boardgame_dados.boardgameid == boardgameid){
+        if(boardgame_dados.round_date == round_date){
+          if(boardgame_dados.host == host){
+            if(boardgame_dados.level == level){
+              if(boardgame_dados.state !== "finished"){
                 existe= "sim";
               }
             }
