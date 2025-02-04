@@ -135,7 +135,10 @@ function setUser(User){
   
 function getUser(){
     let UserString = sessionStorage.User;
-    let User = JSON.parse(UserString);
+    let User;
+    if(!(UserString === undefined)){
+        User = JSON.parse(UserString);
+    }
     console.log(User);
     return User;
 }
