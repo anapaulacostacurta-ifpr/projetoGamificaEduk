@@ -16,11 +16,12 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   const rodada_id = document.getElementById("boardgameid").value;
   var boardgame = getBoardgame(rodada_id);
   let boardgameid = boardgame.id;
+  let boardgame_level = boardgame.level;
   var players = boardgame.dados.players;
   let score = 0;
   if (players === undefined){
     players = new Array();
-    players[0] = {user_UID:user_UID,score_round:0};
+    players[0] = {user_UID:user_UID,score_round:score};
     boardgamesService.addPlayers(boardgameid, {players});
     buscarBoardgame(rodada_id);
   }else{
@@ -39,8 +40,10 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
       boardgamesService.addPlayers(boardgame_id, {players});
       buscarBoardgame(rodada_id);
     }
+
   }
- 
+  sessionStorage.setItem("score_round",score);
+  sessionStorage.setItem("level",boardgame_level);
   window.location.href = "./menu.html";
 });
 
@@ -102,4 +105,6 @@ function getProfile(){
   var avatar = User.avatar;
   document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
   document.getElementById("score_total").innerHTML = User.score;
+  document.getElementById("score_round").innerHTML = sessionStorage.score_round;
+  document.getElementById("level").innerHTML = sessionStorage.level;
 }
