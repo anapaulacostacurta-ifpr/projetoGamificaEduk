@@ -76,6 +76,10 @@ function jogar() {
     window.location.href = "../play/play.html";
 }
 
+function voltar() {
+    window.location.href = "../confirmacao.html";
+}
+
 function ranking_geral() {
     window.location.href = "../ranking/geral/geralranking.html";
 }
