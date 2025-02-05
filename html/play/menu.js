@@ -10,12 +10,6 @@ getProfile();
 
 const boardgame = getBoardgame();
 
-//Ranking Nível
-const scoreLevelPoint = document.getElementById("score_round");
-scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.score_round;
-
-const level = document.getElementById("level");
-level.innerHTML = "Nível: "+sessionStorage.level;
 
 
 function logout() {
