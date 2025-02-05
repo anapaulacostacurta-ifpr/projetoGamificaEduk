@@ -16,7 +16,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   const rodada_id = document.getElementById("boardgameid").value;
   var boardgame = getBoardgame(rodada_id);
   let boardgameid = boardgame.id;
-  let boardgame_level = boardgame.level;
+  let boardgame_level = boardgame.dados.level;
   var players = boardgame.dados.players;
   let score = 0;
   if (players === undefined){
