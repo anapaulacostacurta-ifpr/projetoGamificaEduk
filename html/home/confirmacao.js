@@ -7,11 +7,11 @@ if(sessionStorage.profile_atualizar == "true"){
     btn_jogar.disabled = true;   
 }
 
-function btnJogar(){
+function jogar(){
     window.location.href = "../home/home.html";
 }
 
-function btnAtualizar(){
+function atualizar(){
     window.location.href = "../home/atualicacao.html";
 }
 
