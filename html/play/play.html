@@ -47,13 +47,20 @@
       </header>
         <div id="play-card">
           <form id="play-form">
+            <h2>Entrar em Rodada</h2>
+            <hr class="colorgraph">
             <p>
               <label for="boargameid"><strong>Rodada ID:</strong></label>
               <input type="boardgameid" id="boardgameid" name="boardgameid" required/>
             </p>
-            <p>
-              <button class="btn btn-secondary" type="button" onclick="voltar()">Voltar</button>
-              <button class="btn btn-success" type="submit">Entrar</button>
+            <hr class="colorgraph">
+            <div class="wrapper">
+              <span class="group-btn  col-lg-6">   
+                <button class="btn btn-secondary" type="button" onclick="voltar()">Voltar</button>
+              </span>
+              <span class="group-btn col-lg-6">   
+                <button class="btn btn-success" type="submit">Entrar</button>
+              </span> 
             </p>
           </form>
         </div>
