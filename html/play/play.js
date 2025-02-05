@@ -20,7 +20,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     boardgames.forEach(boardgame => {
         let boardgame_id = boardgame.dados.boardgameid;
         let boardgameid = boardgame.id;
-        if(boardgameid == rodada_id){
+        if(boardgame_id == rodada_id){
           setBoardGame(boardgame);
           var players = boardgame.dados.players;
             let score = 0;
