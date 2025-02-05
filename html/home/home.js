@@ -66,7 +66,7 @@ function getMenuTop(){
     if(User === undefined){
         User = getUser();
     }
-    var professor = User.profileUser.professor;
+    var professor = User.profiles.professor;
     if(professor === undefined){
         professor = false;
     }else{
