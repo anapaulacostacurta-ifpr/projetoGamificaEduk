@@ -8,11 +8,11 @@ if(sessionStorage.profile_atualizar == "true"){
 }
 
 function jogar(){
-    window.location.href = "../home/home.html";
+    window.location.href = "./home.html";
 }
 
 function atualizar(){
-    window.location.href = "../home/atualicacao.html";
+    window.location.href = "./atualicacao.html";
 }
 
 firebase.auth().onAuthStateChanged( (user) => {
