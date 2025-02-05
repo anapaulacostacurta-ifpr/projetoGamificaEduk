@@ -35,28 +35,11 @@
                 </header>  
                 <br/>
                 <div id="menu-center" class="btn-menu text-center">
-                    <p><button type="button" class="btn btn-info" id="appRankingGeral" onclick="ranking_geral()">Ranking Geral</button></p>
-                    <p><button type="button" class="btn btn-info" id="appRankingNivel" onclick="ranking_nivel()">Ranking Níveis</button></p>
-                    <p><button type="button" class="btn btn-info" id="appRankingNivel" onclick="extrato()">Extrato Scores</button></p> 
-                    <p><button type="button" class="btn btn-info" id="appJogar" onclick="jogar()">Jogar</button></p> 
-                </div>
-                <div id="form-profile">
-                    <form class="form-signin">
-                        <h1 class="text-center">Atualize o Perfil</h1>
-                        <hr class="colorgraph">
-                        <input id="nome" name="nome" id="nome" class="form-control" placeholder="Nome completo" required/>
-                        <select id="profile" name="profile" class="form-select">
-                            <option value="aluno" selected >Aluno</option>
-                            <option value="professor">Professor</option>
-                            <option value="admin">Administrador</option>
-                        </select>
-                        <hr class="colorgraph">
-                        <div class="wrapper">
-                            <span class="group-btn col-lg-6">     
-                                <button class="btn btn-success" type="button" onclick="save_profile()">Salvar</button>
-                            </span>
-                        </div>
-                    </form>
+                    <p><button type="button" class="badge bg-info p-2" id="appRankingGeral" onclick="ranking_geral()">Ranking Geral</button></p>
+                    <p><button type="button" class="badge bg-info p-2" id="appRankingNivel" onclick="ranking_nivel()">Ranking Níveis</button></p>
+                    <p><button type="button" class="badge bg-info p-2" id="appRankingNivel" onclick="extrato()">Extrato Scores</button></p> 
+                    <p><button type="button" class="badge bg-info p-2" id="appJogar" onclick="jogar()">Jogar</button></p> 
+                    <p><button type="button" class="badge bg-info p-2" id="btnSair" onclick="logout()">SAIR</button></p> 
                 </div>
             </div>
         </div>
