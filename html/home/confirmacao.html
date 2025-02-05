@@ -13,21 +13,27 @@
         <script src="../../firebase-init.js"></script>
         <script src="../../services/questions.service.js"></script>
         <script src="../../services/user.service.js"></script>
-        
     </head>
     <body>
         <div class="container">
             <div class="card card-container">
-                <hr class="colorgraph">
-                <div id="menu-center" class="btn-menu text-center">
-                    <p><button type="button" class="badge bg-success p-2" id="btnJogar" onclick="jogar()">JOGAR</button></p>
-                    <p><button type="button" class="badge bg-primary p-2" id="btnAtualizar" onclick="atualizar()">ATUALIZAR PERFIL</button></p>
-                    <p><button type="button" class="badge bg-primary p-2" id="btnconfiguracoes" onclick="configuracoes()">CONFIGURAÇÕES</button></p>
-                    <p><button type="button" class="badge bg-danger p-2" id="btnSair" onclick="logout()">SAIR</button></p> 
+                <header></header>
+                <article>    
+                    <hr class="colorgraph">
+                    <div id="menu-center" class="btn-menu text-center">
+                        <p><button type="button" class="badge bg-success p-2" id="btnJogar" onclick="jogar()">JOGAR</button></p>
+                        <p><button type="button" class="badge bg-primary p-2" id="btnAtualizar" onclick="atualizar()">ATUALIZAR PERFIL</button></p>
+                        <p><button type="button" class="badge bg-primary p-2" id="btnconfiguracoes" onclick="configuracoes()">CONFIGURAÇÕES</button></p>
+                    </div>
+                    <hr class="colorgraph">
+                </article>
+                <footer>
+                    <span class="d-flex flex-row-reverse">
+                        <p><button type="button" class="badge bg-danger p-2" id="btnSair" onclick="logout()">SAIR</button></p>
+                    </span>
+                </footer>
                 </div>
-                <hr class="colorgraph">
             </div>
-        </div>
         <script src="confirmacao.js"></script>
     </body>
 </html>
