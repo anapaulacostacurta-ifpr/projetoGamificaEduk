@@ -12,7 +12,7 @@ function jogar(){
 }
 
 function atualizar(){
-    window.location.href = "./atualicacao.html";
+    window.location.href = "./atualizacao.html";
 }
 /**
 <a class="nav-link" href="../adm/boardgames/boardgames.html">Cadastrar Rodada</a></li>
