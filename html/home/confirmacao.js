@@ -14,6 +14,10 @@ function jogar(){
 function atualizar(){
     window.location.href = "./atualicacao.html";
 }
+/**
+<a class="nav-link" href="../adm/boardgames/boardgames.html">Cadastrar Rodada</a></li>
+<a class="nav-link" href="../adm/boardgames/startboardgames.html">Iniciar Rodada</a></li>
+<a class="nav-link" href="../adm/boardgames/closeboardgames.html">Encerrar Rodada</a></li>**/
 
 firebase.auth().onAuthStateChanged( (user) => {
     if (!user) {
