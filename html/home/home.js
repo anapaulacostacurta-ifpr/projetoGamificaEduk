@@ -77,9 +77,9 @@ function getMenuTop(){
         }
     }
     if(!professor){
-        document.getElementById("menu_top").style.display = "none";    
+        document.getElementById("professor").style.display = "none";    
     }else{
-        document.getElementById("menu_top").style.display = "inline"; 
+        document.getElementById("professor").style.display = "inline"; 
     }
 }
 
