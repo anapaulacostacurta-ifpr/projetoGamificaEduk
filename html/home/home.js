@@ -56,7 +56,9 @@ function getProfile(){
     if(User === undefined){
         User = getUser();
     }
-    document.getElementById("nameUser").innerHTML = User.name;
+    document.getElementById("nameUser").innerHTML = User.nickname;
+    var avatar = User.avatar;
+    document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil'+avatar+'png" width="30" height="30"></img>';
     document.getElementById("score_total").innerHTML = User.score +" points";
 }
 
@@ -164,3 +166,5 @@ function getUser(){
     console.log(user);
     return user;
 }
+
+
