@@ -22,6 +22,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     players = new Array();
     players[0] = {user_UID:user_UID,score_round:0};
     boardgamesService.addPlayers(boardgameid, {players});
+    buscarBoardgame(rodada_id);
   }else{
     //variável para verficar se o jogador já entrou no tabuleiro
     let isOnPlayer = false;
@@ -36,9 +37,10 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
     }else{
       players.push({user_UID:user_UID,score_round:0});
       boardgamesService.addPlayers(boardgame_id, {players});
+      buscarBoardgame(rodada_id);
     }
   }
-  buscarBoardgame(rodada_id);
+ 
   window.location.href = "./menu.html";
 });
 
