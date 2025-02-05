@@ -67,9 +67,9 @@ function getMenuTop(){
         User = getUser();
     }
     var professor = User.profiles.professor;
-    if(!professor){
+    /**if(!professor){
         document.getElementById("professor").style.display = "none";    
-    }
+    }/**
 }
 
 function jogar() {
