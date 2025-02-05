@@ -1,6 +1,6 @@
 firebase.auth().onAuthStateChanged( (user) => {
     if (user) {
-        window.location.href = "../home/home.html";
+        window.location.href = "../home/confirmacao.html";
     }
 })
 
@@ -12,7 +12,7 @@ function login() {
         user_UID = userCredential.user.auth.currentUser.uid;
         user = userCredential.user.auth.currentUser;
         sessionStorage.setItem("userUid", user_UID);
-        window.location.href = "../home/home.html";
+        window.location.href = "../home/confirmacao.html";
         console.log("Usuário logou:" + userCredential.user.uid);
         getCurrentUser(user_UID)
     }).catch(error => {
