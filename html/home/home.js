@@ -67,15 +67,6 @@ function getMenuTop(){
         User = getUser();
     }
     var professor = User.profiles.professor;
-    if(professor === undefined){
-        professor = false;
-    }else{
-        if (professor == "true"){
-            professor = true;
-        }else{
-            professor = false;
-        }
-    }
     if(!professor){
         document.getElementById("professor").style.display = "none";    
     }else{
