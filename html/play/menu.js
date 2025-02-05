@@ -29,7 +29,6 @@ function logout() {
 
 function sair(){
   if (window.confirm("Você irá perder todo o histórico desta rodada! Tem certeza que deseja sair?")) {
-    sessionStorage.clear();
     window.location.href = "../home/home.html";
   }
 }
