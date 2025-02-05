@@ -69,8 +69,6 @@ function getMenuTop(){
     var professor = User.profiles.professor;
     if(!professor){
         document.getElementById("professor").style.display = "none";    
-    }else{
-        document.getElementById("professor").style.display = "inline"; 
     }
 }
 
