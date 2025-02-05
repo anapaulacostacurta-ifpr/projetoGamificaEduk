@@ -9,47 +9,53 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
   <script src="../../../firebase-init.js"></script>
-  <script src="../../../auth-guard.js"></script>
   <script src="../../../services/user.service.js"></script>
 </head>
 <body>
-  <div class="container-sm">
-    <header>
-      <nav class="navbar navbar-expand-sm">
-          <div class="container-fluid">
-              <img class="navbar-brand" src="../../../assets/img/AnaBiTE.svg" alt="80" width="180">
-              <div class="btn-group">
-                  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Config</button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="../adm/boardgames/boardgames.html">Novo Tabuleiro</a>
-                    <a class="dropdown-item" href="../adm/questions/questions.html">Cadastrar Questões</a>
-                  </div>
-                </div>   
-              <button class="btn btn-link" type="button" class="clear" onclick="logout()">Sair</button>
-          </div>
-      </nav>
-    </header>
-    <div  class="card">
-      <p id="nameUser"></p>
-      <p id="level"></p>
-      <p id="score_round"></p>
-      <p id="score_total"></p>
+  <div class="container">
+    <div class="card card-container">
+      <header>
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid">
+                <div id="profile">
+                    <p id="nameUser"></p>
+                    <p><img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/coin.png" width="30" height="30"><span id="score_total"></span></p>
+                </div>
+                <div id="menu_top">
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" aria-expanded="false">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul id="professor" class="navbar-nav">
+                            <hr class="colorgraph">
+                            <li class="nav-item"><a class="nav-link" href="../adm/boardgames/boardgames.html">Cadastrar Rodada</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../adm/boardgames/startboardgames.html">Iniciar Rodada</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../adm/boardgames/closeboardgames.html">Encerrar Rodada</a></li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <hr class="colorgraph">
+                            <li class="nav-item"><a class="nav-link" onclick="logout()">Sair</a></li>
+                            <hr class="colorgraph">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+      </header>
+        <div id="play-card">
+          <form id="play-form">
+            <p>
+              <label for="tokenid"><strong>Token ID:</strong></label>
+              <input type="tokenid" id="tokenid" name="tokenid" required>
+            </p>
+            <p>
+              <button class="btn btn-success" type="submit">Enviar</button>
+            </p>
+          </form>
+        </div>
     </div>
-    <div class="container">
-      <div id="play-card">
-        <form id="play-form" >
-          <p>
-            <label for="tokenid"><strong>Token ID:</strong></label>
-            <input type="tokenid" id="tokenid" name="tokenid" required>
-          </p>
-          <p>
-            <button class="btn btn-success" type="submit">Enviar</button>
-          </p>
-        </form>
-      </div>
-    </div>
-    <script src="../../../services/tokens.services.js"></script>
-    <script src="token.js"></script>
   </div>
+  <script src="../../../services/tokens.services.js"></script>
+  <script src="token.js"></script>
 </body>
 </html>

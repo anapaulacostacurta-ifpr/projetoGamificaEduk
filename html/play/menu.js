@@ -46,7 +46,7 @@ function quiz() {
 }
 let hasquiz;
 if (sessionStorage.hasquiz === undefined) {
-  sessionStorage.setItem("hasquiz",true);
+   sessionStorage.setItem("hasquiz",true);
 }else{
   if(sessionStorage.hasquiz == "true"){
     hasquiz = true;
@@ -57,7 +57,7 @@ if (sessionStorage.hasquiz === undefined) {
 
 if(!hasquiz){
   //Não tem mais Quiz para apresentar desativa o botão
-  document.getElementById("AppQuiz").disabled = true;
+   document.getElementById("AppQuiz").disabled = true;
 }
 
 

@@ -1,3 +1,14 @@
+firebase.auth().onAuthStateChanged( (user) => {
+    if (!user) {
+        sessionStorage.clear;
+        window.location.href = "../login/login.html";
+    }
+})
+
+var user_UID = sessionStorage.userUid;
+var User = getUser();
+getProfile();
+
 //Ranking Nível
 const scoreLevelPoint = document.getElementById("score_round");
 scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.getItem("score_round");
@@ -5,9 +16,6 @@ scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.getItem("score_round"
 const level = document.getElementById("level");
 level.innerHTML = "Nível: "+sessionStorage.getItem("level");
 
-//Ranking Geral
-const scorePoint = document.getElementById("score_total");
-scorePoint.innerHTML = "Score Total: "+sessionStorage.getItem("score_total");
 
 const category = sessionStorage.question_category;
 
@@ -84,3 +92,18 @@ function logout() {
     })
 }    
   
+
+function getUser(){
+    let UserString = sessionStorage.User;
+    let User = JSON.parse(UserString);
+    console.log(User);
+    return User;
+  }
+  
+  function getProfile(){
+    if(User === undefined){
+        User = getUser();
+    }
+    document.getElementById("nameUser").innerHTML = User.name;
+    document.getElementById("score_total").innerHTML = User.score +" points";
+  }
