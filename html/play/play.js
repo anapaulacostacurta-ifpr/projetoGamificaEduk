@@ -18,7 +18,8 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   
   boardgamesService.getBoardGameByRodadaID(rodada_id).then((boardgames) => {
     boardgames.forEach(boardgame => {
-        let boardgameid = boardgame.dados.boardgameid;
+        let boardgame_id = boardgame.dados.boardgameid;
+        let boardgameid = boardgame.id;
         if(boardgameid == rodada_id){
           setBoardGame(boardgame);
           var players = boardgame.dados.players;
@@ -45,10 +46,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
               }
             }
             setBoardGame(boardgame);
-            sessionStorage.setItem("boardgameid",boardgameid);
-            sessionStorage.setItem("rodadaid",rodada_id);
-            sessionStorage.setItem("level",boardgame.level);
-            sessionStorage.setItem("score_round",score);
         }
       });
       window.location.href = "./menu.html";
