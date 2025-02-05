@@ -25,7 +25,7 @@ function jogar() {
 }
 
 function voltar() {
-    window.location.href = "../confirmacao.html";
+    window.location.href = "./confirmacao.html";
 }
 
 function ranking_geral() {
