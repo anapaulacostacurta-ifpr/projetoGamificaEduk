@@ -12,56 +12,61 @@ getProfile();
 // Captura o evento de envio do formulário
 document.getElementById("play-form").addEventListener("submit", function(event) {
   event.preventDefault();
-
   // Captura os dados do formulário
   const rodada_id = document.getElementById("boardgameid").value;
-  
-  boardgamesService.getBoardGameByRodadaID(rodada_id).then((boardgames) => {
-    boardgames.forEach(boardgame => {
-        let boardgame_id = boardgame.dados.boardgameid;
-        let boardgameid = boardgame.id;
-        if(boardgame_id == rodada_id){
-          setBoardGame(boardgame);
-          var players = boardgame.dados.players;
-            let score = 0;
-            if (players === undefined){
-              players = new Array();
-              players[0] = {user_UID:user_UID,score_round:0};
-              boardgamesService.addPlayers(boardgameid, {players});
-            }else{
-              //variável para verficar se o jogador já entrou no tabuleiro
-              let isOnPlayer = false;
-              
-              players.forEach(player => {
-                if(player.user_UID == user_UID){
-                  isOnPlayer = true;
-                  score = player.score_round;
-                }
-              });
-              if (isOnPlayer){
-                alert('Você já entrou no jogo!Retornando para o Jogo!');
-              }else{
-                players.push({user_UID:user_UID,score_round:0});
-                boardgamesService.addPlayers(boardgame_id, {players});
-              }
-            }
-            setBoardGame(boardgame);
-        }
-      });
-      window.location.href = "./menu.html";
-    }).catch( (error) => {
-      alert(error);
-      document.getElementById("play-form").reset();
-    })
-  });
+  var boardgame = getBoardgame(rodada_id);
+  let boardgameid = boardgame.id;
+  var players = boardgame.dados.players;
+  let score = 0;
+  if (players === undefined){
+    players = new Array();
+    players[0] = {user_UID:user_UID,score_round:0};
+    boardgamesService.addPlayers(boardgameid, {players});
+  }else{
+    //variável para verficar se o jogador já entrou no tabuleiro
+    let isOnPlayer = false;
+    players.forEach(player => {
+      if(player.user_UID == user_UID){
+        isOnPlayer = true;
+        score = player.score_round;
+      }
+    });
+    if (isOnPlayer){
+      alert('Você já entrou no jogo!Retornando para o Jogo!');
+    }else{
+      players.push({user_UID:user_UID,score_round:0});
+      boardgamesService.addPlayers(boardgame_id, {players});
+    }
+  }
+  buscarBoardgame(rodada_id);
+  window.location.href = "./menu.html";
+});
 
 function setBoardGame(boardgame){
   let boardgameString = JSON.stringify(boardgame);
   sessionStorage.setItem('boardgame', boardgameString);
+  return boardgameString;
 }
 
-function getBoardgame(){
+function buscarBoardgame(rodada_id){
+  boardgamesService.getBoardGameByRodadaID(rodada_id).then((boardgames) => {
+    boardgames.forEach(boardgame => {
+      let boardgame_id = boardgame.dados.boardgameid;
+      if(boardgame_id == rodada_id){
+        return setBoardGame(boardgame);
+      }
+    })
+  }).catch( (error) => {
+    alert(error);
+    document.getElementById("play-form").reset();
+  });
+}
+
+function getBoardgame(rodada_id){
   let boardgameString = sessionStorage.boardgame;
+  if(boardgameString === undefined){
+    boardgameString = buscarBoardgame(rodada_id);
+  }
   let boardgame = JSON.parse(boardgameString);
   console.log(boardgame);
   return boardgame;
