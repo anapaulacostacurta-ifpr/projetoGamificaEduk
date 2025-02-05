@@ -107,3 +107,7 @@ function getUser(){
     document.getElementById("nameUser").innerHTML = User.name;
     document.getElementById("score_total").innerHTML = User.score +" points";
   }
+
+  function voltar(){
+    window.location.href = "../../play/menu.html";
+  }
