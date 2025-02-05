@@ -7,50 +7,7 @@ firebase.auth().onAuthStateChanged( (user) => {
 
 var user_UID = sessionStorage.userUid;
 var User = getCurrentUser(user_UID);
-showBody();
-User = getUser();
-showBody();
-
-function showBody(){ 
-    if(User === undefined){
-        User = getUser();
-    }
-    var status_profile = sessionStorage.profile_atualizar;
-    if(status_profile == "true"){
-        status_profile =true;
-    }else{
-        status_profile =false;
-    }
-    if(!status_profile){
-        getMenuCenter();
-        getProfile();
-    }else{
-        getFormAtualizar();
-    } 
-    getMenuTop();
-}
-
-function getMenuCenter(){
-    if(User === undefined){
-        User = getUser();
-    }
-    var menu_center = document.getElementById("menu-center");
-    var dados = document.getElementById("profile");
-    var form_perfil = document.getElementById("form-profile");
-    dados.style.display = "inline";   
-    menu_center.style.display = "inline"; 
-    form_perfil.style.display = "none"; 
-}
-
-function getFormAtualizar(){
-    if(User === undefined){
-        User = getUser();
-    }
-    var form_perfil = document.getElementById("form-profile");
-    dados.style.display = "none";   
-    menu_center.style.display = "none"; 
-    form_perfil.style.display = "inline"; 
-}
+getProfile();
 
 function getProfile(){
     if(User === undefined){
@@ -62,15 +19,6 @@ function getProfile(){
     document.getElementById("score_total").innerHTML = User.score;
 }
 
-function getMenuTop(){
-    if(User === undefined){
-        User = getUser();
-    }
-    var professor = User.profiles.professor;
-    /**if(!professor){
-        document.getElementById("professor").style.display = "none";    
-    }**/
-}
 
 function jogar() {
     window.location.href = "../play/play.html";
@@ -90,32 +38,6 @@ function ranking_nivel() {
 
 function extrato() {
     window.location.href = "../extrato/extrato.html";
-}
-
-function save_profile(){
-    const name = document.getElementById("nome");
-    const select = document.getElementById("profile");
-    const profileUser = select.options[select.selectedIndex].value;
-    
-    var admin = false;
-    var aluno = false;
-    var professor = false;
-
-    if(profileUser == "professor"){
-        professor = true;
-    }else{
-        if (profileUser == "aluno"){
-            aluno = true;
-        }
-        if (profileUser == "admin"){
-            admin = true;
-        }
-    }
-    var profile = {admin:admin, aluno: aluno, professor: professor};
-    var user = {name: name, profile, score:0, status:false};
-    userService.save(user_UID,user);
-    alert("Aguarde seu perfil ser ativado pelo administrador!");
-    logout();
 }
 
 function logout() {
