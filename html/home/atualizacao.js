@@ -42,6 +42,10 @@ function logout() {
     })
 }
 
+function voltar(){
+    window.location.href = "../configuracao.html";
+}
+
 function setUser(User){
     let UserString = JSON.stringify(User);
     sessionStorage.setItem('User', UserString);
