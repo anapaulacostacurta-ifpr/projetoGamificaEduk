@@ -39,7 +39,7 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
                 }
               });
               if (isOnPlayer){
-                alert('Você já entrou no jogo!Fale com o professor!');
+                alert('Você já entrou no jogo!Retornando para o Jogo!');
               }else{
                 players.push({user_UID:user_UID,score_round:0});
                 boardgamesService.addPlayers(boardgame_id, {players});
