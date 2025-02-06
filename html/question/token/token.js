@@ -9,13 +9,6 @@ var user_UID = sessionStorage.userUid;
 var User = getUser();
 getProfile();
 
-//Ranking Nível
-const scoreLevelPoint = document.getElementById("score_round");
-scoreLevelPoint.innerHTML = "Level Score: "+sessionStorage.getItem("score_round");
-
-const level = document.getElementById("level");
-level.innerHTML = "Nível: "+sessionStorage.getItem("level");
-
 
 const category = sessionStorage.question_category;
 
@@ -106,7 +99,7 @@ function getUser(){
     }
     document.getElementById("nameUser").innerHTML = User.nickname;
     var avatar = User.avatar;
-    document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
+    document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
     document.getElementById("score_total").innerHTML = User.score;
   }
 
