@@ -25,15 +25,15 @@
                             <br/>
                             <span id="nameUser"></span>
                             <br/>
-                            <span class="badge rounded-pill bg-primary">NÍVEL &nbsp;&nbsp;
-                                <span id="level" class="badge bg-light text-dark"></span>
+                            <span class="badge rounded-pill bg-primary border border-2 border-dark">NÍVEL &nbsp;&nbsp;
+                                <span id="level" class="badge bg-light text-dark border border-2 border-dark"></span>
                             </span>
                         </p>
                     </span>
                     <span class="col-sm-6">&nbsp;&nbsp;</span>
                     <span id="coins" class="col-sm-3">
-                        <span class="badge rounded-pill bg-success"><span id="score_total" class="badge bg-light text-dark"></span>&nbsp;AB@ COINS</span><br>
-                        <span class="badge rounded-pill bg-warning"><span id="score_round" class="badge bg-light text-dark"></span>&nbsp;PONTOS NÍVEL</span>
+                        <span class="badge rounded-pill bg-warning border border-2 border-dark p-2 m-1"><span id="score_total" class="badge bg-light text-dark border border-2 border-dark"></span>&nbsp;AB@ COINS</span><br>
+                        <span class="badge rounded-pill bg-warning border border-2 border-dark p-2 m-1"><span id="score_round" class="badge bg-light text-dark border border-2 border-dark"></span>&nbsp;PONTOS NÍVEL</span>
                     </span>
                 </nav>                  
             </header>
@@ -41,21 +41,24 @@
                 <div>
                     <hr class="colorgraph">
                     <div class="btn-menu text-center">
-                        <p><button type="button" class="badge bg-success p-2" id="AppQuiz" onclick="quiz()">QUIZ</button></p>
-                        <p><button type="button" class="badge bg-success p-2" id="AppDesafio" onclick="desafio()">DESAFIO</button></p>
-                        <p><button type="button" class="badge bg-success p-2" id="AppSorte" onclick="sorte()">SORTE/AZAR</button></p>
+                        <p><button type="button" class="badge bg-primary p-2" id="AppQuiz" onclick="quiz()">QUIZ</button></p>
+                        <p><button type="button" class="badge bg-primary p-2" id="AppDesafio" onclick="desafio()">DESAFIO</button></p>
+                        <p><button type="button" class="badge bg-primary p-2" id="AppSorte" onclick="sorte()">SORTE/AZAR</button></p>
                         <p><button type="button" class="badge bg-warning p-2" id="AppExtra" onclick="extra()">EXTRAS</button></p>
-                        <p><button type="button" class="badge bg-primary p-2" id="Quizfinal" onclick="quizfinal()">QUIZ FINAL</button></p> 
+                        <p><button type="button" class="badge bg-success p-2 border border-2 border-dark" id="Quizfinal" onclick="quizfinal()">QUIZ FINAL</button></p> 
                     </div>
                     <hr class="colorgraph">
                 </div>
             </article>
             <footer>
-                <span class="btn-menu">
-                    <button type="button" class="badge bg-secundary" id="voltar" onclick="voltar()">VOLTAR</button>
-                </span>
-                <span class="btn-menu d-flex flex-row-reverse">
-                    <button type="button" class="badge bg-danger" id="sair" onclick="sair()">SAIR</button>
+                <span class="btn-menu d-flex">
+                    <span class="col-sm-4">
+                        <button type="button" class="badge bg-warning p-2" id="voltar" onclick="voltar()">VOLTAR</button>
+                    </span>
+                    <span class="col-sm-4">&nbsp;</span>
+                    <span class="col-sm-4 ml-auto">
+                        <button type="button" class="badge bg-danger p-2" id="btnSair" onclick="logout()">SAIR</button>
+                    </span>
                 </span>
             </footer>
         </div>
