@@ -15,9 +15,6 @@ document.getElementById("play-form").addEventListener("submit", function(event) 
   // Captura os dados do formulário
   const rodada_id = document.getElementById("boardgameid").value;
   var boardgame = getBoardgame(rodada_id);
-  if (boardgame === undefined){
-    alert('Aconteceu um erro imprevisto e por esse motivo será necessário realizar a consulta novamente!');
-  }
   let boardgameid = boardgame.id;
   let boardgame_level = boardgame.dados.level;
   var players = boardgame.dados.players;
@@ -73,8 +70,10 @@ function buscarBoardgame(rodada_id){
 function getBoardgame(rodada_id){
   let boardgameString = sessionStorage.boardgame;
   if(boardgameString === undefined){
-    return boardgameString;
     boardgameString = buscarBoardgame(rodada_id);
+    if (boardgame === undefined){
+      alert('Aconteceu um erro imprevisto e por esse motivo será necessário realizar a consulta novamente!');
+    }
   }
   let boardgame = JSON.parse(boardgameString);
   console.log(boardgame);
