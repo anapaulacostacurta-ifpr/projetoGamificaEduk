@@ -46,7 +46,11 @@ function setAtualQuiz(){
     let answerString;
     let typeString;
     let numbString;
+    let quizAtual;
     //buscar as questões da sessão
+    if( quizzes === undefined){
+      quizzes = getQuizzes();
+    }
     quizzes.forEach(quiz => {
       if(answered_quizzes.indexOf(quiz.numb) == -1){ //Não foi respondida
         quizString = JSON.stringify(quiz);
@@ -60,7 +64,8 @@ function setAtualQuiz(){
       sessionStorage.setItem('answer',answerString);
       sessionStorage.setItem('question_numb',numbString);
       sessionStorage.setItem('question_type',typeString);
-      return quizString;
+      quizAtual = JSON.parse(quizString);
+      return quizAtual;
 }
 
 function setQuizzes(questions){
