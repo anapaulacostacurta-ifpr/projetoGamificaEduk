@@ -1,17 +1,6 @@
 var user_UID = sessionStorage.userUid;
 getCurrentUser(user_UID);
 User = getUser();
-getProfile();
-
-function getProfile(){
-    if(User === undefined){
-        User = getUser();
-    }
-    document.getElementById("nameUser").innerHTML = User.nickname;
-    var avatar = User.avatar;
-    document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
-    document.getElementById("score_total").innerHTML = User.score;
-}
 
 if(sessionStorage.profile_atualizar == "true"){
     var btn_jogar = document.getElementById("btnJogar");
