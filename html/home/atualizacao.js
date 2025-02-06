@@ -43,7 +43,7 @@ function logout() {
 }
 
 function voltar(){
-    window.location.href = "../configuracao.html";
+    window.location.href = "./configuracao.html";
 }
 
 function setUser(User){
