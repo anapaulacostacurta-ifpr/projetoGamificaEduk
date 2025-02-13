@@ -1,12 +1,21 @@
 const userService = {
     findByUid: async (uid) => {
-        return await firebase.firestore()
+        const querySnapshot = await firebase.firestore()
             .collection("users")
             .where('uid','==',uid)
-            .get()
-            .then(doc => {
-                return doc.data();
+            .get();
+
+            if(querySnapshot.empty){
+                throw new Error("Nenhuma pergunta encontrada para o nível "+ level+ " .");
+            }
+            var users = new Array();
+            querySnapshot.forEach(doc => {
+                var uid = doc.id;
+                var dados = doc.data();
+                users.push({uid,dados});              
             });
+            console.log(users);
+            return users;
     },
     save: async (user) => {
         try{
