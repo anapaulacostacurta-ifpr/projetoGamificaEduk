@@ -1,110 +1,115 @@
-firebase.auth().onAuthStateChanged( (user) => {
-    if (!user) {
+firebase.auth().onAuthStateChanged( (User) => {
+    if (!User) {
         sessionStorage.clear;
         window.location.href = "../login/login.html";
-    }
-})
-
-var user_UID = sessionStorage.userUid;
-var User = getUser();
-getProfile();
-
-
-const category = sessionStorage.question_category;
-
-var tokens = getTokens(category);
-
-// Captura o evento de envio do formulário
-document.getElementById("play-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    // Captura os dados do formulário
-    const tokenid = document.getElementById("tokenid").value;
-    
-        if(category == "quiz"){
-            let pos_token = tokens.indexOf(tokenid);
-            if ( pos_token > -1){
-                alert("Token Válido!");
-                sessionStorage.setItem("token",tokenid); // Manter o token durante a resposta da pergunta
-                setTokens(tokens, tokenid);//removendo apenas da sessão o token utilizado.
-                window.location.href = "../quiz/quiz.html";
-            }else{
-                alert("Token inválido!");
-                window.location.href = "../../play/menu.html";
-            }
-        }
-        if(category == "challange"){
-            window.location.href = "../challange/challange.html";
-        }
-        if(category == "luck"){
-            window.location.href = "../luck/luck.html";
-        }
-        if(category == "quiz_final"){
-            window.location.href = "../final/final.html";
-        }
-    
-    
-    });
-
-
-function getTokens(){
-    var tokensString = sessionStorage.tokens;
-    var tokens;
-    if (tokensString === undefined){
-        tokenService.getTokens().then(tokens => {
-            tokens.forEach(token => {
-                tokensString = JSON.stringify(token.quiz);
-                // Store the stringified object in sessionStorage
-                sessionStorage.setItem('tokens', tokensString);
-            });
-        });
     }else{
-        // Convert the user object into a string
-        tokens = JSON.parse(tokensString);
+        userService.findByUid(User.uid).then(user=>{
+            document.getElementById("nameUser").innerHTML = user.nickname;
+            var avatar = user.avatar;
+            document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
+            document.getElementById("score_total").innerHTML = user.score;
+          }).catch(error => {
+              console.log(error);
+          });
+          const params = new URLSearchParams(window.location.search);
+          const category = params.get('category');
+          var boardgameid;
+          var tmp_players;
+          var tokens_quiz_used;
+          var tokens_quiz;
+          var count =0;
+          boardgamesService.getBoardgamebyPlayer(User.uid, (new Date()).toLocaleDateString('pt-BR')).then((boardgames) => {
+            boardgames.forEach(boardgame => {
+              boardgameid = boardgame.id;
+              tmp_players = boardgame.dados.players;
+              tmp_players.forEach(player => {
+                count++;
+                if(player.user_UID == User.uid){
+                    tokens_quiz_used = player.tokens_quiz_used;
+                    document.getElementById("score_round").innerHTML = player.score_round;
+                    document.getElementById("level").innerHTML = boardgame.dados.level;
+                }
+              });
+            });
+          });
+
+          tokenService.getTokens().then(tokens => {
+                tokens.forEach(token => {
+                    tokens_quiz = token.quiz;
+                });
+            });
+
+          document.getElementById("play-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            // Captura os dados do formulário
+            let tokenid = document.getElementById("tokenid").value;
+                if(category == "quiz"){
+                    let pos_token = tokens_quiz.indexOf(tokenid);
+                    var players;
+                    if(!(tokens_quiz_used === "undefined") || !(tokens_quiz_used === undefined)){
+                            if(pos_token > -1){
+                                        tokens_quiz_used = new Array();
+                                        tokens_quiz_used.push(tokenid);
+                                        var players = new Array();
+                                        tmp_players.forEach(tmp_player=>{
+                                            var player = tmp_players;
+                                            if(tmp_player.user_UID = User.uid){
+                                                player = {user_UID: tmp_player.user_UID, score_round: tmp_player.score_round, tokens_quiz_used};
+                                            }
+                                            players.push(player);
+                                        })                               
+                                try{
+                                    boardgamesService.update(boardgameid, {players}).then(alert("Token Válido!"));
+                                    window.location.href = "../quiz/quiz.html";
+                                } catch (error) {
+                                    alert(error);
+                                }
+                            }else{
+                                alert("Token inválido!");
+                                window.location.href = "../../play/menu.html";
+                            }
+                    }else{    
+                        let pos_token_used = tokens_quiz_used.indexOf(tokenid);  
+                        let pos_token = tokens_quiz.indexOf(tokenid); 
+                        if (pos_token_used > -1){ // Não foi usado  ainda
+                            if(pos_token > -1){
+                                tmp_players.forEach(player => {
+                                    if(player.user_UID == User.uid){
+                                        tokens_quiz_used.push(tokenid)
+                                        player.push(tokens_quiz_used);
+                                    }
+                                });
+                                boardgamesService.update(boardgameid, {players}).then(alert("Token Válido!"));      
+                                window.location.href = "../quiz/quiz.html";
+                            }else{
+                                alert("Token inválido!");
+                                window.location.href = "../../play/menu.html";
+                            }
+                        }
+                    }   
+                }
+                if(category == "challange"){
+                    window.location.href = "../challange/challange.html";
+                }
+                if(category == "luck"){
+                    window.location.href = "../luck/luck.html";
+                }
+                if(category == "quiz_final"){
+                    window.location.href = "../final/final.html";
+                }
+        });
     }
-    return tokens;
-}
-
-
-function setTokens(tokens, tokenid){
-  // Convert the user object into a string
-  let removetoken = tokens.splice(tokens.indexOf(tokenid),1);
-  console.log(removetoken);
-  let tokensString = JSON.stringify(tokens);
-  // Store the stringified object in sessionStorage
-  console.log(tokensString);
-  sessionStorage.setItem('tokens', tokensString);
-}
+});
 
 
 function logout() {
     firebase.auth().signOut().then(() => {
-        sessionStorage.clear();
         window.location.href = "../../home/home.html";
     }).catch(() => {
         alert('Erro ao fazer logout');
     })
 }    
   
-
-function getUser(){
-    let UserString = sessionStorage.User;
-    let User = JSON.parse(UserString);
-    console.log(User);
-    return User;
-  }
-  
-  function getProfile(){
-    if(User === undefined){
-        User = getUser();
-    }
-    document.getElementById("nameUser").innerHTML = User.nickname;
-    var avatar = User.avatar;
-    document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
-    document.getElementById("score_total").innerHTML = User.score;
-    document.getElementById("score_round").innerHTML = sessionStorage.score_round;
-    document.getElementById("level").innerHTML = sessionStorage.level;
-  }
-
-  function voltar(){
-    window.location.href = "../../play/menu.html";
-  }
+function voltar(){
+window.location.href = "../../play/menu.html";
+}

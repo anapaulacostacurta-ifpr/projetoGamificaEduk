@@ -1,75 +1,69 @@
-var User = getUser();
-var user_UID = sessionStorage.userUid;
-getProfile();
-
-
-var boardgames = getBoardgames();
-// Verificar se o usuário tem acesso a funcionalidade
-isAcessoBoargames();
-
-firebase.auth().onAuthStateChanged( (user) => {
-  if (!user) {
-    sessionStorage.clear;
-    window.location.href = "../login/login.html";
-  }
-})
-
-// Captura o evento de envio do formulário
-document.getElementById("boardgame-form").addEventListener("submit", function(event) {
-  event.preventDefault();
- 
-  var alert_sucesso = document.getElementById("alert_sucesso");
-  var alert_error = document.getElementById("alert_error");
-  var msg_sucesso = document.getElementById("res_sucesso");
-  var msg_error = document.getElementById("res_error");  
-
-  // Captura os dados do formulário
-  const round_date = (new Date()).toLocaleDateString('pt-BR');
-  const level = document.getElementById("level").value;
-  const host = sessionStorage.userUid;
-  const boardgameid = document.getElementById("boardgameid").value;
-  const state = "waiting"; // "waiting", "started", "finished"
-
-  // Cria o objeto para salvar o quiz
-  const newboardgame = {
-    round_date,
-    boardgameid,
-    level,
-    host,
-    state,  
-  };
-
-  var existe;
-  if (boardgames === undefined){
-    getBoardgames();
-  }
-  existe = getBoardgamebyID(boardgameid,round_date, host, level);
-  if(existe === "indisponível"){
-      msg_error.innerHTML= "Funcionalidade indisponível. Limpe a página e Tente novamente!"; 
-      alert_error.classList.add("show");
-      return[];
+firebase.auth().onAuthStateChanged((User) => {
+  if (!User) {
+      window.location.href = "../login/login.html";
   }else{
-    if(existe =="sim"){
-      msg_error.innerHTML="Rodada ID: "+ boardgameid + " está já esta cadastrado. Limpe a pagina e digite os dados novamente!"; 
-      alert_error.classList.add("show");
-      return[];
-    }else{
-      //Inserir
-      saveBoardgame(newboardgame);
-      msg_sucesso.innerHTML= "Consulte o cadastro da Rodada ID:"+ boardgameid+"!";
-      alert_sucesso.classList.add("show");
-      return[];
-    }
+      userService.findByUid(User.uid).then(user=>{
+        document.getElementById("nameUser").innerHTML = user.nickname;
+        var avatar = user.avatar;
+        document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
+      }).catch(error => {
+          console.log(error);
+      });
+
+      document.getElementById("activity-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+       
+        var alert_sucesso = document.getElementById("alert_sucesso");
+        var alert_error = document.getElementById("alert_error");
+        var msg_sucesso = document.getElementById("res_sucesso");
+        var msg_error = document.getElementById("res_error");  
+      
+        // Captura os dados do formulário
+        const activity_date_start = new Date(document.getElementById("activity_date_start").value).toLocaleDateString('pt-BR');
+        const activity_date_final = new Date(document.getElementById("activity_date_start").value).toLocaleDateString('pt-BR');
+        const activity_time_start = new Date(document.getElementById("activity_date_start").value).toLocaleDateString('pt-BR');
+        const activity_time_final = new Date(document.getElementById("activity_date_start").value).toLocaleDateString('pt-BR');
+        const activity_level = document.getElementById("activity_level").value;
+        const activity_teacher = User.uid;
+        const activity_id = document.getElementById("activity_id").value;
+        const activity_state = "waiting"; // "waiting", "started", "finished"
+      
+        /** 
+        boardgamesService.getBoardGameByRodadaID(boardgameid).then(boardgames=>{
+          boardgames.forEach(boardgame=>{
+            msg_error.innerHTML= "Atividade: "+boardgame.dados.boardgameid+" já cadastrada!";
+          })
+        }).catch(error => {
+              if(error == "Não encontrado"){
+                console.log(error);
+              }
+        });
+
+        */
+      
+        // Cria o objeto para salvar o quiz
+        const newactivity = {
+          activity_date,
+          activity_id,
+          activity_level,
+          activity_teacher,
+          activity_state,  
+        };
+        try{
+          boardgamesService.save(newactivity);
+          msg_sucesso.innerHTML= "Atividade cadastrada com Sucesso!";
+          alert_sucesso.classList.add("show");
+          document.getElementById("bt-success").disabled = true;
+        } catch (error){
+          msg_error.innerHTML= error;
+          alert_error.classList.add("show");
+        }
+    });
   }
 })
-
-function recarregarAPagina(){
-  window.location.reload();
-} 
-
+ 
 function logout() {
   firebase.auth().signOut().then(() => {
-      sessionStorage.clear();
       window.location.href = "../../login/login.html";
   }).catch(() => {
       alert('Erro ao fazer logout');
@@ -78,78 +72,4 @@ function logout() {
 
 function voltar(){
   window.location.href = "../../home/home.html";
-}
-
-
-function saveBoardgame(newboardgame){
-  boardgamesService.save(newboardgame);
-  setBoardGames();
-}
-
-function getBoardgameRounds(boardgameid,round_date, host, level){
-  var existe = "não";
-  if(boardgames === undefined){
-    existe = "indisponível";
-  }else{
-    boardgames.forEach(boardgame =>{
-      let boardgame_dados = boardgame.dados;
-      if(boardgame_dados.boardgameid == boardgameid){
-        if(boardgame_dados.round_date == round_date){
-          if(boardgame_dados.host == host){
-            if(boardgame_dados.level == level){
-              if(boardgame_dados.state !== "finished"){
-                existe= "sim";
-              }
-            }
-          }
-        }
-      }
-    });
-  }
-  return existe;
-}
-
-function setBoardGames(){
-  boardgamesService.findAll().then(boardgames =>{
-      let boardgamesString = JSON.stringify(boardgames);
-      sessionStorage.setItem('boardgames', boardgamesString);
-    });
-}
-
-function getBoardgames(){
-  let boardgamesString = sessionStorage.boardgames;
-  let boardgames;
-  if (boardgamesString === undefined){
-    setBoardGames();
-  }else{
-    boardgames = JSON.parse(boardgamesString);
-  }
-  return boardgames;
-}
-
-
-function isAcessoBoargames(){
-  var user_UID = sessionStorage.userUid;
-  var perfil_professor = sessionStorage.professor;
-  if ( (perfil_professor) && !(user_UID === undefined)){
-    return true;
-  }else{
-    return false;
-  }
-}
-  
-
-function getUser(){
-  let UserString = sessionStorage.User;
-  let User = JSON.parse(UserString);
-  console.log(User);
-  return User;
-}
-
-function getProfile(){
-  if(User === undefined){
-      User = getUser();
-  }
-  document.getElementById("nameUser").innerHTML = User.name;
-  document.getElementById("score_total").innerHTML = User.score +" points";
 }

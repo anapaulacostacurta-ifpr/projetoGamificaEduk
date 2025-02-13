@@ -19,14 +19,25 @@ const boardgamesService = {
         console.log(boardgames);
         return boardgames;
     },
-    findByUid: uid => {
-        return firebase.firestore()
+    findByUid: async (uid) => {
+        const querySnapshot =  await firebase.firestore()
             .collection("boardgames")
             .doc(uid)
             .get()
-            .then(doc => {
-                return doc.data();
+            console.log(querySnapshot);
+
+            if(querySnapshot.empty){
+                throw new Error("Tabuleiro não encontrado:" + rodadaid);
+            }
+            var boardgames = new Array();
+            querySnapshot.forEach(doc => {
+                var id = doc.id;
+                var dados = doc.data();
+                var boardgame = {id,dados};
+                boardgames.push(boardgame);
             });
+            console.log(boardgames);
+            return boardgames;
     },
     getBoardGameByRodadaID: async (rodadaid) => {
             const querySnapshot = await firebase.firestore().collection("boardgames")
@@ -37,7 +48,7 @@ const boardgamesService = {
             console.log(querySnapshot);
 
             if(querySnapshot.empty){
-                throw new Error("Tabuleiro não encontrador:" + rodadaid);
+                throw new Error("Não encontrado");
             }
             var boardgames = new Array();
             querySnapshot.forEach(doc => {
@@ -60,7 +71,7 @@ const boardgamesService = {
         console.log(querySnapshot);
 
         if(querySnapshot.empty){
-            throw new Error("Tabuleiro não encontrador:" + boardgameid);
+            throw new Error("Tabuleiro não encontrado:" + boardgameid);
         }
         var boardgames = new Array();
         querySnapshot.forEach(doc => {
@@ -82,7 +93,7 @@ const boardgamesService = {
     console.log(querySnapshot);
 
     if(querySnapshot.empty){
-        throw new Error("Tabuleiro não encontrador:" + boardgameid);
+        throw new Error("Tabuleiro não encontrado:" + boardgameid);
     }
     var boardgames = new Array();
     querySnapshot.forEach(doc => {
@@ -92,7 +103,76 @@ const boardgamesService = {
             boardgames.push(boardgame);
     });
     console.log(boardgames);
-    return boardgams;
+    return boardgames;
+},
+getActivitiesbyDate: async (date) => {
+    const querySnapshot = await firebase.firestore().collection("activities")
+    .where('activity_date','==', date)
+    .where('activity_state','==','started')
+    .get();
+    console.log(querySnapshot);
+
+    if(querySnapshot.empty){
+        throw new Error("Atividades não encontradas:" + date);
+    }
+    var activities = new Array();
+    querySnapshot.forEach(doc => {
+            var uid = doc.id;
+            var dados = doc.data();
+            var activity = {uid,dados};
+            activities.push(activity);
+    });
+    console.log(activities);
+    return activities;
+},
+getActivities: async (activity_id) => {
+    const querySnapshot = await firebase.firestore().collection("activities")
+            .where('activity_id', '==',activity_id)
+            .where('activity_state','==','started')
+            .get();
+            console.log(querySnapshot);
+
+            if(querySnapshot.empty){
+                throw new Error("Atividade não encontrado:" + activity_id);
+            }
+            var activities = new Array();
+            querySnapshot.forEach(doc => {
+                var uid = doc.id;
+                var dados = doc.data();
+                var activity = {uid,dados};
+                activities.push(activity);
+            });
+            console.log(activities);
+            return activities;
+},
+getActivitybyPlayer: async (user_UID, date) => {
+    const querySnapshot = await firebase.firestore().collection("boardgames")
+            .where('state','==','started')
+            .where('activity_date_start','==',data)
+            .where('activity_date_final','==',data)
+            .where('activity_time_start','==',data)
+            .where('activity_time_final','==',data)
+            .get();
+            console.log(querySnapshot);
+
+            if(querySnapshot.empty){
+                throw new Error("Tabuleiro não encontrado:" + rodadaid);
+            }
+            var boardgames = new Array();
+            querySnapshot.forEach(doc => {
+                var id = doc.id;
+                var dados = doc.data();
+                var players = dados.players;
+                players.forEach(player => {
+                    if(player.user_UID == user_UID){
+                        var boardgame = {id,dados};
+                        boardgames.push(boardgame);
+                    }
+                  });
+                
+            });
+            console.log(boardgames);
+            return boardgames;
 },
     remove: boardgames => {
         return firebase.firestore()
@@ -100,23 +180,21 @@ const boardgamesService = {
             .doc(boardgames.uid)
             .delete();
     },
-    save: async (boardgames) => {
-        return await firebase.firestore()
-            .collection("boardgames")
+    save: async (activities) => {
+        try{
+            const querySnapshot = await firebase.firestore()
+            .collection("activities")
             .doc()
-            .set(boardgames)
+            .set(activities);
+            return querySnapshot;
+        }catch (error) {
+            throw error;
+        }
     },
-    update: (id,boardgame)  => {
-        return firebase.firestore()
-            .collection("boardgames")
+    update: async (id,activities)  => {
+        return await firebase.firestore()
+            .collection("activities")
             .doc(id)
-            .update(boardgame);
-    },
-    addPlayers:  (boardgameid, players) => {
-        return firebase.firestore()
-            .collection("boardgames")
-            .doc(boardgameid)
-            .update(players);
-            
+            .update(activities);
     }
 };

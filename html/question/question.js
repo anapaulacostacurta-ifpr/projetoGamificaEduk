@@ -1,35 +1,32 @@
-const question_box = document.querySelector(".question_box");
-const que_text = document.querySelector(".que_text");
-const option_list = document.querySelector(".option_list");
-const timeText = document.querySelector(".timer .time_left_txt");
-const timeCount = document.querySelector(".timer .timer_sec");
-const user_UID = sessionStorage.userUid;
+//const question_box = document.querySelector(".question_box");
+const question_box = document.getElementById("question_box");
+//const que_text = document.querySelector(".que_text");
+const que_text = document.getElementById("que_text");
+//const option_list = document.querySelector(".option_list");
+const option_list = document.getElementById("option_list");
+//const timeText = document.querySelector(".timer .time_left_txt");
+const timeText = document.getElementById("time_left_txt");
+//const timeCount = document.querySelector(".timer .timer_sec");
+const timeCount = document.getElementById("timer_sec");
 
-const boardgame = getBoardgame();
-
-function getBoardgame(){
-  let boardgameString = sessionStorage.boardgame;
-  let boardgame = JSON.parse(boardgameString);
-  console.log(boardgame);
-  return boardgame;
-}
+var User = getUser();
 
 function showQuestion(question){
   //creating a new span and div tag for question and option and passing the value using array index
-  let que_tag = "<span>" +  question.numb +".</span>"+"<span>" +  question.text +"</span>";
+  let que_tag = '<span class="fw-bold">' +  question.numb +".</span>"+'<span class="fw-bold">' +  question.text +"</span>";
   let option_tag = 
-  '<div class="option"><p class="choice-prefix">A</p><p class="choice-text" data-number="1"><span class="question">' +
+  '<div class="option"><span class="choice-prefix m-2 p-2">A</span><span class="choice-text card m-2 p-2" style="width:380px" data-number="1"><span class="question">' +
     question.options[0] +
-    "</span></div>" +
-    '<div class="option"><p class="choice-prefix">B</p><p class="choice-text" data-number="2"><span class="question">' +
+    "</span></span></div>"+
+    '<div class="option"><span class="choice-prefix m-2 p-2">B</span><span class="choice-text card m-2 p-2" style="width:380px" data-number="2"><span class="question">' +
     question.options[1] +
-    "</span></p></div>" +
-    '<div class="option"><p class="choice-prefix">C</p><p class="choice-text" data-number="3"><span class="question">' +
+    "</span></span></div>" +
+    '<div class="option"><span class="choice-prefix m-2 p-2">C</span><span class="choice-text card m-2 p-2" style="width:380px" data-number="3"><span class="question">' +
     question.options[2] +
-    "</span></p></div>" +
-    '<div class="option"><p class="choice-prefix">D</p><p class="choice-text" data-number="4"><span class="question">' +
+    "</span></span></div>" +
+    '<div class="option"><span class="choice-prefix m-2 p-2">D</span><span class="choice-text card m-2 p-2" style="width:380px" data-number="4"><span class="question">' +
     question.options[3] +
-    "</span></p></div>";
+    "</span></span></div>";
   
   que_text.innerHTML = que_tag; //adding new span tag inside que_tag
   option_list.innerHTML = option_tag; //adding new div tag inside option_tag
@@ -48,19 +45,19 @@ let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 //if user clicked on option
 function optionSelected(answer) {
   let userAns = answer.querySelector(".choice-text").textContent; //getting user selected option
-  let correcAns =  sessionStorage.answer;   
+  let correcAns =  sessionStorage.answer;
+  let correct;
   const allOptions = option_list.children.length; //getting all option items
   sessionStorage.setItem("userAnswer",userAns);
-
   if (userAns == correcAns) {
     answer.classList.add("correct"); //adding green color to correct selected option
     answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
-    setScore(true);
+    correct = true;
   } else {
     answer.classList.add("incorrect"); //adding red color to correct selected option
     answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
     console.log("Wrong Answer");
-    setScore(false);
+    correct = false;
     for (i = 0; i < allOptions; i++) {
       if (option_list.children[i].textContent == correcAns) {
         //if there is an option which is matched to an array answer
@@ -73,11 +70,13 @@ function optionSelected(answer) {
   for (i = 0; i < allOptions; i++) {
     option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
   }
+  setScore(correct);
 }
 
 function setScore(corret){
   var boardgame = getBoardgame();
-  var players = boardgame.players;
+  var players = boardgame.dados.players;
+  var boardgameid = boardgame.id;
   var count = 0;
   let score_old = parseInt(sessionStorage.score_round);
   let score;
@@ -97,25 +96,39 @@ function setScore(corret){
   
   //Salvar Score na variável
   players[count].score_round = score;
-  //Atualizar no banco de dados
-  boardgamesService.addPlayers(boardgame.boardgameid, {players});
-  //Atualizar Sessão
+
+  //Atualizar os quiz respondidos
+  var array_answered = players[count].quiz_answered;
+  if(array_answered === undefined || array_answered === "undefined"){
+    array_answered = new Array();
+  }
+  array_answered.push(sessionStorage.question_numb);
+  players[count].push(array_answered);
+  sessionStorage.setItem("answered_quizzes",JSON.stringify(array_answered));
+
+  //Atualizar os tokens usados
+  var array_tokens = players[count].usedtokens_quiz;
+  if(array_tokens === undefined || array_tokens === "undefined"){
+    array_tokens= new Array();
+  }
+  array_tokens.push(sessionStorage.token_quiz);
+  players[count].push(array_tokens);
+  sessionStorage.setItem("usedtokens_quiz",JSON.stringify(array_tokens));
+
+  boardgamesService.addPlayers(boardgameid, {players}).then(buscarBoardgame(boardgame.dados.boardgameid));
+  //atualizar o boargame da sessão
+
+  //Atualizar o Score dos pontos do nível na Sessão
   sessionStorage.setItem("score_round",score);
 
-  //Log da resposta
-  const boardgame_id = boardgame.boardgameid;
-  const level = boardgame.level;
+  //gravar na Log as resposta selecionadas
+  const boardgame_id = boardgame.dados.boardgameid;
+  const level = boardgame.dados.level;
   const hora = (new Date()).toLocaleTimeString('pt-BR');
   const data = (new Date()).toLocaleDateString('pt-BR');
-  var log_answers = {user_UID: user_UID, data: data, hora: hora, level: level, boardgame_id: boardgame_id, category: sessionStorage.question_type, question_numb:sessionStorage.question_numb, user_answer:sessionStorage.userAnswer, score_old: score_old, score_round: score, tokenid: sessionStorage.token};
+  var log_answers = {user_UID: user_UID, data: data, hora: hora, level: level, boardgameid: boardgameid, rodada_id: boardgame_id, category: sessionStorage.question_category, question_numb:sessionStorage.question_numb, user_answer:sessionStorage.userAnswer, score_old: score_old, score_new: score, tokenid: sessionStorage.sessionStorage.token_quiz};
   // Salvar no banco de dados.
   logboardgamesService.save(log_answers);
-  
-}
-
-function setBoardGame(boardgame){
-  let boardgameString = JSON.stringify(boardgame);
-  sessionStorage.setItem('boardgame', boardgameString);
 }
 
 function getBoardgame(){
@@ -124,6 +137,7 @@ function getBoardgame(){
   console.log(boardgame);
   return boardgame;
 }
+
 
 function startTimer(time) {
   counter = setInterval(timer, 1000);
@@ -138,7 +152,7 @@ function startTimer(time) {
     if (time < 0) {
       //if timer is less than 0
       clearInterval(counter); //clear counter
-      timeText.textContent = "Intervalo"; //change the time text to time off
+      timeText.textContent = "Tempo Restante"; //change the time text to time off
       const allOptions = option_list.children.length; //getting all option items
       let correcAns = sessionStorage.answer; //getting correct answer from array
       for (i = 0; i < allOptions; i++) {
@@ -174,5 +188,113 @@ function logout() {
       window.location.href = "../../home/home.html";
   }).catch(() => {
       alert('Erro ao fazer logout');
+  })
+}
+
+function getUser(){
+  let UserString = sessionStorage.User;
+  let User = JSON.parse(UserString);
+  console.log(User);
+  return User;
+}
+
+function getAnsweredQuizzes(){
+  // Get the stringified object from sessionStorage
+  let answered_quizzesString = sessionStorage.answered_quizzes;
+  let answered_quizzes;
+  if(answered_quizzesString === undefined || answered_quizzesString === "undefined"){
+    var boardgame = getBoardgame();
+    var players = boardgame.dados.players;
+    players.forEach(player => {
+      if(player.user_UID == user_UID){
+        answered_quizzes = player.answered_quizzes;
+        sessionStorage.setItem('answered_quizzes', JSON.stringify(answered_quizzes));
+      }
+    })
+  }else{
+    // Parse the string back into an object
+    answered_quizzes = JSON.parse(answered_quizzesString);
+    console.log(answered_quizzes);
+  }
+  return answered_quizzes;
+}
+
+function getQuizzes(){
+  var quizzesString = sessionStorage.quizzes;
+  var quizzes;
+  if (quizzesString  === undefined || quizzesString  === "undefined"){
+    questionsService.getQuizzesByLevel(parseInt(sessionStorage.level),"quiz").then(questions =>{
+      console.log(questions);
+      setQuizzes(questions);
+    });
+  }else{
+    quizzes = JSON.parse(quizzesString);
+    console.log(quizzes);
+  }
+  return quizzes;
+}
+
+function setAtualQuiz(){
+  let answered_quizzes = getAnsweredQuizzes();
+  if(answered_quizzes === undefined || answered_quizzes === "undefined"){
+    answered_quizzes = new Array();
+  }
+  let quizString;
+  let answerString;
+  let categoryString;
+  let numbString;
+  let quizAtual;
+  //buscar as questões da sessão
+  if( !(quizzes === undefined) || !(quizzes === "undefined")){
+    quizzes.forEach(quiz => {
+      if(answered_quizzes.indexOf(quiz.numb) == -1){ //Não foi respondida
+        quizString = JSON.stringify(quiz);
+        answerString = quiz.answer[0];
+        categoryString = quiz.category;
+        numbString = quiz.numb;
+      }
+    });
+    //Coloca quiz atual na sessão.
+    sessionStorage.setItem('quiz', quizString);
+    sessionStorage.setItem('answer',answerString);
+    sessionStorage.setItem('question_numb',numbString);
+    sessionStorage.setItem('question_category',categoryString);
+    quizAtual = JSON.parse(quizString);
+  }
+  return quizAtual;
+}
+
+function setQuizzes(questions){
+  // Convert the user object into a string
+  let quizzesString = JSON.stringify(questions);
+  // Store the stringified object in sessionStorage
+  sessionStorage.setItem('quizzes', quizzesString);
+  //sessionStorage.setItem('answered_quizzes', JSON.stringify(new Array()));
+}
+
+function getAtualQuiz(){
+  let quizString = sessionStorage.quiz;
+  let quiz;
+  if (quizString === undefined || quizString === "undefined"){
+    quizString = setAtualQuiz();
+  }
+  if(quizString === undefined || quizString === "undefined"){
+    sessionStorage.setItem('hasquiz',false);
+  }else {
+    sessionStorage.setItem('hasquiz',true);
+    quiz = JSON.parse(quizString);
+    console.log(quiz);
+  }
+  return quiz;
+}
+
+function buscarBoardgame(rodada_id){
+  boardgamesService.getBoardGameByRodadaID(rodada_id).then((boardgames) => {
+    boardgames.forEach(boardgame => {
+      let boardgame_id = boardgame.dados.boardgameid;
+      if(boardgame_id == rodada_id){
+        return setBoardGame(boardgame);
+      }
+    })
   })
 }
