@@ -65,7 +65,7 @@ const boardgamesService = {
     console.log(boardgames);
     return boardgames;
 },
-getActivitiesbyDateStart: async (date_start) => {
+getActivitiesbyDate: async (date_start) => {
     const querySnapshot = await firebase.firestore().collection("activities")
     .where('date_start','==', date_start)
     .where('state','==','started')
