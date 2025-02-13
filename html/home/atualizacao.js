@@ -10,18 +10,12 @@ firebase.auth().onAuthStateChanged((User) => {
             
             var profile;
 
-            if(profileUser == "professor"){
-                profile = {admin:false, aluno: false, professor: true};
-            }else{
-                if (profileUser == "aluno"){
-                    profile = {admin:false, aluno: true, professor: false};
-                }
-                if (profileUser == "admin"){
-                    profile = {admin:true, aluno: false, professor: false};
-                }
+            var user = {uid: User.uid, name: name, profile:profileUser, score:0, status:false};
+            try{
+                userService.save(user).then(alert("Aguarde seu perfil ser ativado pelo administrador!"));
+            }catch(error){
+                alert(error.message);
             }
-            var user = {uid: User.uid, name: name, profile:"aluno", score:0, status:false};
-            userService.save(user).then(alert("Aguarde seu perfil ser ativado pelo administrador!"));
             logout();
         });
     }

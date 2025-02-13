@@ -22,7 +22,7 @@ const userService = {
             const querySnapshot = await firebase.firestore()
             .collection("users")
             .doc()
-            .add(user);
+            .set(user);
 
             return querySnapshot;
         }catch (error) {
