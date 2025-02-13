@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged((User) => {
       document.getElementById("startactivity-form").addEventListener("submit", function(event) {
         event.preventDefault();
         // Captura os dados do formulário
-        const activity_date = (document.getElementById("activity_date").value).toLocaleDateString('pt-BR');
+        const activity_date = new Date(document.getElementById("activity_date").value).toLocaleDateString('pt-BR');
         const activity_level = document.getElementById("activity_level").value;
         const activity_teacher = User.uid;
         const activity_id = document.getElementById("activity_id").value;
