@@ -8,7 +8,7 @@ firebase.auth().onAuthStateChanged((User) => {
             document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
             document.getElementById("score_total").innerHTML = user.score;
         }).catch(error => {
-            if(error == "01 - Não encontrado."){
+            if(error.message === "01 - Não encontrado."){
                 document.getElementById("btnJogar").style.display = "none";
                 alert("Seu perfil precisa ser atualizado e ativado!Acesse o menu perfil.");
                 window.location.href = "./atualizacao.html";
