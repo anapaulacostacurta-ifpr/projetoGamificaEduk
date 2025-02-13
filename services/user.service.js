@@ -1,18 +1,18 @@
 const usersService = {
-    findByUid: uid => {
-        return firebase.firestore()
+    findByUid: async (uid) => {
+        return await firebase.firestore()
             .collection("login")
-            .doc(uid)
+            .where('uid','==',uid)
             .get()
             .then(doc => {
                 return doc.data();
             });
     },
-    save: async (uid, user) => {
+    save: async (user) => {
         try{
             const querySnapshot = await firebase.firestore()
-            .collection("login")
-            .doc(uid)
+            .collection("users")
+            .doc()
             .set(user);
 
             return querySnapshot;

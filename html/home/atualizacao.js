@@ -20,8 +20,8 @@ firebase.auth().onAuthStateChanged((User) => {
                     profile = {admin:true, aluno: false, professor: false};
                 }
             }
-            var user = {name: name, profile, score:0, status:false};
-            usersService.save(User.uid, user).then(alert("Aguarde seu perfil ser ativado pelo administrador!"));
+            var user = {uid: User.uid, name: name, profile, score:0, status:false};
+            userService.save(user).then(alert("Aguarde seu perfil ser ativado pelo administrador!"));
             logout();
         });
     }

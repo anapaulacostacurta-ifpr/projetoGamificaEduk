@@ -2,7 +2,7 @@ firebase.auth().onAuthStateChanged((User) => {
     if (!User) {
         window.location.href = "../login/login.html";
     }else{
-        usersService.findByUid(User.uid).then(user=>{
+        userService.findByUid(User.uid).then(user=>{
             if(user === undefined){
                 document.getElementById("btnJogar").style.display = "none";
                 alert("Seu perfil precisa ser atualizado e ativado!Acesse o menu perfil.");

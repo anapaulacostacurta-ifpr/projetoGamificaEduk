@@ -105,10 +105,10 @@ const boardgamesService = {
     console.log(boardgames);
     return boardgames;
 },
-getActivitiesbyDate: async (date) => {
+getActivitiesbyDateStart: async (date_start) => {
     const querySnapshot = await firebase.firestore().collection("activities")
-    .where('activity_date','==', date)
-    .where('activity_state','==','started')
+    .where('date_start','==', date_start)
+    .where('state','==','started')
     .get();
     console.log(querySnapshot);
 
@@ -125,15 +125,15 @@ getActivitiesbyDate: async (date) => {
     console.log(activities);
     return activities;
 },
-getActivities: async (activity_id) => {
+getActivities: async (id) => {
     const querySnapshot = await firebase.firestore().collection("activities")
-            .where('activity_id', '==',activity_id)
-            .where('activity_state','==','started')
+            .where('id', '==',id)
+            .where('state','==','started')
             .get();
             console.log(querySnapshot);
 
             if(querySnapshot.empty){
-                throw new Error("Atividade não encontrado:" + activity_id);
+                throw new Error("Atividade não encontrado:" + id);
             }
             var activities = new Array();
             querySnapshot.forEach(doc => {

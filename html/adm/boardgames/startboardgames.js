@@ -26,20 +26,21 @@ firebase.auth().onAuthStateChanged((User) => {
         const activity_state = "waiting"; // "waiting", "started", "finished"
 
         let linhas = ''; 
-        boardgamesService.getActivitiesbyDate(activity_id, activity_date, activity_teacher, activity_level, activity_state).then(activities => {
+        boardgamesService.getActivitiesbyDateStart(activity_id, activity_date, activity_teacher, activity_level, activity_state).then(activities => {
           activities.forEach(activity => {
                   var activity_uid = activity.uid;
                   var activity_dados = activity.dados;
                   var option = activity_uid;
                   let linha_id = '<td><span>'+'<label class="form-check-label" for="'+activity_dados.activity_id+'">'+activity_dados.activity_id+'</span></label></td>';
-                  let level = '<td><span>'+activity_dados.activity_level+'</span></td>';
-                  let date = '<td><span>'+activity_dados.activity_date+'</span></td>';
-                  let state = '<td><span>'+activity_dados.activity_state+'</span></td>';
+                  let level = '<td><span>'+activity_dados._level+'</span></td>';
+                  let date_start = '<td><span>'+activity_dados.date_start+'</span>-<span>'+activity_dados.time_start+'</span></td>';
+                  let date_final = '<td><span>'+activity_dados.date_final+'</span>-<span>'+activity_dados.time_final+'</span></td>';
+                  let state = '<td><span>'+activity_dados.state+'</span></td>';
                   let radio = '<td><input type="radio" class="form-check-activate" id="radio_id" name="radio_id" value="'+option+'" checked"></td>';
-                  linhas = linhas + '<tr>'+radio+linha_id+level+date+state+'</tr>';
+                  linhas = linhas + '<tr>'+radio+linha_id+level+date_start+date_final+state+'</tr>';
               })
               let tbody = '<tbody>'+linhas+'</tbody>';
-              let thead = '<thead><tr><th></th><th>Rodada ID</th><th>Level</th><th>Data</th><th>Status</th></tr></thead>';     
+              let thead = '<thead><tr><th></th><th>Atividade</th><th>Level</th><th>Inicio</th><th>Fim</th><th>Status</th></tr></thead>';     
               let table = '<table class="table table-hover" align="center">'+ thead + tbody+'</table>';
               lista_activities.innerHTML = table;
               pesquisa_activities.style.display = "none";
@@ -53,7 +54,7 @@ firebase.auth().onAuthStateChanged((User) => {
       document.getElementById("ativaractivity-form").addEventListener("submit", function(event) {
         event.preventDefault();
           let userselect = document.querySelector('input[name="radio_id"]:checked').value;
-          let activities = {activity_state: "started"};
+          let activities = {state: "started"};
           var alert_sucesso = document.getElementById("alert_sucesso");
           var alert_error = document.getElementById("alert_error");
           var msg_sucesso = document.getElementById("res_sucesso");
