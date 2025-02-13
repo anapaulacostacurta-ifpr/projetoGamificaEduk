@@ -15,8 +15,8 @@ firebase.auth().onAuthStateChanged((User) => {
     document.getElementById("play-form").addEventListener("submit", function(event) {
       event.preventDefault();
       // Captura os dados do formulário
-      let activity_id = document.getElementById("activity_id").value;
-      let activity_level;
+      let id = document.getElementById("activity_id").value;
+      let level;
       let activity_uid; // UID do doc no firestone
       let score = 0;
 

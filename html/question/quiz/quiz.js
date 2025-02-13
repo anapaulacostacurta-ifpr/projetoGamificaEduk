@@ -124,7 +124,7 @@ function setScore(corret){
   //gravar na Log as resposta selecionadas
   const boardgame_id = boardgame.dados.boardgameid;
   const level = boardgame.dados.level;
-  const hora = (new Date()).toLocaleTimeString('pt-BR');
+  const hora = (new Date()).F;
   const data = (new Date()).toLocaleDateString('pt-BR');
   const log_answers = {user_UID: user_UID, data: data, hora: hora, level: level, boardgameid: boardgameid, rodada_id: boardgame_id, category: sessionStorage.question_category, question_numb:sessionStorage.question_numb, user_answer:sessionStorage.userAnswer, score_old: score_old, score_new: score, tokenid: sessionStorage.sessionStorage.token_quiz};
   // Salvar no banco de dados.
