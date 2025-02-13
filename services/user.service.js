@@ -8,10 +8,10 @@ const usersService = {
                 return doc.data();
             });
     },
-    save:  async(uid, user) => {
+    save:  async (user) => {
         return await firebase.firestore()
             .collection("users")
-            .doc(uid)
+            .doc(user.uid)
             .set(user);
     }
 };
