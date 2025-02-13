@@ -7,12 +7,12 @@ firebase.auth().onAuthStateChanged((User) => {
             const name = document.getElementById("nome").value;
             const select = document.getElementById("profile");
             const profileUser = select.options[select.selectedIndex].value;
-            
-            var profile;
 
             var user = {uid: User.uid, name: name, profile:profileUser, score:0, status:false};
             try{
-                userService.save(user).then(alert("Aguarde seu perfil ser ativado pelo administrador!"));
+                var res = userService.save(User.uid, user);
+                alert(res);
+                alert("Aguarde seu perfil ser ativado pelo administrador!");
             }catch(error){
                 alert(error.message);
             }

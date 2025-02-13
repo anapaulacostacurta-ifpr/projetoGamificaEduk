@@ -1,27 +1,15 @@
 const userService = {
-    findByUid: async (uid) => {
-        const querySnapshot = await firebase.firestore()
+    findByUid: async (id) => {
+        return await firebase.firestore()
             .collection("users")
-            .where('uid','==',uid)
+            .doc(id)
             .get();
-
-            if(querySnapshot.empty){
-                throw new Error("01 - Não encontrado.");
-            }
-            var users = new Array();
-            querySnapshot.forEach(doc => {
-                var uid = doc.id;
-                var dados = doc.data();
-                users.push({uid,dados});              
-            });
-            console.log(users);
-            return users;
     },
-    save: async (user) => {
+    save: async (id,user) => {
         try{
             const querySnapshot = await firebase.firestore()
             .collection("users")
-            .doc()
+            .doc(id)
             .set(user);
 
             return querySnapshot;
