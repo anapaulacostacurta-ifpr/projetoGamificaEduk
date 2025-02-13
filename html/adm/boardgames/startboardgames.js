@@ -46,7 +46,7 @@ firebase.auth().onAuthStateChanged((User) => {
               pesquisa_activities.style.display = "none";
               ativar_activity.style.display = "inline";
           }).catch((error) => {
-              let errorString = '<span>'+ error+'<span>';
+              let errorString = '<span>'+ error.message+'<span>';
               lista_activities.innerHTML = errorString;
         });  
       });

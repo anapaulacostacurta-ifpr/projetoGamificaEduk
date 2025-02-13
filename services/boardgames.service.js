@@ -73,7 +73,7 @@ getActivitiesbyDateStart: async (date_start) => {
     console.log(querySnapshot);
 
     if(querySnapshot.empty){
-        throw new Error("Atividades não encontradas:" + date);
+        throw new Error("01 - Não encontrado.");
     }
     var activities = new Array();
     querySnapshot.forEach(doc => {
