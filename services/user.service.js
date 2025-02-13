@@ -1,7 +1,7 @@
 const usersService = {
     findByUid: uid => {
         return firebase.firestore()
-            .collection("users")
+            .collection("login")
             .doc(uid)
             .get()
             .then(doc => {
