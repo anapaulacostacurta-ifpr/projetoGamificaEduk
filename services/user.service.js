@@ -6,7 +6,7 @@ const userService = {
             .get();
 
             if(querySnapshot.empty){
-                throw new Error("Nenhuma pergunta encontrada para o nível "+ level+ " .");
+                throw new Error("01 - Não encontrado.");
             }
             var users = new Array();
             querySnapshot.forEach(doc => {
