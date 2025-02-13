@@ -1,4 +1,4 @@
-const usersService = {
+const userService = {
     findByUid: async (uid) => {
         return await firebase.firestore()
             .collection("login")
