@@ -21,7 +21,11 @@
                     <form class="form-signin">
                         <h3 class="text-center">Atualizar Perfil</h3>
                         <hr class="colorgraph">
-                        <input id="nome" type="text" name="nome" id="nome" class="form-control" placeholder="Nome completo" required/>
+                        <input id="name" type="text" name="name" class="form-control" placeholder="Nome completo" required/>
+                        <input id="nickname" type="text" name="nickname" class="form-control" placeholder="Apelido" required/>
+                        <span id="avatar"></span><button id="btn_avatar" name="btn_avatar" onclick="buscarAvatar()">Alterar</button>
+                        <span id="lista_avatars"></span>
+                        <input type="checkbox" id="admin" name="admin" class="form-control" placeholder="Apelido" required/>
                         <select id="profile" name="profile" class="form-select">
                             <option value="aluno" selected>Aluno</option>
                             <option value="professor">Professor</option>
