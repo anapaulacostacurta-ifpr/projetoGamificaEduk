@@ -47,7 +47,7 @@ firebase.auth().onAuthStateChanged((User) => {
               ativar_activity.style.display = "inline";
           }).catch((error) => {
               let errorString = '<span>'+ error+'<span>';
-              lista_boardgames.innerHTML = errorString;
+              lista_activities.innerHTML = errorString;
         });  
       });
 
