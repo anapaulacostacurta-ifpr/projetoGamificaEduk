@@ -20,28 +20,28 @@ const boardgamesService = {
             console.log(boardgames);
             return boardgames;
     },
-    getBoardGameByDados: async (boardgameid,round_date, host, level,state) => {
-        const querySnapshot = await firebase.firestore().collection("boardgames")
-        .where('boardgameid','==',boardgameid)
-        .where('round_date','==',round_date)
-        .where('host','==',host)
-        .where('level','==',level)
-        .where('state','==',state)
+    getActivitiesbyDateStart: async (activity_id, activity_date, activity_teacher, activity_level, activity_state) => {
+        const querySnapshot = await firebase.firestore().collection("activities")
+        .where('id','==',activity_id)
+        .where('date_start','==',activity_date)
+        .where('teacher','==',activity_teacher)
+        .where('level','==',activity_level)
+        .where('state','==',activity_state)
         .get();
         console.log(querySnapshot);
 
         if(querySnapshot.empty){
-            throw new Error("Tabuleiro não encontrado:" + boardgameid);
+            throw new Error("01 - Não encontrado.");
         }
-        var boardgames = new Array();
+        var activities = new Array();
         querySnapshot.forEach(doc => {
-            var id = doc.id;
+            var uid = doc.id;
             var dados = doc.data();
-            var boardgame = {id,dados};
-            boardgames.push(boardgame);
+            var activity = {uid,dados};
+            activities.push(activity);
         });
-        console.log(boardgames);
-        return boardgames;
+        console.log(activities);
+        return activities;
 },
     getBoardgameRounds: async (boardgameid,round_date, host, level) => {
     const querySnapshot = await firebase.firestore().collection("boardgames")
