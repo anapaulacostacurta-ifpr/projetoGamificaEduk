@@ -8,12 +8,13 @@ const usersService = {
                 return doc.data();
             });
     },
-    save: async (user) => {
+    save: async (uid, user) => {
         try{
             const querySnapshot = await firebase.firestore()
             .collection("users")
-            .doc(user.uid)
+            .doc(uid)
             .set(user);
+            
             return querySnapshot;
         }catch (error) {
             throw error;
