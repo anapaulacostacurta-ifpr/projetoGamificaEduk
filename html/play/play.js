@@ -24,7 +24,7 @@ firebase.auth().onAuthStateChanged((User) => {
         let data = (new Date()).toLocaleDateString('pt-BR');
         activities.forEach(activity => {
           if(activity.dados.id == id){
-            if(data >= activity.dados.date_start &&  data <= activity.dados.data_final){
+            if(data >= activity.dados.date_start &&  data <= activity.dados.date_final){
               if( hora >= activity.dados.time_start && hora <= activity.dados.time_final){
                   activity_uid = activity.id; // UID do doc no firestone
                   var tmp_players = activity.dados.players;
