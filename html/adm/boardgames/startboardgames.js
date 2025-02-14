@@ -31,8 +31,8 @@ firebase.auth().onAuthStateChanged((User) => {
                   var activity_uid = activity.uid;
                   var activity_dados = activity.dados;
                   var option = activity_uid;
-                  let linha_id = '<td><span>'+'<label class="form-check-label" for="'+activity_dados.activity_id+'">'+activity_dados.activity_id+'</span></label></td>';
-                  let level = '<td><span>'+activity_dados._level+'</span></td>';
+                  let linha_id = '<td><span>'+'<label class="form-check-label" for="'+activity_dados.id+'">'+activity_dados.id+'</span></label></td>';
+                  let level = '<td><span>'+activity_dados.level+'</span></td>';
                   let date_start = '<td><span>'+activity_dados.date_start+'</span>-<span>'+activity_dados.time_start+'</span></td>';
                   let date_final = '<td><span>'+activity_dados.date_final+'</span>-<span>'+activity_dados.time_final+'</span></td>';
                   let state = '<td><span>'+activity_dados.state+'</span></td>';
