@@ -30,12 +30,13 @@ firebase.auth().onAuthStateChanged((User) => {
                   var tmp_players = activity.dados.players;
                   if (tmp_players === undefined){
                     let players = new Array();
-                    players.push({'user_UID':User.uid,'score':score,'ckeckin_date':date,'ckeckin_time':hora});
+                    players[0] = {'user_UID':User.uid,'score':score,'ckeckin_date':date,'ckeckin_time':hora};
                     boardgamesService.update(activity_uid, {players});
                   }else{
                     let players = new Array();
                     //variável para verficar se o jogador já entrou no tabuleiro
                     let isOnPlayer = false;
+                    const last = tmp_players.at(-1);
                     tmp_players.forEach(player => {
                       if(player.user_UID == User.uid){
                         isOnPlayer = true;
