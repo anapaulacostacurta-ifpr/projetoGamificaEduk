@@ -36,7 +36,7 @@ firebase.auth().onAuthStateChanged((User) => {
                   let date = '<td><span>'+activity_dados.date_start+'</span>-<span>'+activity_dados.time_start+'</span>-<span>'+activity_dados.date_final+'</span>-<span>'+activity_dados.time_final+'</span></td>';
                   let state = '<td><span>'+activity_dados.state+'</span></td>';
                   let radio = '<td><input type="radio" class="form-check-activate" id="radio_id" name="radio_id" value="'+option+'" checked"></td>';
-                  linhas = linhas + '<tr>'+radio+linha_id+level+datet+state+'</tr>';
+                  linhas = linhas + '<tr>'+radio+linha_id+level+date+state+'</tr>';
               })
               let tbody = '<tbody>'+linhas+'</tbody>';
               let thead = '<thead><tr><th></th><th>Atividade</th><th>Level</th><th>Inicio</th><th>Status</th></tr></thead>';     
