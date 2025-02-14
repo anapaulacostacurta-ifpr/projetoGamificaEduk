@@ -30,7 +30,7 @@ firebase.auth().onAuthStateChanged((User) => {
             const avatar = document.querySelector('input[name="avatar_id"]:checked').value;
 
 
-            var user = {uid: User.uid, avatar: avatar, name: name, nickname:nickname, admin: admin, profile:profileUser, score:0, status:status};
+            var user = {'uid': User.uid, 'avatar': avatar, 'name': name, 'nickname':nickname, 'admin': admin, 'profile':profileUser, 'score':0, 'status':status};
             try{
                 var res = userService.save(User.uid, user);
                 alert(res);

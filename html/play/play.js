@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged((User) => {
       // Captura os dados do formulário
       let id = document.getElementById("activity_id").value;
       let activity_uid; // UID do doc no firestone
-      let score = "0";
+      let score = 0;
 
       boardgamesService.getActivities(id).then((activities) => {
         let hora = (new Date()).toLocaleTimeString('pt-BR');
@@ -30,7 +30,7 @@ firebase.auth().onAuthStateChanged((User) => {
                   var tmp_players = activity.dados.players;
                   if (tmp_players === undefined){
                     let players = new Array();
-                    players.push({user_UID:User.uid,score:score,ckeckin_date:date,ckeckin_time:hora});
+                    players.push({'user_UID':User.uid,'score':score,'ckeckin_date':date,'ckeckin_time':hora});
                     boardgamesService.update(activity_uid, {players});
                   }else{
                     let players = new Array();
@@ -41,12 +41,12 @@ firebase.auth().onAuthStateChanged((User) => {
                         isOnPlayer = true;
                         score = player.score;
                       }
-                      players.push({user_UID:player.user_UID,score:player.score,ckeckin_data:player.ckeckin_data,ckeckin_time:checkin_time});
+                      players.push({'user_UID':player.user_UID,'score':player.score,'ckeckin_date':player.ckeckin_date,'ckeckin_time':checkin_time});
                     });
                     if (isOnPlayer){
                       alert('Retornando para o Jogo!');
                     }else{
-                      players.push({user_UID:User.uid,score:score,ckeckin_data:data,ckeckin_time:hora});
+                      players.push({'user_UID':User.uid,'score':score,'ckeckin_date':date,'ckeckin_time':hora});
                       boardgamesService.update(activity_uid, {players});
                     }
                   }
