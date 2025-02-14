@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged((User) => {
       // Captura os dados do formulário
       let id = document.getElementById("activity_id").value;
       let activity_uid; // UID do doc no firestone
-      let score = 0;
+      let score = "0";
 
       boardgamesService.getActivities(id).then((activities) => {
         let hora = (new Date()).toLocaleTimeString('pt-BR');
