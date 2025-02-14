@@ -52,13 +52,19 @@ firebase.auth().onAuthStateChanged((User) => {
                   }
                 }
               window.location.href = "./menu.html";
+            }else{
+              alert("Atividade fora do prazo!");
             }
+          }else{
+            alert("Atividade Não encontrada!");
           }  
         });
       
-      });
-         
-    });
+      }).catch((error) => {
+        alert(error.menssage);
+      })
+    })
+    
   }
 });
 

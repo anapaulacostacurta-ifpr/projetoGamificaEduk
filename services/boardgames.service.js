@@ -93,7 +93,7 @@ getActivities: async (id) => {
             console.log(querySnapshot);
 
             if(querySnapshot.empty){
-                throw new Error("Atividade não encontrado:" + id);
+                throw new Error("01 - Não encontrado.");
             }
             var activities = new Array();
             querySnapshot.forEach(doc => {
