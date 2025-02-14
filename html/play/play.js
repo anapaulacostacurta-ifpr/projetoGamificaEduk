@@ -21,16 +21,16 @@ firebase.auth().onAuthStateChanged((User) => {
 
       boardgamesService.getActivities(id).then((activities) => {
         let hora = (new Date()).toLocaleTimeString('pt-BR');
-        let data = (new Date()).toLocaleDateString('pt-BR');
+        let date = (new Date()).toLocaleDateString('pt-BR');
         activities.forEach(activity => {
           if(activity.dados.id == id){
-            if(data >= activity.dados.date_start &&  data <= activity.dados.date_final){
+            if(date >= activity.dados.date_start &&  date <= activity.dados.date_final){
               if( hora >= activity.dados.time_start && hora <= activity.dados.time_final){
-                  activity_uid = activity.id; // UID do doc no firestone
+                  activity_uid = activity.uid; // UID do doc no firestone
                   var tmp_players = activity.dados.players;
                   if (tmp_players === undefined){
                     let players = new Array();
-                    players.push({user_UID:User.uid,score:score,ckeckin_data:data,ckeckin_time:hora});
+                    players.push({user_UID:User.uid,score:score,ckeckin_date:date,ckeckin_time:hora});
                     boardgamesService.update(activity_uid, {players});
                   }else{
                     let players = new Array();
