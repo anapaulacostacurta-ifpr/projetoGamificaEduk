@@ -32,14 +32,12 @@ firebase.auth().onAuthStateChanged((User) => {
                   var activity_dados = activity.dados;
                   var option = activity_uid;
                   let linha_id = '<td><span>'+'<label class="form-check-label" for="'+activity_dados.id+'">'+activity_dados.id+'</span></label></td>';
-                  let level = '<td><span>'+activity_dados.level+'</span></td>';
                   let date = '<td><span>'+activity_dados.date_start+'</span>-<span>'+activity_dados.time_start+'</span>-<span>'+activity_dados.date_final+'</span>-<span>'+activity_dados.time_final+'</span></td>';
-                  let state = '<td><span>'+activity_dados.state+'</span></td>';
                   let radio = '<td><input type="radio" class="form-check-activate" id="radio_id" name="radio_id" value="'+option+'" checked"></td>';
-                  linhas = linhas + '<tr>'+radio+linha_id+level+date+state+'</tr>';
+                  linhas = linhas + '<tr>'+radio+linha_id+date+'</tr>';
               })
               let tbody = '<tbody>'+linhas+'</tbody>';
-              let thead = '<thead><tr><th></th><th>Atividade</th><th>Level</th><th>Inicio</th><th>Status</th></tr></thead>';     
+              let thead = '<thead><tr><th></th><th>Atividade</th><th>Inicio</th></tr></thead>';     
               let table = '<table class="table table-hover" align="center">'+ thead + tbody+'</table>';
               lista_activities.innerHTML = table;
               pesquisa_activities.style.display = "none";
