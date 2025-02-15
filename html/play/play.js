@@ -35,7 +35,7 @@ firebase.auth().onAuthStateChanged((User) => {
                   }else{
                     //variável para verficar se o jogador já entrou no tabuleiro
                     let isOnPlayer = false;
-                    let last = tmp_players.length;
+                    let last = players.length;
                     players.forEach(player => {
                       if(player.user_UID == User.uid){
                         isOnPlayer = true;
