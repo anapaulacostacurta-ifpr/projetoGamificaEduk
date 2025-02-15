@@ -47,7 +47,8 @@ firebase.auth().onAuthStateChanged((User) => {
                       alert('Retornando para o Jogo!');
                     }else{
                       let players = new Array();
-                      players[last] = {'user_UID':User.uid,'score':score,'ckeckin_date':date,'ckeckin_time':hora};
+                      //players[0] = {'user_UID':User.uid,'score':score,'ckeckin_date':date,'ckeckin_time':hora};
+                      players[1] = {'user_UID':User.uid,'score':score,'ckeckin_date':date,'ckeckin_time':hora};
                       let res = boardgamesService.update(activity_uid, {players});
                       alert(res);
                     }
