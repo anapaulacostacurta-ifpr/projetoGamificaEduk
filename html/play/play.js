@@ -37,11 +37,13 @@ firebase.auth().onAuthStateChanged((User) => {
                     let isOnPlayer = false;
                     let count=0;
                     let players = new Array(tmp_players.length);
+                    players[0] = {};
                     tmp_players.forEach(player => {
                       if(player.user_UID == User.uid){
                         isOnPlayer = true;
                         score = player.score;
                       }
+                      
                       players[count] = {'user_UID':player.user_UID,'score':player.score,'ckeckin_date':player.ckeckin_date,'ckeckin_time':checkin_time};
                       count++;
                     });
