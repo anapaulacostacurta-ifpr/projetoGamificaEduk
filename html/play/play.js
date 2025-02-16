@@ -31,7 +31,7 @@ firebase.auth().onAuthStateChanged((User) => {
                     //variável para verficar se o jogador já entrou no tabuleiro
                     let isOnPlayer = false;
                     players.forEach(player=>{
-                      if(player.user_UID = user_UID){
+                      if(player.user_UID == user_UID){
                         score = player.score;
                         alert('Retornando para o Jogo!');
                         window.location.href = "./menu.html";
