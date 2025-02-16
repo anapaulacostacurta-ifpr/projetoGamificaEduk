@@ -10,13 +10,7 @@ const playerService = {
         if(querySnapshot.empty){
             throw new Error("01 - Não encontrado.");
         }
-        var players = new Array();
-        querySnapshot.forEach(doc => {
-            var uid = doc.id;
-            var dados = doc.data();
-            var player = {uid,dados};
-            players.push(player);
-        });
+        const players = querySnapshot.docs.map(doc=>doc.data());
         console.log(players);
         return players;
     },
