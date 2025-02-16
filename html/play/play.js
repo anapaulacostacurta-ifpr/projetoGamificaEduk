@@ -20,6 +20,7 @@ firebase.auth().onAuthStateChanged((User) => {
       let user_UID = User.uid;
       let ckeckin_date = (new Date()).toLocaleDateString('pt-BR');
       let ckeckin_time = (new Date()).toLocaleTimeString('pt-BR');
+      let timestamp = new Date().getTime();
 
       boardgamesService.getActivities(id).then((activities) => {
         activities.forEach(activity => {
@@ -36,8 +37,9 @@ firebase.auth().onAuthStateChanged((User) => {
                         alert('Retornando para o Jogo!');
                         window.location.href = "./menu.html";
                       }
+                      player.timestamp = timestamp;
                     })
-                    players.push({user_UID,score,ckeckin_date,ckeckin_time});
+                    players.push({user_UID,score,ckeckin_date,ckeckin_time,timestamp});
                     boardgamesService.update(activity_uid, {players}).then(window.location.href = "./menu.html");
               }
               
