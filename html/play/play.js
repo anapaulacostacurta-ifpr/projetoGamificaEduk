@@ -37,8 +37,9 @@ firebase.auth().onAuthStateChanged((User) => {
                     }else{
                       boardgamesService.update(activity_uid, {user_UID,score,ckeckin_date,ckeckin_time});
                     }
-                  }
-                }
+                 
+                
+              }
               window.location.href = "./menu.html";
             }else{
               alert("Atividade fora do prazo!");
