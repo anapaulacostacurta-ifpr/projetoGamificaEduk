@@ -158,12 +158,13 @@ getActivitybyPlayer: async (user_UID, date_start,date_final,time_start,time_fina
             .doc(id)
             .update(activities);
     },
-    updatePlayers: async (id,players)  => {
+    addPlayer: async (id,players)  => {
         try{
             const querySnapshot = await firebase.firestore()
             .collection("activities")
             .doc(id)
-            .update(players);
+            .push()
+            .set(players);
             return querySnapshot;
         }catch (error) {
             throw error;
