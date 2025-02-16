@@ -38,7 +38,7 @@ firebase.auth().onAuthStateChanged((User) => {
                         alert('Retornando para o Jogo!');
                         window.location.href = "./menu.html";
                       }
-                      players.push(player);
+                      //players.push(player);
                     })
                     //players.push({user_UID,score,ckeckin_date,ckeckin_time,timestamp});
                     players.push({});
