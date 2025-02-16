@@ -41,13 +41,24 @@ firebase.auth().onAuthStateChanged((User) => {
                         isOnPlayer = true;
                         score = player.score;
                       }
-                      player.score=10;
+                      //player.score=10;
                       //players[count] = {'user_UID':player.user_UID,'score':player.score,'ckeckin_date':player.ckeckin_date,'ckeckin_time':checkin_time};
                     });
+
+                    const array = players;
+
+                    let newArray = [];
+                    
+                    for(i = 0; i < array.length; i++) {
+                      const item = array[i];
+                      newArray.push(item);
+                    }
+
                     if (isOnPlayer){
                       alert('Retornando para o Jogo!');
                     }else{
-                      players.push({user_UID,score,ckeckin_date,ckeckin_time});
+                      newArray.push({user_UID,score,ckeckin_date,ckeckin_time});
+                      players = newArray;
                       boardgamesService.addPlayer(activity_uid, {players});
                     }
                   }
