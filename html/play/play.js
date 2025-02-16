@@ -38,7 +38,7 @@ firebase.auth().onAuthStateChanged((User) => {
                       }
                     })
                     players.push({user_UID,score,ckeckin_date,ckeckin_time});
-                    boardgamesService.update(activity_uid, {players});                
+                    boardgamesService.update(activity_uid, {players}).then(window.location.href = "./menu.html");
               }
               
             }else{
