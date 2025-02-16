@@ -2,7 +2,6 @@ const playerService = {
     getPlayer: async (id, user_UID) => {
         const querySnapshot = await firebase.firestore().collection("activities")
         .doc(id)
-        .where('state','==','starterd')
         .collection("players")
         .doc(user_UID)
         .get();
