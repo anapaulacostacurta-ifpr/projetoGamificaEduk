@@ -35,8 +35,10 @@ firebase.auth().onAuthStateChanged((User) => {
                       window.location.href = "./menu.html";
                     })
                   }).catch((error) => {
-                    let players = {user_UID,score,ckeckin_date,ckeckin_time,timestamp};
-                    playerService.save(activity_uid, players).then(window.location.href = "./menu.html");
+                    if(error.menssage == "01 - Não encontrado."){
+                      let players = {user_UID,score,ckeckin_date,ckeckin_time,timestamp};
+                      playerService.save(activity_uid, players).then(window.location.href = "./menu.html");
+                    }
                   })
                     //variável para verficar se o jogador já entrou no tabuleiro
                     //let isOnPlayer = false;
