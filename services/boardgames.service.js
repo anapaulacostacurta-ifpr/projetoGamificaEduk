@@ -158,12 +158,12 @@ getActivitybyPlayer: async (user_UID, date_start,date_final,time_start,time_fina
             .doc(id)
             .update(activities);
     },
-    addPlayer: async (id,activities)  => {
+    addPlayer: async (id,players)  => {
         try{
             const querySnapshot = await firebase.firestore()
             .collection("activities")
             .doc(id)
-            .update(activities);
+            .update({timestamp: (new Date().toLocaleString("pt-BR", { timeZone: "UTC" })), players});
             return querySnapshot;
         }catch (error) {
             throw error;

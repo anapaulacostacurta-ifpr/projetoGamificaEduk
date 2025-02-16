@@ -48,7 +48,7 @@ firebase.auth().onAuthStateChanged((User) => {
                       alert('Retornando para o Jogo!');
                     }else{
                       players.push({user_UID,score,ckeckin_date,ckeckin_time});
-                      boardgamesService.addPlayer(activity_uid, {players});
+                      boardgamesService.addPlayer(activity_uid, players);
                     }
                   }
                 }
