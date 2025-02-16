@@ -36,7 +36,6 @@ firebase.auth().onAuthStateChanged((User) => {
                   }else{
                     //variável para verficar se o jogador já entrou no tabuleiro
                     let isOnPlayer = false;
-                    let last = players.length;
                     players.forEach(player => {
                       if(player.user_UID == User.uid){
                         isOnPlayer = true;
@@ -48,7 +47,7 @@ firebase.auth().onAuthStateChanged((User) => {
                     if (isOnPlayer){
                       alert('Retornando para o Jogo!');
                     }else{
-                      let players = {user_UID,score,ckeckin_date,ckeckin_time};
+                      players.push({user_UID,score,ckeckin_date,ckeckin_time});
                       boardgamesService.addPlayer(activity_uid, {players});
                     }
                   }
