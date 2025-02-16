@@ -28,8 +28,8 @@ firebase.auth().onAuthStateChanged((User) => {
             if(ckeckin_date >= activity.dados.date_start &&  ckeckin_date <= activity.dados.date_final){
               if( ckeckin_time >= activity.dados.time_start && ckeckin_time <= activity.dados.time_final){
                   activity_uid = activity.uid; // UID do doc no firestone
-                  var tmp_players = activity.dados.players;
-                  if (tmp_players === undefined){
+                  var players = activity.dados.players;
+                  if (players === undefined){
                     let players = new Array();
                     players[0] = {user_UID,score,ckeckin_date,ckeckin_time};
                     boardgamesService.updatePlayers(activity_uid, {players});
