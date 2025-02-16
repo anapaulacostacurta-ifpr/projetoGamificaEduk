@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged((User) => {
         activities.forEach(activity => {
           if(activity.dados.id == id){
             if(ckeckin_date >= activity.dados.date_start &&  ckeckin_date <= activity.dados.date_final){
-              if( ckeckin_date >= activity.dados.time_start && ckeckin_date <= activity.dados.time_final){
+              if( ckeckin_time >= activity.dados.time_start && ckeckin_time <= activity.dados.time_final){
                   activity_uid = activity.uid; // UID do doc no firestone
                   var players = activity.dados.players;
                   if (players === undefined){
