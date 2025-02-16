@@ -18,20 +18,21 @@ firebase.auth().onAuthStateChanged((User) => {
       let id = document.getElementById("activity_id").value;
       let activity_uid; // UID do doc no firestone
       let score = 0;
+      let user_UID = User.uid;
+      let ckeckin_date = (new Date()).toLocaleDateString('pt-BR');
+      let ckeckin_time = (new Date()).toLocaleTimeString('pt-BR');
 
       boardgamesService.getActivities(id).then((activities) => {
-        let hora = (new Date()).toLocaleTimeString('pt-BR');
-        let date = (new Date()).toLocaleDateString('pt-BR');
         activities.forEach(activity => {
           if(activity.dados.id == id){
-            if(date >= activity.dados.date_start &&  date <= activity.dados.date_final){
-              if( hora >= activity.dados.time_start && hora <= activity.dados.time_final){
+            if(ckeckin_date >= activity.dados.date_start &&  ckeckin_date <= activity.dados.date_final){
+              if( ckeckin_date >= activity.dados.time_start && ckeckin_date <= activity.dados.time_final){
                   activity_uid = activity.uid; // UID do doc no firestone
                   var players = activity.dados.players;
                   if (players === undefined){
                     let players = new Array();
-                    players[0] = {'user_UID':User.uid,'score':score,'ckeckin_date':date,'ckeckin_time':hora};
-                    boardgamesService.update(activity_uid, {players});
+                    players[0] = {user_UID,score,ckeckin_date,ckeckin_time};
+                    boardgamesService.updatePlayers(activity_uid, {players});
                   }else{
                     //variável para verficar se o jogador já entrou no tabuleiro
                     let isOnPlayer = false;
@@ -46,9 +47,8 @@ firebase.auth().onAuthStateChanged((User) => {
                     if (isOnPlayer){
                       alert('Retornando para o Jogo!');
                     }else{
-                      let players = firebase.firestore.FieldValue.arrayUnion({'user_UID':User.uid,'score':score,'ckeckin_date':date,'ckeckin_time':hora});
-                      let res = boardgamesService.update(activity_uid, {players});
-                      alert(res);
+                      players[last] = {user_UID,score,ckeckin_date,ckeckin_time};
+                      boardgamesService.updatePlayers(activity_uid, {players});
                     }
                   }
                 }
