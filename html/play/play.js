@@ -30,18 +30,18 @@ firebase.auth().onAuthStateChanged((User) => {
                   activity_uid = activity.uid; // UID do doc no firestone
                   var tmp_players = activity.dados.players;
                     //variável para verficar se o jogador já entrou no tabuleiro
-                    let isOnPlayer = false;
+                    //let isOnPlayer = false;
                     var players = [];
-                    tmp_players.forEach(player=>{
-                      if(player.user_UID == user_UID){
+                    var last = tmp_players.length;
+                    for(i=0;i<last;i++){
+                      if(tmp_players[i].user_UID == user_UID){
                         score = player.score;
                         alert('Retornando para o Jogo!');
                         window.location.href = "./menu.html";
                       }
-                      //players.push(player);
-                    })
-                    //players.push({user_UID,score,ckeckin_date,ckeckin_time,timestamp});
-                    players.push({});
+                      players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp};
+                    }
+                    players[last] = {user_UID,score,ckeckin_date,ckeckin_time,timestamp};
                     boardgamesService.update(activity_uid, {players}).then(window.location.href = "./menu.html");
               }
               
