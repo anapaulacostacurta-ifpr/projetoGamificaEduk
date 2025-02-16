@@ -30,11 +30,11 @@ firebase.auth().onAuthStateChanged((User) => {
                   
                     //variável para verficar se o jogador já entrou no tabuleiro
                     let isOnPlayer = false;
-                  
+                    let players = {user_UID,score,ckeckin_date,ckeckin_time};
                     if (isOnPlayer){
                       alert('Retornando para o Jogo!');
                     }else{
-                      playerService.save(activity_uid, {user_UID,score,ckeckin_date,ckeckin_time});
+                      playerService.save(activity_uid, players);
                     }
                  
                 
