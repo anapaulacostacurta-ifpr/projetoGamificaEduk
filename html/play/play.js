@@ -29,11 +29,13 @@ firebase.auth().onAuthStateChanged((User) => {
               if( ckeckin_time >= activity.dados.time_start && ckeckin_time <= activity.dados.time_final){
                   activity_uid = activity.uid; // UID do doc no firestone
                   playerService.getPlayer(activity_uid,user_UID).then(players =>{
-                    score = player.score;
-                    alert('Retornando para o Jogo!');
-                    window.location.href = "./menu.html";
+                    players.forEach(player=>{
+                      score = player.score;
+                      alert('Retornando para o Jogo!');
+                      window.location.href = "./menu.html";
+                    })
                   }).catch((error) => {
-                    players = {user_UID,score,ckeckin_date,ckeckin_time,timestamp};
+                    let players = {user_UID,score,ckeckin_date,ckeckin_time,timestamp};
                     playerService.save(activity_uid, players).then(window.location.href = "./menu.html");
                   })
                     //variável para verficar se o jogador já entrou no tabuleiro
