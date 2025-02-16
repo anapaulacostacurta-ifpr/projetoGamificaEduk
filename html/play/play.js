@@ -42,6 +42,7 @@ firebase.auth().onAuthStateChanged((User) => {
                         isOnPlayer = true;
                         score = player.score;
                       }
+                      player.score=10;
                       //players[count] = {'user_UID':player.user_UID,'score':player.score,'ckeckin_date':player.ckeckin_date,'ckeckin_time':checkin_time};
                     });
                     if (isOnPlayer){
