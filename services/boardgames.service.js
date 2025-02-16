@@ -159,7 +159,7 @@ getActivitybyPlayer: async (user_UID, date_start,date_final,time_start,time_fina
             .doc(id)
             .collection("players")
             .doc()
-            .update(players);
+            .set(players);
             return querySnapshot;
         }catch (error) {
             throw error;
