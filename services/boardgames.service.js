@@ -94,13 +94,7 @@ getActivitybyUid: async (uid) => {
             if(querySnapshot.empty){
                 throw new Error("01 - Não encontrado.");
             }
-            var activities = new Array();
-            querySnapshot.forEach(doc => {
-                var uid = doc.id;
-                var dados = doc.data();
-                var activity = {uid,dados};
-                activities.push(activity);
-            });
+            var activities = querySnapshot.docs.map(doc=>doc.data());
             console.log(activities);
             return activities;
 },
