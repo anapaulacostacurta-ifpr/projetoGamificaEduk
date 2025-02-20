@@ -89,6 +89,7 @@ getActivitybyUid: async (uid) => {
     const querySnapshot = await firebase.firestore().collection("activities")
             .doc(uid)
             .get();
+            
             console.log(querySnapshot);
 
             if(querySnapshot.empty){
