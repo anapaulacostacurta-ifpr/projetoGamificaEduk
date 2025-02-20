@@ -25,6 +25,7 @@ firebase.auth().onAuthStateChanged((User) => {
         const time_final = document.getElementById("activity_time_final").value;
         const level = document.getElementById("activity_level").value;
         const teacher = User.uid;
+        const players = [];
         const id = document.getElementById("activity_id").value;
         const state = "waiting"; // "waiting", "started", "finished"
       
@@ -47,6 +48,7 @@ firebase.auth().onAuthStateChanged((User) => {
           date_final,
           time_start,
           time_final,
+          players,
           id,
           level,
           teacher,

@@ -65,30 +65,29 @@ const boardgamesService = {
     console.log(boardgames);
     return boardgames;
 },
-getActivitiesbyDate: async (date_start) => {
-    const querySnapshot = await firebase.firestore().collection("activities")
-    .where('date_start','==', date_start)
-    .where('state','==','started')
-    .get();
-    console.log(querySnapshot);
-
-    if(querySnapshot.empty){
-        throw new Error("01 - Não encontrado.");
-    }
-    var activities = new Array();
-    querySnapshot.forEach(doc => {
-            var uid = doc.id;
-            var dados = doc.data();
-            var activity = {uid,dados};
-            activities.push(activity);
-    });
-    console.log(activities);
-    return activities;
-},
 getActivities: async (id) => {
     const querySnapshot = await firebase.firestore().collection("activities")
             .where('id', '==',id)
             .where('state','==','started')
+            .get();
+            console.log(querySnapshot);
+
+            if(querySnapshot.empty){
+                throw new Error("01 - Não encontrado.");
+            }
+            var activities = new Array();
+            querySnapshot.forEach(doc => {
+                var uid = doc.id;
+                var dados = doc.data();
+                var activity = {uid,dados};
+                activities.push(activity);
+            });
+            console.log(activities);
+            return activities;
+},
+getActivitybyUid: async (uid) => {
+    const querySnapshot = await firebase.firestore().collection("activities")
+            .doc(uid)
             .get();
             console.log(querySnapshot);
 

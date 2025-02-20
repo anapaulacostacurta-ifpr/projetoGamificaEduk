@@ -28,7 +28,7 @@ firebase.auth().onAuthStateChanged((User) => {
             if(ckeckin_date >= activity.dados.date_start &&  ckeckin_date <= activity.dados.date_final){
               if( ckeckin_time >= activity.dados.time_start && ckeckin_time <= activity.dados.time_final){
                   activity_uid = activity.uid; // UID do doc no firestone
-                  playerService.getPlayer(activity_uid,user_UID).then(players =>{
+                  /**playerService.getPlayer(activity_uid,user_UID).then(players =>{
                     players.forEach(player=>{
                       score = player.score;
                       alert('Retornando para o Jogo!');
@@ -39,22 +39,22 @@ firebase.auth().onAuthStateChanged((User) => {
                       let players = {user_UID,score,ckeckin_date,ckeckin_time,timestamp};
                       playerService.save(activity_uid, players).then(window.location.href = "./menu.html");
                     }
-                  })
+                  })*/
                     //variável para verficar se o jogador já entrou no tabuleiro
                     //let isOnPlayer = false;
-                    //var players = [];
+                    var players = [];
                     var tmp_players = activity.dados.players;
                     var last = tmp_players.length;
                     for(i=0;i<last;i++){
                       if(tmp_players[i].user_UID == user_UID){
-                        score = player.score;
+                        score = tmp_players[i].score;
                         alert('Retornando para o Jogo!');
-                        window.location.href = "./menu.html";
+                        window.location.href = "./menu.html?activity_uid="+activity_uid;
                       }
                       players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp};
                     }
                     players[last] = {user_UID,score,ckeckin_date,ckeckin_time,timestamp};
-                    boardgamesService.update(activity_uid, {players}).then(window.location.href = "./menu.html");
+                    boardgamesService.update(activity_uid, {players}).then(window.location.href = "./menu.html?activity_uid="+activity_uid);
               }
               
             }else{

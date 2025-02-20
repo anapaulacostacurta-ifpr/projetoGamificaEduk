@@ -8,19 +8,19 @@ firebase.auth().onAuthStateChanged((User) => {
       document.getElementById("nameUser").innerHTML = user.nickname;
       var avatar = user.avatar;
       document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
-      document.getElementById("score_total").innerHTML = user.score;
-      //menu.html?score_round=0&level=1&boardgame_id=A02
-      boardgamesService.getBoardgamebyPlayer(User.uid, (new Date()).toLocaleDateString('pt-BR')).then((boardgames) => {
-        boardgames.forEach(boardgame => {
-          var players = boardgame.dados.players;
-          players.forEach(player => {
-            if(player.user_UID == User.uid){
-              document.getElementById("score_round").innerHTML = player.score_round;
-              document.getElementById("level").innerHTML = boardgame.dados.level;
-            }
+      const params = new URLSearchParams(window.location.search);
+      const activity_uid = params.get('activity_uid');
+        boardgamesService.getActivitybyUid(activity_uid).then((activities) => {
+          activities.forEach(activity => {
+            var players = activity.dados.players;
+            players.forEach(player => {
+              if(player.user_UID == User.uid){
+                document.getElementById("score").innerHTML = player.score;
+                document.getElementById("level").innerHTML = activity.dados.level;
+              }
+            });
           });
         });
-      });
     }).catch(error => {
         console.log(error);
     });
