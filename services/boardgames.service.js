@@ -85,19 +85,12 @@ getActivities: async (id) => {
             console.log(activities);
             return activities;
 },
-getActivitybyUid: async (uid) => {
-    const querySnapshot = await firebase.firestore().collection("activities")
-            .doc(uid)
-            .get();
-            
-            console.log(querySnapshot);
-
-            if(querySnapshot.empty){
-                throw new Error("01 - Não encontrado.");
-            }
-            var activities = querySnapshot.docs.map(doc=>doc.data());
-            console.log(activities);
-            return activities;
+getActivitybyUid: async (id) => {
+   return await firebase.firestore().collection("activities")
+            .doc(id)
+            .get().then(doc => {
+                return doc.data();
+    });
 },
 getActivitybyPlayer: async (user_UID, date_start,date_final,time_start,time_final) => {
     const querySnapshot = await firebase.firestore().collection("activities")
