@@ -1,4 +1,5 @@
 var activity_uid;
+var tokenid;
 firebase.auth().onAuthStateChanged( (User) => {
     var player;
     if (!User) {
@@ -37,7 +38,7 @@ firebase.auth().onAuthStateChanged( (User) => {
           document.getElementById("play-form").addEventListener("submit", function(event) {
             event.preventDefault();
             // Captura os dados do formulário
-            let tokenid = document.getElementById("tokenid").value;
+            tokenid = document.getElementById("tokenid").value;
                 if(category == "quiz"){
                     let pos_token = tokens_quiz.indexOf(tokenid);
                     let pos_token_used = atual_tokens_quiz_used.indexOf(tokenid);  
@@ -63,18 +64,18 @@ firebase.auth().onAuthStateChanged( (User) => {
                             }                              
                             try{
                                 boardgamesService.update(activity_uid, {players}).then(alert("Token Válido!"));
-                                window.location.href = "../quiz/quiz.html&activity_uid="+activity_uid;
+                                window.location.href = "../quiz/quiz.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
                             } catch (error) {
                                 alert(error);
-                                window.location.href = "../../play/menu.html&activity_uid="+activity_uid;
+                                window.location.href = "../../play/menu.html?activity_uid="+activity_uid+;
                             }
                         }else{
                             alert("Token inválido!");
-                            window.location.href = "../../play/menu.html&activity_uid="+activity_uid;
+                            window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
                         }
                     }else{
                         alert("Token inválido!");
-                        window.location.href = "../../play/menu.html&activity_uid="+activity_uid;
+                        window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
                     }
                 }
                 if(category == "challange"){
