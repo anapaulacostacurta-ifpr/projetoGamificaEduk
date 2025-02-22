@@ -67,7 +67,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                                 window.location.href = "../quiz/quiz.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
                             } catch (error) {
                                 alert(error);
-                                window.location.href = "../../play/menu.html?activity_uid="+activity_uid+;
+                                window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
                             }
                         }else{
                             alert("Token inválido!");
