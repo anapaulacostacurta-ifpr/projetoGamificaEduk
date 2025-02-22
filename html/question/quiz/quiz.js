@@ -20,11 +20,11 @@ firebase.auth().onAuthStateChanged((User) => {
         activity = activityfind;
         var players = activityfind.players;
         player = players.find(player => player.user_UID == User.uid);
-          //document.getElementById("score").innerHTML = player.score;
-          //document.getElementById("level").innerHTML = activity.level;
-          questionsService.getQuizzesByLevel(parseInt(activity.level),"quiz").then(questions =>{
-            quizzes = questions;
-          });
+        //document.getElementById("score").innerHTML = player.score;
+        //document.getElementById("level").innerHTML = activity.level;
+        questionsService.getQuizzesByLevel(parseInt(activity.level),"quiz").then(questions =>{
+          quizzes = questions;
+        });
       });
     });
     
