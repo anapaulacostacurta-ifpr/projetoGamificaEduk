@@ -86,11 +86,16 @@ getActivities: async (id) => {
             return activities;
 },
 getActivitybyUid: async (id) => {
-   return await firebase.firestore().collection("activities")
+    const querySnapshot = await firebase.firestore().collection("activities")
             .doc(id)
-            .get().then(doc => {
-                return doc.data();
-    });
+            .get();
+            console.log(querySnapshot);
+
+            if(querySnapshot.empty){
+                throw new Error("01 - Não encontrado.");
+            }
+
+            return querySnapshot.data();
 },
 getActivitybyPlayer: async (user_UID, date_start,date_final,time_start,time_final) => {
     const querySnapshot = await firebase.firestore().collection("activities")

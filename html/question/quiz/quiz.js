@@ -4,30 +4,26 @@ const option_list = document.getElementById("option_list");
 const timeText = document.getElementById("time_left_txt");
 const timeCount = document.getElementById("timer_sec");
 
+
 firebase.auth().onAuthStateChanged((User) => {
+  var activity;
+  var question;
+  var quizzes;
   if (!User) {
       window.location.href = "../login/login.html";
   }else{
-    var activity;
-    var quizzes;
-    var question;
     userService.findByUid(User.uid).then(user=>{
       document.getElementById("nameUser").innerHTML = user.nickname;
       var avatar = user.avatar;
       document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
-      boardgamesService.getActivitiesbyDateTime((new Date()).toLocaleDateString('pt-BR'),(new Date()).toLocaleTimeString('pt-BR')).then((activities) => {
-        activities.forEach(activity => {
-          activity = activity;
-          var players = activity.dados.players;
-          players.forEach(player => {
-            if(player.user_UID == User.uid){
-              document.getElementById("score").innerHTML = player.score;
-              document.getElementById("level").innerHTML = activity.dados.level;
-            }
-          });
+      boardgamesService.getActivitybyUid(activity_uid).then((activityfind) => {
+          activity = activityfind;
+          var players = activityfind.players;
+          var player = players.find(player => player.user_UID == User.uid);
+            document.getElementById("score").innerHTML = player.score;
+            document.getElementById("level").innerHTML = activity.level;
         });
       });
-    });
     question = getAtualQuiz();
     showQuestion();
     startTimer(15);
@@ -92,15 +88,15 @@ firebase.auth().onAuthStateChanged((User) => {
       }
 
       function setScore(corret){
-        let activity = activity.dados;
-        let players = activity.dados.players;
-        let activity_uid = activity.uid;
+        let tmp_players = activity.players;
         var count = 0;
         let score_old;
         let score;
-        players.forEach(player => {
-          score_old = player.score;
-          if(player.user_UID == user_UID){
+        let players = [];
+        var last = tmp_players.length;
+        for(i=0;i<last;i++){
+          score_old = tmp_players[i].score;
+          if(tmp_players[i].user_UID == User.uid){
             if (corret){
               score = score_old + 10;
               count ++;
@@ -110,12 +106,10 @@ firebase.auth().onAuthStateChanged((User) => {
             }
             return [];
           }
-        });
+          players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp};
+        }
         count = count -1;
         
-        //Salvar Score na variável
-        players[count].score = score;
-
         //Atualizar os quiz respondidos
         var array_answered = players[count].quiz_answered;
         if(array_answered === undefined || array_answered === "undefined"){
@@ -131,18 +125,12 @@ firebase.auth().onAuthStateChanged((User) => {
         }
         players[count].push(array_tokens);
 
-        boardgamesService.addPlayers(activity_uid, {players}).then(buscarBoardgame(boardgame.dados.boardgameid));
-        //atualizar o boargame da sessão
-
-        //Atualizar o Score dos pontos do nível na Sessão
-        sessionStorage.setItem("score_round",score);
+        boardgamesService.update(activity_uid, {players});
 
         //gravar na Log as resposta selecionadas
-        const boardgame_id = boardgame.dados.boardgameid;
-        const level = boardgame.dados.level;
-        const hora = (new Date()).F;
+        const hora = (new Date()).toLocaleDateString('pt-BR');
         const data = (new Date()).toLocaleDateString('pt-BR');
-        const log_answers = {user_UID: user_UID, data: data, hora: hora, level: level, boardgameid: boardgameid, rodada_id: boardgame_id, category: sessionStorage.question_category, question_numb:sessionStorage.question_numb, user_answer:sessionStorage.userAnswer, score_old: score_old, score_new: score, tokenid: sessionStorage.sessionStorage.token_quiz};
+        const log_answers = {user_UID: User.uid, data: data, hora: hora, level: level, activity_uid: activity_uid, activity_id: activity.id, category: question.category, question_numb:question_numb, user_answer:sessionStorage.userAnswer, score_old: score_old, score_new: score, tokenid: sessionStorage.sessionStorage.token_quiz};
         // Salvar no banco de dados.
         logboardgamesService.save(log_answers);
       }
