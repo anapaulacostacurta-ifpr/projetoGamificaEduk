@@ -21,7 +21,7 @@ firebase.auth().onAuthStateChanged( (User) => {
           var tokens_quiz;
           boardgamesService.getActivitybyUid(activity_uid).then((activityfind) => {
             var activity = activityfind;
-            var tmp_players = activityfind.players;
+            tmp_players = activityfind.players;
             player = tmp_players.find(player => player.user_UID == User.uid);
             document.getElementById("score").innerHTML = player.score;
             document.getElementById("level").innerHTML = activity.level;
