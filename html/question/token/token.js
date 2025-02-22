@@ -82,7 +82,8 @@ firebase.auth().onAuthStateChanged( (User) => {
                                     if(tmp_players[i].user_UID == user_UID){
                                         players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used};
                                     }else{
-                                        players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp, tmp_players[i].tokens_quiz_used};
+                                        let tokens_quiz_used = tmp_players[i].tokens_quiz_used;
+                                        players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp, tokens_quiz_used};
                                     }
                                 }  
                                 boardgamesService.update(activity_uid, {players}).then(alert("Token Válido!"));      
