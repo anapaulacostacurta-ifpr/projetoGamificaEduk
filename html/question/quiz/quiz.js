@@ -24,12 +24,13 @@ firebase.auth().onAuthStateChanged((User) => {
       boardgamesService.getActivitybyUid(activity_uid).then((activityfind) => {
         activity = activityfind;
         player = players.find(player => player.user_UID == User.uid);
-        //document.getElementById("score").innerHTML = player.score;
-        //document.getElementById("level").innerHTML = activity.level;
+        //Buscas as Questões a serem respondidas para a atividade de acorco com o nive e categoria.
         questionsService.getQuizzesByLevel(activity_uid,parseInt(activity.level),"quiz").then(questions =>{
           quizzes = questions;
         });
+        // Verifica quais questões já foram respondidas pelo jogador
         question = getAtualQuiz();
+        //Verifica se o jogador já respondeu todas as perguntas
         if(question == null){
           alert("Não existe nenhum quiz para ser respondido!");
           window.location.href = "../../play/menu.html";
@@ -39,8 +40,6 @@ firebase.auth().onAuthStateChanged((User) => {
         }
       });
     });
-    
-    
     
     function showQuestion(){
       let que_tag = '<span class="fw-bold">' +  question.numb +".</span>"+'<span class="fw-bold">' +  question.text +"</span>";
@@ -172,9 +171,6 @@ firebase.auth().onAuthStateChanged((User) => {
     function getAtualQuiz(){
       let atual_quiz;
       let answered_quizzes = player.quiz_answered;
-      if(answered_quizzes === undefined || answered_quizzes === "undefined"){
-        answered_quizzes = new Array();
-      }
       if(!(quizzes === undefined)){
         quizzes.forEach(quiz => {
           if(answered_quizzes.indexOf(quiz.numb) == -1){ //Não foi respondida
