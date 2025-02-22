@@ -84,10 +84,10 @@ firebase.auth().onAuthStateChanged((User) => {
         for (i = 0; i < allOptions; i++) {
           option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
         }
-        setScore(correct);
+        setScore(correct, userAns);
       }
 
-      function setScore(corret){
+      function setScore(corret, userAns){
         let tmp_players = activity.players;
         var count = 0;
         let score_old;
@@ -123,6 +123,7 @@ firebase.auth().onAuthStateChanged((User) => {
         if(array_tokens === undefined || array_tokens === "undefined"){
           array_tokens= new Array();
         }
+        array_tokens.push(question.numb);
         players[count].push(array_tokens);
 
         boardgamesService.update(activity_uid, {players});
@@ -130,7 +131,7 @@ firebase.auth().onAuthStateChanged((User) => {
         //gravar na Log as resposta selecionadas
         const hora = (new Date()).toLocaleDateString('pt-BR');
         const data = (new Date()).toLocaleDateString('pt-BR');
-        const log_answers = {user_UID: User.uid, data: data, hora: hora, level: level, activity_uid: activity_uid, activity_id: activity.id, category: question.category, question_numb:question_numb, user_answer:sessionStorage.userAnswer, score_old: score_old, score_new: score, tokenid: sessionStorage.sessionStorage.token_quiz};
+        const log_answers = {user_UID: User.uid, data: data, hora: hora, level: level, activity_uid: activity_uid, activity_id: activity.id, category: question.category, question_numb:question_numb, user_answer:userAnswer, score_old: score_old, score_new: score, tokenid: sessionStorage.sessionStorage.token_quiz};
         // Salvar no banco de dados.
         logboardgamesService.save(log_answers);
       }
