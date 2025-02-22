@@ -25,17 +25,18 @@ firebase.auth().onAuthStateChanged((User) => {
         questionsService.getQuizzesByLevel(parseInt(activity.level),"quiz").then(questions =>{
           quizzes = questions;
         });
+        question = getAtualQuiz();
+        if(question == null){
+          alert("Não existe nenhum quiz para ser respondido!");
+          window.location.href = "../../play/menu.html";
+        }else{
+          showQuestion();
+          startTimer(30);
+        }
       });
     });
     
-    question = getAtualQuiz();
-    if(question == null){
-      alert("Não existe nenhum quiz para ser respondido!");
-      window.location.href = "../../play/menu.html";
-    }else{
-      showQuestion();
-      startTimer(30);
-    }
+    
     
     function showQuestion(){
       let que_tag = '<span class="fw-bold">' +  question.numb +".</span>"+'<span class="fw-bold">' +  question.text +"</span>";
