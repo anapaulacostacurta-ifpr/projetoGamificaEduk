@@ -9,6 +9,8 @@ firebase.auth().onAuthStateChanged((User) => {
   var quizzes;
   var player;
   var question;
+  var activity_uid;
+  var tokenid;
   if (!User) {
       window.location.href = "../login/login.html";
   }else{
@@ -16,6 +18,9 @@ firebase.auth().onAuthStateChanged((User) => {
       //document.getElementById("nameUser").innerHTML = user.nickname;
       var avatar = user.avatar;
       //document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
+      const params = new URLSearchParams(window.location.search);
+      activity_uid = params.get('activity_uid');
+      tokenid = params.get('tokenid');
       boardgamesService.getActivitybyUid(activity_uid).then((activityfind) => {
         activity = activityfind;
         var players = activityfind.players;
