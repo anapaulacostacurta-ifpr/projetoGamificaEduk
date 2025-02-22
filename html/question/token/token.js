@@ -52,7 +52,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                             var players = new Array();
                             let timestamp = new Date().getTime();
                             var last = tmp_players.length;
-                            for(i=0;i<last-1;i++){
+                            for(i=0;i<last;i++){
                                 let quiz_answered = tmp_players[i].quiz_answered;
                                 if(tmp_players[i].user_UID == User.uid){
                                     players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used, quiz_answered};
