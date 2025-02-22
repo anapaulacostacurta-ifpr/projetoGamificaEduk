@@ -51,9 +51,13 @@ firebase.auth().onAuthStateChanged((User) => {
                         alert('Retornando para o Jogo!');
                         window.location.href = "./menu.html?activity_uid="+activity_uid;
                       }
-                      players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp};
+                      let quiz_answered = tmp_players[i].quiz_answered;
+                      let tokens_quiz_used = tmp_players[i].tokens_quiz_used;
+                      players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,quiz_answered,tokens_quiz_used};
                     }
-                    players[last] = {user_UID,score,ckeckin_date,ckeckin_time,timestamp};
+                    let quiz_answered = [];
+                    let tokens_quiz_used = [];
+                    players[last] = {user_UID,score,ckeckin_date,ckeckin_time,timestamp,quiz_answered,tokens_quiz_used};
                     boardgamesService.update(activity_uid, {players}).then(window.location.href = "./menu.html?activity_uid="+activity_uid);
               }
               
