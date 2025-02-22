@@ -49,11 +49,11 @@ firebase.auth().onAuthStateChanged( (User) => {
                             let timestamp = new Date().getTime();
                             var last = tmp_players.length;
                             for(i=0;i<last;i++){
-                                let quiz_answered = setQuizAnswered(tmp_players[i].quiz_answered);
+                                let quiz_answered = setQuizAnswered(tmp_players[i].quiz_answered,null);
                                 if(tmp_players[i].user_UID == User.uid){
                                     players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used, quiz_answered};
                                 }else{
-                                    let tokens_quiz_used = setTokensQuizUsed(tmp_players[i].tokens_quiz_used);
+                                    let tokens_quiz_used = setTokensQuizUsed(tmp_players[i].tokens_quiz_used,null);
                                     players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,tokens_quiz_used, quiz_answered};
                                 }
                             }                              
@@ -85,11 +85,14 @@ firebase.auth().onAuthStateChanged( (User) => {
         });
     } 
     
-    function setQuizAnswered(atual_quiz_answered){
+    function setQuizAnswered(atual_quiz_answered, question_numb){
         let quiz_answered = new Array();
         let stop = atual_quiz_answered.length;
         for (i=0; i<stop;i++){
             quiz_answered[i] = atual_quiz_answered[i];
+        }
+        if(!(question_numb == null)){
+            quiz_answered[stop] = question_numb;
         }
         return quiz_answered;
     }
@@ -100,18 +103,12 @@ firebase.auth().onAuthStateChanged( (User) => {
         for (i=0; i<stop;i++){
             tokens_quiz_used[i] = atual_tokens_quiz_used[i];
         }
-        tokens_quiz_used[stop] = tokenid;
-        return tokens_quiz_used;
-    }
-
-    function setTokensQuizUsed(atual_tokens_quiz_used){
-        let tokens_quiz_used = new Array();
-        let stop = atual_tokens_quiz_used.length;
-        for (i=0; i<stop;i++){
-            tokens_quiz_used[i] = atual_tokens_quiz_used[i];
+        if(!(tokenid == null)){
+            tokens_quiz_used[stop] = tokenid;
         }
         return tokens_quiz_used;
     }
+
 });
 
 function logout() {
