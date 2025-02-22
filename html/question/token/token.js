@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged( (User) => {
             var activity = activityfind;
             tmp_players = activityfind.players;
             player = tmp_players.find(player => player.user_UID == User.uid);
-            document.getElementById("score").innerHTML = player.score;
+            //document.getElementById("score").innerHTML = player.score;
             document.getElementById("level").innerHTML = activity.level;
           });
 
