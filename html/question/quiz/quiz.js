@@ -22,11 +22,12 @@ firebase.auth().onAuthStateChanged((User) => {
         player = players.find(player => player.user_UID == User.uid);
           //document.getElementById("score").innerHTML = player.score;
           document.getElementById("level").innerHTML = activity.level;
+          questionsService.getQuizzesByLevel(parseInt(activity.level),"quiz").then(questions =>{
+            quizzes = questions;
+          });
       });
     });
-    questionsService.getQuizzesByLevel(parseInt(activity.level),"quiz").then(questions =>{
-      quizzes = questions;
-    });
+    
     question = getAtualQuiz();
     if(question == null){
       alert("Não existe nenhum quiz para ser respondido!");
