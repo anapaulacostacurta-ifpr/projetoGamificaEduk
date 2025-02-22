@@ -1,10 +1,9 @@
-const question_box = document.getElementById("question_box");
-const que_text = document.getElementById("que_text");
-const option_list = document.getElementById("option_list");
-const timeText = document.getElementById("time_left_txt");
-const timeCount = document.getElementById("timer_sec");
-
 firebase.auth().onAuthStateChanged((User) => {
+  const question_box = document.getElementById("question_box");
+  const que_text = document.getElementById("que_text");
+  const option_list = document.getElementById("option_list");
+  const timeText = document.getElementById("time_left_txt");
+  const timeCount = document.getElementById("timer_sec");
   var activity;
   var question;
   var quizzes;
