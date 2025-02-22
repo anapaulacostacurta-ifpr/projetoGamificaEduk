@@ -44,21 +44,16 @@ firebase.auth().onAuthStateChanged( (User) => {
                     let pos_token_used = atual_tokens_quiz_used.indexOf(tokenid);  
                     if (!(pos_token_used > -1)){ // Se encontrado foi usado. retorna -1 Não encontrado.
                         if(pos_token > -1){ 
-                            let tokens_quiz_used = new Array();
-                            let stop = atual_tokens_quiz_used.length;
-                            for (i=0; i<stop;i++){
-                                tokens_quiz_used[i] = atual_tokens_quiz_used[i];
-                            }
-                            tokens_quiz_used[stop] = tokenid;
+                            var tokens_quiz_used = setTokensQuizUsed(atual_tokens_quiz_used,tokenid);
                             var players = new Array();
                             let timestamp = new Date().getTime();
                             var last = tmp_players.length;
                             for(i=0;i<last;i++){
-                                let quiz_answered = tmp_players[i].quiz_answered;
+                                let quiz_answered = setQuizAnswered(tmp_players[i].quiz_answered);
                                 if(tmp_players[i].user_UID == User.uid){
                                     players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used, quiz_answered};
                                 }else{
-                                    let tokens_quiz_used = tmp_players[i].tokens_quiz_used;
+                                    let tokens_quiz_used = setTokensQuizUsed(tmp_players[i].tokens_quiz_used);
                                     players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,tokens_quiz_used, quiz_answered};
                                 }
                             }                              
@@ -88,7 +83,35 @@ firebase.auth().onAuthStateChanged( (User) => {
                     window.location.href = "../final/final.html";
                 }
         });
-    }        
+    } 
+    
+    function setQuizAnswered(atual_quiz_answered){
+        let quiz_answered = new Array();
+        let stop = atual_quiz_answered.length;
+        for (i=0; i<stop;i++){
+            quiz_answered[i] = atual_quiz_answered[i];
+        }
+        return quiz_answered;
+    }
+
+    function setTokensQuizUsed(atual_tokens_quiz_used, tokenid){
+        let tokens_quiz_used = new Array();
+        let stop = atual_tokens_quiz_used.length;
+        for (i=0; i<stop;i++){
+            tokens_quiz_used[i] = atual_tokens_quiz_used[i];
+        }
+        tokens_quiz_used[stop] = tokenid;
+        return tokens_quiz_used;
+    }
+
+    function setTokensQuizUsed(atual_tokens_quiz_used){
+        let tokens_quiz_used = new Array();
+        let stop = atual_tokens_quiz_used.length;
+        for (i=0; i<stop;i++){
+            tokens_quiz_used[i] = atual_tokens_quiz_used[i];
+        }
+        return tokens_quiz_used;
+    }
 });
 
 function logout() {

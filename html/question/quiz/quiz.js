@@ -106,24 +106,18 @@ firebase.auth().onAuthStateChanged((User) => {
         score_old = tmp_players[i].score;
         if(tmp_players[i].user_UID == User.uid){
           //Atualizar os quizzes respondidos
-          let atual_array_answered = tmp_players[i].array_answered;
-          let array_answered = new Array();
-          let stop = atual_array_answered.length;
-          for (i=0; i<stop;i++){
-            array_answered[i] = atual_array_answered[i];
-          }
-          array_answered[stop] = question.numb;
+          let quiz_answered = setQuizAnswered(tmp_players[i].quiz_answered,question.numb);
           //Atualizar score
           if (corret){
             score = score_old + 10;
           }else{
             score = score_old - 5;
           }
-          let tokens_quiz_used =  tmp_players[i].tokens_quiz_used; 
-          players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp ,quiz_answered,tokens_quiz_used};
+          let tokens_quiz_used =  setTokensQuizUsed(tmp_players[i].tokens_quiz_used); 
+          players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp,quiz_answered,tokens_quiz_used};
         }else{
-          let quiz_answered = tmp_players[i].quiz_answered;
-          let tokens_quiz_used =  tmp_players[i].tokens_quiz_used; 
+          let quiz_answered = setQuizAnswered(tmp_players[i].quiz_answered);
+          let tokens_quiz_used =  setTokensQuizUsed(tmp_players[i].tokens_quiz_used); 
           players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,quiz_answered,tokens_quiz_used};
         }
       }
@@ -185,6 +179,36 @@ firebase.auth().onAuthStateChanged((User) => {
       return atual_quiz;
     }
   }
+
+  function setQuizAnswered(atual_quiz_answered){
+    let quiz_answered = new Array();
+    let stop = atual_quiz_answered.length;
+    for (i=0; i<stop;i++){
+        quiz_answered[i] = atual_quiz_answered[i];
+    }
+    return quiz_answered;
+  }
+
+  function setTokensQuizUsed(atual_tokens_quiz_used){
+    let tokens_quiz_used = new Array();
+    let stop = atual_tokens_quiz_used.length;
+    for (i=0; i<stop;i++){
+        tokens_quiz_used[i] = atual_tokens_quiz_used[i];
+    }
+    return tokens_quiz_used;
+  }
+
+  function setQuizAnswered(atual_quiz_answered, question_numb){
+    let quiz_answered = new Array();
+    let stop = atual_quiz_answered.length;
+    for (i=0; i<stop;i++){
+        quiz_answered[i] = atual_quiz_answered[i];
+    }
+    quiz_answered[stop] = question_numb;
+    return quiz_answered;
+  }
+
+
 })
 
 function fechar(){
