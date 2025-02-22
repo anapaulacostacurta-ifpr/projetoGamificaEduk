@@ -34,7 +34,7 @@ firebase.auth().onAuthStateChanged((User) => {
         //Verifica se o jogador já respondeu todas as perguntas
         if(question == null){
           alert("Não existe nenhum quiz para ser respondido!");
-          window.location.href = "../../play/menu.html";
+          window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
         }else{
           showQuestion();
           startTimer(30);
