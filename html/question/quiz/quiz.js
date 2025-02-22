@@ -23,6 +23,7 @@ firebase.auth().onAuthStateChanged((User) => {
       tokenid = params.get('tokenid');
       boardgamesService.getActivitybyUid(activity_uid).then((activityfind) => {
         activity = activityfind;
+        var players = activityfind.players;
         player = players.find(player => player.user_UID == User.uid);
         //Buscas as Questões a serem respondidas para a atividade de acorco com o nive e categoria.
         questionsService.getQuizzesByLevel(activity_uid,parseInt(activity.level),"quiz").then(questions =>{
