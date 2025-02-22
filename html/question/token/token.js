@@ -41,8 +41,8 @@ firebase.auth().onAuthStateChanged( (User) => {
                 if(category == "quiz"){
                     let pos_token = tokens_quiz.indexOf(tokenid);
                     let pos_token_used = atual_tokens_quiz_used.indexOf(tokenid);  
-                    if (pos_token_used > -1){ // Não foi usado ainda
-                        if(pos_token > -1){
+                    if (!(pos_token_used > -1)){ // Se encontrado foi usado. retorna -1 Não encontrado.
+                        if(pos_token > -1){ 
                             let tokens_quiz_used = new Array();
                             let stop = atual_tokens_quiz_used.length;
                             for (i=0; i<stop-1;i++){
