@@ -48,7 +48,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                                 let timestamp = new Date().getTime();
                                 var last = tmp_players.length;
                                 for(i=0;i<last;i++){
-                                    if(tmp_players[i].user_UID == user_UID){
+                                    if(tmp_players[i].user_UID == User.uid){
                                         players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used};
                                     }else{
                                         players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp};
@@ -79,7 +79,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                                 let timestamp = new Date().getTime();
                                 var last = tmp_players.length;
                                 for(i=0;i<last;i++){
-                                    if(tmp_players[i].user_UID == user_UID){
+                                    if(tmp_players[i].user_UID == User.uid){
                                         players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used};
                                     }else{
                                         let tokens_quiz_used = tmp_players[i].tokens_quiz_used;
