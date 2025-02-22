@@ -23,11 +23,10 @@ firebase.auth().onAuthStateChanged((User) => {
       tokenid = params.get('tokenid');
       boardgamesService.getActivitybyUid(activity_uid).then((activityfind) => {
         activity = activityfind;
-        var players = activityfind.players;
         player = players.find(player => player.user_UID == User.uid);
         //document.getElementById("score").innerHTML = player.score;
         //document.getElementById("level").innerHTML = activity.level;
-        questionsService.getQuizzesByLevel(parseInt(activity.level),"quiz").then(questions =>{
+        questionsService.getQuizzesByLevel(activity_uid,parseInt(activity.level),"quiz").then(questions =>{
           quizzes = questions;
         });
         question = getAtualQuiz();
