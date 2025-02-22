@@ -45,7 +45,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                         if(pos_token > -1){ 
                             let tokens_quiz_used = new Array();
                             let stop = atual_tokens_quiz_used.length;
-                            for (i=0; i<stop-1;i++){
+                            for (i=0; i<stop;i++){
                                 tokens_quiz_used[i] = atual_tokens_quiz_used[i];
                             }
                             tokens_quiz_used[stop] = tokenid;
