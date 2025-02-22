@@ -13,15 +13,15 @@ firebase.auth().onAuthStateChanged((User) => {
       window.location.href = "../login/login.html";
   }else{
     userService.findByUid(User.uid).then(user=>{
-      document.getElementById("nameUser").innerHTML = user.nickname;
+      //document.getElementById("nameUser").innerHTML = user.nickname;
       var avatar = user.avatar;
-      document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
+      //document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
       boardgamesService.getActivitybyUid(activity_uid).then((activityfind) => {
         activity = activityfind;
         var players = activityfind.players;
         player = players.find(player => player.user_UID == User.uid);
           //document.getElementById("score").innerHTML = player.score;
-          document.getElementById("level").innerHTML = activity.level;
+          //document.getElementById("level").innerHTML = activity.level;
           questionsService.getQuizzesByLevel(parseInt(activity.level),"quiz").then(questions =>{
             quizzes = questions;
           });
