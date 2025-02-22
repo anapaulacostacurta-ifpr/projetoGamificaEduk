@@ -40,7 +40,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                 if(category == "quiz"){
                     let pos_token = tokens_quiz.indexOf(tokenid);
                     tokens_quiz_used = player.tokens_quiz_used;
-                    if(!(tokens_quiz_used === "undefined") || !(tokens_quiz_used === undefined)){
+                    if(!(tokens_quiz_used === undefined)){
                             if(pos_token > -1){
                                 tokens_quiz_used = new Array();
                                 tokens_quiz_used.push(tokenid);
