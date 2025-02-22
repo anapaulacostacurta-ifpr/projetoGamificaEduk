@@ -67,7 +67,6 @@ firebase.auth().onAuthStateChanged((User) => {
                     players[last] = {user_UID,score,ckeckin_date,ckeckin_time,timestamp,quiz_answered,tokens_quiz_used};
                     boardgamesService.update(activity_uid, {players}).then(window.location.href = "./menu.html?activity_uid="+activity_uid);
               }
-              
             }else{
               alert("Atividade fora do prazo!");
             }
@@ -75,7 +74,6 @@ firebase.auth().onAuthStateChanged((User) => {
             alert("Atividade Não encontrada!");
           }  
         });
-      
       }).catch((error) => {
         alert(error.menssage);
       })
