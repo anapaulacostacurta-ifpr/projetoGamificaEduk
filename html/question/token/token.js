@@ -40,30 +40,30 @@ firebase.auth().onAuthStateChanged( (User) => {
                 if(category == "quiz"){
                     let pos_token = tokens_quiz.indexOf(tokenid);
                     tokens_quiz_used = player.tokens_quiz_used;
-                    if(!(tokens_quiz_used === undefined)){
-                            if(pos_token > -1){
-                                tokens_quiz_used = new Array();
-                                tokens_quiz_used.push(tokenid);
-                                var players = new Array();
-                                let timestamp = new Date().getTime();
-                                var last = tmp_players.length;
-                                for(i=0;i<last;i++){
-                                    if(tmp_players[i].user_UID == User.uid){
-                                        players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used};
-                                    }else{
-                                        players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp};
-                                    }
-                                }                              
-                                try{
-                                    boardgamesService.update(activity_uid, {players}).then(alert("Token Válido!"));
-                                    window.location.href = "../quiz/quiz.html&activity_uid="+activity_uid;
-                                } catch (error) {
-                                    alert(error);
+                    if(tokens_quiz_used === undefined){
+                        if(pos_token > -1){
+                            tokens_quiz_used = new Array();
+                            tokens_quiz_used.push(tokenid);
+                            var players = new Array();
+                            let timestamp = new Date().getTime();
+                            var last = tmp_players.length;
+                            for(i=0;i<last;i++){
+                                if(tmp_players[i].user_UID == User.uid){
+                                    players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used};
+                                }else{
+                                    players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp};
                                 }
-                            }else{
-                                alert("Token inválido!");
-                                window.location.href = "../../play/menu.html";
+                            }                              
+                            try{
+                                boardgamesService.update(activity_uid, {players}).then(alert("Token Válido!"));
+                                window.location.href = "../quiz/quiz.html&activity_uid="+activity_uid;
+                            } catch (error) {
+                                alert(error);
                             }
+                        }else{
+                            alert("Token inválido!");
+                            window.location.href = "../../play/menu.html";
+                        }
                     }else{    
                         let pos_token_used = tokens_quiz_used.indexOf(tokenid);  
                         let pos_token = tokens_quiz.indexOf(tokenid); 
