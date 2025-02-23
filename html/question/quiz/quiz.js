@@ -180,7 +180,7 @@ function setScore(corret, userAns){
   boardgamesService.update(activity_uid, {players});
 
   //gravar na Log as resposta selecionadas
-  const hora = (new Date()).toLocaleDateString('pt-BR');
+  const hora = (new Date()).toLocaleTimeString('pt-BR');
   const data = (new Date()).toLocaleDateString('pt-BR');
   const log_answers = {user_UID: User.uid, data: data, hora: hora, level:activity.level, activity_uid: activity_uid, activity_id: activity.id, category: question.category, question_numb:question.numb, user_answer:userAns, score_old: score_old, score_new: score, tokenid: tokenid};
   // Salvar no banco de dados.
