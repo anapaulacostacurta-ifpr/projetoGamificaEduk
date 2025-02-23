@@ -15,7 +15,7 @@ firebase.auth().onAuthStateChanged((User) => {
       window.location.href = "../login/login.html";
   }else{
     userService.findByUid(User.uid).then(user=>{
-      user_UID = User.uid;
+      user_uid = User.uid;
       //document.getElementById("nameUser").innerHTML = user.nickname;
       var avatar = user.avatar;
       //document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
