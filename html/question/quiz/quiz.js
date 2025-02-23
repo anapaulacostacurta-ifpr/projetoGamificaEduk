@@ -1,7 +1,8 @@
 var question;
 var activity;
 var tokenid;
-var user_UID;
+var user_uid;
+var activity_uid;
 firebase.auth().onAuthStateChanged((User) => {
   const question_box = document.getElementById("question_box");
   const que_text = document.getElementById("que_text");
@@ -10,7 +11,6 @@ firebase.auth().onAuthStateChanged((User) => {
   const timeCount = document.getElementById("timer_sec");
   var quizzes;
   var player;
-  var activity_uid;
   if (!User) {
       window.location.href = "../login/login.html";
   }else{
@@ -152,23 +152,34 @@ function optionSelected(answer) {
   setScore(correct, userAns);
 }
 
-function setScore(corret, userAns){
+function setScore(corret,  user_answer){
   let tmp_players = activity.players;
   let score_old;
   let score;
   let players = new Array();
   var last = tmp_players.length;
-  let timestamp = new Date().getTime();
+  
   for(i=0;i<last;i++){
-    score_old = tmp_players[i].score;
-    if(tmp_players[i].user_UID == user_UID){
+    let timestamp = tmp_players[i].timestamp;
+    score = tmp_players[i].score;
+    let ckeckin_date = tmp_players[i].ckeckin_date;
+    let ckeckin_time = tmp_players[i].ckeckin_time;
+    let quiz_answered = new Array();
+    let atual_quiz_answered = tmp_players[i].quiz_answered;
+    let last = atual_quiz_answered.length;
+    let user_UID = tmp_players[i].user_UID;
+    for (i=0; i<last;i++){
+        quiz_answered[i] = atual_quiz_answered.length[i];
+    }
+    let tokens_quiz_used = new Array();
+    stop = tmp_players[i].tokens_quiz_used.length;
+    let atual_tokens_quiz_used = tmp_players[i].tokens_quiz_used;
+    for (i=0; i<stop;i++){
+        tokens_quiz_used[i] = atual_tokens_quiz_used[i];
+    }
+    if(tmp_players[i].user_UID == user_uid){
+      score_old = tmp_players[i].score;
       //Atualizar os quizzes respondidos
-      let quiz_answered = new Array();
-      let atual_quiz_answered = tmp_players[i].quiz_answered;
-      let last = atual_quiz_answered.length;
-      for (i=0; i<last;i++){
-          quiz_answered[i] = atual_quiz_answered.length[i];
-      }
       quiz_answered[last] = question.numb;
       //Atualizar score
       if (corret){
@@ -176,28 +187,9 @@ function setScore(corret, userAns){
       }else{
         score = score_old - 5;
       }
-      let tokens_quiz_used = new Array();
-      stop = tmp_players[i].tokens_quiz_used.length;
-      let atual_tokens_quiz_used = tmp_players[i].tokens_quiz_used;
-      for (i=0; i<stop;i++){
-          tokens_quiz_used[i] = atual_tokens_quiz_used[i];
-      } 
-      players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp,quiz_answered,tokens_quiz_used};
-    }else{
-      let quiz_answered = new Array();
-      let atual_quiz_answered = tmp_players[i].quiz_answered;
-      let last = atual_quiz_answered.length;
-      for (i=0; i<last;i++){
-          quiz_answered[i] = atual_quiz_answered.length[i];
-      }
-      let tokens_quiz_used = new Array();
-      let stop = tmp_players[i].tokens_quiz_used.length;
-      let atual_tokens_quiz_used = tmp_players[i].tokens_quiz_used;
-      for (i=0; i<stop;i++){
-          tokens_quiz_used[i] = atual_tokens_quiz_used[i];
-      }
-      players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,quiz_answered,tokens_quiz_used};
+      timestamp = new Date().getTime();
     }
+    players[i] = {user_UID,score,ckeckin_date,ckeckin_time, timestamp,quiz_answered,tokens_quiz_used};
   }
   //Gravar Dados
   boardgamesService.update(activity_uid, {players});
@@ -205,7 +197,11 @@ function setScore(corret, userAns){
   //gravar na Log as resposta selecionadas
   const hora = (new Date()).toLocaleTimeString('pt-BR');
   const data = (new Date()).toLocaleDateString('pt-BR');
-  const log_answers = {user_UID: user_UID, data: data, hora: hora, level:activity.level, activity_uid: activity_uid, activity_id: activity.id, category: question.category, question_numb:question.numb, user_answer:userAns, score_old: score_old, score_new: score, tokenid: tokenid};
+  let level = activity.level;
+  let category =  question.category;
+  let question_numb = question_numb;
+  let score_new = score;
+  const log_answers = {user_UID, data, hora, level, activity_uid, category, question_numb,  user_answer, score_old, score_new, tokenid};
   // Salvar no banco de dados.
   logboardgamesService.save(log_answers);
 }
