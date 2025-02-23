@@ -28,17 +28,17 @@ firebase.auth().onAuthStateChanged((User) => {
         //Buscas as Questões a serem respondidas para a atividade de acorco com o nive e categoria.
         questionsService.getQuizzesByLevel(activity_uid,parseInt(activity.level),"quiz").then(questions =>{
           quizzes = questions;
+
+          question = getAtualQuiz();
+          //Verifica se o jogador já respondeu todas as perguntas
+          if(question == null){
+            alert("Não existe nenhum quiz para ser respondido!");
+            window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
+          }else{
+            showQuestion();
+            startTimer(30);
+          }
         });
-        // Verifica quais questões já foram respondidas pelo jogador
-        question = getAtualQuiz();
-        //Verifica se o jogador já respondeu todas as perguntas
-        if(question == null){
-          alert("Não existe nenhum quiz para ser respondido!");
-          window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
-        }else{
-          showQuestion();
-          startTimer(30);
-        }
       });
     });
     

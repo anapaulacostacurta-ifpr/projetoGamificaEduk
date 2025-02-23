@@ -99,31 +99,6 @@ firebase.auth().onAuthStateChanged( (User) => {
                 }
         });
     } 
-    
-    function setQuizAnswered(atual_quiz_answered, question_numb){
-        let quiz_answered = new Array();
-        let stop = atual_quiz_answered.length;
-        for (i=0; i<stop;i++){
-            quiz_answered[i] = atual_quiz_answered[i];
-        }
-        if(!(question_numb == null)){
-            quiz_answered[stop] = question_numb;
-        }
-        return quiz_answered;
-    }
-
-    function setTokensQuizUsed(atual_tokens_quiz_used, tokenid){
-        let tokens_quiz_used = new Array();
-        let stop = atual_tokens_quiz_used.length;
-        for (i=0; i<stop;i++){
-            tokens_quiz_used[i] = atual_tokens_quiz_used[i];
-        }
-        if(!(tokenid == null)){
-            tokens_quiz_used[stop] = tokenid;
-        }
-        return tokens_quiz_used;
-    }
-
 });
 
 function logout() {
