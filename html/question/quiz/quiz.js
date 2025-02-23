@@ -1,16 +1,15 @@
+var question;
+var activity;
+var tokenid;
 firebase.auth().onAuthStateChanged((User) => {
   const question_box = document.getElementById("question_box");
   const que_text = document.getElementById("que_text");
   const option_list = document.getElementById("option_list");
   const timeText = document.getElementById("time_left_txt");
   const timeCount = document.getElementById("timer_sec");
-  var activity;
-  var question;
   var quizzes;
   var player;
-  var question;
   var activity_uid;
-  var tokenid;
   if (!User) {
       window.location.href = "../login/login.html";
   }else{
@@ -68,76 +67,6 @@ firebase.auth().onAuthStateChanged((User) => {
       }
     }
 
-    // creating the new div tags which for icons
-    let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
-    let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
-
-    //if user clicked on option
-    function optionSelected(answer) {
-      let userAns = answer.querySelector(".choice-text").textContent; //getting user selected option
-      let correct;
-      const allOptions = option_list.children.length; //getting all option items
-      if (userAns == question.answer[0]) {
-        answer.classList.add("correct"); //adding green color to correct selected option
-        answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
-        correct = true;
-      } else {
-        answer.classList.add("incorrect"); //adding red color to correct selected option
-        answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
-        console.log("Wrong Answer");
-        correct = false;
-        for (i = 0; i < allOptions; i++) {
-          if (option_list.children[i].textContent == correcAns) {
-            //if there is an option which is matched to an array answer
-            option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
-            option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
-            console.log("Auto selected correct answer.");
-          }
-        }
-      }
-      for (i = 0; i < allOptions; i++) {
-        option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
-      }
-      setScore(correct, userAns);
-    }
-
-    function setScore(corret, userAns){
-      let tmp_players = activity.players;
-      let score_old;
-      let score;
-      let players = [];
-      var last = tmp_players.length;
-      let timestamp = new Date().getTime();
-      for(i=0;i<last;i++){
-        score_old = tmp_players[i].score;
-        if(tmp_players[i].user_UID == User.uid){
-          //Atualizar os quizzes respondidos
-          let quiz_answered = setQuizAnswered(tmp_players[i].quiz_answered,question.numb);
-          //Atualizar score
-          if (corret){
-            score = score_old + 10;
-          }else{
-            score = score_old - 5;
-          }
-          let tokens_quiz_used =  setTokensQuizUsed(tmp_players[i].tokens_quiz_used,null); 
-          players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp,quiz_answered,tokens_quiz_used};
-        }else{
-          let quiz_answered = setQuizAnswered(tmp_players[i].quiz_answered,null);
-          let tokens_quiz_used =  setTokensQuizUsed(tmp_players[i].tokens_quiz_used,null); 
-          players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,quiz_answered,tokens_quiz_used};
-        }
-      }
-      //Gravar Dados
-      boardgamesService.update(activity_uid, {players});
-
-      //gravar na Log as resposta selecionadas
-      const hora = (new Date()).toLocaleDateString('pt-BR');
-      const data = (new Date()).toLocaleDateString('pt-BR');
-      const log_answers = {user_UID: User.uid, data: data, hora: hora, level:activity.level, activity_uid: activity_uid, activity_id: activity.id, category: question.category, question_numb:question.numb, user_answer:userAns, score_old: score_old, score_new: score, tokenid: tokenid};
-      // Salvar no banco de dados.
-      logboardgamesService.save(log_answers);
-    }
-
     function startTimer(time) {
       counter = setInterval(timer, 1000);
       function timer() {
@@ -182,36 +111,78 @@ firebase.auth().onAuthStateChanged((User) => {
       return atual_quiz;
     }
   }
-
-
-  function setQuizAnswered(atual_quiz_answered, question_numb){
-    let quiz_answered = new Array();
-    let stop = atual_quiz_answered.length;
-    for (i=0; i<stop;i++){
-        quiz_answered[i] = atual_quiz_answered[i];
-    }
-    if(!(question_numb == null)){
-        quiz_answered[stop] = question_numb;
-    }
-    return quiz_answered;
-  }
-
-  function setTokensQuizUsed(atual_tokens_quiz_used, tokenid){
-    let tokens_quiz_used = new Array();
-    let stop = atual_tokens_quiz_used.length;
-    for (i=0; i<stop;i++){
-        tokens_quiz_used[i] = atual_tokens_quiz_used[i];
-    }
-    if(!(tokenid == null)){
-        tokens_quiz_used[stop] = tokenid;
-    }
-    return tokens_quiz_used;
-  }
-
-
-
 })
 
 function fechar(){
   window.location.href = "../../play/menu.html";
+}
+
+// creating the new div tags which for icons
+let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
+let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+
+//if user clicked on option
+function optionSelected(answer) {
+  let userAns = answer.querySelector(".choice-text").textContent; //getting user selected option
+  let correct;
+  const allOptions = option_list.children.length; //getting all option items
+  if (userAns == question.answer[0]) {
+    answer.classList.add("correct"); //adding green color to correct selected option
+    answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
+    correct = true;
+  } else {
+    answer.classList.add("incorrect"); //adding red color to correct selected option
+    answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
+    console.log("Wrong Answer");
+    correct = false;
+    for (i = 0; i < allOptions; i++) {
+      if (option_list.children[i].textContent == correcAns) {
+        //if there is an option which is matched to an array answer
+        option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
+        option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
+        console.log("Auto selected correct answer.");
+      }
+    }
+  }
+  for (i = 0; i < allOptions; i++) {
+    option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
+  }
+  setScore(correct, userAns);
+}
+
+function setScore(corret, userAns){
+  let tmp_players = activity.players;
+  let score_old;
+  let score;
+  let players = new Array();
+  var last = tmp_players.length;
+  let timestamp = new Date().getTime();
+  for(i=0;i<last;i++){
+    score_old = tmp_players[i].score;
+    if(tmp_players[i].user_UID == User.uid){
+      //Atualizar os quizzes respondidos
+      let quiz_answered = setQuizAnswered(tmp_players[i].quiz_answered,question.numb);
+      //Atualizar score
+      if (corret){
+        score = score_old + 10;
+      }else{
+        score = score_old - 5;
+      }
+      let tokens_quiz_used =  setTokensQuizUsed(tmp_players[i].tokens_quiz_used,null); 
+      players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp,quiz_answered,tokens_quiz_used};
+    }else{
+      let quiz_answered = setQuizAnswered(tmp_players[i].quiz_answered,null);
+      let tokens_quiz_used =  setTokensQuizUsed(tmp_players[i].tokens_quiz_used,null); 
+      players[i] = {user_UID:tmp_players[i].user_UID,score:score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,quiz_answered,tokens_quiz_used};
+    }
+  }
+  //Gravar Dados
+  boardgamesService.update(activity_uid, {players});
+
+  //gravar na Log as resposta selecionadas
+  const hora = (new Date()).toLocaleDateString('pt-BR');
+  const data = (new Date()).toLocaleDateString('pt-BR');
+  const log_answers = {user_UID: User.uid, data: data, hora: hora, level:activity.level, activity_uid: activity_uid, activity_id: activity.id, category: question.category, question_numb:question.numb, user_answer:userAns, score_old: score_old, score_new: score, tokenid: tokenid};
+  // Salvar no banco de dados.
+  logboardgamesService.save(log_answers);
 }
