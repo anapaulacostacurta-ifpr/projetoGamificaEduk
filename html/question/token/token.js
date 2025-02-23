@@ -56,7 +56,8 @@ firebase.auth().onAuthStateChanged( (User) => {
                             var last = tmp_players.length;
                             for(i=0;i<last;i++){
                                 let quiz_answered = new Array();
-                                for (i=0; i<atual_quiz_answered.length;i++){
+                                let stop = atual_quiz_answered.length;
+                                for (i=0; i<stop;i++){
                                 quiz_answered[i] = atual_quiz_answered[i];
                                 }
                                 if(tmp_players[i].user_UID == User.uid){
