@@ -28,7 +28,7 @@ firebase.auth().onAuthStateChanged((User) => {
         //Buscas as Questões a serem respondidas para a atividade de acorco com o nive e categoria.
         questionsService.getQuizzesByLevel(activity_uid,parseInt(activity.level),"quiz").then(questions =>{
           quizzes = questions;
-
+          //Verificar qual a pergunta que o jogador deverá respoder
           question = getAtualQuiz();
           //Verifica se o jogador já respondeu todas as perguntas
           if(question == null){
