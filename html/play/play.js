@@ -28,20 +28,6 @@ firebase.auth().onAuthStateChanged((User) => {
             if(ckeckin_date >= activity.dados.date_start &&  ckeckin_date <= activity.dados.date_final){
               if( ckeckin_time >= activity.dados.time_start && ckeckin_time <= activity.dados.time_final){
                   activity_uid = activity.uid; // UID do doc no firestone
-                  /**playerService.getPlayer(activity_uid,user_UID).then(players =>{
-                    players.forEach(player=>{
-                      score = player.score;
-                      alert('Retornando para o Jogo!');
-                      window.location.href = "./menu.html";
-                    })
-                  }).catch((error) => {
-                    if(error.menssage == "01 - Não encontrado."){
-                      let players = {user_UID,score,ckeckin_date,ckeckin_time,timestamp};
-                      playerService.save(activity_uid, players).then(window.location.href = "./menu.html");
-                    }
-                  })*/
-                    //variável para verficar se o jogador já entrou no tabuleiro
-                    //let isOnPlayer = false;
                     var players = new Array();
                     var tmp_players = activity.dados.players;
                     var last = tmp_players.length;
@@ -59,7 +45,12 @@ firebase.auth().onAuthStateChanged((User) => {
                         for (i=0; i<atual_tokens_quiz_used.length;i++){
                           tokens_quiz_used[i] = atual_tokens_quiz_used[i];
                         }
-                        players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,quiz_answered,tokens_quiz_used};
+                        let user_UID = tmp_players[i].user_UID;
+                        let score = tmp_players[i].score;
+                        let ckeckin_date = tmp_players[i].ckeckin_date;
+                        let ckeckin_time = tmp_players[i].ckeckin_time;
+                        let timestamp = tmp_players[i].timestamp;
+                        players[i] = {user_UID,score,ckeckin_date,ckeckin_time, timestamp,quiz_answered,tokens_quiz_used};
                       }
                     }
                     let quiz_answered = [];
