@@ -76,8 +76,8 @@ firebase.auth().onAuthStateChanged((User) => {
             }else{
               alert("Atividade fora do prazo!");
             }
-      }).catch((error) => {
-        alert(error.menssage);
+      //}).catch((error) => {
+      //  console.log(error.menssage);
       })
     })
   }

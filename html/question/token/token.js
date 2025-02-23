@@ -9,25 +9,14 @@ firebase.auth().onAuthStateChanged( (User) => {
         sessionStorage.clear;
         window.location.href = "../login/login.html";
     }else{
-        userService.findByUid(User.uid).then(user=>{
-            document.getElementById("nameUser").innerHTML = user.nickname;
-            var avatar = user.avatar;
-            document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
-            //document.getElementById("score_total").innerHTML = user.score;
-          }).catch(error => {
-              console.log(error);
-          });
           const params = new URLSearchParams(window.location.search);
           const category = params.get('category');
           activity_uid = params.get('activity_uid');
-          
-          boardgamesService.getActivitybyUid(activity_uid).then((activityfind) => {
+          activityService.getActivitybyUid(activity_uid).then((activityfind) => {
             var activity = activityfind;
             tmp_players = activityfind.players;
             player = tmp_players.find(player => player.user_UID == User.uid);
             atual_tokens_quiz_used = player.tokens_quiz_used;
-            //document.getElementById("score").innerHTML = player.score;
-            document.getElementById("level").innerHTML = activity.level;
           });
 
           tokenService.getTokens().then(tokens => {
@@ -72,7 +61,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                                 players[i] = {user_UID,score,ckeckin_date,ckeckin_time, timestamp, tokens_quiz_used, quiz_answered};
                             }                              
                             try{
-                                boardgamesService.update(activity_uid, {players}).then(alert("Token Válido!"));
+                                activityService.update(activity_uid, {players}).then(alert("Token Válido!"));
                                 window.location.href = "../quiz/quiz.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
                             } catch (error) {
                                 alert(error);

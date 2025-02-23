@@ -1,7 +1,7 @@
-firebase.auth().onAuthStateChanged( (User) => {
+firebase.auth().onAuthStateChanged((User) => {
     if (!User) {
         window.location.href = "../login/login.html";
-    }
+    }else{
     // Captura o evento de envio do formulário
     document.getElementById("extrato-form").addEventListener("submit", function(event) {
         event.preventDefault();
@@ -11,7 +11,7 @@ firebase.auth().onAuthStateChanged( (User) => {
         const extrato = document.querySelector(".card-extrato");
         let linhas = ''; 
 
-        logboardgamesService.getLogboardgameByUserUID(User.uid,level).then(logactivities => {
+        logactivitiesService.getLogboardgameByUserUID(User.uid,level).then(logactivities => {
             logactivities.forEach(log_activity => {
                 let data_hora = '<td><span>'+ log_activity.data+'-</span>'+'<span>'+log_activity.hora+'</span></td>';
                 let activity_id = '<td><span>'+log_activity.activity_id+'</span></td>';
@@ -30,6 +30,7 @@ firebase.auth().onAuthStateChanged( (User) => {
             extrato.innerHTML = errorString;
         });
     });
+}
 })
 
 
