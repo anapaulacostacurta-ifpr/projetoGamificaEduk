@@ -56,18 +56,19 @@ firebase.auth().onAuthStateChanged( (User) => {
                             var last = tmp_players.length;
                             for(i=0;i<last;i++){
                                 let quiz_answered = new Array();
-                                let atual_quiz_answered = player.quiz_answered;
+                                let atual_quiz_answered = tmp_players[i].quiz_answered;
                                 let stop = atual_quiz_answered.length;
                                 for (i=0; i<stop;i++){
-                                    quiz_answered[i] = atual_quiz_answered[i];
+                                    quiz_answered[i] = atual_quiz_answered.length[i];
                                 }
                                 if(tmp_players[i].user_UID == User.uid){
                                     players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used, quiz_answered};
                                 }else{
                                     let tokens_quiz_used = new Array();
-                                    let stop = atual_tokens_quiz_used.length;
+                                    let stop = tmp_players[i].tokens_quiz_used.length;
+                                    let atual_tokens_quiz_used = tmp_players[i].tokens_quiz_used;
                                     for (i=0; i<stop;i++){
-                                    tokens_quiz_used[i] = atual_tokens_quiz_used[i];
+                                        tokens_quiz_used[i] = atual_tokens_quiz_used[i];
                                     }
                                     players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,tokens_quiz_used, quiz_answered};
                                 }
