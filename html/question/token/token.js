@@ -2,6 +2,9 @@ var activity_uid;
 var tokenid;
 firebase.auth().onAuthStateChanged( (User) => {
     var player;
+    var tmp_players;
+    var atual_tokens_quiz_used;
+    var tokens_quiz;
     if (!User) {
         sessionStorage.clear;
         window.location.href = "../login/login.html";
@@ -17,9 +20,7 @@ firebase.auth().onAuthStateChanged( (User) => {
           const params = new URLSearchParams(window.location.search);
           const category = params.get('category');
           activity_uid = params.get('activity_uid');
-          var tmp_players;
-          var atual_tokens_quiz_used;
-          var tokens_quiz;
+          
           boardgamesService.getActivitybyUid(activity_uid).then((activityfind) => {
             var activity = activityfind;
             tmp_players = activityfind.players;
@@ -62,7 +63,8 @@ firebase.auth().onAuthStateChanged( (User) => {
                                     players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used, quiz_answered};
                                 }else{
                                     let tokens_quiz_used = new Array();
-                                    for (i=0; i<atual_tokens_quiz_used.length;i++){
+                                    let stop = atual_tokens_quiz_used.length;
+                                    for (i=0; i<stop;i++){
                                     tokens_quiz_used[i] = atual_tokens_quiz_used[i];
                                     }
                                     players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,tokens_quiz_used, quiz_answered};
