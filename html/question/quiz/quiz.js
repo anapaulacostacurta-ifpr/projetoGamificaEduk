@@ -168,14 +168,14 @@ function setScore(corret,  user_answer){
     let atual_quiz_answered = tmp_players[i].quiz_answered;
     let last = atual_quiz_answered.length;
     let user_UID = tmp_players[i].user_UID;
-    for (i=0; i<last;i++){
-        quiz_answered[i] = atual_quiz_answered.length[i];
+    for (j=0; j<last;j++){
+        quiz_answered[j] = atual_quiz_answered.length[j];
     }
     let tokens_quiz_used = new Array();
     stop = tmp_players[i].tokens_quiz_used.length;
     let atual_tokens_quiz_used = tmp_players[i].tokens_quiz_used;
-    for (i=0; i<stop;i++){
-        tokens_quiz_used[i] = atual_tokens_quiz_used[i];
+    for (j=0; j<stop;j++){
+        tokens_quiz_used[j] = atual_tokens_quiz_used[j];
     }
     if(tmp_players[i].user_UID == user_uid){
       score_old = tmp_players[i].score;
