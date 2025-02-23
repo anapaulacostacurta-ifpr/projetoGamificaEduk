@@ -1,6 +1,7 @@
 var question;
 var activity;
 var tokenid;
+var user_UID;
 firebase.auth().onAuthStateChanged((User) => {
   const question_box = document.getElementById("question_box");
   const que_text = document.getElementById("que_text");
@@ -13,7 +14,8 @@ firebase.auth().onAuthStateChanged((User) => {
   if (!User) {
       window.location.href = "../login/login.html";
   }else{
-    userService.findByUid(User.uid).then(user=>{
+    userService.findByUid(User.uidUser.uid).then(user=>{
+      user_UID = User.uid;
       //document.getElementById("nameUser").innerHTML = user.nickname;
       var avatar = user.avatar;
       //document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
@@ -159,7 +161,7 @@ function setScore(corret, userAns){
   let timestamp = new Date().getTime();
   for(i=0;i<last;i++){
     score_old = tmp_players[i].score;
-    if(tmp_players[i].user_UID == User.uid){
+    if(tmp_players[i].user_UID == user_UID){
       //Atualizar os quizzes respondidos
       let quiz_answered = new Array();
       let atual_quiz_answered = tmp_players[i].quiz_answered;
@@ -203,7 +205,7 @@ function setScore(corret, userAns){
   //gravar na Log as resposta selecionadas
   const hora = (new Date()).toLocaleTimeString('pt-BR');
   const data = (new Date()).toLocaleDateString('pt-BR');
-  const log_answers = {user_UID: User.uid, data: data, hora: hora, level:activity.level, activity_uid: activity_uid, activity_id: activity.id, category: question.category, question_numb:question.numb, user_answer:userAns, score_old: score_old, score_new: score, tokenid: tokenid};
+  const log_answers = {user_UID: user_UID, data: data, hora: hora, level:activity.level, activity_uid: activity_uid, activity_id: activity.id, category: question.category, question_numb:question.numb, user_answer:userAns, score_old: score_old, score_new: score, tokenid: tokenid};
   // Salvar no banco de dados.
   logboardgamesService.save(log_answers);
 }
