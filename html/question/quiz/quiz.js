@@ -137,13 +137,14 @@ function optionSelected(answer) {
     answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
     console.log("Wrong Answer");
     correct = false;
-    for (i = 0; i < allOptions; i++) {
-      if (option_list.children[i].textContent == correcAns) {
-        //if there is an option which is matched to an array answer
-        option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
-        option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
-        console.log("Auto selected correct answer.");
-      }
+  }
+  
+  for (i = 0; i < allOptions; i++) {
+    if (option_list.children[i].textContent == question.answer[0]) {
+      //if there is an option which is matched to an array answer
+      option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
+      option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
+      console.log("Auto selected correct answer.");
     }
   }
   for (i = 0; i < allOptions; i++) {
