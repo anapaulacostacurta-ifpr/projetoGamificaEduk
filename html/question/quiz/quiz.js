@@ -192,7 +192,7 @@ function setScore(corret,  user_answer){
       const data = (new Date()).toLocaleDateString('pt-BR');
       let level = activity.level;
       let category =  question.category;
-      let question_numb = question_numb;
+      let question_numb = question.numb;
       let score_new = score;
       log_answers = {user_UID, data, hora, level, activity_uid, category, question_numb,  user_answer, score_old, score_new, tokenid};
     }
