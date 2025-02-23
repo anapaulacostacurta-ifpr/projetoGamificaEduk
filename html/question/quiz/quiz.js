@@ -170,7 +170,7 @@ function setScore(corret,  user_answer){
     let last = atual_quiz_answered.length;
     let user_UID = tmp_players[i].user_UID;
     for (j=0; j<last;j++){
-        quiz_answered[j] = atual_quiz_answered.length[j];
+        quiz_answered[j] = atual_quiz_answered[j];
     }
     let tokens_quiz_used = new Array();
     stop = tmp_players[i].tokens_quiz_used.length;
