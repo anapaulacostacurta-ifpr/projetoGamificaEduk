@@ -111,6 +111,6 @@ function logout() {
 }    
 
 function voltar(){
-    window.location.href = "../../play/menu.html&activity_uid="+activity_uid;
+    window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
 }
   
