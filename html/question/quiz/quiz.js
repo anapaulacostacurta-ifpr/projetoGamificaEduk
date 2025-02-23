@@ -158,7 +158,7 @@ function setScore(corret,  user_answer){
   let score;
   let players = new Array();
   var last = tmp_players.length;
-  
+  var log_answers;
   for(i=0;i<last;i++){
     let timestamp = tmp_players[i].timestamp;
     score = tmp_players[i].score;
@@ -188,6 +188,13 @@ function setScore(corret,  user_answer){
         score = score_old - 5;
       }
       timestamp = new Date().getTime();
+      const hora = (new Date()).toLocaleTimeString('pt-BR');
+      const data = (new Date()).toLocaleDateString('pt-BR');
+      let level = activity.level;
+      let category =  question.category;
+      let question_numb = question_numb;
+      let score_new = score;
+      log_answers = {user_UID, data, hora, level, activity_uid, category, question_numb,  user_answer, score_old, score_new, tokenid};
     }
     players[i] = {user_UID,score,ckeckin_date,ckeckin_time, timestamp,quiz_answered,tokens_quiz_used};
   }
@@ -195,13 +202,5 @@ function setScore(corret,  user_answer){
   boardgamesService.update(activity_uid, {players});
 
   //gravar na Log as resposta selecionadas
-  const hora = (new Date()).toLocaleTimeString('pt-BR');
-  const data = (new Date()).toLocaleDateString('pt-BR');
-  let level = activity.level;
-  let category =  question.category;
-  let question_numb = question_numb;
-  let score_new = score;
-  const log_answers = {user_UID, data, hora, level, activity_uid, category, question_numb,  user_answer, score_old, score_new, tokenid};
-  // Salvar no banco de dados.
   logboardgamesService.save(log_answers);
 }
