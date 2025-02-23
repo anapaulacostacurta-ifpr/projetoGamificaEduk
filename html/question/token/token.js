@@ -45,33 +45,31 @@ firebase.auth().onAuthStateChanged( (User) => {
                     let pos_token_used = atual_tokens_quiz_used.indexOf(tokenid);  
                     if (!(pos_token_used > -1)){ // Se encontrado foi usado. retorna -1 Não encontrado.
                         if(pos_token > -1){ 
-                            let tokens_quiz_used = new Array();
-                            let stop = atual_tokens_quiz_used.length
-                            for (j=0; j<stop;j++){
-                                tokens_quiz_used[j] = atual_tokens_quiz_used[j];
-                            }
-                            tokens_quiz_used[stop] = tokenid;
                             var players = new Array();
-                            let timestamp = new Date().getTime();
                             var last = tmp_players.length;
                             for(i=0;i<last;i++){
                                 let quiz_answered = new Array();
                                 let atual_quiz_answered = tmp_players[i].quiz_answered;
-                                let stop = atual_quiz_answered.length;
-                                for (j=0; j<stop;j++){
+                                let last_quiz_answered = atual_quiz_answered.length;
+                                for (j=0; j<last_quiz_answered;j++){
                                     quiz_answered[j] = atual_quiz_answered[j];
                                 }
-                                if(tmp_players[i].user_UID == User.uid){
-                                    players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: timestamp, tokens_quiz_used, quiz_answered};
-                                }else{
-                                    let tokens_quiz_used = new Array();
-                                    let stop = tmp_players[i].tokens_quiz_used.length;
-                                    let atual_tokens_quiz_used = tmp_players[i].tokens_quiz_used;
-                                    for (i=0; i<stop;i++){
-                                        tokens_quiz_used[i] = atual_tokens_quiz_used[i];
-                                    }
-                                    players[i] = {user_UID:tmp_players[i].user_UID,score:tmp_players[i].score,ckeckin_date: tmp_players[i].ckeckin_date,ckeckin_time: tmp_players[i].ckeckin_time, timestamp: tmp_players[i].timestamp,tokens_quiz_used, quiz_answered};
+                                let tokens_quiz_used = new Array();
+                                let last_token_quiz = tmp_players[i].tokens_quiz_used.length;
+                                let atual_tokens_quiz_used = tmp_players[i].tokens_quiz_used;
+                                for (j=0; j<last_token_quiz;j++){
+                                    tokens_quiz_used[j] = atual_tokens_quiz_used[j];
                                 }
+                                let user_UID = tmp_players[i].user_UID; 
+                                let score = tmp_players[i].score;
+                                let ckeckin_date = tmp_players[i].ckeckin_date;
+                                let ckeckin_time =  tmp_players[i].ckeckin_time;
+                                let timestamp = tmp_players[i].timestamp;
+                                if(tmp_players[i].user_UID == User.uid){
+                                    timestamp = new Date().getTime();
+                                    tokens_quiz_used[last_token_quiz] = tokenid;
+                                }
+                                players[i] = {user_UID,score,ckeckin_date,ckeckin_time, timestamp, tokens_quiz_used, quiz_answered};
                             }                              
                             try{
                                 boardgamesService.update(activity_uid, {players}).then(alert("Token Válido!"));
