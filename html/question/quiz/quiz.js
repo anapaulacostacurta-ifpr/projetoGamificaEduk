@@ -116,7 +116,7 @@ firebase.auth().onAuthStateChanged((User) => {
 })
 
 function fechar(){
-  window.location.href = "../../play/menu.htmll&activity_uid="+activity_uid;
+  window.location.href = "../../play/menu.html&activity_uid="+activity_uid;
 }
 
 // creating the new div tags which for icons
