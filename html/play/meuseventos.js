@@ -42,7 +42,7 @@ firebase.auth().onAuthStateChanged((User) => {
       activityService.getActivitybyUid(uid).then((activity) => {
           if(ckeckin_date >= activity.date_start &&  ckeckin_date <= activity.date_final){
             if( ckeckin_time >= activity.time_start && ckeckin_time <= activity.time_final){
-                  activity_uid = activity.id; // UID do doc no firestone
+                  activity_uid = uid; // UID do doc no firestone
                     var players = new Array();
                     var tmp_players = activity.players;
                     var last = tmp_players.length;

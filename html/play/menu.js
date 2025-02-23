@@ -6,7 +6,7 @@ firebase.auth().onAuthStateChanged((User) => {
     userService.findByUid(User.uid).then(user=>{
       const params = new URLSearchParams(window.location.search);
       activity_uid = params.get('activity_uid');
-       activityService.getActivitybyUid(activity_uid).then((activity) => {
+      activityService.getActivitybyUid(activity_uid).then((activity) => {
             var players = activity.players;
             var player = players.find(player => player.user_UID == User.uid);
             document.getElementById("score").innerHTML = player.score;
@@ -15,8 +15,6 @@ firebase.auth().onAuthStateChanged((User) => {
     }).catch(error => {
         console.log(error);
     });
-
-    
   } 
 });
 
