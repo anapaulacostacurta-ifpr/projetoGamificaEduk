@@ -6,7 +6,7 @@ firebase.auth().onAuthStateChanged((User) => {
         var admin;
         var nickname;
         var profile;
-        var avatar;
+        var avatar
         var status;
         userService.findByUid(User.uid).then(user=>{
             name = user.name;
@@ -20,27 +20,6 @@ firebase.auth().onAuthStateChanged((User) => {
             console.log(error.message);
             status = false;
         });
-        document.getElementById("form-profile").addEventListener("submit", function(event) {
-        event.preventDefault();
-            const name = document.getElementById("name").value;
-            const nickname = document.getElementById("nickname").value;
-            const admin = document.querySelector('[id=admin]:checked');
-            const select = document.getElementById("profile");
-            const profileUser = select.options[select.selectedIndex].value;
-            const avatar = document.querySelector('input[name="avatar_id"]:checked').value;
-
-
-            var user = {'uid': User.uid, 'avatar': avatar, 'name': name, 'nickname':nickname, 'admin': admin, 'profile':profileUser, 'score':0, 'status':status};
-            try{
-                var res = userService.save(User.uid, user);
-                alert(res);
-                alert("Aguarde seu perfil ser ativado pelo administrador!");
-            }catch(error){
-                alert(error.message);
-            }
-            logout();
-        });
-
         
     }
 });

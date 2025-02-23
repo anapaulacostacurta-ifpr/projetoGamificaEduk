@@ -11,17 +11,17 @@
         <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
         <script src="../../firebase-init.js"></script>
-        <script src="../../auth-guard.js"></script>
         <script src="../../services/questions.service.js"></script>
         <script src="../../services/user.service.js"></script>
-        <script src="../../services/activities.service.js"></script>
+        <script src="consultar.js"></script>
     </head>
+    
     <body>
         <div class="container">
             <div class="card card-container">
-                <header >
-                    <nav class="navbar navbar-expand-sm col-sm-12 m-1 p-1">
-                        <span class="col-sm-2">
+                <header>
+                    <nav class="navbar navbar-expand-sm col-sm-12">
+                        <span class="col-sm-1">
                             <div class="dropdown">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Menu
@@ -38,8 +38,8 @@
                                     <a id="closerodada" class="dropdown-item" href="../adm/boardgames/closeboardgames.html">Encerrar</a>
                                     <div class="dropdown-divider"></div>
                                     <h6 class="dropdown-header">Questões</h6>
-                                    <a id="cadastrar_questao" class="dropdown-item" href="../adm/questions/cadastrar.html">Cadastrar</a>
-                                    <a id="consutar_questao" class="dropdown-item" href="../adm/questions/consultar.html">Consultar</a>
+                                    <a id="cadastrar_questao" class="dropdown-item" href="../adm/boardgames/boardgames.html">Cadastrar</a>
+                                    <a id="consutar_questao" class="dropdown-item" href="../adm/boardgames/startboardgames.html">Consultar</a>
                                     <div class="dropdown-divider"></div>
                                     <h6 class="dropdown-header">Eventos</h6>
                                     <a id="participar_evento" class="dropdown-item" href="../play/play.html">Participar</a>
@@ -50,23 +50,53 @@
                                 </div>
                             </div>
                         </span>
-                        <span class="col-sm-6">&nbsp;&nbsp;</span>
-                        <span id="profile" class="col-sm-3 text-center">
+                        <span class="col-sm-5">&nbsp;&nbsp;</span>
+                        <span id="coin" class="col-sm-3 ml-auto">
+                            <span class="badge rounded-pill bg-success"><span id="coins" class="badge bg-light text-dark"></span>&nbsp;AB@ COINS</span><br>
+                        </span>
+                        <span id="profile" class="col-sm-2 text-center">
                             <p>
                                 <span id="avatarUser"></span><br/>
                                 <span id="nameUser"></span><br/>
                             </p>
-                            <span id="coin" class="col-sm-3 ml-auto">
-                                <span class="badge rounded-pill bg-success"><span id="coins" class="badge bg-light text-dark"></span>&nbsp;AB@ COINS</span><br>
-                            </span>
                         </span>
                     </nav>                  
                 </header>
                 <div>
-                    <iframe class="embed-responsive-item col-sm-12" height="300" id="meueventos" src="../play/meuseventos.html"></iframe>                
+                    <form id="consultar-form">
+                        <fieldset>
+                            <p>
+                            Selecione o nível:
+                            <select id="level" name="level">
+                                <option value="1">Nível 1</option>
+                                <option value="2">Nível 2</option>
+                                <option value="3">Nível 3</option>
+                                <option value="4">Nível 4</option>
+                                <option value="5">Nível 5</option>
+                                <option value="6">Nível 6</option>
+                                <option value="6">Nível 7</option>
+                            </select>
+                            </p>
+                        </fieldset>
+                        <fieldset>
+                            <p>
+                            Selecione a Categoria:
+                            <select id="category" name="category">
+                                <option value="quiz">quiz</option>
+                                <option value="desafio">desafio</option>
+                                <option value="sorte_revez">sorte_revez</option>
+                                <option value="quiz_final">quiz_final</option>
+                            </select>
+                            </p>
+                        </fieldset>
+                        <p>
+                            <button type="submit">Pesquisar</button>
+                        </p>
+                    </form>
+                    <ol id="card-questions"></ol>
+                    <button class="fab fixed bottom right" onclick="newQuestion()">+</button>
                 </div>
             </div>
         </div>
-        <script src="home.js"></script>
     </body>
 </html>

@@ -11,31 +11,30 @@
         <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
         <script src="../../firebase-init.js"></script>
-        <script src="../../auth-guard.js"></script>
-        <script src="../../services/questions.service.js"></script>
         <script src="../../services/user.service.js"></script>
-        <script src="../../services/activities.service.js"></script>
+        <script src="../../services/questions.service.js"></script>
+        <script src="cadastrar.js"></script>
     </head>
     <body>
         <div class="container">
             <div class="card card-container">
-                <header >
-                    <nav class="navbar navbar-expand-sm col-sm-12 m-1 p-1">
-                        <span class="col-sm-2">
+                <header>
+                    <nav class="navbar navbar-expand-sm col-sm-12">
+                        <span class="col-sm-1">
                             <div class="dropdown">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Menu
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <h6 class="dropdown-header">Perfil</h6>
-                                    <a id="inserir_perfil" class="dropdown-item" href="../home/inserir.html">Inserir</a>
+                                    <a id="cadastrar_perfil" class="dropdown-item" href="../home/cadastrar.html">Cadastrar</a>
                                     <a id="ativar_perfil" class="dropdown-item" href="../home/ativar.html">Ativar</a>
                                     <a id="atualizar_perfil" class="dropdown-item" href="../home/atualizacao.html">Atualizar</a>
                                     <div class="dropdown-divider"></div>
                                     <h6 class="dropdown-header">Atividade</h6>
-                                    <a id="novarodada" class="dropdown-item" href="../adm/boardgames/boardgames.html">Cadastrar</a>
-                                    <a id="startrodada" class="dropdown-item" href="../adm/boardgames/startboardgames.html">Ativar</a>
-                                    <a id="closerodada" class="dropdown-item" href="../adm/boardgames/closeboardgames.html">Encerrar</a>
+                                    <a id="cadastrar_atividade" class="dropdown-item" href="../adm/boardgames/boardgames.html">Cadastrar</a>
+                                    <a id="ativar_atividade" class="dropdown-item" href="../adm/boardgames/startboardgames.html">Ativar</a>
+                                    <a id="encerrar_atividade" class="dropdown-item" href="../adm/boardgames/closeboardgames.html">Encerrar</a>
                                     <div class="dropdown-divider"></div>
                                     <h6 class="dropdown-header">Questões</h6>
                                     <a id="cadastrar_questao" class="dropdown-item" href="../adm/questions/cadastrar.html">Cadastrar</a>
@@ -50,23 +49,61 @@
                                 </div>
                             </div>
                         </span>
-                        <span class="col-sm-6">&nbsp;&nbsp;</span>
-                        <span id="profile" class="col-sm-3 text-center">
+                        <span class="col-sm-5">&nbsp;&nbsp;</span>
+                        <span id="coin" class="col-sm-3 ml-auto">
+                            <span class="badge rounded-pill bg-success"><span id="coins" class="badge bg-light text-dark"></span>&nbsp;AB@ COINS</span><br>
+                        </span>
+                        <span id="profile" class="col-sm-2 text-center">
                             <p>
                                 <span id="avatarUser"></span><br/>
                                 <span id="nameUser"></span><br/>
                             </p>
-                            <span id="coin" class="col-sm-3 ml-auto">
-                                <span class="badge rounded-pill bg-success"><span id="coins" class="badge bg-light text-dark"></span>&nbsp;AB@ COINS</span><br>
-                            </span>
                         </span>
                     </nav>                  
                 </header>
-                <div>
-                    <iframe class="embed-responsive-item col-sm-12" height="300" id="meueventos" src="../play/meuseventos.html"></iframe>                
+                <div class="container">
+                  <h1>Cadastrar Nova Questão</h1>
+                  <div id="cadastrar-card">
+                    <form id="cadastrar-form">
+                      <p>
+                        <label for="category"><strong>Categoria:</strong></label>
+                        <input type="text" id="category" name="category" required>
+                      </p>
+                      <p>
+                        <label for="type"><strong>Tipo:</strong></label>
+                        <input type="text" id="type" name="type" required>
+                      </p>
+                      <p>
+                        <label for="level"><strong>Fase:</strong></label>
+                        <input type="text" id="level" name="level" required>
+                      </p>
+                      <p>
+                        <label for="text"><strong>Pergunta:</strong></label>
+                        <input type="text" id="text" name="text" required>
+                      </p>
+                      <p>
+                        <label for="options"><strong>Opções (separadas por vírgula):</strong></label>
+                        <input type="text" id="options" name="options" required>
+                      </p>
+                      <p>
+                        <label for="answer"><strong>Resposta correta:</strong></label>
+                        <input type="text" id="answer" name="answer" required>
+                      </p>
+                      <p>
+                        <label for="feedback_correct"><strong>Feedback acerto:</strong></label>
+                        <input type="text" id="feedback_correct" name="feedback_correct" required>
+                      </p>
+                      <p>
+                        <label for="feedback_incorrect"><strong>Feedback erro:</strong></label>
+                        <input type="text" id="feedback_incorrect" name="feedback_incorrect" required>
+                      </p>
+                      <p>
+                        <button type="submit">Cadastrar</button>
+                      </p>
+                    </form>
+                  </div>
                 </div>
             </div>
         </div>
-        <script src="home.js"></script>
     </body>
 </html>

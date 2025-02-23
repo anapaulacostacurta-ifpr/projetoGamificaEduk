@@ -1,16 +1,12 @@
-//var quiz = getAtualQuiz();
 var activity_uid;
 firebase.auth().onAuthStateChanged((User) => {
   if (!User) {
       window.location.href = "../login/login.html";
   }else{
     userService.findByUid(User.uid).then(user=>{
-      document.getElementById("nameUser").innerHTML = user.nickname;
-      var avatar = user.avatar;
-      document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
       const params = new URLSearchParams(window.location.search);
       activity_uid = params.get('activity_uid');
-        boardgamesService.getActivitybyUid(activity_uid).then((activity) => {
+       activityService.getActivitybyUid(activity_uid).then((activity) => {
             var players = activity.players;
             var player = players.find(player => player.user_UID == User.uid);
             document.getElementById("score").innerHTML = player.score;

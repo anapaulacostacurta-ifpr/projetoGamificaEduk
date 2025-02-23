@@ -2,34 +2,49 @@ firebase.auth().onAuthStateChanged((User) => {
   if (!User) {
       window.location.href = "../login/login.html";
   }else{
-    userService.findByUid(User.uid).then(user=>{
-      document.getElementById("nameUser").innerHTML = user.nickname;
-      //var user_UID = User.uid;
-      var avatar = user.avatar;
-      document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
-    }).catch(error => {
-        console.log(error);
-    });
+    var players;
+    var player;
+    let linhas = ''; 
+    const eventos = document.getElementById("meus_eventos");
+    
+    activityService.getActivitybyPlayer(User.uid).then((activities) => {
+      activities.forEach(activity => {
+        players = activity.dados.players;
+        player = players.find(player => player.user_UID == User.uid);                      
+        var activity_uid = activity.uid;
+        var activity_dados = activity.dados;
+        let entrar;
+        if (activity_dados.state =="started"){
+          entrar = `<td><span><input type="radio" id="activity_uid" class="activity_uid" value="${activity_uid}">${activity_dados.id}</span></td>`;
+        }else{
+          entrar = `<td><span>&nbsp;&nbsp;&nbsp${activity_dados.id}</span></td>`;
+        }
+        let date = '<td><span>'+activity_dados.date_start+'</span>-<span>'+activity_dados.time_start+'</span>-<span>'+activity_dados.date_final+'</span>-<span>'+activity_dados.time_final+'</span></td>';
+        let state = '<td><span>'+activity_dados.state+'</span></td>';
+        linhas = linhas + '<tr>'+entrar+date+state+'</tr>';
+      })
+      let tbody = '<tbody>'+linhas+'</tbody>';
+      let thead = '<thead><tr><th>Atividade</th><th>Período</th><th>Status</th></tr></thead>';     
+      let table = '<table class="table table-hover" align="center">'+ thead + tbody+'</table>';
+      eventos.innerHTML = table;
+    })
 
     document.getElementById("play-form").addEventListener("submit", function(event) {
       event.preventDefault();
       // Captura os dados do formulário
-      let id = document.getElementById("activity_id").value;
-      let activity_uid; // UID do doc no firestone
+      let uid = eventos.querySelector(".activity_uid").value;
       let score = 0;
       let user_UID = User.uid;
       let ckeckin_date = (new Date()).toLocaleDateString('pt-BR');
       let ckeckin_time = (new Date()).toLocaleTimeString('pt-BR');
       let timestamp = new Date().getTime();
 
-      activityService.getActivities(id).then((activities) => {
-        activities.forEach(activity => {
-          if(activity.dados.id == id){
-            if(ckeckin_date >= activity.dados.date_start &&  ckeckin_date <= activity.dados.date_final){
-              if( ckeckin_time >= activity.dados.time_start && ckeckin_time <= activity.dados.time_final){
-                  activity_uid = activity.uid; // UID do doc no firestone
+      activityService.getActivitybyUid(uid).then((activity) => {
+          if(ckeckin_date >= activity.date_start &&  ckeckin_date <= activity.date_final){
+            if( ckeckin_time >= activity.time_start && ckeckin_time <= activity.time_final){
+                  activity_uid = activity.id; // UID do doc no firestone
                     var players = new Array();
-                    var tmp_players = activity.dados.players;
+                    var tmp_players = activity.players;
                     var last = tmp_players.length;
                     for(i=0;i<last;i++){
                       if(tmp_players[i].user_UID == user_UID){
@@ -61,17 +76,12 @@ firebase.auth().onAuthStateChanged((User) => {
             }else{
               alert("Atividade fora do prazo!");
             }
-          }else{
-            alert("Atividade Não encontrada!");
-          }  
-        });
       }).catch((error) => {
         alert(error.menssage);
       })
     })
-    
   }
-});
+})
 
 function voltar(){
   window.location.href = "../home/home.html";
