@@ -21,6 +21,21 @@ const userService = {
             console.log(teachers);            
             return teachers;
     },
+    getPlayersInative: async (professor) => {
+        const querySnapshot = await firebase.firestore()
+            .collection("users")
+            .where('profile','==',"aluno")
+            .where('professor','==',professor)
+            .where('state','==',false)
+            .get();
+
+            if(querySnapshot.empty){
+                throw new Error("01 - Não encontrado.");
+            }
+            const players = querySnapshot.docs.map(doc=>doc.data());
+            console.log(players);            
+            return players;
+    },
     save: async (id,user) => {
         try{
             const querySnapshot = await firebase.firestore()
@@ -32,5 +47,11 @@ const userService = {
         }catch (error) {
             throw error;
         }
+    },
+    update: async (id,user) => {
+        return await firebase.firestore()
+            .collection("users")
+            .doc(id)
+            .update(user);
     }
 };

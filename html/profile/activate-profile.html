@@ -12,23 +12,16 @@
         <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
         <script src="../../firebase-init.js"></script>
         <script src="../../services/user.service.js"></script>
+        <script src="../../services/logprofile.service.js"></script>
     </head>
     <body>     
         <form id="profile-form">
-            <h3 class="text-center">Registrar</h3>
+            <h3 class="text-center">Ativar Perfil</h3>
             <hr class="colorgraph">
-            <input id="name" type="text" name="name" class="form-control form-control-sm" placeholder="Nome completo" required/>
-            <input id="nickname" type="text" name="nickname" class="form-control form-control-sm" placeholder="Apelido" required/>
-            <select id="profile" name="profile" class="form-select-sm">
-                <option value="none">selecione o perfil</option>
-                <option value="aluno">Aluno</option>
-                <option value="professor">Professor</option>
-                <option value="admin">Administrador</option>
-            </select>
-            <div id="professores" style="display: none;"></div>
+            <div id="lista_alunos"></div>
             <hr class="colorgraph">
-            <span class="group-btn col-lg-6">     
-                <button id="salvar" class="btn btn-success" type="submit">SALVAR</button>
+            <span class="group-btn">     
+                <button id="ativar" class="btn btn-success" type="submit">ATIVAR</button>
             </span>
             <div id="alert_sucesso" class="alert alert-success fade">
                 <strong id="res_sucesso"></strong>
@@ -37,6 +30,6 @@
                 <strong id="res_error"></strong>
               </div>
         </form>
-        <script src="register-profile.js"></script>
+        <script src="activate-profile.js"></script>
     </body>
 </html>
