@@ -2,15 +2,8 @@ firebase.auth().onAuthStateChanged((User) => {
   if (!User) {
       window.location.href = "../login/login.html";
   }else{
-      userService.findByUid(User.uid).then(user=>{
-        document.getElementById("nameUser").innerHTML = user.nickname;
-        var avatar = user.avatar;
-        document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
-      }).catch(error => {
-          console.log(error);
-      });
 
-      document.getElementById("activity-form").addEventListener("submit", function(event) {
+    document.getElementById("activity-form").addEventListener("submit", function(event) {
         event.preventDefault();
        
         var alert_sucesso = document.getElementById("alert_sucesso");
@@ -29,19 +22,6 @@ firebase.auth().onAuthStateChanged((User) => {
         const id = document.getElementById("activity_id").value;
         const state = "waiting"; // "waiting", "started", "finished"
       
-        /** 
-        boardgamesService.getBoardGameByRodadaID(boardgameid).then(boardgames=>{
-          boardgames.forEach(boardgame=>{
-            msg_error.innerHTML= "Atividade: "+boardgame.dados.boardgameid+" já cadastrada!";
-          })
-        }).catch(error => {
-              if(error == "Não encontrado"){
-                console.log(error);
-              }
-        });
-
-        */
-      
         // Cria o objeto para salvar o quiz
         const newactivity = {
           date_start,
@@ -55,7 +35,7 @@ firebase.auth().onAuthStateChanged((User) => {
           state,  
         };
         try{
-          boardgamesService.save(newactivity);
+          activityService.save(newactivity);
           msg_sucesso.innerHTML= "Atividade cadastrada com Sucesso!";
           alert_sucesso.classList.add("show");
           document.getElementById("bt-success").disabled = true;

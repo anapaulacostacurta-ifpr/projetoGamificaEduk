@@ -2,14 +2,6 @@ firebase.auth().onAuthStateChanged((User) => {
   if (!User) {
       window.location.href = "../login/login.html";
   }else{
-      userService.findByUid(User.uid).then(user=>{
-        document.getElementById("nameUser").innerHTML = user.nickname;
-        var avatar = user.avatar;
-        document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
-      }).catch(error => {
-          console.log(error);
-      });
-
       const lista_activities = document.getElementById("lista_activities");
       const pesquisa_activities = document.getElementById("startactivity-form");
       const ativar_activity = document.getElementById("ativaractivity-form");
@@ -26,7 +18,7 @@ firebase.auth().onAuthStateChanged((User) => {
         const activity_state = "waiting"; // "waiting", "started", "finished"
 
         let linhas = ''; 
-        boardgamesService.getActivitiesbyDateStart(activity_id, activity_date, activity_teacher, activity_level, activity_state).then(activities => {
+        activityService.getActivitiesbyDateStart(activity_id, activity_date, activity_teacher, activity_level, activity_state).then(activities => {
           activities.forEach(activity => {
                   var activity_uid = activity.uid;
                   var activity_dados = activity.dados;
@@ -57,7 +49,7 @@ firebase.auth().onAuthStateChanged((User) => {
           var msg_sucesso = document.getElementById("res_sucesso");
           var msg_error = document.getElementById("res_error");  
       
-          boardgamesService.update(userselect, activities).then(() => {
+          activityService.update(userselect, activities).then(() => {
             msg_sucesso.innerHTML= "Atividade Iniciada com sucesso!";
             alert_sucesso.classList.add("show");
             document.getElementById("ativar").disabled = true;
