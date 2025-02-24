@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged( (User) => {
       };
 
       // Chama a função para salvar o quiz no Firestore
-      questionService.save(newQuiz);
+      questionsService.save(newQuiz);
 
       // Limpa o formulário após o envio
       document.getElementById("cadastrar-form").reset();
