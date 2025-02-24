@@ -20,6 +20,43 @@ const questionsService = {
                 return [];
         }
     },
+    getQuestionByCategory: async (category) => {
+        try {
+            const querySnapshot = await firebase.firestore().collection("questions")
+            .where('category','==',category)
+            .get();
+
+            if(querySnapshot.empty){
+                throw new Error("Nenhuma pergunta encontrada para o nível "+ level+ " .");
+            }
+            const questions = querySnapshot.docs.map(doc=>doc.data());
+            console.log(questions);            
+            return questions;
+        } catch (error) {
+                console.error("Erro ao carregar perguntas:", error);
+                alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
+                return [];
+        }
+    },
+    getQuestionByCategoryLevel: async (Category,level) => {
+        try {
+            const querySnapshot = await firebase.firestore().collection("questions")
+            .where('level','==',level)
+            .where('category','==',category)
+            .get();
+
+            if(querySnapshot.empty){
+                throw new Error("Nenhuma pergunta encontrada para o nível "+ level+ " .");
+            }
+            const questions = querySnapshot.docs.map(doc=>doc.data());
+            console.log(questions);            
+            return questions;
+        } catch (error) {
+                console.error("Erro ao carregar perguntas:", error);
+                alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
+                return [];
+        }
+    },
     findByUid: uid => {
         return firebase.firestore()
             .collection("questions")

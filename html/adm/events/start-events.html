@@ -11,28 +11,25 @@
         <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
         <script src="../../../firebase-init.js"></script>
         <script src="../../../services/user.service.js"></script>
-        <script src="../../../services/activities.service.js"></script>
+        <script src="../../../services/events.service.js"></script>
     </head>
     <body>
-    <form id="startactivity-form ">
-      <h5 class="text-center">Iniciar Atividade</h5>
+    <form id="start-events-form">
+      <h5 class="text-center">Iniciar Evento</h5>
       <hr class="colorgraph">
         <div class="col-sm-12">
           <label class="form-label col-3" for="text"><strong>ID:</strong>
-            <input class="form-control form-control-sm" type="text" size="10" id="activity_id" name="activity_id" required>
-          </label>
-          <label class="form-label col-2" for="text"><strong>Fase:</strong>
-            <input class="form-control form-control-sm" type="number" min="0" size="10" id="activity_level" name="activity_level" required>
+            <input class="form-control form-control-sm" type="text" size="10" id="event_id" name="event_id" required>
           </label>
           <label class="form-label col-4" for="text"><strong>Data de Início:</strong>
-            <input class="form-control form-control-sm" type="date" id="activity_date" size="5 name="activity_date" required>
+            <input class="form-control form-control-sm" type="date" id="event_date" size="5" name="event_date" required>
           </label>
           <button class="btn btn-success " type="submit">Pesquisar</button>
         </div>   
     </form>
     <hr class="colorgraph">
-    <form id="ativaractivity-form">
-      <div id="lista_activities" class="form-check">
+    <form id="ativar-event-form">
+      <div id="list_events" class="form-check">
       </div>
       <hr class="colorgraph">
         <span class="group-btn  col-lg-6">
@@ -46,6 +43,6 @@
         <strong id="res_error"></strong>
       </div>
     </form>
-  <script src="start-boardgames.js"></script>
+  <script src="start-events.js"></script>
 </body>
 </html>

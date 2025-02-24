@@ -3,7 +3,7 @@ firebase.auth().onAuthStateChanged((User) => {
       window.location.href = "../login/login.html";
   }else{
 
-    document.getElementById("activity-form").addEventListener("submit", function(event) {
+    document.getElementById("event-form").addEventListener("submit", function(event) {
         event.preventDefault();
        
         var alert_sucesso = document.getElementById("alert_sucesso");
@@ -12,31 +12,25 @@ firebase.auth().onAuthStateChanged((User) => {
         var msg_error = document.getElementById("res_error");  
       
         // Captura os dados do formulário
-        const date_start = new Date((document.getElementById("activity_date_start").value).replace("-","/")).toLocaleDateString('pt-BR');
-        const date_final = new Date((document.getElementById("activity_date_final").value).replace("-","/")).toLocaleDateString('pt-BR');
-        const time_start = document.getElementById("activity_time_start").value;
-        const time_final = document.getElementById("activity_time_final").value;
-        const level = document.getElementById("activity_level").value;
-        const teacher = User.uid;
-        const players = [];
-        const id = document.getElementById("activity_id").value;
+        const date_start = new Date((document.getElementById("event_date_start").value).replace("-","/")).toLocaleDateString('pt-BR');
+        const date_final = new Date((document.getElementById("event_date_final").value).replace("-","/")).toLocaleDateString('pt-BR');
+        const time_start = document.getElementById("event_time_start").value;
+        const time_final = document.getElementById("event_time_final").value;
+        const id = document.getElementById("event_id").value;
         const state = "waiting"; // "waiting", "started", "finished"
       
         // Cria o objeto para salvar o quiz
-        const newactivity = {
+        const newevent = {
           date_start,
           date_final,
           time_start,
           time_final,
-          players,
           id,
-          level,
-          teacher,
           state,  
         };
         try{
-          activityService.save(newactivity);
-          msg_sucesso.innerHTML= "Atividade cadastrada com Sucesso!";
+          eventService.save(newevent);
+          msg_sucesso.innerHTML= "Evento cadastrada com Sucesso!";
           alert_sucesso.classList.add("show");
           document.getElementById("bt-success").disabled = true;
         } catch (error){
