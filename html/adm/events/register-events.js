@@ -1,6 +1,6 @@
 const list_hosts = document.getElementById("list_hosts");
   userService.getHosts().then(hosts=>{
-      let select = `<select id="hosts" name="hosts" class="form-select-sm">`;
+      let select = `<label class="form-label" for="hosts"><strong>Anfitriões:</strong><select id="hosts" name="hosts" class="form-control form-control-sm">`;
       hosts.forEach(host => {
           select = select +`<option value="${host.uid}" selected>"${host.name}"</option>`;
       });
@@ -26,6 +26,7 @@ firebase.auth().onAuthStateChanged((User) => {
         const date_start = new Date((document.getElementById("event_date_start").value).replace("-","/")).toLocaleDateString('pt-BR');
         const date_final = new Date((document.getElementById("event_date_final").value).replace("-","/")).toLocaleDateString('pt-BR');
         const time_start = document.getElementById("event_time_start").value;
+        const name = document.getElementById("event_event_name").value;
         const time_final = document.getElementById("event_time_final").value;
         const id = document.getElementById("event_id").value;
         const state = "waiting"; // "waiting", "started", "finished"
@@ -42,6 +43,7 @@ firebase.auth().onAuthStateChanged((User) => {
           activities,
           host,
           id,
+          name,
           state,  
         };
         try{

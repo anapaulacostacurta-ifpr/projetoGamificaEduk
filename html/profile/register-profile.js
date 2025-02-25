@@ -5,7 +5,7 @@ document.getElementById('profile').addEventListener('change', function () {
     const list_hosts = document.getElementById("list_hosts");
     userService.getHosts().then( (hosts) =>{
         
-        let select = `<label class="form-label" for="hosts"><strong>Anfitrões:</strong><select id="hosts" name="hosts" class="form-select-sm">`;
+        let select = `<label class="form-label" for="hosts"><strong>Anfitrões:</strong><select id="hosts" name="hosts" class="form-control form-control-sm">`;
         hosts.forEach(host => {
             select = select +`<option value="${host.uid}" selected>"${host.name}"</option>`;
         });

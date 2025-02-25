@@ -1,6 +1,6 @@
 const list_hosts = document.getElementById("list_hosts");
   userService.getHosts().then(hosts=>{
-      const select = `<select id="hosts" name="hosts" class="form-select-sm">`;
+      const select = `<select id="hosts" name="hosts" class="form-control form-control-sm">`;
       hosts.forEach(host => {
           select = select +`<option value="${host.uid}" selected>"${host.name}"</option>`;
       });
@@ -26,6 +26,7 @@ firebase.auth().onAuthStateChanged((User) => {
         const date_start = new Date((document.getElementById("activity_date_start").value).replace("-","/")).toLocaleDateString('pt-BR');
         const date_final = new Date((document.getElementById("activity_date_final").value).replace("-","/")).toLocaleDateString('pt-BR');
         const time_start = document.getElementById("activity_time_start").value;
+        const name = document.getElementById("activity_name").value;
         const time_final = document.getElementById("activity_time_final").value;
         const level = document.getElementById("activity_level").value;
         const hosts_options = document.getElementById("hosts");
@@ -42,6 +43,7 @@ firebase.auth().onAuthStateChanged((User) => {
           time_final,
           players,
           id,
+          name,
           level,
           host,
           state,  
