@@ -13,12 +13,12 @@ firebase.auth().onAuthStateChanged((User) => {
         // Captura os dados do formulário
         const activity_date = new Date((document.getElementById("activity_date").value).replace('-','/')).toLocaleDateString('pt-BR');
         const activity_level = document.getElementById("activity_level").value;
-        const activity_teacher = User.uid;
+        const activity_host = User.uid;
         const activity_id = document.getElementById("activity_id").value;
         const activity_state = "waiting"; // "waiting", "started", "finished"
 
         let linhas = ''; 
-        activityService.getActivitiesbyDateStart(activity_id, activity_date, activity_teacher, activity_level, activity_state).then(activities => {
+        activityService.getActivitiesbyDateStart(activity_id, activity_date, activity_host, activity_level, activity_state).then(activities => {
           activities.forEach(activity => {
                   var activity_uid = activity.uid;
                   var activity_dados = activity.dados;

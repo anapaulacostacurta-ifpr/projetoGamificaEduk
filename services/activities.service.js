@@ -1,9 +1,9 @@
 const activityService = {
-    getActivitiesbyDateStart: async (activity_id, activity_date, activity_teacher, activity_level, activity_state) => {
+    getActivitiesbyDateStart: async (activity_id, activity_date, activity_host, activity_level, activity_state) => {
         const querySnapshot = await querySnapshot.collection("activities")
         .where('id','==',activity_id)
         .where('date_start','==',activity_date)
-        .where('teacher','==',activity_teacher)
+        .where('host','==',activity_host)
         .where('level','==',activity_level)
         .where('state','==',activity_state)
         .get();
