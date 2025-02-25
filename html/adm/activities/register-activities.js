@@ -1,14 +1,5 @@
-const list_hosts = document.getElementById("list_hosts");
-  userService.getHosts().then(hosts=>{
-      const select = `<select id="hosts" name="hosts" class="form-control form-control-sm">`;
-      hosts.forEach(host => {
-          select = select +`<option value="${host.uid}" selected>"${host.name}"</option>`;
-      });
-      select = select + `</select>`; 
-      list_hosts.innerHTML = select;
-});
-
-
+popularSelectHosts();
+popularSelectEvents();
 firebase.auth().onAuthStateChanged((User) => {
   if (!User) {
       window.location.href = "../login/login.html";
@@ -60,3 +51,20 @@ firebase.auth().onAuthStateChanged((User) => {
     });
   }
 })
+function popularSelectHosts() {
+  let Hosts = document.getElementById("hosts");
+  userService.getHosts().then(hosts=>{
+    hosts.forEach(host => {
+      Hosts.innerHTML = Hosts.innerHTML +`<option value="${host.uid}">${host.name}</option>`;
+    });
+  });
+}
+
+function popularSelectEvents() {
+  let Events = document.getElementById("events");
+  eventService.getEvents().then( events => {
+    events.forEach(event => {
+      Events.innerHTML = Events.innerHTML +`<option value="${event.uid}">${event.dados.name}</option>`;
+    });
+  })
+}

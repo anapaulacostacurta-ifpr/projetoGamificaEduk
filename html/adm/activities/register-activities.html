@@ -12,6 +12,7 @@
         <script src="../../../firebase-init.js"></script>
         <script src="../../../services/user.service.js"></script>
         <script src="../../../services/activities.service.js"></script>
+        <script src="../../../services/events.service.js"></script>
     </head>
     <form class="form-signin col-sm-12" id="activity-form">
       <h5 class="text-center">Nova Atividade</h5>
@@ -25,8 +26,18 @@
       <label class="form-label" for="type"><strong>Descrição da Atividade:</strong>
         <textarea class="form-control form-control-sm" rows="1" cols="100" type="text" id="activity_name" name="activity_name"></textarea>
       </label>
-      <div id="list_hosts"></div>
-      <div id="list_events"></div>
+      <div id="list_hosts">
+        <label class="form-label" for="hosts"><strong>Anfitriões:</strong></label>
+          <select id="hosts" name="hosts" class="form-control form-control-sm">;
+            <option value=""></option>
+          </select>
+      </div>
+      <div id="list_events">
+        <label class="form-label" for="events"><strong>Eventos:</strong></label>
+          <select id="events" name="events" class="form-control form-control-sm">
+            <option value=""></option>
+          </select>
+      </div>
       <label class="form-label" for="type"><strong>Data/Hora de Inicio:</strong>
         <input class="form-control form-control-sm" type="date" id="activity_date_start" name="activity_date_start" placeholder="Data Inicio" required>
         <input  class="form-control form-control-sm" type="time" id="activity_time_start" name="activity_time_start" placeholder="Horario Inicio" >
