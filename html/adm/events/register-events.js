@@ -1,3 +1,14 @@
+const list_hosts = document.getElementById("list_hosts");
+  userService.getHosts().then(hosts=>{
+      let select = `<select id="hosts" name="hosts" class="form-select-sm">`;
+      hosts.forEach(host => {
+          select = select +`<option value="${host.uid}" selected>"${host.name}"</option>`;
+      });
+      select = select + `</select>`; 
+      list_hosts.innerHTML = select;
+});
+
+
 firebase.auth().onAuthStateChanged((User) => {
   if (!User) {
       window.location.href = "../login/login.html";
@@ -18,6 +29,9 @@ firebase.auth().onAuthStateChanged((User) => {
         const time_final = document.getElementById("event_time_final").value;
         const id = document.getElementById("event_id").value;
         const state = "waiting"; // "waiting", "started", "finished"
+        const hosts_options = document.getElementById("hosts");
+        const host = hosts_options.options[hosts_options.selectedIndex].value;
+        const activities = [];
       
         // Cria o objeto para salvar o quiz
         const newevent = {
@@ -25,6 +39,8 @@ firebase.auth().onAuthStateChanged((User) => {
           date_final,
           time_start,
           time_final,
+          activities,
+          host,
           id,
           state,  
         };

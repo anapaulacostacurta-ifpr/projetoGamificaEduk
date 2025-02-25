@@ -28,6 +28,11 @@
     width: 150px;
 }
 
+.btn-footer button{
+    width: 100px;
+    align-items: center;
+}
+
 .btn {
     font-weight: 700;
     height: 36px;

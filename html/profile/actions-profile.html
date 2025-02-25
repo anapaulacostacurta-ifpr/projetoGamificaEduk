@@ -16,13 +16,22 @@
     </head>
     <body>     
         <form id="profile-form">
+            <hr class="colorgraph">
             <h3 class="text-center">Ativar Perfil</h3>
             <hr class="colorgraph">
-            <div id="lista_alunos"></div>
+            <div id="list_players"></div>
             <hr class="colorgraph">
-            <span class="group-btn">     
-                <button id="ativar" class="btn btn-success" type="submit">ATIVAR</button>
-            </span>
+            <div class="col-md-12 d-flex align-items-center">
+                <div class="col-4 text-center">     
+                    <button id="ativate" class="col-8 badge bg-success p-2" onclick="ativar()" type="button">ATIVAR</button>
+                </div>
+                <div class="col-4 text-center">
+                    <button id="disable" class="col-8 badge bg-danger p-2" onclick="desativar()" type="button">DESATIVAR</button>
+                </div>
+                <div class="col-4 text-center">
+                    <button id="refresh" class="col-8 badge bg-primary p-2" onclick="refresh()" type="button">ATUALIZAR</button>
+                </div>
+            </div>
             <div id="alert_sucesso" class="alert alert-success fade">
                 <strong id="res_sucesso"></strong>
               </div>
@@ -30,6 +39,6 @@
                 <strong id="res_error"></strong>
               </div>
         </form>
-        <script src="activate-profile.js"></script>
+        <script src="actions-profile.js"></script>
     </body>
 </html>

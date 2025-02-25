@@ -1,3 +1,14 @@
+const list_hosts = document.getElementById("list_hosts");
+  userService.getHosts().then(hosts=>{
+      const select = `<select id="hosts" name="hosts" class="form-select-sm">`;
+      hosts.forEach(host => {
+          select = select +`<option value="${host.uid}" selected>"${host.name}"</option>`;
+      });
+      select = select + `</select>`; 
+      list_hosts.innerHTML = select;
+});
+
+
 firebase.auth().onAuthStateChanged((User) => {
   if (!User) {
       window.location.href = "../login/login.html";
@@ -17,7 +28,8 @@ firebase.auth().onAuthStateChanged((User) => {
         const time_start = document.getElementById("activity_time_start").value;
         const time_final = document.getElementById("activity_time_final").value;
         const level = document.getElementById("activity_level").value;
-        const teacher = User.uid;
+        const hosts_options = document.getElementById("hosts");
+        const host = hosts_options.options[hosts_options.selectedIndex].value;
         const players = [];
         const id = document.getElementById("activity_id").value;
         const state = "waiting"; // "waiting", "started", "finished"
@@ -31,7 +43,7 @@ firebase.auth().onAuthStateChanged((User) => {
           players,
           id,
           level,
-          teacher,
+          host,
           state,  
         };
         try{

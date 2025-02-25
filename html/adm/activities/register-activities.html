@@ -14,13 +14,14 @@
         <script src="../../../services/activities.service.js"></script>
     </head>
     <form class="form-signin col-sm-12" id="activity-form">
-      <h5 class="text-center">Nova Rodada</h5>
+      <h5 class="text-center">Nova Atividade</h5>
       <hr class="colorgraph">
-      <label class="form-label" for="type"><strong>ID Atividade:</strong>
-        <input class="form-control form-control-sm" type="text" id="activity_id" name="activity_id" placeholder="ID da Atividade" required>
-      </label>
+      <div id="list_hosts"></div>
       <label class="form-label" for="type"><strong>Fase da Atividade:</strong>
         <input class="form-control form-control-sm" type="number" min="0" id="activity_level" name="activity_level" placeholder="Fase da atividade" required>
+      </label>
+      <label class="form-label" for="type"><strong>ID Atividade:</strong>
+        <input class="form-control form-control-sm" type="text" id="activity_id" name="activity_id" placeholder="ID da Atividade" required>
       </label>
       <label class="form-label" for="type"><strong>Descrição da Atividade:</strong>
         <textarea class="form-control form-control-sm" rows="1" cols="100" type="text" id="activity_name" name="activity_name"></textarea>

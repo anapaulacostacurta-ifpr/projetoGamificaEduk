@@ -24,16 +24,23 @@
           <label class="form-label col-4" for="text"><strong>Data de Início:</strong>
             <input class="form-control form-control-sm" type="date" id="event_date" size="5" name="event_date" required>
           </label>
-          <button class="btn btn-success " type="submit">Pesquisar</button>
+          <button class="btn btn-success" id="pesquisar" type="submit">PESQUISAR</button>
         </div>   
     </form>
     <hr class="colorgraph">
+    <form id="event-update-form">
+      <div id="list_activities" class="form-check"></div>
+      <hr class="colorgraph">
+        <span class="group-btn">
+          <button class="btn btn-success"  id="salvar" type="submit">SALVAR</button>
+      </span>
+    </form>
     <form id="ativar-event-form">
       <div id="list_events" class="form-check">
       </div>
       <hr class="colorgraph">
-        <span class="group-btn  col-lg-6">
-          <button class="btn btn-success"  id="ativar" type="submit">Ativar</button>
+        <span class="group-btn">
+          <button class="btn btn-success"  id="ativar" type="submit">SALVAR</button>
         </span>
       <hr class="colorgraph">
       <div id="alert_sucesso" class="alert alert-success fade">

@@ -7,26 +7,26 @@ const userService = {
             .then(doc => {
                 return doc.data();
             });
-    },getTeachers: async () => {
+    },
+    getHosts: async () => {
         const querySnapshot = await firebase.firestore()
             .collection("users")
-            .where('profile','==',"professor")
+            .where('profile','==',"host")
             .where('state','==',true)
             .get();
 
             if(querySnapshot.empty){
                 throw new Error("01 - Não encontrado.");
             }
-            const teachers = querySnapshot.docs.map(doc=>doc.data());
-            console.log(teachers);            
-            return teachers;
+            const hosts = querySnapshot.docs.map(doc=>doc.data());
+            console.log(hosts);            
+            return  hosts;
     },
-    getPlayersInative: async (professor) => {
+    getPlayersInative: async (host) => {
         const querySnapshot = await firebase.firestore()
             .collection("users")
-            .where('profile','==',"aluno")
-            .where('professor','==',professor)
-            .where('state','==',false)
+            .where('profile','==',"player")
+            .where('host','==',host)
             .get();
 
             if(querySnapshot.empty){
@@ -53,5 +53,5 @@ const userService = {
             .collection("users")
             .doc(id)
             .update(user);
-    }
+    },
 };
