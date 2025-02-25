@@ -3,12 +3,12 @@ firebase.auth().onAuthStateChanged((User) => {
       window.location.href = "../login/login.html";
   }else{
       const lista_activities = document.getElementById("lista_activities");
-      const pesquisa_activities = document.getElementById("startactivity-form");
-      const ativar_activity = document.getElementById("ativaractivity-form");
+      const pesquisa_activities = document.getElementById("start-activity-form");
+      const ativar_activity = document.getElementById("ativate-activity-form");
       ativar_activity.style.display = "none";
 
       // Captura o evento de envio do formulário
-      document.getElementById("startactivity-form").addEventListener("submit", function(event) {
+      document.getElementById("start-activity-form").addEventListener("submit", function(event) {
         event.preventDefault();
         // Captura os dados do formulário
         const activity_date = new Date((document.getElementById("activity_date").value).replace('-','/')).toLocaleDateString('pt-BR');
@@ -40,7 +40,7 @@ firebase.auth().onAuthStateChanged((User) => {
         });  
       });
 
-      document.getElementById("ativaractivity-form").addEventListener("submit", function(event) {
+      document.getElementById("ativate-activity-form").addEventListener("submit", function(event) {
         event.preventDefault();
           let userselect = document.querySelector('input[name="radio_id"]:checked').value;
           let activities = {state: "started"};

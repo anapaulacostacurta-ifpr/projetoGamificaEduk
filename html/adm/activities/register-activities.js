@@ -7,7 +7,6 @@ firebase.auth().onAuthStateChanged((User) => {
 
     document.getElementById("activity-form").addEventListener("submit", function(event) {
         event.preventDefault();
-       
         var alert_sucesso = document.getElementById("alert_sucesso");
         var alert_error = document.getElementById("alert_error");
         var msg_sucesso = document.getElementById("res_sucesso");
@@ -25,6 +24,8 @@ firebase.auth().onAuthStateChanged((User) => {
         const players = [];
         const id = document.getElementById("activity_id").value;
         const state = "waiting"; // "waiting", "started", "finished"
+        const events_options = document.getElementById("events");
+        const event_id  = events_options.options[events_options.selectedIndex].value;
       
         // Cria o objeto para salvar o quiz
         const newactivity = {
@@ -37,10 +38,11 @@ firebase.auth().onAuthStateChanged((User) => {
           name,
           level,
           host,
-          state,  
+          state,
+          event_id,  
         };
         try{
-          activityService.save(newactivity);
+          //eventService.newactivity(event_id,newactivity);
           msg_sucesso.innerHTML= "Atividade cadastrada com Sucesso!";
           alert_sucesso.classList.add("show");
           document.getElementById("bt-success").disabled = true;
