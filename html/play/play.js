@@ -56,7 +56,7 @@ firebase.auth().onAuthStateChanged((User) => {
                     let quiz_answered = [];
                     let tokens_quiz_used = [];
                     players[last] = {user_UID,score,ckeckin_date,ckeckin_time,timestamp,quiz_answered,tokens_quiz_used};
-                    boardgamesService.update(activity_uid, {players}).then(window.location.href = "./menu.html?activity_uid="+activity_uid);
+                    activityService.update(activity_uid, {players}).then(window.location.href = "./menu.html?activity_uid="+activity_uid);
               }
             }else{
               alert("Atividade fora do prazo!");
