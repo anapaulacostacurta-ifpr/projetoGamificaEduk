@@ -9,7 +9,7 @@ const questionsService = {
             .get();
 
             if(querySnapshot.empty){
-                throw new Error("Nenhuma pergunta encontrada para o nível "+ level+ " .");
+                throw new Error("01 - Não encontrado.");
             }
             const questions = querySnapshot.docs.map(doc=>doc.data());
             console.log(questions);            
@@ -27,7 +27,7 @@ const questionsService = {
             .get();
 
             if(querySnapshot.empty){
-                throw new Error("Nenhuma pergunta encontrada para o nível "+ level+ " .");
+                throw new Error("01 - Não encontrado.");
             }
             const questions = querySnapshot.docs.map(doc=>doc.data());
             console.log(questions);            
@@ -38,7 +38,7 @@ const questionsService = {
                 return [];
         }
     },
-    getQuestionByCategoryLevel: async (Category,level) => {
+    getQuestionsByLevelCategory: async (category,level) => {
         try {
             const querySnapshot = await firebase.firestore().collection("questions")
             .where('level','==',level)
@@ -46,7 +46,7 @@ const questionsService = {
             .get();
 
             if(querySnapshot.empty){
-                throw new Error("Nenhuma pergunta encontrada para o nível "+ level+ " .");
+                throw new Error("01 - Não encontrado.");
             }
             const questions = querySnapshot.docs.map(doc=>doc.data());
             console.log(questions);            

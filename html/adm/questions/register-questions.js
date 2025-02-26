@@ -2,8 +2,14 @@ firebase.auth().onAuthStateChanged( (User) => {
   if (!User) {
       window.location.href = "../../login/login.html";
   }else{
+
+    var alert_sucesso = document.getElementById("alert_sucesso");
+    var alert_error = document.getElementById("alert_error");
+    var msg_sucesso = document.getElementById("res_sucesso");
+    var msg_error = document.getElementById("res_error");
+
     // Captura o evento de envio do formulário
-    document.getElementById("cadastrar-form").addEventListener("submit", function(event) {
+    document.getElementById("register-form").addEventListener("submit", function(event) {
       event.preventDefault();
 
       // Captura os dados do formulário
@@ -24,20 +30,19 @@ firebase.auth().onAuthStateChanged( (User) => {
         options,
         answer,
       };
-
-      // Chama a função para salvar o quiz no Firestore
-      questionsService.save(newQuiz);
-
-      // Limpa o formulário após o envio
-      document.getElementById("cadastrar-form").reset();
+      
+      try{
+        // Chama a função para salvar o quiz no Firestore
+        questionsService.save(newQuiz);
+        msg_sucesso.innerHTML= "Questão cadastrada com Sucesso!";
+        alert_sucesso.classList.add("show");
+        document.getElementById("bt-success").disabled = true;
+        // Limpa o formulário após o envio
+        document.getElementById("register-form").reset();
+      } catch (error){
+        msg_error.innerHTML= error;
+        alert_error.classList.add("show");
+      }
     });
   }
 })
-
-function logout() {
-  firebase.auth().signOut().then(() => {
-    window.location.href = "../../login/login.html";
-  }).catch(() => {
-      alert('Erro ao fazer logout');
-  })
-}

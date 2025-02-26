@@ -1,19 +1,19 @@
 const activityService = {
     getActivitiesbyDateStart: async (activity_id, activity_date, activity_host, activity_level, activity_state) => {
-        const querySnapshot = await querySnapshot.collection("activities")
+        const querySnapshot = await firebase.firestore().collection("activities")
         .where('id','==',activity_id)
         .where('date_start','==',activity_date)
         .where('host','==',activity_host)
         .where('level','==',activity_level)
         .where('state','==',activity_state)
         .get();
-        console.log(querySnapshot_activity);
+        console.log(querySnapshot);
 
-        if(querySnapshot_activity.empty){
+        if(querySnapshot.empty){
             throw new Error("01 - Não encontrado.");
         }
         var activities = new Array();
-        querySnapshot_activity.forEach(doc => {
+        querySnapshot.forEach(doc => {
             var uid = doc.id;
             var dados = doc.data();
             var activity = {uid,dados};

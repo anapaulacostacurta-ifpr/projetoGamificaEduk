@@ -36,33 +36,16 @@ firebase.auth().onAuthStateChanged((User) => {
         });  
       });
 
-      document.getElementById("event-update-form").addEventListener("submit", function(event) {
+      document.getElementById("ativar-event-form").addEventListener("submit", function(event) {
         event.preventDefault();
           // listar as actividades para vincular com evento
           var alert_sucesso = document.getElementById("alert_sucesso");
           var alert_error = document.getElementById("alert_error");
           var msg_sucesso = document.getElementById("res_sucesso");
           var msg_error = document.getElementById("res_error");  
-      
-          acti.update(userselect, events).then(() => {
-            msg_sucesso.innerHTML= "Evento iniciado com sucesso!";
-            alert_sucesso.classList.add("show");
-            document.getElementById("ativar").disabled = true;
-          }).catch((error) => {
-            msg_error.innerHTML= error;
-            alert_error.classList.add("show");
-          });
-      });
-
-      document.getElementById("ativar-event-form").addEventListener("submit", function(event) {
-        event.preventDefault();
           let userselect = document.querySelector('input[name="radio_id"]:checked').value;
           let events = {state: "started"};
-          var alert_sucesso = document.getElementById("alert_sucesso");
-          var alert_error = document.getElementById("alert_error");
-          var msg_sucesso = document.getElementById("res_sucesso");
-          var msg_error = document.getElementById("res_error");  
-      
+          
           eventService.update(userselect, events).then(() => {
             msg_sucesso.innerHTML= "Evento iniciado com sucesso!";
             alert_sucesso.classList.add("show");

@@ -15,6 +15,7 @@
     </head>
     <body>
     <form id="start-events-form">
+      <hr class="colorgraph">
       <h5 class="text-center">Iniciar Evento</h5>
       <hr class="colorgraph">
         <div class="col-sm-12">
@@ -24,24 +25,23 @@
           <label class="form-label col-4" for="text"><strong>Data de Início:</strong>
             <input class="form-control form-control-sm" type="date" id="event_date" size="5" name="event_date" required>
           </label>
-          <button class="btn btn-success" id="pesquisar" type="submit">PESQUISAR</button>
+          <div class="col-md-12 d-flex align-items-center">
+            <div class="col-12 text-center">     
+              <button id="bt-success" class="col-4 badge bg-success p-2" type="submit">PESQUISAR</button>
+            </div>
+          </div>
         </div>   
     </form>
     <hr class="colorgraph">
-    <form id="event-update-form">
-      <div id="list_activities" class="form-check"></div>
-      <hr class="colorgraph">
-        <span class="group-btn">
-          <button class="btn btn-success"  id="salvar" type="submit">SALVAR</button>
-      </span>
-    </form>
     <form id="ativar-event-form">
       <div id="list_events" class="form-check">
       </div>
       <hr class="colorgraph">
-        <span class="group-btn">
-          <button class="btn btn-success"  id="ativar" type="submit">SALVAR</button>
-        </span>
+      <div class="col-md-12 d-flex align-items-center">
+        <div class="col-12 text-center">     
+          <button id="ativar" class="col-4 badge bg-success p-2" type="submit">ATIVAR</button>
+        </div>
+      </div>
       <hr class="colorgraph">
       <div id="alert_sucesso" class="alert alert-success fade">
         <strong id="res_sucesso"></strong>

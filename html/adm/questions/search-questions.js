@@ -5,22 +5,22 @@ firebase.auth().onAuthStateChanged( (User) => {
     const questionsList = document.getElementById('questionUid');
     questionsList.innerHTML = ''; // Limpa a lista de perguntas
 
-    document.getElementById("consultar-form").addEventListener("submit", function(event) {
+    document.getElementById("search-form").addEventListener("submit", function(event) {
       event.preventDefault();
       // Captura os dados do formulário
       const level = document.getElementById("level").value;
       const category = document.getElementById("category").value;
-      questionService.getQuestionsByLevel(level,category).then(questions => {
+      questionService.getQuestionsByLevelCategory(level,category).then(questions => {
           questions.forEach(question => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
               <p><strong>numb:</strong> ${question.numb}</p>
-              <p><strong>Level:</strong> ${question.level}</p>
-              <p><strong>Category:</strong> ${question.category}</p>
               <p><strong>Pergunta:</strong> ${question.text}</p>
+              <p><strong>Category:</strong> ${question.category}</p>
+              <p><strong>Tipo Questão:</strong> ${question.type}</p>
+              <p><strong>Level:</strong> ${question.level}</p>              
               <p><strong>Respostas:</strong> ${question.options}</p>
               <p><strong>Resposta Correta:</strong> ${question.answer}</p>
-              <p><strong>Resposta Correta:</strong> ${question.type}</p>
             `;
             questionsLevel.appendChild(listItem);
           });
@@ -32,14 +32,3 @@ firebase.auth().onAuthStateChanged( (User) => {
   }
 })
 
-function logout() {
-  firebase.auth().signOut().then(() => {
-      window.location.href = "../../index.html";
-  }).catch(() => {
-      alert('Erro ao fazer logout');
-  })
-}
-
-function newQuestion() {
-  window.location.href = "../questions/questions.html";
-}

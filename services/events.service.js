@@ -18,7 +18,7 @@ const eventService = {
             events.push(event);
         });
         console.log(events);
-        return aevents;
+        return events;
     },
     getEvents: async () => {
         const querySnapshot = await firebase.firestore().collection("events")

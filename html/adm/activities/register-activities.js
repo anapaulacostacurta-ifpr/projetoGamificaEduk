@@ -42,7 +42,7 @@ firebase.auth().onAuthStateChanged((User) => {
           event_id,  
         };
         try{
-          //eventService.newactivity(event_id,newactivity);
+          activityService.save(newactivity);
           msg_sucesso.innerHTML= "Atividade cadastrada com Sucesso!";
           alert_sucesso.classList.add("show");
           document.getElementById("bt-success").disabled = true;
