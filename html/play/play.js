@@ -74,15 +74,3 @@ firebase.auth().onAuthStateChanged((User) => {
     
   }
 });
-
-function voltar(){
-  window.location.href = "../home/home.html";
-}
-
-function logout() {
-    firebase.auth().signOut().then(() => {
-        window.location.href = "../login/login.html";
-    }).catch(() => {
-        alert('Erro ao fazer logout');
-    })
-}
