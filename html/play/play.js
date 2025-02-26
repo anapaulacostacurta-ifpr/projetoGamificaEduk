@@ -38,12 +38,14 @@ firebase.auth().onAuthStateChanged((User) => {
                         window.location.href = "./menu.html?activity_uid="+activity_uid;
                       }else{
                         let quiz_answered = new Array();
-                        for (i=0; i<atual_quiz_answered.length;i++){
-                          quiz_answered[i] = atual_quiz_answered[i];
+                        let atual_quiz_answered = tmp_players[i].quiz_answered;
+                        for (j=0; i<atual_quiz_answered.length;j++){
+                          quiz_answered[j] = atual_quiz_answered[j];
                         }
                         let tokens_quiz_used = new Array();
-                        for (i=0; i<atual_tokens_quiz_used.length;i++){
-                          tokens_quiz_used[i] = atual_tokens_quiz_used[i];
+                        let atual_tokens_quiz_used = tokens_quiz_used;
+                        for (j=0; i<atual_tokens_quiz_used.length;j++){
+                          tokens_quiz_used[j] = atual_tokens_quiz_used[j];
                         }
                         let user_UID = tmp_players[i].user_UID;
                         let score = tmp_players[i].score;
