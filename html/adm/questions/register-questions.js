@@ -1,3 +1,4 @@
+popularSelectActivities();
 firebase.auth().onAuthStateChanged( (User) => {
   if (!User) {
       window.location.href = "../../login/login.html";
@@ -18,8 +19,19 @@ firebase.auth().onAuthStateChanged( (User) => {
       const type = "multiple";
       const level = document.getElementById("level").value;
       const text = document.getElementById("text").value;
-      const options = document.getElementById("options").value.split(",").map(option => option.trim()); // Divide as opções
+      //const options = document.getElementById("options").value.split(",").map(option => option.trim()); // Divide as opções
+      var options = new Array();
+      for (i=1;i<=5;i++){
+         let option = document.getElementById(`option${i}`).value;
+         if ( !(option.trim() === "")){
+          options[i-1] = option;
+         }
+      }
+
       const answer = document.getElementById("answer").value.split(",").map(answer => answer.trim());
+      const activities_options = document.getElementById("activities");
+      const activity_id  = activities_options.options[activities_options.selectedIndex].value;
+
 
       // Cria o objeto para salvar o quiz
       const newQuiz = {
@@ -29,6 +41,7 @@ firebase.auth().onAuthStateChanged( (User) => {
         text,
         options,
         answer,
+        activity_id,
       };
       
       try{
@@ -46,3 +59,12 @@ firebase.auth().onAuthStateChanged( (User) => {
     });
   }
 })
+
+function popularSelectActivities() {
+  let Activities = document.getElementById("activities");
+  activityService.getActivitiesActives().then( activities => {
+    activities.forEach(activity => {
+      Activities.innerHTML = Activities.innerHTML + `<option value="${activity.uid}">${activity.dados.name}</option>`;
+    });
+  })
+}

@@ -22,7 +22,7 @@ const activityService = {
         console.log(activities);
         return activities;
 },
-getActivities: async (id) => {
+    getActivities: async (id) => {
     const querySnapshot = await firebase.firestore().collection("activities")
             .where('id', '==',id)
             .where('state','==','started')
@@ -42,7 +42,7 @@ getActivities: async (id) => {
             console.log(activities);
             return activities;
 },
-getActivitybyUid: async (id) => {
+    getActivitybyUid: async (id) => {
     const querySnapshot = await firebase.firestore().collection("activities")
             .doc(id)
             .get();
@@ -54,7 +54,7 @@ getActivitybyUid: async (id) => {
 
             return querySnapshot.data();
 },
-getActivitybyPlayer: async (user_UID) => {
+    getActivitybyPlayer: async (user_UID) => {
     const querySnapshot = await firebase.firestore().collection("activities")
             .orderBy("date_start", "asc")
             .get();
@@ -78,6 +78,27 @@ getActivitybyPlayer: async (user_UID) => {
             });
             console.log(activities);
             return activities;
+    },
+    getActivitiesActives: async () => {
+        const querySnapshot = await firebase.firestore().collection("activities")
+                .orderBy("date_start", "asc")
+                .get();
+                console.log(querySnapshot);
+    
+                if(querySnapshot.empty){
+                    throw new Error("01 - Não encontrado.");
+                }
+                var activities = new Array();
+                querySnapshot.forEach(doc => {
+                    var uid = doc.id;
+                    var dados = doc.data();
+                    var activity = {uid,dados};
+                    if( !(activity.dados.state === "finished")){
+                        activities.push(activity);
+                    }                
+                });
+                console.log(activities);
+                return activities;
     },
     getActivitybyPlayer: async (user_UID) => {
         const querySnapshot = await firebase.firestore().collection("activities")

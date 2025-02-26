@@ -12,7 +12,8 @@
         <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
         <script src="../../../firebase-init.js"></script>
         <script src="../../../services/questions.service.js"></script>
-        <script src="register-questions.js"></script>
+        <script src="../../../services/activities.service.js"></script>
+        
     </head>
     <form class="form-signin col-sm-12" id="register-form">
       <hr class="colorgraph">
@@ -20,14 +21,14 @@
       <hr class="colorgraph">
         <span>
           <label class="form-label" for="type"><strong>Categoria:</strong>
-            <select class="form-select form-select-sm" id="category" name="category">
+            <select class="form-select form-select-sm" id="category" name="category" requerid>
               <option value="">Selecione a categoria</option>
               <option value="quiz">Quiz</option>
               <option value="challange">Desafio</option>
               <option value="luck">Sorte/Revez</option>
               <option value="extra">Extra</option>
               <option value="quiz_final">Quiz Final</option>
-              </select>
+            </select>
           </label>
           <label class="form-label" for="type"><strong>Tipo:</strong>
               <input class="form-control form-control-sm" size="15" type="text" id="type" name="type" value="Múltipla Escolha" readonly required>
@@ -36,14 +37,24 @@
             <input class="form-control form-control-sm" size="5" type="text" id="level" name="level" required>
           </label>
         </span>
-        <span >
+        <div id="list_activities">
+          <label class="form-label" for="activities"><strong>Atividades:</strong></label>
+            <select id="activities" name="activities" class="form-control form-control-sm">
+              <option value=""></option>
+            </select>
+        </div>
+        <span>
           <label class="form-label" for="text"><strong>Pergunta:</strong>
             <textarea class="form-control form-control-sm" rows="2" cols="100" type="text" id="text" name="text"></textarea>
           </label>
         </span>
-        <span >
-          <label class="form-label" for="options"><strong>Opções (separadas por vírgula):</strong>
-            <textarea class="form-control form-control-sm" rows="5" cols="100" type="text" id="options" name="options" required></textarea>
+        <span>
+          <label class="form-label" for="options"><strong>Respostas:</strong><br>
+            <span><strong>1 (Obrigatória):</strong><textarea class="form-control form-control-sm" rows="2" cols="80" type="text" id="option1" name="option1" required></textarea></span>
+            <span><strong>2 (Obrigatória):</strong><textarea class="form-control form-control-sm" rows="2" cols="80" type="text" id="option2" name="option2" required></textarea></span>
+            <span><strong>3:</strong><textarea class="form-control form-control-sm" rows="2" cols="80" type="text" id="option3" name="option3" ></textarea></span>
+            <span><strong>4:</strong><textarea class="form-control form-control-sm" rows="2" cols="80" type="text" id="option4" name="option4" ></textarea></span>
+            <span><strong>5:</strong><textarea class="form-control form-control-sm" rows="2" cols="80" type="text" id="option5" name="option5" ></textarea></span>
           </label>
         </span>
         <span >
@@ -64,4 +75,5 @@
         </div>
     </form>
   </body>
+  <script src="register-questions.js"></script>
 </html>
