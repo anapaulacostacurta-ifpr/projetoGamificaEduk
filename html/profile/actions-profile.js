@@ -7,8 +7,6 @@ var msg_error = document.getElementById("res_error");
 firebase.auth().onAuthStateChanged((User) => {
     if (User){
         const list_players = document.getElementById("list_players");
-
-        
         userService.getPlayersInative(User.uid).then(players_find =>{
             let linhas=``;
             players = players_find;
