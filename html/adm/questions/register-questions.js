@@ -1,9 +1,6 @@
 popularSelectActivities();
 firebase.auth().onAuthStateChanged( (User) => {
-  if (!User) {
-      window.location.href = "../../login/login.html";
-  }else{
-
+  if (User){
     var alert_sucesso = document.getElementById("alert_sucesso");
     var alert_error = document.getElementById("alert_error");
     var msg_sucesso = document.getElementById("res_sucesso");

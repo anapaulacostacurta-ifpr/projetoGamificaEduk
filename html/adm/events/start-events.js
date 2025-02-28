@@ -1,7 +1,5 @@
 firebase.auth().onAuthStateChanged((User) => {
-  if (!User) {
-      window.location.href = "../login/login.html";
-  }else{
+  if (User) {
       const lista_events = document.getElementById("list_events");
       const pesquisa_events = document.getElementById("start-events-form");
       const ativar_event = document.getElementById("ativar-event-form");

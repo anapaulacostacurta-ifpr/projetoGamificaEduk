@@ -1,7 +1,5 @@
 firebase.auth().onAuthStateChanged((User) => {
-  if (!User) {
-      window.location.href = "../login/login.html";
-  }else{
+  if (User) {
     var players;
     var player;
     let linhas = ''; 

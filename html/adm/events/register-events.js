@@ -10,10 +10,7 @@ const list_hosts = document.getElementById("list_hosts");
 
 
 firebase.auth().onAuthStateChanged((User) => {
-  if (!User) {
-      window.location.href = "../login/login.html";
-  }else{
-
+  if (User) {
     document.getElementById("event-form").addEventListener("submit", function(event) {
         event.preventDefault();
        

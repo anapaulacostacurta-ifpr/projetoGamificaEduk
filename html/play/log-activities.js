@@ -1,7 +1,5 @@
 firebase.auth().onAuthStateChanged((User) => {
-    if (!User) {
-        window.location.href = "../login/login.html";
-    }else{
+    if (User) {
     // Captura o evento de envio do formulário
     document.getElementById("extrato-form").addEventListener("submit", function(event) {
         event.preventDefault();
