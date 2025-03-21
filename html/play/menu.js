@@ -1,8 +1,6 @@
 var activity_uid;
 firebase.auth().onAuthStateChanged((User) => {
-  if (!User) {
-      window.location.href = "../login/login.html";
-  }else{
+  if (User) {
     userService.findByUid(User.uid).then(user=>{
       const params = new URLSearchParams(window.location.search);
       activity_uid = params.get('activity_uid');
@@ -36,16 +34,4 @@ function btnExtra(){
 
 function btnQuizfinal(){
   window.location.href = "../question/token/token.html?category=quizfinal&activity_uid="+activity_uid;
-}
-
-function logout() {
-  firebase.auth().signOut().then(() => {
-      window.location.href = "../home/home.html";
-  }).catch(() => {
-      alert('Erro ao fazer logout');
-  })
-}
-
-function btnVoltar(){
-  window.location.href = "../home/home.html";
 }

@@ -1,10 +1,7 @@
 popularSelectHosts();
 popularSelectEvents();
 firebase.auth().onAuthStateChanged((User) => {
-  if (!User) {
-      window.location.href = "../login/login.html";
-  }else{
-
+  if (User) {
     document.getElementById("activity-form").addEventListener("submit", function(event) {
         event.preventDefault();
         var alert_sucesso = document.getElementById("alert_sucesso");

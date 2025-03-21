@@ -1,7 +1,5 @@
 firebase.auth().onAuthStateChanged( (User) => {
-  if (!User) {
-    window.location.href = "../login/login.html";
-  }else{
+  if (User) {
     const questionsList = document.getElementById('questionUid');
     questionsList.innerHTML = ''; // Limpa a lista de perguntas
 
@@ -27,7 +25,6 @@ firebase.auth().onAuthStateChanged( (User) => {
       }).catch(error => {
           alert('Erro ao carregar perguntas:'+error.message);
       });
-  
     });
   }
 })
