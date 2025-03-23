@@ -32,10 +32,10 @@ firebase.auth().onAuthStateChanged((User) => {
                       points = players[i].points;
                       alert('Retornando para o Jogo!');
                       window.location.href = "./menu.html?activity_uid="+activity_uid;
+                    }else{
+                      checkin(activity);  
+                      window.location.href = "./menu.html?activity_uid="+activity_uid;
                     }
-                  }
-                  checkin(activity);  
-                  window.location.href = "./menu.html?activity_uid="+activity_uid;
             }else{
               msg_error.innerHTML= "Atividade fora do prazo!";
             }

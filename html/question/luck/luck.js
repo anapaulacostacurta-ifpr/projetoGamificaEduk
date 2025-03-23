@@ -141,7 +141,7 @@ firebase.auth().onAuthStateChanged( (User) => {
           if(type ==="REVÉS"){
             setback_answered[last_setback] = question_uid;
             tokens_setback_used[last_tokens_setback_used]=tokenid;
-          }; 
+          } 
           //Atualizar points
           if (corret){
             points = points_old + question.points;
