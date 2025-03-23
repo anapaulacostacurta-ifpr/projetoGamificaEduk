@@ -2,7 +2,7 @@ firebase.auth().onAuthStateChanged((User) => {
   if (User) {
     var alert_error = document.getElementById("alert_error");
     var msg_error = document.getElementById("res_error");  
-
+    var activity;
     document.getElementById("play-form").addEventListener("submit", function(event) {
       event.preventDefault();
       // Captura os dados do formulário
@@ -15,7 +15,7 @@ firebase.auth().onAuthStateChanged((User) => {
       activityService.getActivities(id).then((activities) => {
         activities.forEach(activity => {
           if(activity.dados.id == id){
-
+            activity = activity;
             let data_start = activity.dados.date_start.split("/");
             let time_start = activity.dados.time_start.split(":");
             let data_time_start = new Date(data_start[2],data_start[1]-1,data_start[0],time_start[0],time_start[1]);
