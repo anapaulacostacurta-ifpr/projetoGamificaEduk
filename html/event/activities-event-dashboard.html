@@ -16,11 +16,19 @@
 <body>
   <div class="container">
       <form id="play-form">
-        <h5 class="text-center">Meus Eventos</h5>
-        <div id="my_activities"></div>
+        <div id="active_activities_list">
+          <hr class="colorgraph">
+          <h4>Atividades Ativas</h4>
+          <hr class="colorgraph">
+        </div>
+        <div id="closed_activities_list">
+          <hr class="colorgraph">
+          <h4>Atividades Encerradas</h4>
+          <hr class="colorgraph">
+        </div>
         <div class="wrapper">
           <span class="btn-menu col-sm-6">   
-            <button id="bt-success" class="badge bg-success p-2" type="submit">ENTRAR</button>
+            <button id="bt-success" badge bg-success p-2" type="submit">ENTRAR</button>
           </span>
         </div>
         <div id="alert_error" class="alert alert-danger alert-dismissible fade">
@@ -28,6 +36,6 @@
         </div>
       </form>
   </div>
-  <script src="my-activities.js"></script>
+  <script src="activities-event-dashboard.js"></script>
 </body>
 </html>

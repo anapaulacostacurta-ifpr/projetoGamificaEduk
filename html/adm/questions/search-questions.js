@@ -1,14 +1,18 @@
+popularSelectActivities();
+
 firebase.auth().onAuthStateChanged( (User) => {
   if (User) {
-    const questionsList = document.getElementById('questionUid');
-    questionsList.innerHTML = ''; // Limpa a lista de perguntas
+    const card_questions = document.getElementById('card-questions');
+    card_questions.innerHTML = ''; // Limpa a lista de perguntas
 
     document.getElementById("search-form").addEventListener("submit", function(event) {
       event.preventDefault();
       // Captura os dados do formulário
       const level = document.getElementById("level").value;
       const category = document.getElementById("category").value;
-      questionService.getQuestionsByLevelCategory(level,category).then(questions => {
+      const activities_options = document.getElementById("activities");
+      const activity_id = activities_options.options[activities_options.selectedIndex].value;
+      questionsService.getQuizzesByLevel(activity_id, level, category).then(questions => {
           questions.forEach(question => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
@@ -20,7 +24,7 @@ firebase.auth().onAuthStateChanged( (User) => {
               <p><strong>Respostas:</strong> ${question.options}</p>
               <p><strong>Resposta Correta:</strong> ${question.answer}</p>
             `;
-            questionsLevel.appendChild(listItem);
+            card_questions.appendChild(listItem);
           });
       }).catch(error => {
           alert('Erro ao carregar perguntas:'+error.message);
@@ -28,4 +32,17 @@ firebase.auth().onAuthStateChanged( (User) => {
     });
   }
 })
+
+function popularSelectActivities() {
+  firebase.auth().onAuthStateChanged( (User) => {
+    if (User){
+      let Activities = document.getElementById("activities");
+      activityService.getActivitiesActives().then( activities => {
+        activities.forEach(activity => {
+          Activities.innerHTML = Activities.innerHTML + `<option value="${activity.uid}">${activity.dados.name}</option>`;
+        });
+      })
+    }
+  })
+}
 

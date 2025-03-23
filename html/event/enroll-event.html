@@ -11,31 +11,31 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
   <script src="../../firebase-init.js"></script>
-  <script src="../../auth-guard.js"></script>
-  <script src="../../services/activities.service.js"></script>
+  <script src="../../services/events.service.js"></script>
   <script src="../../services/user.service.js"></script>
-  <script src="../../services/players.service.js"></script>
 </head>
 <body>
   <hr class="colorgraph m-0 p-0">
-  <h4>Check-in em Atividade</h4>
+  <h4>Inscrição em Evento</h4>
   <hr class="colorgraph m-0 p-0">
   <div class="m-2 p-2">
-    <form id="play-form">
-      <label class="form-label col-3" for="text"><strong>ID da Atividade:</strong>
-      <input class="p-2" type="activity_id" id="activity_id" name="activity_id" required/>   
-      </label>
+    <form id="enroll-form">
+      <label class="form-label col-3" for="text"><strong>ID do Evento:</strong>
+      <input class="p-1" type="event_id" id="event_id" name="event_id" required/></label>
+      <hr class="colorgraph m-0 p-0">
       <div class="col-md-12 d-flex align-items-center">
         <div class="col-4 text-center">
           <button id="bt-success" class="badge bg-success p-2" type="submit">ENTRAR</button>
         </div>
       </div>
-      <div id="alert_error" class="alert alert-danger alert-dismissible fade">
-        <strong id="res_error"></strong>
-      </div>
-    </div>
     </form>
+    <div id="alert_sucesso" class="alert alert-success fade">
+      <strong id="res_sucesso"></strong>
+    </div>
+    <div id="alert_error" class="alert alert-danger alert-dismissible fade">
+      <strong id="res_error"></strong>
+    </div>
   </div>
-  <script src="play.js"></script>
+  <script src="enroll-event.js"></script>
 </body>
 </html>

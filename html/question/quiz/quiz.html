@@ -19,33 +19,30 @@
   <script src="../../../services/questions.service.js"></script>
 </head>
 <body>
-  
-                  <div id="question_box">
-                    <header class="d-flex justify-content-center">
-                      <div class="timer card m-1 p-1 bg-primary" style="width:150px">
-                          <div id="time_left_txt" class="bg-primary text-center m-1 p-1">Tempo Restante</div>
-                          <div id="timer_sec" class="badge rounded-pill bg-warning m-1 p-1"">15</div>
-                      </div>
-                      <div id="time_line"></div>
-                    </header>
-                    <hr class="colorgraph">
-                    <section>
-                        <div id="que_text"></div>
-                        <div id="option_list"></div>
-                    </section>
-                    <hr class="colorgraph">
-                    <section class="d-flex flex-row-reverse">
-                      <span class="btn-menu">   
-                        <button class="badge bg-success p-2" onclick="fechar()" type="button">FECHAR</button>
-                      </span>
-                    </section>
-                  </div>
-                </div>
-              </div>
-        </div>
+  <div class="container">
+    <div class="card card-container">
+      <div id="question_box">
+        <header class="d-flex justify-content-center">
+          <div class="timer card m-1 p-1 bg-primary" style="width:150px">
+              <div id="time_left_txt" class="bg-primary text-center m-1 p-1">Tempo Restante</div>
+              <div id="timer_sec" class="badge rounded-pill bg-warning m-1 p-1"">15</div>
+          </div>
+          <div id="time_line"></div>
+        </header>
+        <hr class="colorgraph">
+        <section>
+            <div id="que_text"></div>
+            <div id="option_list"></div>
+        </section>
+        <hr class="colorgraph">
+        <section class="d-flex flex-row-reverse">
+          <span class="btn-menu">   
+            <button class="badge bg-success p-2" onclick="fechar()" type="button">FECHAR</button>
+          </span>
+        </section>
       </div>
-      <script src="quiz.js"></script>
     </div>
-  </div>  
+  </div>       
+  <script src="quiz.js"></script>
 </body>
 </html>

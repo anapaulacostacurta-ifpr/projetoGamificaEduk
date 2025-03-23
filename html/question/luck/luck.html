@@ -14,43 +14,28 @@
   <script src="../../../firebase-init.js"></script>
   <script src="../../../auth-guard.js"></script>
   <script src="../../../services/user.service.js"></script>
-  <script src="../../../services/boardgames.service.js"></script>
-  <script src="../../../services/logboardgames.service.js"></script>
+  <script src="../../../services/activities.service.js"></script>
+  <script src="../../../services/logactivities.service.js"></script>
   <script src="../../../services/questions.service.js"></script>
 </head>
 <body>
   <div class="container">
     <div class="card card-container">
-        <div class="folha">
-          <div class="seta"></div>
-          <div class="roleta" id="roleta">
-              <div class="box1"></div>
-              <div class="box2"></div>
-              <div class="box3"></div>
-              <div class="box4"></div>
-              <div class="box5"></div>
-              <div class="box6"></div>
-              <div class="box7"></div>
-              <div class="box8"></div>
-              
-              <div class="premio premio1" id="opt1">SORTE</div>
-              <div class="premio premio2" id="opt0">REVÉS</div>
-              <div class="premio premio3" id="opt7">SORTE</div>
-              <div class="premio premio4" id="opt6">REVÉS</div>
-              <div class="premio premio5" id="opt5">SORTE</div>
-              <div class="premio premio6" id="opt4">REVÉS</div>
-              <div class="premio premio7" id="opt3">SORTE</div>
-              <div class="premio premio8" id="opt2">REVÉS</div>
-              
-              <div id="btnPlay" class="btnRoleta play" onclick="playOnClick()">►</div>
-              <div id="btnStop" class="btnRoleta stop" onclick="stopOnClick()">❚❚</div>
-          </div>
+      <div id="question_box">
+        <hr class="colorgraph">
+        <section>
+            <div id="que_text"></div>
+            <div id="que_points"></div>
+        </section>
+        <hr class="colorgraph">
+        <section class="d-flex flex-row-reverse">
+          <span class="btn-menu">   
+            <button class="badge bg-success p-2" onclick="fechar()" type="button">FECHAR</button>
+          </span>
+        </section>
       </div>
-      <form id="sorte_reves">
-        <p id="msgGanhador"></p>
-      </form>
     </div>
-  </div>
+  </div>       
   <script src="luck.js"></script>
 </body>
 </html>
