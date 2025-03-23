@@ -1,9 +1,9 @@
 .folha {
     position: relative;
     background-color: #ffffff;
-    width: 400px;
-    height: 400px;
-    padding: 50px;
+    width: 410px;
+    height: 410px;
+    padding: 61px;
 }
 
 .roleta {
@@ -47,66 +47,66 @@ path {
 }
 
 .box1 {
-    border-top: 80px solid transparent;
-    border-right: 80px solid transparent;
-    border-bottom: 80px solid #f6685e;
-    border-left: 80px solid #f6685e;
+    border-top: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-bottom: 70px solid #f6685e;
+    border-left: 70px solid #f6685e;
 }
 
 .box5 {
-    border-top: 80px solid #e91e63;
-    border-right: 80px solid #e91e63;
-    border-bottom: 80px solid transparent;
-    border-left: 80px solid transparent;
+    border-top: 70px solid #e91e63;
+    border-right: 70px solid #e91e63;
+    border-bottom: 70px solid transparent;
+    border-left: 70px solid transparent;
 }
 
 .box2 {
-    border-top: 80px solid #9c27b0;
-    border-right: 80px solid transparent;
-    border-bottom: 80px solid transparent;
-    border-left: 80px solid #9c27b0;
+    border-top: 70px solid #9c27b0;
+    border-right: 70px solid transparent;
+    border-bottom: 70px solid transparent;
+    border-left: 70px solid #9c27b0;
     left: 50%;
 }
 
 .box6 {
-    border-top: 80px solid transparent;
-    border-right: 80px solid #673ab7;
-    border-bottom: 80px solid #673ab7;
-    border-left: 80px solid transparent;
+    border-top: 70px solid transparent;
+    border-right: 70px solid #673ab7;
+    border-bottom: 70px solid #673ab7;
+    border-left: 70px solid transparent;
     left: 50%
 }
 
 .box4 {
-    border-top: 80px solid transparent;
-    border-right: 80px solid transparent;
-    border-bottom: 80px solid #2196f3;
-    border-left: 80px solid #2196f3;
+    border-top: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-bottom: 70px solid #2196f3;
+    border-left: 70px solid #2196f3;
     top: 50%;
     left: 50%;
 }
 
 .box8 {
-    border-top: 80px solid #34399d;
-    border-right: 80px solid #34399d;
-    border-bottom: 80px solid transparent;
-    border-left: 80px solid transparent;
+    border-top: 70px solid #34399d;
+    border-right: 70px solid #34399d;
+    border-bottom: 70px solid transparent;
+    border-left: 70px solid transparent;
     top: 50%;
     left: 50%;
 }
 
 .box3 {
-    border-top: 80px solid #009688;
-    border-right: 80px solid transparent;
-    border-bottom: 80px solid transparent;
-    border-left: 80px solid #009688;
+    border-top: 70px solid #009688;
+    border-right: 70px solid transparent;
+    border-bottom: 70px solid transparent;
+    border-left: 70px solid #009688;
     top: 50%;
 }
 
 .box7 {
-    border-top: 80px solid transparent;
-    border-right: 80px solid #ffb43b;
-    border-bottom: 80px solid #ffb43b;
-    border-left: 80px solid transparent;
+    border-top: 70px solid transparent;
+    border-right: 70px solid #ffb43b;
+    border-bottom: 70px solid #ffb43b;
+    border-left: 70px solid transparent;
     top: 50%;
 }
 
@@ -130,7 +130,7 @@ path {
 .premio {
     position: absolute;
     z-index: 999;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     color: white;
 }
@@ -187,14 +187,14 @@ path {
     position: absolute;
     color: white;
     background-color: #000;
-    border: 20px solid #000;
+    border: 5px solid #000;
     cursor: pointer;
-    top:40%;
-    left: 40%;
-    font-size: 20px;
+    top:41%;
+    left: 41%;
+    font-size: 25px;
     border-radius: 50%;
-    height: 20px;
-    width: 20px;
+    height: 50px;
+    width: 50px;
     text-align: center;
 }
 
