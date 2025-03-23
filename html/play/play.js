@@ -151,7 +151,7 @@ firebase.auth().onAuthStateChanged((User) => {
       let quiz_final = {questions:questions,tokens_used:tokens_used};
       let user_answered = {bonus, quiz, luck,  setback, challange,quiz_final};
       players[last] = {user_UID,points,check_in,check_out, timestamp, user_answered}
-      activityService.update(activity.id, {players});
+      activityService.update(activity_uid, {players});
     }
   }
 });
