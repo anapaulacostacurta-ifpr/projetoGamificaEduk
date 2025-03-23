@@ -9,15 +9,15 @@ const playerService = {
             if(querySnapshot.empty){
                 throw new Error("01 - Não encontrado.");
             }
+
             const players = new Array();
-            querySnapshot.forEach(doc => {
-                var uid = doc.id;
-                var dados = doc.data();
-                var player = {uid,dados};
-                players.push(player);
-            });
+            const uid = querySnapshot.docs.map(doc=>doc.id);
+            const dados = querySnapshot.docs.map(doc=>doc.data());
+            var player = {uid,dados};
+            players.push(player);
             console.log(players);
-            return players;            
+            return players; 
+                       
         } catch (error) {
                 console.error("Erro ao carregar perguntas:", error);
                 alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
