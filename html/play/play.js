@@ -13,7 +13,7 @@ firebase.auth().onAuthStateChanged((User) => {
       
       activityService.getActivities(activity_id).then((activities) => {
         activities.forEach(activity => {
-          if(activity.dados.id == id){
+          if(activity.dados.id == activity_id){
             let data_start = activity.dados.date_start.split("/");
             let time_start = activity.dados.time_start.split(":");
             let data_time_start = new Date(data_start[2],data_start[1]-1,data_start[0],time_start[0],time_start[1]);
