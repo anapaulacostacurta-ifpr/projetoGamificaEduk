@@ -2,7 +2,6 @@ firebase.auth().onAuthStateChanged((User) => {
   if (User) {
     var alert_error = document.getElementById("alert_error");
     var msg_error = document.getElementById("res_error");  
-    var activity;
     document.getElementById("play-form").addEventListener("submit", function(event) {
       event.preventDefault();
       // Captura os dados do formulário
@@ -15,7 +14,6 @@ firebase.auth().onAuthStateChanged((User) => {
       activityService.getActivities(id).then((activities) => {
         activities.forEach(activity => {
           if(activity.dados.id == id){
-            activity = activity;
             let data_start = activity.dados.date_start.split("/");
             let time_start = activity.dados.time_start.split(":");
             let data_time_start = new Date(data_start[2],data_start[1]-1,data_start[0],time_start[0],time_start[1]);
@@ -34,7 +32,7 @@ firebase.auth().onAuthStateChanged((User) => {
                       window.location.href = "./menu.html?activity_uid="+activity_uid;
                     }
                   }
-                  checkin();  
+                  checkin(activity);  
                   window.location.href = "./menu.html?activity_uid="+activity_uid;
             }else{
               msg_error.innerHTML= "Atividade fora do prazo!";
@@ -50,7 +48,7 @@ firebase.auth().onAuthStateChanged((User) => {
         document.getElementById("bt-success").disabled = true;
       });
 
-    function checkin(){
+    function checkin(activity){
       var players = new Array();
       var tmp_players = activity.dados.players;
       var last = tmp_players.length;
