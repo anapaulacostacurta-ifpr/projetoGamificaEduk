@@ -16,11 +16,11 @@ firebase.auth().onAuthStateChanged((User) => {
         activities.forEach(activity => {
           if(activity.dados.id == id){
 
-            let data_start = event.dados.date_start.split("/");
-            let time_start = event.dados.time_start.split(":");
+            let data_start = activity.dados.date_start.split("/");
+            let time_start = activity.dados.time_start.split(":");
             let data_time_start = new Date(data_start[2],data_start[1]-1,data_start[0],time_start[0],time_start[1]);
-            let data_final = event.dados.date_final.split("/");
-            let time_final = event.dados.time_final.split(":");
+            let data_final = activity.dados.date_final.split("/");
+            let time_final = activity.dados.time_final.split(":");
             let data_time_final = new Date(data_final[2],data_final[1]-1,data_final[0],time_final[0],time_final[1]);
 
             if(date >= data_time_start &&  date <= data_time_final){
