@@ -171,83 +171,84 @@ function setPoints(corret,  user_answer){
   var last = tmp_players.length;
   var log_answers;
   for(i=0;i<last;i++){
-    let timestamp = tmp_players[i].timestamp;
-    points = tmp_players[i].points;
+    t_player = tmp_players[i];
+    let timestamp = t_player.timestamp;
+    points = t_player.points;
 
     let quiz_answered = new Array();
-    let atual_quiz_answered = tmp_players[i].user_answered.quiz.questions;
+    let atual_quiz_answered = t_player.user_answered.quiz.questions;
     let last_quiz_answered = atual_quiz_answered.length;
-    let user_UID = tmp_players[i].user_UID;
+    let user_UID =t_player.user_UID;
     for (j=0; j<last_quiz_answered;j++){
         quiz_answered[j] = atual_quiz_answered[j];
     }
     let tokens_quiz_used = new Array();
-    let last_tokens_quiz = tmp_players[i].user_answered.quiz.tokens_used.length;
-    let atual_tokens_quiz_used = tmp_players[i].user_answered.quiz.tokens_used;
+    let last_tokens_quiz = t_player.user_answered.quiz.tokens_used.length;
+    let atual_tokens_quiz_used = t_player.user_answered.quiz.tokens_used;
     for (j=0; j<last_tokens_quiz;j++){
         tokens_quiz_used[j] = atual_tokens_quiz_used[j];
     }
     let bonus_answered = new Array();
-    let atual_bonus_answered =  tmp_players[i].user_answered.bonus.questions;
+    let atual_bonus_answered =  t_player.user_answered.bonus.questions;
     let last_bonus_answered = atual_bonus_answered.length;
     for (j=0; i<last_bonus_answered;j++){
       bonus_answered[j] = atual_bonus_answered[j];
     }
     let tokens_bonus_used = new Array();
-    let atual_tokens_bonus_used = tmp_players[i].user_answered.bonus.tokens_used;
+    let atual_tokens_bonus_used = t_player.user_answered.bonus.tokens_used;
     for (j=0; i<atual_tokens_bonus_used.length;j++){
       tokens_bonus_used[j] = atual_tokens_bonus_used[j];
     }
 
     let luck_answered = new Array();
-    let atual_luck_answered =  tmp_players[i].user_answered.luck.questions;
+    let atual_luck_answered =  t_player.user_answered.luck.questions;
     for (j=0; i<atual_luck_answered.length;j++){
       luck_answered[j] = atual_luck_answered[j];
     }
     let tokens_luck_used = new Array();
-    let atual_tokens_luck_used = tmp_players[i].user_answered.luck.tokens_used;
+    let atual_tokens_luck_used = t_player.user_answered.luck.tokens_used;
     for (j=0; i<atual_tokens_luck_used.length;j++){
       tokens_luck_used[j] = atual_tokens_luck_used[j];
     }
 
     let setback_answered = new Array();
-    let atual_setback_answered =  tmp_players[i].user_answered.setback.questions;
+    let atual_setback_answered =  t_player.user_answered.setback.questions;
     let last_setback = atual_setback_answered;
     for (j=0; i<last_setback;j++){
       setback_answered[j] = atual_setback_answered[j];
     }
     let tokens_setback_used = new Array();
-    let atual_tokens_setback_used = tmp_players[i].user_answered.setback.tokens_used;
+    let atual_tokens_setback_used = t_player.user_answered.setback.tokens_used;
     for (j=0; i<atual_tokens_setback_used.length;j++){
       tokens_setback_used[j] = atual_tokens_setback_used[j];
     }
 
     let challange_answered = new Array();
-    let atual_challange_answered =  tmp_players[i].user_answered.challange.questions;
+    let atual_challange_answered =  t_player.user_answered.challange.questions;
     for (j=0; i<atual_challange_answered.length;j++){
       challange_answered[j] = atual_challange_answered[j];
     }
 
     let tokens_challange_used = new Array();
-    let atual_tokens_challange_used = tmp_players[i].user_answered.challange.tokens_used;
+    let atual_tokens_challange_used = t_player.user_answered.challange.tokens_used;
     for (j=0; i<atual_tokens_challange_used.length;j++){
       tokens_challange_used[j] = atual_tokens_challange_used[j];
     }
 
     let quiz_final_answered = new Array();
-    let atual_quiz_final_answered =  tmp_players[i].user_answered.quiz_final.questions;
+    let atual_quiz_final_answered =  t_player.user_answered.quiz_final.questions;
     for (j=0; i<atual_quiz_final_answered.length;j++){
       quiz_final_answered[j] = atual_quiz_final_answered[j];
     }
 
     let tokens_quiz_final_used = new Array();
-    let atual_tokens_quiz_final_used = tmp_players[i].user_answered.quiz_final.tokens_used;
+    let atual_tokens_quiz_final_used = t_player.user_answered.quiz_final.tokens_used;
     for (j=0; i<atual_tokens_quiz_final_used.length;j++){
       tokens_quiz_final_used[j] = atual_tokens_quiz_final_used[j];
     }
 
-    if(tmp_players[i].user_UID == user_uid){
-      points_old = tmp_players[i].points;
+    if(t_player.user_UID == user_uid){
+      points_old = t_player.points;
       //Atualizar os quizzes respondidos gravando o UID da questão.
       quiz_answered[last_quiz_answered] = question_uid;
       tokens_quiz_used[last_tokens_quiz] = tokenid;
@@ -265,9 +266,8 @@ function setPoints(corret,  user_answer){
       let points_new = points;
       log_answers = {user_UID, data, hora, level, activity_uid, category, question_uid,  user_answer, points_old, points_new, tokenid};
     }
-
-    let check_in = {date:tmp_players[i].ckeck_in.date,time:tmp_players[i].ckeck_in.time};
-    let check_out = {date:tmp_players[i].ckeck_out.date,time:tmp_players[i].ckeck_out.time};
+    let check_in = {date:t_player.ckeck_in.date,time:t_player.ckeck_in.time};
+    let check_out = {date:t_player.ckeck_out.date,time:t_player.ckeck_out.time};
     let bonus = {questions:bonus_answered,tokens_used:tokens_bonus_used};
     let quiz = {questions:quiz_answered,tokens_used:tokens_quiz_used}; // Atualizado
     let luck = {questions:luck_answered,tokens_used:tokens_luck_used};

@@ -6,6 +6,7 @@ firebase.auth().onAuthStateChanged((User) => {
       activity_uid = params.get('activity_uid');
       activityService.getActivitybyUid(activity_uid).then((activity) => {
             var players = activity.players;
+
             //var player = players.find(player => player.user_UID == User.uid);
             var player;
             var last = players.length;
