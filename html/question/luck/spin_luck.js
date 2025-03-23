@@ -1,4 +1,12 @@
 var type = ``;
+var btn_visualizar = document.getElementById("visualizar");
+
+if(type===""){
+  btn_visualizar.disabled = true;
+}else{
+  btn_visualizar.disabled = false;
+}
+
 function playOnClick() {   
     globalObjects = {
         btnPlay: document.getElementById("btnPlay"),
@@ -29,6 +37,9 @@ function stopOnClick() {
     var box = calculate();
     var boxGanhador = document.getElementById("opt".concat(box));
     type = boxGanhador.innerHTML;
+    if (!(type =="")){
+      btn_visualizar.disabled = false;
+    }
 }
 
 firebase.auth().onAuthStateChanged( (User) => {
