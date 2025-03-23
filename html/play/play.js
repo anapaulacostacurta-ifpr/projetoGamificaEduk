@@ -5,7 +5,7 @@ firebase.auth().onAuthStateChanged((User) => {
     var activity_uid;
     var points = 0;
     var user_UID = User.uid;
-    var checkin = true;
+    var ischeckin = true;
     document.getElementById("play-form").addEventListener("submit", function(event) {
       event.preventDefault();
       // Captura os dados do formulário
@@ -32,11 +32,11 @@ firebase.auth().onAuthStateChanged((User) => {
                     if(players[i].user_UID == user_UID){
                       points = players[i].points;
                       
-                      checkin=false;
+                      ischeckin=false;
                       break;
                     }
                   }
-                  if(checkin){
+                  if(ischeckin){
                     checkin(activity);
                     alert('Realizado Check-in na Atividade!');
                   }else{
