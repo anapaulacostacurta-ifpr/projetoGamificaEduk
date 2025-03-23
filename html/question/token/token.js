@@ -2,23 +2,19 @@ var activity_uid;
 var tokenid;
 firebase.auth().onAuthStateChanged( (User) => {
     var player;
-    var tmp_players;
     var tokens_quiz;
     var tokens_luck;
     var tokens_bonus;
     var tokens_challange;
     var tokens_quiz_final;
-    if (!User) {
-        sessionStorage.clear;
-        window.location.href = "../login/login.html";
-    }else{
+    if (User) {
           const params = new URLSearchParams(window.location.search);
           const category = params.get('category');
           activity_uid = params.get('activity_uid');
           activityService.getActivitybyUid(activity_uid).then((activityfind) => {
-            tmp_players = activityfind.players;
-            tmp_players.forEach(playerfind => {
-                if(playerfind.user_UID == User.uid){
+            playerService.getPlayerByActivity(activity_uid,User.uid).then(players =>{
+                players.forEach(playerfind => {
+                if(playerfind.dados.user_UID == User.uid){
                     player = playerfind;      
                 }
             })
@@ -38,7 +34,7 @@ firebase.auth().onAuthStateChanged( (User) => {
             tokenid = document.getElementById("tokenid").value;
             if(category == "quiz"){
                 var atual_tokens_quiz_used;
-                atual_tokens_quiz_used = player.user_answered.quiz.tokens_used;
+                atual_tokens_quiz_used = player.dados.quiz_tokens_used;
                 let pos_token = tokens_quiz.indexOf(tokenid);
                 let pos_token_used = atual_tokens_quiz_used.indexOf(tokenid);  
                 if (!(pos_token_used > -1)){ // Se encontrado foi usado. retorna -1 Não encontrado.
@@ -52,7 +48,7 @@ firebase.auth().onAuthStateChanged( (User) => {
             }
             if(category == "challange"){
                 var atual_tokens_challange_used;
-                atual_tokens_challange_used = player.user_answered.challange.tokens_used;
+                atual_tokens_challange_used = player.dados.challange_tokens_used;
                 let pos_token = tokens_challange.indexOf(tokenid);
                 let pos_token_used = atual_tokens_challange_used.indexOf(tokenid);  
                 if (!(pos_token_used > -1)){ // Se encontrado foi usado. retorna -1 Não encontrado.
@@ -66,7 +62,7 @@ firebase.auth().onAuthStateChanged( (User) => {
             }
             if(category == "bonus"){
                 var atual_tokens_bonus_used;
-                atual_tokens_bonus_used = player.user_answered.bonus.tokens_used;
+                atual_tokens_bonus_used = player.dados.bonus_tokens_used;
                 let pos_token = tokens_bonus.indexOf(tokenid);
                 let pos_token_used = atual_tokens_bonus_used.indexOf(tokenid);  
                 if (!(pos_token_used > -1)){ // Se encontrado foi usado. retorna -1 Não encontrado.
@@ -81,8 +77,8 @@ firebase.auth().onAuthStateChanged( (User) => {
             if(category == "luck"){
                 var atual_tokens_luck_used;
                 var atual_tokens_setback_used;
-                atual_tokens_luck_used = player.user_answered.luck.tokens_used;
-                atual_tokens_setback_used = player.user_answered.setback.tokens_used;
+                atual_tokens_luck_used = player.dados.luck_tokens_used;
+                atual_tokens_setback_used = player.dados.setback_tokens_used;
                 let pos_token = tokens_luck.indexOf(tokenid);
                 let pos_token_luck_used = atual_tokens_luck_used.indexOf(tokenid); 
                 let pos_token_setback_used = atual_tokens_setback_used.indexOf(tokenid);
@@ -99,7 +95,7 @@ firebase.auth().onAuthStateChanged( (User) => {
             }
             if(category == "quizfinal"){
                 var atual_tokens_quiz_final_used;
-                atual_tokens_quiz_final_used = player.user_answered.quiz_final.tokens_used;
+                atual_tokens_quiz_final_used = player.dados.quiz_final_tokens_used;
                 let pos_token = tokens_quiz_final.indexOf(tokenid);
                 let pos_token_quiz_final_used = atual_tokens_quiz_final_used.indexOf(tokenid); 
                 if (!(pos_token_quiz_final_used > -1)){ // Se encontrado foi usado. retorna -1 Não encontrado.
@@ -112,6 +108,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                 }
             }
         });
+    });
     }
 });
 

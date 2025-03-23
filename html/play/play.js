@@ -40,7 +40,7 @@ firebase.auth().onAuthStateChanged((User) => {
                       }else{
                         alert('Retornando para atividade!');
                       }
-                      window.location.href = "./menu.html?activity_uid="+activity_uid+"&level="+activity.dados.level+"&points="+points;
+                      window.location.href = "./menu.html?activity_uid="+activity_uid;
                   }).catch((error) => {
                     msg_error.innerHTML= error.menssage;
                     alert_error.classList.add("show");

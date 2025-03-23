@@ -5,8 +5,7 @@ firebase.auth().onAuthStateChanged( (User) => {
     var question;
     var activity;
     var tokenid;
-    var user_uid;
-
+    var user_UID = User.uid;
     var question_uid;
     var player;
     const que_text = document.getElementById("que_text");
@@ -17,26 +16,24 @@ firebase.auth().onAuthStateChanged( (User) => {
     type = params.get('type');
     activityService.getActivitybyUid(activity_uid).then((activityfind) => {
       activity = activityfind;
-      tmp_players = activityfind.players;
-      tmp_players.forEach(playerfind => {
-          if(playerfind.user_UID == User.uid){
-              player = playerfind;      
-          }
-      })
-      if(type ==="SORTE"){
-        question_uid = getAtualLuck();
-      }
-      if(type ==="REVÉS"){
-        question_uid = getAtualSetback();
-      }
+      playerService.getPlayerByActivity(activity_uid,User.uid).then(players =>{
+        players.forEach(playerfind => {
+            if(playerfind.dados.user_UID == User.uid){
+                player = playerfind;      
+            }
+        })
+        if(type ==="SORTE"){
+          question_uid = getAtualLuck();
+        }
+        if(type ==="REVÉS"){
+          question_uid = getAtualSetback();
+        }
 
-      questionsService.findByUid(question_uid).then(question_find =>{
-        question = question_find;
-        showQuestion();
-          
-      
-      })
-
+        questionsService.findByUid(question_uid).then(question_find =>{
+          question = question_find;
+          showQuestion();
+        })
+      });
     });
 
     function showQuestion(){
@@ -55,124 +52,78 @@ firebase.auth().onAuthStateChanged( (User) => {
     }
 
     function setPoints(){
-      let tmp_players = activity.players;
-      let points_old;
+      let points_old = player.dados.points;
       let points;
-      let players = new Array();
-      var last = tmp_players.length;
       var log_answers;
-      for(i=0;i<last;i++){
-        let timestamp = tmp_players[i].timestamp;
-        points = tmp_players[i].points;
-    
-        let quiz_answered = new Array();
-        let atual_quiz_answered = tmp_players[i].user_answered.quiz.questions;
-        let user_UID = tmp_players[i].user_UID;
-        for (j=0; j<atual_quiz_answered.length;j++){
-            quiz_answered[j] = atual_quiz_answered[j];
-        }
-        let tokens_quiz_used = new Array();
-        let atual_tokens_quiz_used = tmp_players[i].user_answered.quiz.tokens_used;
-        for (j=0; j<atual_tokens_quiz_used.length;j++){
-            tokens_quiz_used[j] = atual_tokens_quiz_used[j];
-        }
-        let bonus_answered = new Array();
-        let atual_bonus_answered =  tmp_players[i].user_answered.bonus.questions;
-        for (j=0; i<atual_bonus_answered.length;j++){
-          bonus_answered[j] = atual_bonus_answered[j];
-        }
-        let tokens_bonus_used = new Array();
-        let atual_tokens_bonus_used = tmp_players[i].user_answered.bonus.tokens_used;
-        for (j=0; i<atual_tokens_bonus_used.length;j++){
-          tokens_bonus_used[j] = atual_tokens_bonus_used[j];
-        }
-    
-        let luck_answered = new Array();
-        let atual_luck_answered =  tmp_players[i].user_answered.luck.questions;
-        let last_luck = atual_luck_answered.length;
-        for (j=0; i< last_luck;j++){
-          luck_answered[j] = atual_luck_answered[j];
-        }
-        let tokens_luck_used = new Array();
-        let atual_tokens_luck_used = tmp_players[i].user_answered.luck.tokens_used;
-        let last_tokens_luck_used = atual_tokens_luck_used.length;
-        for (j=0; i<last_tokens_luck_used;j++){
-          tokens_luck_used[j] = atual_tokens_luck_used[j];
-        }
-        let setback_answered = new Array();
-        let atual_setback_answered =  tmp_players[i].user_answered.setback.questions;
-        let last_setback = atual_setback_answered;
-        for (j=0; i<last_setback;j++){
-          setback_answered[j] = atual_setback_answered[j];
-        }
-        let tokens_setback_used = new Array();
-        let atual_tokens_setback_used = tmp_players[i].user_answered.setback.tokens_used;
-        let last_tokens_setback_used = atual_tokens_setback_used.length;
-        for (j=0; i<last_tokens_setback_used;j++){
-          tokens_setback_used[j] = atual_tokens_setback_used[j];
-        }
-        let challange_answered = new Array();
-        let atual_challange_answered =  tmp_players[i].user_answered.challange.questions;
-        for (j=0; i<atual_challange_answered.length;j++){
-          challange_answered[j] = atual_challange_answered[j];
-        }
-        let tokens_challange_used = new Array();
-        let atual_tokens_challange_used = tmp_players[i].user_answered.challange.tokens_used;
-        for (j=0; i<atual_tokens_challange_used.length;j++){
-          tokens_challange_used[j] = atual_tokens_challange_used[j];
-        }
-        let quiz_final_answered = new Array();
-        let atual_quiz_final_answered =  tmp_players[i].user_answered.quiz_final.questions;
-        for (j=0; i<atual_quiz_final_answered.length;j++){
-          quiz_final_answered[j] = atual_quiz_final_answered[j];
-        }
-        let tokens_quiz_final_used = new Array();
-        let atual_tokens_quiz_final_used = tmp_players[i].user_answered.quiz_final.tokens_used;
-        for (j=0; i<atual_tokens_quiz_final_used.length;j++){
-          tokens_quiz_final_used[j] = atual_tokens_quiz_final_used[j];
-        }
-        if(tmp_players[i].user_UID == user_uid){
-          points_old = tmp_players[i].points;
-          //Atualizar os quizzes respondidos gravando o UID da questão.
-          if(type ==="SORTE"){
-            luck_answered[last_luck] = question_uid;
-            tokens_luck_used[last_tokens_luck_used] = tokenid;
-          }
-          if(type ==="REVÉS"){
-            setback_answered[last_setback] = question_uid;
-            tokens_setback_used[last_tokens_setback_used]=tokenid;
-          } 
-          //Atualizar points
-          if (corret){
-            points = points_old + question.points;
-          }else{
-            points = points_old - question.lose_points;
-          }
-          timestamp = new Date().getTime();
-          const hora = (new Date()).toLocaleTimeString('pt-BR');
-          const data = (new Date()).toLocaleDateString('pt-BR');
-          let level = activity.level;
-          let category =  question.category;
-          let points_new = points;
-          log_answers = {user_UID, data, hora, level, activity_uid, category, question_uid,  user_answer, points_old, points_new, tokenid};
-        }
-        let check_in_date = tmp_players[i].check_in.date;
-        let check_in_time = tmp_players[i].check_in.time;
-        let check_out_date = tmp_players[i].check_out.date;
-        let check_out_time = tmp_players[i].check_out.time;
-        let check_in = {date:check_in_date,time:check_in_time};
-        let check_out = {date:check_out_date,time:check_out_time};
-        let bonus = {questions:bonus_answered,tokens_used:tokens_bonus_used};
-        let quiz = {questions:quiz_answered,tokens_used:tokens_quiz_used}; 
-        let luck = {questions:luck_answered,tokens_used:tokens_luck_used};
-        let setback = {questions:setback_answered,tokens_used:tokens_setback_used};
-        let challange = {questions: challange_answered,tokens_used:tokens_challange_used};
-        let quiz_final = {questions:quiz_final_answered,tokens_used:tokens_quiz_final_used};
-        let user_answered = {bonus, quiz, luck,  setback, challange,quiz_final};
-        players[i] = {user_UID,points,check_in,check_out, timestamp,user_answered};
+      
+      let luck_answered = new Array();
+      let atual_luck_answered =  player.dados.luck_answered;
+      let last_luck = atual_luck_answered.length;
+      for (j=0; i< last_luck;j++){
+        luck_answered[j] = atual_luck_answered[j];
       }
-      //Gravar Dados
-      activityService.update(activity_uid, {players});
+      let tokens_luck_used = new Array();
+      let atual_tokens_luck_used = player.dados.luck_tokens_used;
+      let last_tokens_luck_used = atual_tokens_luck_used.length;
+      for (j=0; i<last_tokens_luck_used;j++){
+        tokens_luck_used[j] = atual_tokens_luck_used[j];
+      }
+      let setback_answered = new Array();
+      let atual_setback_answered =  player.dados.setback_answered;
+      let last_setback = atual_setback_answered;
+      for (j=0; i<last_setback;j++){
+        setback_answered[j] = atual_setback_answered[j];
+      }
+      let tokens_setback_used = new Array();
+      let atual_tokens_setback_used = player.dados.setback_tokens_used;
+      let last_tokens_setback_used = atual_tokens_setback_used.length;
+      for (j=0; i<last_tokens_setback_used;j++){
+        tokens_setback_used[j] = atual_tokens_setback_used[j];
+      }
+
+      //Atualizar os quizzes respondidos gravando o UID da questão.
+      if(type ==="SORTE"){
+        luck_answered[last_luck] = question_uid;
+        tokens_luck_used[last_tokens_luck_used] = tokenid;
+      }
+      if(type ==="REVÉS"){
+        setback_answered[last_setback] = question_uid;
+        tokens_setback_used[last_tokens_setback_used]=tokenid;
+      } 
+      //Atualizar points
+      if (corret){
+        points = points_old + question.points;
+      }else{
+        points = points_old - question.lose_points;
+      }
+      timestamp = new Date().getTime();
+      const hora = (new Date()).toLocaleTimeString('pt-BR');
+      const data = (new Date()).toLocaleDateString('pt-BR');
+      let level = activity.level;
+      let category =  question.category;
+      let points_new = points;
+      log_answers = {user_UID, data, hora, level, activity_uid, category, question_uid,  user_answer, points_old, points_new, tokenid};
+
+      const luck = {
+        luck_answered,
+        tokens_luck_used,
+        points,
+        timestamp,
+      };
+      const setback = {
+        setback_answered,
+        tokens_setback_used,
+        points,
+        timestamp,
+      };
+      if(type ==="SORTE"){
+        const players = luck;
+        playerService.update(player.uid, players);
+      }
+      if(type ==="REVÉS"){
+        const players = setback;
+        playerService.update(player.uid, players);
+      }
     
       //gravar na Log as resposta selecionadas
       logActivityService.save(log_answers);
@@ -180,7 +131,7 @@ firebase.auth().onAuthStateChanged( (User) => {
 
     function getAtualLuck(){
       let atual_luck;
-      let answered_lucks = player.user_answered.luck.questions;
+      let answered_lucks = player.dados.luck_answered;
       let lucks_questions = activity.schedule.luck.questions;
       let stop = lucks_questions.length;
       for(i=0;i<stop;i++){
@@ -196,7 +147,7 @@ firebase.auth().onAuthStateChanged( (User) => {
 
     function getAtualSetback(){
       let atual_setback;
-      let answered_setback = player.user_answered.setback.questions;
+      let answered_setback = player.dados.setback_answered;
       let setback_questions = activity.schedule.setback.questions;
       let stop = setback_questions.length;
       for(i=0;i<stop;i++){
