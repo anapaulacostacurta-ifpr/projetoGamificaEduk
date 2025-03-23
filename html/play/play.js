@@ -52,6 +52,7 @@ firebase.auth().onAuthStateChanged((User) => {
       var players = new Array();
       var tmp_players = activity.dados.players;
       var last = tmp_players.length;
+      let date = new Date();
       let ckeckin_date = date.toLocaleDateString('pt-BR');
       let ckeckin_time = date.toLocaleTimeString('pt-BR');
       let timestamp = date.getTime();
