@@ -197,7 +197,7 @@ firebase.auth().onAuthStateChanged( (User) => {
       let stop = setback_questions.length;
       for(i=0;i<stop;i++){
         if (answered_setback.indexOf(setback_questions[i]) == -1){ // Não foi respondida
-          atual_luck = setback_questions[i];
+          atual_setback = setback_questions[i];
           i=stop;
         }
       }
