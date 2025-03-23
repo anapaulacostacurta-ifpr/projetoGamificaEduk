@@ -5,6 +5,7 @@ firebase.auth().onAuthStateChanged((User) => {
     var activity_uid;
     var points = 0;
     var user_UID = User.uid;
+    var checkin = true;
     document.getElementById("play-form").addEventListener("submit", function(event) {
       event.preventDefault();
       // Captura os dados do formulário
@@ -30,24 +31,35 @@ firebase.auth().onAuthStateChanged((User) => {
                   for(i=0;i<last;i++){
                     if(players[i].user_UID == user_UID){
                       points = players[i].points;
-                      alert('Retornando para o Jogo!');
-                      window.location.href = "./menu.html?activity_uid="+activity_uid;
-                    }else{
-                      checkin(activity);  
-                      window.location.href = "./menu.html?activity_uid="+activity_uid;
+                      
+                      checkin=false;
+                      break;
                     }
+                  }
+                  if(checkin){
+                    checkin(activity);
+                    alert('Realizado Check-in na Atividade!');
+                  }else{
+                    alert('Retornando para Atividade!');
+                  }
+                  window.location.href = "./menu.html?activity_uid="+activity_uid;
             }else{
               msg_error.innerHTML= "Atividade fora do prazo!";
+              alert_error.classList.add("show");
+              document.getElementById("bt-success").disabled = true;
             }
           }else{
             msg_error.innerHTML= "Atividade não encontrada!";
+            alert_error.classList.add("show");
+            document.getElementById("bt-success").disabled = true;
           }  
         });
         }).catch((error) => {
           msg_error.innerHTML= error.menssage;
+          alert_error.classList.add("show");
+          document.getElementById("bt-success").disabled = true;
         })
-        alert_error.classList.add("show");
-        document.getElementById("bt-success").disabled = true;
+        
       });
 
     function checkin(activity){
