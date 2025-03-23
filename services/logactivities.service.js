@@ -1,9 +1,9 @@
-const logactivitieService = {
-    save: (log_profile) => {
+const logActivityService = {
+    save: (log_activities) => {
         return firebase.firestore()
-            .collection("log_profiles")
+            .collection("log_activities")
             .doc()
-            .set(log_profile);
+            .set(log_activities);
     },
     getLogboardgameByUserUID: async (user_UID,level) => {
         const querySnapshot = await firebase.firestore().collection("log_activities")
