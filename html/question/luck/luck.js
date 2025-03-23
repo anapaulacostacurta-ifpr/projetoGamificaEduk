@@ -156,8 +156,12 @@ firebase.auth().onAuthStateChanged( (User) => {
           let points_new = points;
           log_answers = {user_UID, data, hora, level, activity_uid, category, question_uid,  user_answer, points_old, points_new, tokenid};
         }
-        let check_in = {date:tmp_players[i].check_in.date,time:tmp_players[i].check_in.time};
-        let check_out = {date:tmp_players[i].check_out.date,time:tmp_players[i].check_out.time};
+        let check_in_date = tmp_players[i].check_in.date;
+        let check_in_time = tmp_players[i].check_in.time;
+        let check_out_date = tmp_players[i].check_out.date;
+        let check_out_time = tmp_players[i].check_out.time;
+        let check_in = {date:check_in_date,time:check_in_time};
+        let check_out = {date:check_out_date,time:check_out_time};
         let bonus = {questions:bonus_answered,tokens_used:tokens_bonus_used};
         let quiz = {questions:quiz_answered,tokens_used:tokens_quiz_used}; 
         let luck = {questions:luck_answered,tokens_used:tokens_luck_used};
