@@ -171,7 +171,7 @@ firebase.auth().onAuthStateChanged( (User) => {
       activityService.update(activity_uid, {players});
     
       //gravar na Log as resposta selecionadas
-      logactivitieService.save(log_answers);
+      logActivityService.save(log_answers);
     }
 
     function getAtualLuck(){
