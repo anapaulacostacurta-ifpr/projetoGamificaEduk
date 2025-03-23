@@ -115,3 +115,6 @@ firebase.auth().onAuthStateChanged( (User) => {
     }
 });
 
+function voltar(){
+    window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
+}

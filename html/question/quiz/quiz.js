@@ -287,3 +287,5 @@ function setPoints(corret,  user_answer){
 function fechar(){
   window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
 }
+
+
