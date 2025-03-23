@@ -266,8 +266,8 @@ function setPoints(corret,  user_answer){
       let points_new = points;
       log_answers = {user_UID, data, hora, level, activity_uid, category, question_uid,  user_answer, points_old, points_new, tokenid};
     }
-    let check_in = {date:t_player.ckeck_in.date,time:t_player.ckeck_in.time};
-    let check_out = {date:t_player.ckeck_out.date,time:t_player.ckeck_out.time};
+    let check_in = {date:t_player.check_in.date,time:t_player.check_in.time};
+    let check_out = {date:t_player.check_out.date,time:t_player.check_out.time};
     let bonus = {questions:bonus_answered,tokens_used:tokens_bonus_used};
     let quiz = {questions:quiz_answered,tokens_used:tokens_quiz_used}; // Atualizado
     let luck = {questions:luck_answered,tokens_used:tokens_luck_used};
