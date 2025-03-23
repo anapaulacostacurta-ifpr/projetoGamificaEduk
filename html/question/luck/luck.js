@@ -1,22 +1,28 @@
-var type = ``;
-var question;
-var activity;
-var tokenid;
-var user_uid;
 var activity_uid;
-var question_uid;
-const que_text = document.getElementById("que_text");
-const que_points = document.getElementById("que_points");
-
 firebase.auth().onAuthStateChanged( (User) => {
   if (User){
+    var type = ``;
+    var question;
+    var activity;
+    var tokenid;
+    var user_uid;
+
+    var question_uid;
+    var player;
+    const que_text = document.getElementById("que_text");
+    const que_points = document.getElementById("que_points");
     const params = new URLSearchParams(window.location.search);
     activity_uid = params.get('activity_uid');
     tokenid = params.get('tokenid');
     type = params.get('type');
     activityService.getActivitybyUid(activity_uid).then((activityfind) => {
       activity = activityfind;
-    
+      tmp_players = activityfind.players;
+      tmp_players.forEach(playerfind => {
+          if(playerfind.user_UID == User.uid){
+              player = playerfind;      
+          }
+      })
       if(type ==="SORTE"){
         question_uid = getAtualLuck();
       }
