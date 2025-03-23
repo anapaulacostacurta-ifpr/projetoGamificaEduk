@@ -1,13 +1,13 @@
 .folha {
     position: relative;
-    background-color: #cdcdcd;
-    width: 400px;
-    height: 400px;
+    background-color:#FFF;
+    width: 450px;
+    height: 450px;
     padding: 50px;
 }
 
 .roleta {
-    border: 5px solid #FFF;
+    border: 5px solid #0d0d0d;
     position: relative;
     width: 100%;
     height: 100%;
