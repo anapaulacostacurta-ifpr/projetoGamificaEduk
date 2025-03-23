@@ -2,13 +2,15 @@ firebase.auth().onAuthStateChanged((User) => {
   if (User) {
     var alert_error = document.getElementById("alert_error");
     var msg_error = document.getElementById("res_error");  
+    var activity_uid;
+    var points = 0;
+    var user_UID = User.uid;
     document.getElementById("play-form").addEventListener("submit", function(event) {
       event.preventDefault();
       // Captura os dados do formulário
       let id = document.getElementById("activity_id").value;
-      let activity_uid; // UID do doc no firestone
-      let points = 0;
-      let user_UID = User.uid;
+      activity_uid; // UID do doc no firestone
+      
       let date = new Date();
       
       activityService.getActivities(id).then((activities) => {
@@ -53,8 +55,6 @@ firebase.auth().onAuthStateChanged((User) => {
       var tmp_players = activity.dados.players;
       var last = tmp_players.length;
       let date = new Date();
-      let points = 0;
-      let user_UID = User.uid;
       let ckeckin_date = date.toLocaleDateString('pt-BR');
       let ckeckin_time = date.toLocaleTimeString('pt-BR');
       let timestamp = date.getTime();
