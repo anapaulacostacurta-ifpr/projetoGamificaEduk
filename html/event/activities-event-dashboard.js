@@ -54,9 +54,10 @@ function cardActiveSelected(answer) {
       let activity_uid = answer.querySelector(".activity_dados").id;
       let score = 0;
       let user_UID = User.uid;
-      let ckeckin_date = (new Date()).toLocaleDateString('pt-BR');
-      let ckeckin_time = (new Date()).toLocaleTimeString('pt-BR');
-      let timestamp = new Date().getTime();
+      let date = new Date();
+      let ckeckin_date = date.toLocaleDateString('pt-BR');
+      let ckeckin_time = date.toLocaleTimeString('pt-BR');
+      let timestamp = date.getTime();
 
       activityService.getActivitybyUid(activity_uid).then((activity) => {
         let data_start = activity.date_start.split("/");

@@ -93,7 +93,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                 alert("Token inválido!");
                 window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
             }
-            if(category == "quiz_final"){
+            if(category == "quizfinal"){
                 var atual_tokens_quiz_final_used;
                 atual_tokens_quiz_final_used = player.user_answered.quiz_final.tokens_used;
                 let pos_token = tokens_quiz_final.indexOf(tokenid);
