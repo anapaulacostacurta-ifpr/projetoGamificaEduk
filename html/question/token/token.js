@@ -45,9 +45,10 @@ firebase.auth().onAuthStateChanged( (User) => {
                     if(pos_token > -1){ //Se encontrado foi é porque existe o token valor > -1 
                         window.location.href = "../quiz/quiz.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
                     }
+                }else{
+                    alert("Token inválido!");
+                    window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
                 }
-                alert("Token inválido!");
-                window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
             }
             if(category == "challange"){
                 var atual_tokens_challange_used;
@@ -58,9 +59,10 @@ firebase.auth().onAuthStateChanged( (User) => {
                     if(pos_token > -1){ //Se encontrado foi é porque existe o token valor > -1 
                         window.location.href = "../challange/challange.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
                     }
+                }else{
+                    alert("Token inválido!");
+                    window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
                 }
-                alert("Token inválido!");
-                window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
             }
             if(category == "bonus"){
                 var atual_tokens_bonus_used;
@@ -71,9 +73,10 @@ firebase.auth().onAuthStateChanged( (User) => {
                     if(pos_token > -1){ //Se encontrado foi é porque existe o token valor > -1 
                         window.location.href = "../bonus/bonus.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
                     }
+                }else{
+                    alert("Token inválido!");
+                    window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
                 }
-                alert("Token inválido!");
-                window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
             }
             if(category == "luck"){
                 var atual_tokens_luck_used;
@@ -89,9 +92,10 @@ firebase.auth().onAuthStateChanged( (User) => {
                             window.location.href = "../luck/spin_luck.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
                         }
                     }
+                }else{
+                    alert("Token inválido!");
+                    window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
                 }
-                alert("Token inválido!");
-                window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
             }
             if(category == "quizfinal"){
                 var atual_tokens_quiz_final_used;
@@ -102,9 +106,10 @@ firebase.auth().onAuthStateChanged( (User) => {
                     if(pos_token > -1){ // Se encontrado foi é porque existe o token valor > -1 
                         window.location.href = "../final/final.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
                     }
+                }else{
+                    alert("Token inválido!");
+                    window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
                 }
-                alert("Token inválido!");
-                window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
             }
         });
     }

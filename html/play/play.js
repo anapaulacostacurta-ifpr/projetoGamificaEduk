@@ -128,8 +128,9 @@ firebase.auth().onAuthStateChanged((User) => {
         for (j=0; i<atual_tokens_quiz_final_used.length;j++){
           tokens_quiz_final_used[j] = atual_tokens_quiz_final_used[j];
         }
-        let check_in = {date:tmp_players[i].ckeck_in.date,time:tmp_players[i].ckeck_in.time};
-        let check_out = {date:tmp_players[i].ckeck_out.date,time:tmp_players[i].ckeck_out.time};
+
+        let check_in = {date:tmp_players[i].check_in.date,time:tmp_players[i].check_in.time};
+        let check_out = {date:tmp_players[i].check_out.date,time:tmp_players[i].check_out.time};
         let bonus = {questions:bonus_answered,tokens_used:tokens_bonus_used};
         let quiz = {questions:quiz_answered,tokens_used:tokens_quiz_used}; 
         let luck = {questions:luck_answered,tokens_used:tokens_luck_used};
