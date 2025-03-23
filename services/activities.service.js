@@ -42,18 +42,26 @@ const activityService = {
             console.log(activities);
             return activities;
 },
-    getActivitybyUid: async (id) => {
-    const querySnapshot = await firebase.firestore().collection("activities")
-            .doc(id)
+    getActivitybyUid: async (uid) => {
+        const querySnapshot = await firebase.firestore().collection("activities")
+            .doc(uid)
             .get();
             console.log(querySnapshot);
 
             if(querySnapshot.empty){
                 throw new Error("01 - Não encontrado.");
             }
+            var activities = new Array();
+            querySnapshot.forEach(doc => {
+                var uid = doc.id;
+                var dados = doc.data();
+                var activity = {uid,dados};
+                activities.push(activity);
+            });
 
-            return querySnapshot.data();
-},
+            console.log(activities);
+            return activities;
+    },
     getActivitybyPlayer: async (user_UID) => {
     const querySnapshot = await firebase.firestore().collection("activities")
             .orderBy("date_start", "asc")
@@ -139,7 +147,7 @@ const activityService = {
                 querySnapshot.forEach(doc => {
                     var uid = doc.id;
                     var dados = doc.data();
-                    var players = dados.players;
+                    //var players = dados.players;
                     var activity = {uid,dados};
                     activities.push(activity);
                 });

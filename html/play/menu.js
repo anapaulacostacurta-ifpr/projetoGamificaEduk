@@ -4,24 +4,22 @@ firebase.auth().onAuthStateChanged((User) => {
     userService.findByUid(User.uid).then(user=>{
       const params = new URLSearchParams(window.location.search);
       activity_uid = params.get('activity_uid');
-      activityService.getActivitybyUid(activity_uid).then((activity) => {
-            var players = activity.players;
-
-            //var player = players.find(player => player.user_UID == User.uid);
-            var player;
-            var last = players.length;
-            for(i=0;i<last;i++){
-              if(players[i].user_UID == User.uid){
-                player = players[i];
+      activityService.getActivitybyUid(activity_uid).then((activities) => {
+        activities.forEach(activity => {
+          activity_uid = activity.uid;
+          document.getElementById("level").innerHTML = activity.dados.level;
+          playerService.getPlayerByActivity(activity_uid,user_UID).then(players =>{    
+            players.forEach(player =>{
+              user_UID = player.dados.user_UID;
+              if(user_UID === User.uid){
+                document.getElementById("points").innerHTML = player.dados.points;
               }
-            }
-            document.getElementById("points").innerHTML = player.points;
-            document.getElementById("level").innerHTML = activity.level;
-        });
-    }).catch(error => {
-        console.log(error);
-    });
-  } 
+            })  
+          })
+        })
+      })
+    })
+  }
 });
 
 function btnQuiz() {
@@ -43,3 +41,4 @@ function btnBonus(){
 function btnQuizfinal(){
   window.location.href = "../question/token/token.html?category=quizfinal&activity_uid="+activity_uid;
 }
+
