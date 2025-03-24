@@ -14,26 +14,28 @@ firebase.auth().onAuthStateChanged( (User) => {
     activity_uid = params.get('activity_uid');
     tokenid = params.get('tokenid');
     type = params.get('type');
-    activityService.getActivitybyUid(activity_uid).then((activityfind) => {
-      activity = activityfind;
-      playerService.getPlayerByActivity(activity_uid,User.uid).then(players =>{
-        players.forEach(playerfind => {
-            if(playerfind.dados.user_UID == User.uid){
-                player = playerfind;      
-            }
-        })
-        if(type ==="SORTE"){
-          question_uid = getAtualLuck();
-        }
-        if(type ==="REVÉS"){
-          question_uid = getAtualSetback();
-        }
+    activityService.getActivitybyUid(activity_uid).then((activities) => {
+      activities.forEach(activityfind =>{
+        activity = activityfind;
+        playerService.getPlayerByActivity(activity_uid,User.uid).then(players =>{
+          players.forEach(playerfind => {
+              if(playerfind.dados.user_UID == User.uid){
+                  player = playerfind;      
+              }
+          })
+          if(type ==="SORTE"){
+            question_uid = getAtualLuck();
+          }
+          if(type ==="REVÉS"){
+            question_uid = getAtualSetback();
+          }
 
-        questionsService.findByUid(question_uid).then(question_find =>{
-          question = question_find;
-          showQuestion();
-        })
-      });
+          questionsService.findByUid(question_uid).then(question_find =>{
+            question = question_find;
+            showQuestion();
+          })
+          });
+      })
     });
 
     function showQuestion(){
