@@ -70,6 +70,7 @@ firebase.auth().onAuthStateChanged((User) => {
           let challange_tokens_used = [];
           let quiz_final_answered = [];
           let quiz_final_tokens_used = [];
+          let activity_id = activity_uid;
           const players = {
             activity_id,
             user_UID,
