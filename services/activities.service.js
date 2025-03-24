@@ -52,13 +52,10 @@ const activityService = {
                 throw new Error("01 - Não encontrado.");
             }
             var activities = new Array();
-            querySnapshot.forEach(doc => {
-                var uid = doc.id;
-                var dados = doc.data();
-                var activity = {uid,dados};
-                activities.push(activity);
-            });
-
+            const uid = querySnapshot.docs.map(doc=>doc.id);
+            const dados = querySnapshot.docs.map(doc=>doc.data());
+            var activity = {uid,dados};
+            activities.push(activity);
             console.log(activities);
             return activities;
     },
