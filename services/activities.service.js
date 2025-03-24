@@ -52,7 +52,6 @@ const activityService = {
                 throw new Error("01 - Não encontrado.");
             }
             var activities = new Array();
-            const uid = querySnapshot.docs.map(doc=>doc.id);
             const dados = querySnapshot.docs.map(doc=>doc.data());
             var activity = {uid,dados};
             activities.push(activity);
