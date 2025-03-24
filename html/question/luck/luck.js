@@ -99,7 +99,7 @@ firebase.auth().onAuthStateChanged( (User) => {
       timestamp = new Date().getTime();
       const hora = (new Date()).toLocaleTimeString('pt-BR');
       const data = (new Date()).toLocaleDateString('pt-BR');
-      let level = activity.level;
+      let level = activity.dados.level;
       let category =  question.category;
       let points_new = points;
       log_answers = {user_UID, data, hora, level, activity_uid, category, question_uid,  user_answer, points_old, points_new, tokenid};
@@ -132,7 +132,7 @@ firebase.auth().onAuthStateChanged( (User) => {
     function getAtualLuck(){
       let atual_luck;
       let answered_lucks = player.dados.luck_answered;
-      let lucks_questions = activity.schedule.luck.questions;
+      let lucks_questions = activity.dados.schedule.luck.questions;
       let stop = lucks_questions.length;
       for(i=0;i<stop;i++){
         if (answered_lucks.indexOf(lucks_questions[i]) == -1){ // Não foi respondida
@@ -148,7 +148,7 @@ firebase.auth().onAuthStateChanged( (User) => {
     function getAtualSetback(){
       let atual_setback;
       let answered_setback = player.dados.setback_answered;
-      let setback_questions = activity.schedule.setback.questions;
+      let setback_questions = activity.dados.schedule.setback.questions;
       let stop = setback_questions.length;
       for(i=0;i<stop;i++){
         if (answered_setback.indexOf(setback_questions[i]) == -1){ // Não foi respondida
