@@ -11,13 +11,13 @@ const playerService = {
             }
 
             const players = new Array();
-            const uid = querySnapshot.docs.map(doc=>doc.id);
-            const dados = querySnapshot.docs.map(doc=>doc.data());
+            const uid = querySnapshot.id;
+            const dados = querySnapshot.data();
             var player = {uid,dados};
             players.push(player);
             console.log(players);
             return players; 
-                       
+
         } catch (error) {
                 console.error("Erro ao carregar perguntas:", error);
                 alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
