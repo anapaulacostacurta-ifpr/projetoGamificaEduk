@@ -8,10 +8,9 @@ firebase.auth().onAuthStateChanged((User) => {
         activities.forEach(activity => {
           activity_uid = activity.uid;
           document.getElementById("level").innerHTML = activity.dados.level;
-          playerService.getPlayerByActivity(activity_uid,user_UID).then(players =>{    
+          playerService.getPlayerByActivity(activity_uid,User.uid).then(players =>{    
             players.forEach(player =>{
-              user_UID = player.dados.user_UID;
-              if(user_UID === User.uid){
+              if( player.dados.user_UID === User.uid){
                 document.getElementById("points").innerHTML = player.dados.points;
               }
             })  
