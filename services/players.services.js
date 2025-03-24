@@ -11,17 +11,19 @@ const playerService = {
             }
 
             const players = new Array();
-            const uid = querySnapshot.id;
-            const dados = querySnapshot.data();
-            var player = {uid,dados};
-            players.push(player);
+            querySnapshot.forEach(doc => {
+                var uid = doc.id;
+                var dados = doc.data();
+                var player = {uid,dados};
+                players.push(player);
+            });
             console.log(players);
             return players; 
 
         } catch (error) {
-                console.error("Erro ao carregar perguntas:", error);
-                alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
-                return [];
+            console.error("Erro ao carregar perguntas:", error);
+            //alert("Falha ao carregar perguntas. Tente novamente mais tarde.");
+            return [];
         }
     },
     findByUid: uid => {
