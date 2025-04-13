@@ -29,6 +29,10 @@ function btnDesafio() {
   window.location.href = "../question/token/token.html?category=challange&activity_uid="+activity_uid;
 }
 
+function btnTesouro() {
+  window.location.href = "../qrcode/scan_qrcode?category=challange&activity_uid="+activity_uid;
+}
+
 function btnSorte() {
   window.location.href = "../question/token/token.html?category=luck&activity_uid="+activity_uid;
 }
