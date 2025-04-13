@@ -1,57 +1,59 @@
 const userService = {
-    findByUid: async (uid) => {
-        return await firebase.firestore()
-            .collection("users")
-            .doc(uid)
-            .get()
-            .then(doc => {
-                return doc.data();
-            });
+    findByUid: uid => {
+        return callApi({
+            method: "GET",
+            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/${uid}`
+        })
     },
-    getHosts: async () => {
-        const querySnapshot = await firebase.firestore()
-            .collection("users")
-            .where('profile','==',"host")
-            .where('state','==',true)
-            .get();
+    getHosts: () => {
+        return callApi({
+            method: "GET",
+            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/`
+        })
+    },
+    getPlayersInative: (host) => {
+        return callApi({
+            method: "GET",
+            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/${host}`
+        })
+    },
+    save: (user) => {
+        return callApi({
+            method: "POST",
+            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users`,
+            params:user
+        })
+    },
+    update: (user) => {
+        return callApi({
+            method: "PATCH",
+            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/${user.uid}`, 
+            params: user
+        })
+    },
+}
 
-            if(querySnapshot.empty){
-                throw new Error("01 - Não encontrado.");
+function callApi({method, url}){
+    return new Promise(async (resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(
+            method,
+            url,
+            true
+        );
+        
+        xhr.setRequestHeader('Authorization',await firebase.auth().currentUser.getIdToken());
+
+        xhr.onreadystatechange = function(){
+            if(this.readyState == 4){
+                const json = JSON.parse(this.responseText);
+                if(this.status != 200){
+                    reject(json);
+                }else{
+                    resolve(json);
+                }
             }
-            const hosts = querySnapshot.docs.map(doc=>doc.data());
-            console.log(hosts);            
-            return  hosts;
-    },
-    getPlayersInative: async (host) => {
-        const querySnapshot = await firebase.firestore()
-            .collection("users")
-            .where('profile','==',"player")
-            .where('host','==',host)
-            .get();
-
-            if(querySnapshot.empty){
-                throw new Error("01 - Não encontrado.");
-            }
-            const players = querySnapshot.docs.map(doc=>doc.data());
-            console.log(players);            
-            return players;
-    },
-    save: async (id,user) => {
-        try{
-            const querySnapshot = await firebase.firestore()
-            .collection("users")
-            .doc(id)
-            .set(user);
-
-            return querySnapshot;
-        }catch (error) {
-            throw error;
-        }
-    },
-    update: async (id,user) => {
-        return await firebase.firestore()
-            .collection("users")
-            .doc(id)
-            .update(user);
-    },
-};
+        };
+        xhr.send();
+    })
+}
