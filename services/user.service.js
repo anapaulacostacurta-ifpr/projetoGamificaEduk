@@ -33,14 +33,10 @@ const userService = {
     },
 }
 
-function callApi({method, url}){
+function callApi({method, url, params}){
     return new Promise(async (resolve, reject) => {
         const xhr = new XMLHttpRequest();
-        xhr.open(
-            method,
-            url,
-            true
-        );
+        xhr.open(method,url,true);
         
         xhr.setRequestHeader('Authorization', await firebase.auth().currentUser.getIdToken());
         xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
