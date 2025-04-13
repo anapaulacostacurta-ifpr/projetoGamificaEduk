@@ -21,7 +21,7 @@ firebase.auth().onAuthStateChanged((User) => {
       activityService.getActivitybyUid(activity_uid).then((activityfind) => {
         activity = activityfind.dados;
         playerService.getPlayerByActivity(activity_uid,User.uid).then(players =>{
-          var players = activityfind.players;
+          var players = activityfind.dados.players;
           players.forEach(t_player => {
             if(t_player.dados.user_UID == User.uid){
                 player = t_player;      
