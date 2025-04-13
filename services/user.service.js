@@ -11,24 +11,24 @@ const userService = {
             url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/`
         })
     },
-    getPlayersInative: (host) => {
+    getPlayers: (host) => {
         return callApi({
             method: "GET",
             url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/${host}`
         })
     },
-    save: (user) => {
+    save: (users) => {
         return callApi({
             method: "POST",
             url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users`,
-            params:user
+            params:users
         })
     },
-    update: (user) => {
+    update: (users) => {
         return callApi({
             method: "PATCH",
-            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/${user.uid}`, 
-            params: user
+            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/${users.uid}`, 
+            params: users
         })
     },
 }
@@ -42,7 +42,8 @@ function callApi({method, url}){
             true
         );
         
-        xhr.setRequestHeader('Authorization',await firebase.auth().currentUser.getIdToken());
+        xhr.setRequestHeader('Authorization', await firebase.auth().currentUser.getIdToken());
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
         xhr.onreadystatechange = function(){
             if(this.readyState == 4){
@@ -54,6 +55,6 @@ function callApi({method, url}){
                 }
             }
         };
-        xhr.send();
+        xhr.send(JSON.stringify(params));
     })
 }
