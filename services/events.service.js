@@ -40,6 +40,25 @@ const eventService = {
         console.log(events);
         return events;
     },
+    getEventByUID: async (event_uid) => {
+        const querySnapshot = await firebase.firestore().collection("events")
+        .doc(event_uid)
+        .get();
+        console.log(querySnapshot);
+
+        if(querySnapshot.empty){
+           return [];
+        }
+        var events = new Array();
+        querySnapshot.forEach(doc => {
+            var uid = doc.id;
+            var dados = doc.data();
+            var event = {uid,dados};
+            events.push(event);
+        });
+        console.log(events);
+        return events;
+    },
     getEvents: async () => {
         const querySnapshot = await firebase.firestore().collection("events")
         .orderBy("date_start", "asc")
@@ -57,30 +76,6 @@ const eventService = {
             if( !(event.state === "finished")){
                 events.push(event);
             }
-        });
-        console.log(events);
-        return events;
-    },
-    getEventsByUserUID: async (user_UID) => {
-        const querySnapshot = await firebase.firestore().collection("events")
-        .orderBy("date_start", "asc")
-        .get();
-        console.log(querySnapshot);
-
-        if(querySnapshot.empty){
-            throw new Error("01 - Não encontrado.");
-        }
-        var events = new Array();
-        querySnapshot.forEach(doc => {
-            var uid = doc.id;
-            var dados = doc.data();
-            var event = {uid,dados};
-            var players = event.dados.players;
-            players.forEach(player => {
-                if(player.user_UID === user_UID){
-                    events.push(event);
-                }
-            });                
         });
         console.log(events);
         return events;
