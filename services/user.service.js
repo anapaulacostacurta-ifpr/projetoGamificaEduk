@@ -2,32 +2,32 @@ const userService = {
     findByUid: uid => {
         return callApi({
             method: "GET",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users/${uid}`
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users/${uid}`
         })
     },
     getHosts: () => {
         return callApi({
             method: "GET",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users/`
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users`
         })
     },
     getPlayers: (host) => {
         return callApi({
             method: "GET",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users/${host}`
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users/${host}`
         })
     },
     save: (users) => {
         return callApi({
             method: "POST",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users`,
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users`,
             params:users
         })
     },
     update: (users) => {
         return callApi({
             method: "PATCH",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users/${users.uid}`, 
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users/${users.uid}`, 
             params: users
         })
     },
@@ -43,11 +43,19 @@ function callApi({method, url, params}){
 
         xhr.onreadystatechange = function(){
             if(this.readyState == 4){
-                const json = JSON.parse(this.responseText);
-                if(this.status != 200){
-                    reject(json);
-                }else{
-                    resolve(json);
+                if (!this.responseText) {
+                    reject({ error: "Resposta vazia da API." });
+                    return;
+                }
+                try {
+                    const json = JSON.parse(this.responseText);
+                    if(this.status != 200){
+                        reject(json);
+                    }else{
+                        resolve(json);
+                    }
+                } catch (e) {
+                    reject({ error: "Erro ao fazer parse do JSON", detalhes: e.message });
                 }
             }
         };
