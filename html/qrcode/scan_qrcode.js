@@ -11,8 +11,8 @@ firebase.auth().onAuthStateChanged((User) => {
             }
         );
         scanner.addListener('scan', function(content) {
-            alert('QRCODE: ' + content + ' - Data: '+ dateStringWithTime) ;
-            window.location.href = "../challange/challange.html?activity_uid="+activity_uid+"&tokenid="+tokenid+"&qrcode="+content;
+            alert('QRCODE: ' + content + ' - Data: '+ dateStringWithTime);
+            window.location.href = "../challange/challange.html?activity_uid="+activity_uid+"&qrcode="+content;
         });
         Instascan.Camera.getCameras().then(cameras => 
         {

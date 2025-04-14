@@ -100,7 +100,7 @@ firebase.auth().onAuthStateChanged( (User) => {
                 let pos_token_quiz_final_used = atual_tokens_quiz_final_used.indexOf(tokenid); 
                 if (!(pos_token_quiz_final_used > -1)){ // Se encontrado foi usado. retorna -1 Não encontrado.
                     if(pos_token > -1){ // Se encontrado foi é porque existe o token valor > -1 
-                        window.location.href = "../final/final.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
+                        window.location.href = "../quizfinal/quiz.html?activity_uid="+activity_uid+"&tokenid="+tokenid;
                     }
                 }else{
                     alert("Token inválido!");

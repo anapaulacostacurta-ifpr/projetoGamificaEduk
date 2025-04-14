@@ -22,11 +22,11 @@ firebase.auth().onAuthStateChanged((User) => {
 });
 
 function btnQuiz() {
-  window.location.href = "../question/token/token.html?category=quiz&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=quiz&activity_uid="+activity_uid;
 }
 
 function btnDesafio() {
-  window.location.href = "../question/token/token.html?category=challange&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=challange&activity_uid="+activity_uid;
 }
 
 function btnTesouro() {
@@ -34,14 +34,14 @@ function btnTesouro() {
 }
 
 function btnSorte() {
-  window.location.href = "../question/token/token.html?category=luck&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=luck&activity_uid="+activity_uid;
 }
 
 function btnBonus(){
-  window.location.href = "../question/token/token.html?category=bonus&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=bonus&activity_uid="+activity_uid;
 }
 
 function btnQuizfinal(){
-  window.location.href = "../question/token/token.html?category=quizfinal&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=quizfinal&activity_uid="+activity_uid;
 }
 
