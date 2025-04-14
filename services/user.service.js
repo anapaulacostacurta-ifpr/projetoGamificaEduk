@@ -1,64 +1,57 @@
 const userService = {
-    findByUid: uid => {
-        return callApi({
-            method: "GET",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users/${uid}`
-        })
+    findByUid: async (uid) => {
+        return await firebase.firestore()
+            .collection("users")
+            .doc(uid)
+            .get()
+            .then(doc => {
+                return doc.data();
+            });
     },
-    getHosts: () => {
-        return callApi({
-            method: "GET",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users`
-        })
-    },
-    getPlayers: (host) => {
-        return callApi({
-            method: "GET",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users/${host}`
-        })
-    },
-    save: (users) => {
-        return callApi({
-            method: "POST",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users`,
-            params:users
-        })
-    },
-    update: (users) => {
-        return callApi({
-            method: "PATCH",
-            url: `https://api.github.com/users/anapaulacostacurta-ifpr/apiGamificaEduk/users/${users.uid}`, 
-            params: users
-        })
-    },
-}
+    getHosts: async () => {
+        const querySnapshot = await firebase.firestore()
+            .collection("users")
+            .where('profile','==',"host")
+            .where('state','==',true)
+            .get();
 
-function callApi({method, url, params}){
-    return new Promise(async (resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open(method,url,true);
-        
-        xhr.setRequestHeader('Authorization', await firebase.auth().currentUser.getIdToken());
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-
-        xhr.onreadystatechange = function(){
-            if(this.readyState == 4){
-                if (!this.responseText) {
-                    reject({ error: "Resposta vazia da API." });
-                    return;
-                }
-                try {
-                    const json = JSON.parse(this.responseText);
-                    if(this.status != 200){
-                        reject(json);
-                    }else{
-                        resolve(json);
-                    }
-                } catch (e) {
-                    reject({ error: "Erro ao fazer parse do JSON", detalhes: e.message });
-                }
+            if(querySnapshot.empty){
+                throw new Error("01 - Não encontrado.");
             }
-        };
-        xhr.send(JSON.stringify(params));
-    })
-}
+            const hosts = querySnapshot.docs.map(doc=>doc.data());
+            console.log(hosts);            
+            return  hosts;
+    },
+    getPlayers: async (host) => {
+        const querySnapshot = await firebase.firestore()
+            .collection("users")
+            .where('profile','==',"player")
+            .where('host','==',host)
+            .get();
+
+            if(querySnapshot.empty){
+                throw new Error("01 - Não encontrado.");
+            }
+            const players = querySnapshot.docs.map(doc=>doc.data());
+            console.log(players);            
+            return players;
+    },
+    save: async (id,user) => {
+        try{
+            const querySnapshot = await firebase.firestore()
+            .collection("users")
+            .doc(id)
+            .set(user);
+
+            return querySnapshot;
+        }catch (error) {
+            throw error;
+        }
+    },
+    update: async (id,user) => {
+        return await firebase.firestore()
+            .collection("users")
+            .doc(id)
+            .update(user);
+    },
+};
