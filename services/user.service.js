@@ -2,32 +2,32 @@ const userService = {
     findByUid: uid => {
         return callApi({
             method: "GET",
-            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/${uid}`
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users/${uid}`
         })
     },
     getHosts: () => {
         return callApi({
             method: "GET",
-            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/`
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users/`
         })
     },
     getPlayers: (host) => {
         return callApi({
             method: "GET",
-            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/${host}`
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users/${host}`
         })
     },
     save: (users) => {
         return callApi({
             method: "POST",
-            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users`,
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users`,
             params:users
         })
     },
     update: (users) => {
         return callApi({
             method: "PATCH",
-            url: `https://api.github.com:3000/users/anapaulacostacurta-ifpr/users/${users.uid}`, 
+            url: `https://api.github.com/users/anapaulacostacurta-ifpr/users/${users.uid}`, 
             params: users
         })
     },
