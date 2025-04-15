@@ -8,7 +8,8 @@ firebase.auth().onAuthStateChanged((User) => {
         let card_closed_event = ``;
         enroll_events.forEach(enroll_event => {
           eventService.getEventByUID(enroll_event.event_id).then(event =>{
-            let card_event = `<span class="event_dados" id="${event.uid}">${event.dados.name} - ${event.dados.date}</span>`;
+            var event_uid = enroll_event.event_id;
+            let card_event = `<span class="event_dados" id="${event_uid}">${event.name} - ${event.date}</span>`;
             card_coins = 
                   `<span id="coin" class="col-sm-3 ml-auto">`+
                     `<span class="badge rounded-pill bg-success">`+
@@ -17,10 +18,10 @@ firebase.auth().onAuthStateChanged((User) => {
                     `</span>`+
                     `<br/>`+
                   `</span>`;
-            if (event.dados.state === "started"){
+            if (event.state === "started"){
               card_active_event = card_active_event +`<div class="card card_active">${card_event}${card_coins}</div>`;
             }
-            if (event.dados.state === "finished"){
+            if (event.state === "finished"){
               card_closed_event = card_closed_event +`<div class="card card_closed">${card_event}${card_coins}</div>`;
             }
             active_events_list.innerHTML = card_active_event;

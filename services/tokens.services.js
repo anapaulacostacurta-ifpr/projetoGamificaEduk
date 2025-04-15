@@ -16,19 +16,17 @@ const tokenService = {
     }
    },
    findByUid: uid => {
-        return firebase.firestore()
-            .collection("tokens")
-            .doc(uid)
-            .get()
-            .then(doc => {
-                return doc.data();
-            });
+        return firebase.firestore().collection("tokens")
+        .doc(uid)
+        .get()
+        .then(doc => {
+            return doc.data();
+        });
     },
     remove: token => {
-        return firebase.firestore()
-            .collection("tokens")
-            .doc(tokens.uid)
-            .delete();
+        return firebase.firestore().collection("tokens")
+        .doc(tokens.uid)
+        .delete();
     },
     save: token => {
         return firebase.firestore()

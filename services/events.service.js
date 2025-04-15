@@ -41,18 +41,12 @@ const eventService = {
         return events;
     },
     getEventByUID: async (event_uid) => {
-        const querySnapshot = await firebase.firestore().collection("events")
+        return await firebase.firestore().collection("events")
         .doc(event_uid)
-        .get();
-        console.log(querySnapshot);
-
-        if(querySnapshot.empty){
-           return "";
-        }
-        var uid = event_uid;
-        var dados = querySnapshot.docs.map(doc=>doc.data());
-        var event = {uid,dados};
-        return event;
+        .get()
+        .then(doc => {
+            return doc.data();
+        });
     },
     getEvents: async () => {
         const querySnapshot = await firebase.firestore().collection("events")
