@@ -1,10 +1,11 @@
-const started_activities_list = document.getElementById("started_activities_list");
-const finished_activities_list = document.getElementById("finished_activities_list");
-const params = new URLSearchParams(window.location.search);
-var event_uid = params.get('event_uid');
+
 
 firebase.auth().onAuthStateChanged((User) => {
   if (User) {
+    const started_activities_list = document.getElementById("started_activities_list");
+    const finished_activities_list = document.getElementById("finished_activities_list");
+    const params = new URLSearchParams(window.location.search);
+    var event_uid = params.get('event_uid');
     activityService.getActivitiesbyEventUID(event_uid).then((activities) => {
       activities.forEach(activity => {
         checkinactivityService.getcheckinbyPlayer(activity.uid,User.uid).then(checkin_ativities =>{
@@ -16,45 +17,25 @@ firebase.auth().onAuthStateChanged((User) => {
                   `<span id="score" class="badge bg-light text-dark border border-2 border-dark">${checkin_ativity.dados.points}</span>&nbsp;PONTOS`+
               `</span>`+
             `</span>`;
-            
+            let btn_activity = `<button type="button" class="btn btn-btn-primary rounded-pill" onclick="cardActiveSelected(${activity.uid})"></span>`
             if (activity.dados.state === "started"){
-              started_activities_list.innerHTML = started_activities_list.innerHTML +`<div class="card card_${activity.dados.state}">${card_activity}${periodo}${card_points}</div>`;
+              started_activities_list.innerHTML = started_activities_list.innerHTML +`<div class="card">${card_activity}${periodo}${card_points}${btn_activity}</div>`;
             }
             if (activity.dados.state === "finished"){
-              finished_activities_list.innerHTML = finished_activities_list.innerHTML +`<div class="card card_${activity.dados.state}">${card_activity}${periodo}${card_points}</div>`;
+              finished_activities_list.innerHTML = finished_activities_list.innerHTML +`<div class="card">${card_activity}${periodo}${card_points}${btn_activity}</div>`;
             }
           })
         })          
       })
-    }).then(ativaButtons());   
+    })  
   }
 })
 
-function ativaButtons(){
-  const card_started = started_activities_list.querySelectorAll(".card_started");
-  const card_finished = finished_activities_list.querySelectorAll(".card_finished");
 
-  // set onclick attribute to all available cards active
-  for (i = 0; i < card_started.length; i++) {
-    card_active[i].setAttribute("onclick", "cardActiveSelected(this)");
-  }
-    // set onclick attribute to all available cards closed
-  for (i = 0; i < card_finished.length; i++) {
-    card_closed[i].setAttribute("onclick", "cardClosedSelected(this)");
-  }
-}
-
-function cardActiveSelected(answer) {
+function cardActiveSelected(activity_uid) {
   firebase.auth().onAuthStateChanged((User) => {
     if (User) {
-      let activity_uid = answer.querySelector(".activity_dados").id;
-      let score = 0;
-      let user_UID = User.uid;
       let date = new Date();
-      let ckeckin_date = date.toLocaleDateString('pt-BR');
-      let ckeckin_time = date.toLocaleTimeString('pt-BR');
-      let timestamp = date.getTime();
-
       activityService.getActivitybyUid(activity_uid).then((activity) => {
         let data_start = activity.date_start.split("/");
         let time_start = activity.time_start.split(":");
@@ -62,40 +43,9 @@ function cardActiveSelected(answer) {
         let data_final = activity.date_final.split("/");
         let time_final = activity.time_final.split(":");
         let data_time_final = new Date(data_final[2],data_final[1]-1,data_final[0],time_final[0],time_final[1]);
-
-        if(date >= data_time_start &&  date <= data_time_final){
-          var activity_uid = activity.uid; // UID do doc no firestone
-          var players = new Array();
-          var tmp_players = activity.players;
-          var last = tmp_players.length;
-          for(i=0;i<last;i++){
-            if(tmp_players[i].user_UID == user_UID){
-              score = tmp_players[i].score;
-              alert('Retornando para o Jogo!');
-              window.location.href = "./menu.html?activity_uid="+activity_uid;
-            }else{
-              let quiz_answered = new Array();
-              let atual_quiz_answered = tmp_players[i].quiz_answered;
-              for (j=0; i<atual_quiz_answered.length;j++){
-                quiz_answered[j] = atual_quiz_answered[j];
-              }
-              let tokens_quiz_used = new Array();
-              let atual_tokens_quiz_used = tokens_quiz_used;
-              for (j=0; i<atual_tokens_quiz_used.length;j++){
-                tokens_quiz_used[j] = atual_tokens_quiz_used[j];
-              }
-              let user_UID = tmp_players[i].user_UID;
-              let score = tmp_players[i].score;
-              let ckeckin_date = tmp_players[i].ckeckin_date;
-              let ckeckin_time = tmp_players[i].ckeckin_time;
-              let timestamp = tmp_players[i].timestamp;
-              players[i] = {user_UID,score,ckeckin_date,ckeckin_time, timestamp,quiz_answered,tokens_quiz_used};
-            }
-          }
-          let quiz_answered = [];
-          let tokens_quiz_used = [];
-          players[last] = {user_UID,score,ckeckin_date,ckeckin_time,timestamp,quiz_answered,tokens_quiz_used};
-          activityService.update(activity_uid, {players}).then(window.location.href = "./menu.html?activity_uid="+activity_uid);
+        if(date >= data_time_start &&  date <= data_time_final){    
+          alert('Retornando para o Jogo!');
+          window.location.href = "../play/menu.html?activity_uid="+activity_uid;
         }else{
           msg_error.innerHTML= "Atividade fora do prazo!";
           alert_error.classList.add("show");
@@ -107,6 +57,6 @@ function cardActiveSelected(answer) {
 }
 
 //if user clicked on card
-function cardClosedSelected(answer) {
+function cardClosedSelected(activity_uid) {
   alert("em desenvolvimento!");
 }

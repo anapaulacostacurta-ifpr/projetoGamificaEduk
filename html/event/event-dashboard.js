@@ -4,8 +4,6 @@ firebase.auth().onAuthStateChanged((User) => {
     let closed_events_list = document.getElementById("closed_events_list");
     enrollEventService.getEnrollsByUserUID(User.uid).then((enroll_events) => {
       if (!(enroll_events.length === 0)){
-        let card_active_event = ``;
-        let card_closed_event = ``;
         enroll_events.forEach(enroll_event => {
           eventService.getEventByUID(enroll_event.dados.event_id).then(event =>{
             var event_uid = enroll_event.dados.event_id;
@@ -18,23 +16,12 @@ firebase.auth().onAuthStateChanged((User) => {
                     `</span>`+
                     `<br/>`+
                   `</span>`;
+            let btn_enroll = `<button type="button" class="btn btn-btn-primary rounded-pill" onclick="cardActiveSelected(${enroll_event.dados.event_id})"></span>`
             if (event.state === "started"){
-              card_active_event = card_active_event +`<div class="card card_active">${card_event}${card_coins}</div>`;
+              active_events_list.innerHTML =active_events_list.innerHTML +`<div class="card">${card_event}${card_coins}${btn_enroll}</div>`;
             }
             if (event.state === "finished"){
-              card_closed_event = card_closed_event +`<div class="card card_closed">${card_event}${card_coins}</div>`;
-            }
-            active_events_list.innerHTML = card_active_event;
-            closed_events_list.innerHTML = card_closed_event;
-            const card_active = active_events_list.querySelectorAll(".card_active");
-            const card_closed = closed_events_list.querySelectorAll(".card_closed");
-            // set onclick attribute to all available cards active
-            for (i = 0; i < card_active.length; i++) {
-              card_active[i].setAttribute("onclick", "cardActiveSelected(this)");
-            }
-            // set onclick attribute to all available cards closed
-            for (i = 0; i < card_closed.length; i++) {
-              card_closed[i].setAttribute("onclick", "cardClosedSelected(this)");
+              closed_events_list.innerHTML = closed_events_list.innerHTML +`<div class="card">${card_event}${card_coins}${btn_enroll}</div>`;
             }
           });   
         })
@@ -44,13 +31,11 @@ firebase.auth().onAuthStateChanged((User) => {
 });
 
   //if user clicked on card
-  function cardActiveSelected(answer) {
-    let event_uid= answer.querySelector(".event_dados").id;
+  function cardActiveSelected(event_uid) {
     window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}`;
   }
 
   //if user clicked on card
-  function cardClosedSelected(answer) {
-    let event_uid= answer.querySelector(".event_dados").id;
+  function cardClosedSelected(event_uid) {
     window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}`;
   }

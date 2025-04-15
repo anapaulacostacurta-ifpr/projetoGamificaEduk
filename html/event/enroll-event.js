@@ -14,8 +14,6 @@ firebase.auth().onAuthStateChanged((User) => {
       let user_UID = User.uid;
       let date = new Date();
       
-   
-
       eventService.getEventsByID(id).then((events) => {
         events.forEach(event => {
           if(event.dados.id == id){
