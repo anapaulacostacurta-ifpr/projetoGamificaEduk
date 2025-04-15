@@ -42,8 +42,8 @@ firebase.auth().onAuthStateChanged((User) => {
               }
           })
         })           
-      })
-    }).then(cardsActivities());
+      }).then(cardsActivities());
+    })
    
   }
 })
