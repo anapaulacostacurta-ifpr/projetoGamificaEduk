@@ -6,6 +6,22 @@ firebase.auth().onAuthStateChanged((User) => {
     var event_uid = params.get('event_uid');
     let card_active_activity = ``;
     let card_closed_activity = ``;
+    
+    function cardsActivities(){
+      active_activities_list.innerHTML = card_active_activity;
+      closed_activities_list.innerHTML = card_closed_activity;
+      const card_active = active_activities_list.querySelectorAll(".card_active");
+      const card_closed = closed_activities_list.querySelectorAll(".card_closed");
+
+      // set onclick attribute to all available cards active
+      for (i = 0; i < card_active.length; i++) {
+        card_active[i].setAttribute("onclick", "cardActiveSelected(this)");
+      }
+        // set onclick attribute to all available cards closed
+      for (i = 0; i < card_closed.length; i++) {
+        card_closed[i].setAttribute("onclick", "cardClosedSelected(this)");
+      }
+    }
 
     activityService.getActivitiesbyEventUID(event_uid).then((activities) => {
       activities.forEach(activity => {
@@ -28,22 +44,7 @@ firebase.auth().onAuthStateChanged((User) => {
         })           
       })
     }).then(cardsActivities());
-  
-    function cardsActivities(){
-      active_activities_list.innerHTML = card_active_activity;
-      closed_activities_list.innerHTML = card_closed_activity;
-      const card_active = active_activities_list.querySelectorAll(".card_active");
-      const card_closed = closed_activities_list.querySelectorAll(".card_closed");
-
-      // set onclick attribute to all available cards active
-      for (i = 0; i < card_active.length; i++) {
-        card_active[i].setAttribute("onclick", "cardActiveSelected(this)");
-      }
-        // set onclick attribute to all available cards closed
-      for (i = 0; i < card_closed.length; i++) {
-        card_closed[i].setAttribute("onclick", "cardClosedSelected(this)");
-      }
-    }
+   
   }
 })
 
