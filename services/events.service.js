@@ -47,17 +47,12 @@ const eventService = {
         console.log(querySnapshot);
 
         if(querySnapshot.empty){
-           return [];
+           return "";
         }
-        var events = new Array();
-        querySnapshot.forEach(doc => {
-            var uid = doc.id;
-            var dados = doc.data();
-            var event = {uid,dados};
-            events.push(event);
-        });
-        console.log(events);
-        return events;
+        var uid = querySnapshot.docs.map(doc=>doc.id);
+        var dados = querySnapshot.docs.map(doc=>doc.data());
+        var event = {uid,dados};
+        return event;
     },
     getEvents: async () => {
         const querySnapshot = await firebase.firestore().collection("events")
