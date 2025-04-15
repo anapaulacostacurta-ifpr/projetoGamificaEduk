@@ -13,15 +13,15 @@ firebase.auth().onAuthStateChanged((User) => {
             card_coins = 
                   `<span id="coin" class="col-sm-3 ml-auto">`+
                     `<span class="badge rounded-pill bg-success">`+
-                        `<span id="coins" class="badge bg-light text-dark">${event.coins}</span>`+
+                        `<span id="coins" class="badge bg-light text-dark">${event.dados.coins}</span>`+
                     `&nbsp;AB@ COINS`+
                     `</span>`+
                     `<br/>`+
                   `</span>`;
-            if (event.state === "started"){
+            if (event.dados.state === "started"){
               card_active_event = card_active_event +`<div class="card card_active">${card_event}${card_coins}</div>`;
             }
-            if (event.state === "finished"){
+            if (event.dados.state === "finished"){
               card_closed_event = card_closed_event +`<div class="card card_closed">${card_event}${card_coins}</div>`;
             }
             active_events_list.innerHTML = card_active_event;
