@@ -26,8 +26,9 @@ firebase.auth().onAuthStateChanged((User) => {
         }).then(actionButton());           
       })
     })
-  }
-  function actionButton(){
+
+    
+    function actionButton(){
       const card_started = started_activities_list.querySelectorAll(".card_started");
       const card_finished = finished_activities_list.querySelectorAll(".card_finished");
 
@@ -39,6 +40,8 @@ firebase.auth().onAuthStateChanged((User) => {
       for (i = 0; i < card_finished.length; i++) {
         card_closed[i].setAttribute("onclick", "cardClosedSelected(this)");
       }
+    }
+
   }
 })
 
