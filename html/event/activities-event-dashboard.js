@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged((User) => {
                   `<span id="score" class="badge bg-light text-dark border border-2 border-dark">${checkin_ativity.dados.points}</span>&nbsp;PONTOS`+
               `</span>`+
             `</span>`;
-            let btn_activity = `<button type="button" class="btn btn-btn-primary rounded-pill" onclick="cardActiveSelected(${activity.uid})"></span>`
+            let btn_activity = `<button type="button" class="btn btn-btn-primary rounded-pill" onclick="cardActiveSelected(${activity.uid})">Entrar</span>`
             if (activity.dados.state === "started"){
               started_activities_list.innerHTML = started_activities_list.innerHTML +`<div class="card">${card_activity}${periodo}${card_points}${btn_activity}</div>`;
             }
@@ -32,7 +32,8 @@ firebase.auth().onAuthStateChanged((User) => {
 })
 
 
-function cardActiveSelected(activity_uid) {
+function cardActiveSelected(activityuid) {
+  let activity_uid = activityuid.id;
   firebase.auth().onAuthStateChanged((User) => {
     if (User) {
       let date = new Date();
@@ -57,6 +58,7 @@ function cardActiveSelected(activity_uid) {
 }
 
 //if user clicked on card
-function cardClosedSelected(activity_uid) {
+function cardClosedSelected(activityuid) {
+  let activity_uid = activityuid.id;
   alert("em desenvolvimento!");
 }

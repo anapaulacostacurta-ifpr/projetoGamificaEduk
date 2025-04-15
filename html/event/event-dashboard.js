@@ -16,7 +16,7 @@ firebase.auth().onAuthStateChanged((User) => {
                     `</span>`+
                     `<br/>`+
                   `</span>`;
-            let btn_enroll = `<button type="button" class="btn btn-btn-primary rounded-pill" onclick="cardActiveSelected(${enroll_event.dados.event_id})"></span>`
+            let btn_enroll = `<button type="button" class="btn btn-btn-primary rounded-pill" onclick="cardActiveSelected(${enroll_event.dados.event_id})">Entrar</span>`
             if (event.state === "started"){
               active_events_list.innerHTML =active_events_list.innerHTML +`<div class="card">${card_event}${card_coins}${btn_enroll}</div>`;
             }
@@ -31,11 +31,13 @@ firebase.auth().onAuthStateChanged((User) => {
 });
 
   //if user clicked on card
-  function cardActiveSelected(event_uid) {
+  function cardActiveSelected(eventuid) {
+    let event_uid = eventuid.id;
     window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}`;
   }
 
   //if user clicked on card
-  function cardClosedSelected(event_uid) {
+  function cardClosedSelected(eventuid) {
+    let event_uid = eventuid.id;
     window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}`;
   }
