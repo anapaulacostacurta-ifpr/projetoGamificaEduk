@@ -9,19 +9,19 @@ firebase.auth().onAuthStateChanged((User) => {
         enroll_events.forEach(enroll_event => {
           eventService.getEventByUID(enroll_event.dados.event_id).then(event =>{
             var event_uid = enroll_event.dados.event_id;
-            let card_event = `<span class="event_dados" id="${event_uid}">${event.name} - ${event.date}</span>`;
+            let card_event = `<span class="event_dados" id="${event_uid}">${event.name} - ${enroll_event.dados.date} - ${enroll_event.dados.time}</span>`;
             card_coins = 
                   `<span id="coin" class="col-sm-3 ml-auto">`+
                     `<span class="badge rounded-pill bg-success">`+
-                        `<span id="coins" class="badge bg-light text-dark">${event.dados.coins}</span>`+
+                        `<span id="coins" class="badge bg-light text-dark">${enroll_event.dados.coins}</span>`+
                     `&nbsp;AB@ COINS`+
                     `</span>`+
                     `<br/>`+
                   `</span>`;
-            if (event.dados.state === "started"){
+            if (event.state === "started"){
               card_active_event = card_active_event +`<div class="card card_active">${card_event}${card_coins}</div>`;
             }
-            if (event.dados.state === "finished"){
+            if (event.state === "finished"){
               card_closed_event = card_closed_event +`<div class="card card_closed">${card_event}${card_coins}</div>`;
             }
             active_events_list.innerHTML = card_active_event;
