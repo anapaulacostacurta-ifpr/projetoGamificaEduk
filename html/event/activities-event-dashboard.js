@@ -4,11 +4,12 @@ firebase.auth().onAuthStateChanged((User) => {
     let closed_activities_list = document.getElementById("closed_activities_list");
     const params = new URLSearchParams(window.location.search);
     var event_uid = params.get('event_uid');
+    
 
     activityService.getActivitiesbyEventUID(event_uid).then((activities) => {
-      let card_active_activity = ``;
-      let card_closed_activity = ``;
       activities.forEach(activity => {
+        let card_active_activity = ``;
+        let card_closed_activity = ``;
         let card_activity = `<span class="activity_dados" id="${activity.uid}">${activity.dados.name}</span>`;
         checkinactivityService.getcheckinbyPlayer(activity.uid,User.uid).then(checkin_ativities =>{
           checkin_ativities.forEach(checkin_ativity => {
@@ -25,10 +26,10 @@ firebase.auth().onAuthStateChanged((User) => {
                 card_closed_activity = card_closed_activity +`<div class="card card_closed>${card_activity}${periodo}${card_points}</div>`;
               }
           })
-        })
-      })           
-      active_activities_list.innerHTML = card_active_activity;
-      closed_activities_list.innerHTML = card_closed_activity;
+        })           
+        active_activities_list.innerHTML = card_active_activity;
+        closed_activities_list.innerHTML = card_closed_activity;
+      })
       const card_active = active_activities_list.querySelectorAll(".card_active");
       const card_closed = closed_activities_list.querySelectorAll(".card_closed");
 
