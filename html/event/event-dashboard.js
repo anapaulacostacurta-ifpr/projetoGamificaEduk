@@ -46,11 +46,11 @@ firebase.auth().onAuthStateChanged((User) => {
   //if user clicked on card
   function cardActiveSelected(answer) {
     let event_uid= answer.querySelector(".event_dados").id;
-    window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}&state=started`;
+    window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}`;
   }
 
   //if user clicked on card
   function cardClosedSelected(answer) {
     let event_uid= answer.querySelector(".event_dados").id;
-    window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}&state=finished`;
+    window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}`;
   }
