@@ -30,9 +30,7 @@ const enrollEventService = {
         if(querySnapshot.empty){
            return [];
         }
-        var dados = querySnapshot.docs.map(doc=>doc.data());
-        var uid = doc.id;
-        var enroll_events = {uid,dados};     
+        var enroll_events = querySnapshot.docs.map(doc=>{doc.id, doc.data()});   
         console.log(enroll_events);
         return enroll_events;
     },
