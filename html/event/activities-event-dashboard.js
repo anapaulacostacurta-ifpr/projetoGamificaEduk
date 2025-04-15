@@ -24,8 +24,8 @@ firebase.auth().onAuthStateChanged((User) => {
               finished_activities_list.innerHTML = finished_activities_list.innerHTML +`<div class="card card_${activity.dados.state}">${card_activity}${periodo}${card_points}</div>`;
             }
           })
-        })           
-      }).then(buttons = true);
+        }).then(buttons = true);           
+      })
     
       if(buttons){
         const card_started = started_activities_list.querySelectorAll(".card_started");
