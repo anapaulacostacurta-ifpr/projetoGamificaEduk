@@ -1,6 +1,5 @@
 firebase.auth().onAuthStateChanged((User) => {
   if (User) {
-    var players;
     let active_activities_list = document.getElementById("active_activities_list");
     let closed_activities_list = document.getElementById("closed_activities_list");
     const params = new URLSearchParams(window.location.search);
@@ -11,7 +10,7 @@ firebase.auth().onAuthStateChanged((User) => {
       let card_closed_activity = ``;
       activities.forEach(activity => {
         let card_activity = `<span class="activity_dados" id="${activity.uid}">${activity.dados.name}</span>`;
-        checkinactivityService.getcheckinbyPlayer(activity.uid,user_UID).then(checkin_ativities =>{
+        checkinactivityService.getcheckinbyPlayer(activity.uid,User.uid).then(checkin_ativities =>{
           checkin_ativities.forEach(checkin_ativity => {
             let periodo = `<span id="data_time_start">Inicio:${activity.dados.date_start} - ${activity.dados.time_start} - Fim: ${activity.dados.date_final} - ${activity.dados.time_final}</span>`;
             let card_points = `<span id="points" class="col-sm-3 ml-auto">`+
