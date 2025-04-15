@@ -49,7 +49,7 @@ const eventService = {
         if(querySnapshot.empty){
            return "";
         }
-        var uid = querySnapshot.docs.map(doc=>doc.id);
+        var uid = event_uid;
         var dados = querySnapshot.docs.map(doc=>doc.data());
         var event = {uid,dados};
         return event;
