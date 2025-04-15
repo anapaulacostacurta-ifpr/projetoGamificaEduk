@@ -3,6 +3,7 @@ firebase.auth().onAuthStateChanged((User) => {
     let active_events_list = document.getElementById("active_events_list");
     let closed_events_list = document.getElementById("closed_events_list");
     enrollEventService.getEnrollsByUserUID(User.uid).then((events) => {
+      if (!(enroll_events.length === 0)){
         let card_active_event = ``;
         let card_closed_event = ``;
         events.forEach(event => {
@@ -35,8 +36,8 @@ firebase.auth().onAuthStateChanged((User) => {
                 card_closed[i].setAttribute("onclick", "cardClosedSelected(this)");
               }
             });   
-         
         });
+      }
     });
   }
 });
