@@ -1,22 +1,22 @@
+const started_activities_list = document.getElementById("started_activities_list");
+const finished_activities_list = document.getElementById("finished_activities_list");
+const params = new URLSearchParams(window.location.search);
+var event_uid = params.get('event_uid');
+
 firebase.auth().onAuthStateChanged((User) => {
   if (User) {
-    let started_activities_list = document.getElementById("started_activities_list");
-    let finished_activities_list = document.getElementById("finished_activities_list");
-    const params = new URLSearchParams(window.location.search);
-    var event_uid = params.get('event_uid');
-    let buttons = false;
-
     activityService.getActivitiesbyEventUID(event_uid).then((activities) => {
       activities.forEach(activity => {
-        let card_activity = `<span class="activity_dados" id="${activity.uid}">${activity.dados.name}</span>`;
-        let periodo = `<span id="data_time_start">Inicio:${activity.dados.date_start} - ${activity.dados.time_start} - Fim: ${activity.dados.date_final} - ${activity.dados.time_final}</span>`;
         checkinactivityService.getcheckinbyPlayer(activity.uid,User.uid).then(checkin_ativities =>{
           checkin_ativities.forEach(checkin_ativity => {
+            let card_activity = `<span class="activity_dados" id="${activity.uid}">${activity.dados.name}</span>`;
+            let periodo = `<span id="data_time_start">Inicio:${activity.dados.date_start} - ${activity.dados.time_start} - Fim: ${activity.dados.date_final} - ${activity.dados.time_final}</span>`;
             let card_points = `<span id="points" class="col-sm-3 ml-auto">`+
               `<span class="badge rounded-pill bg-info border border-2 border-dark p-1 m-1">`+
                   `<span id="score" class="badge bg-light text-dark border border-2 border-dark">${checkin_ativity.dados.points}</span>&nbsp;PONTOS`+
               `</span>`+
             `</span>`;
+            
             if (activity.dados.state === "started"){
               started_activities_list.innerHTML = started_activities_list.innerHTML +`<div class="card card_${activity.dados.state}">${card_activity}${periodo}${card_points}</div>`;
             }
@@ -24,27 +24,25 @@ firebase.auth().onAuthStateChanged((User) => {
               finished_activities_list.innerHTML = finished_activities_list.innerHTML +`<div class="card card_${activity.dados.state}">${card_activity}${periodo}${card_points}</div>`;
             }
           })
-        }).then(buttons = true);           
+        })          
       })
-    
-      if(buttons){
-        const card_started = started_activities_list.querySelectorAll(".card_started");
-        const card_finished = finished_activities_list.querySelectorAll(".card_finished");
-
-        // set onclick attribute to all available cards active
-        for (i = 0; i < card_started.length; i++) {
-          card_active[i].setAttribute("onclick", "cardActiveSelected(this)");
-        }
-          // set onclick attribute to all available cards closed
-        for (i = 0; i < card_finished.length; i++) {
-          card_closed[i].setAttribute("onclick", "cardClosedSelected(this)");
-        }
-      }
-
-    })   
-
+    }).then(ativaButtons());   
   }
 })
+
+function ativaButtons(){
+  const card_started = started_activities_list.querySelectorAll(".card_started");
+  const card_finished = finished_activities_list.querySelectorAll(".card_finished");
+
+  // set onclick attribute to all available cards active
+  for (i = 0; i < card_started.length; i++) {
+    card_active[i].setAttribute("onclick", "cardActiveSelected(this)");
+  }
+    // set onclick attribute to all available cards closed
+  for (i = 0; i < card_finished.length; i++) {
+    card_closed[i].setAttribute("onclick", "cardClosedSelected(this)");
+  }
+}
 
 function cardActiveSelected(answer) {
   firebase.auth().onAuthStateChanged((User) => {
