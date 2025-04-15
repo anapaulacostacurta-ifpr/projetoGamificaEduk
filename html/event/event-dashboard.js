@@ -2,7 +2,7 @@ firebase.auth().onAuthStateChanged((User) => {
   if (User) {
     let active_events_list = document.getElementById("active_events_list");
     let closed_events_list = document.getElementById("closed_events_list");
-    enrollEventService.getEnrollEventsByUserUID(User.uid).then((events) => {
+    enrollEventService.getEnrollsByUserUID(User.uid).then((events) => {
         let card_active_event = ``;
         let card_closed_event = ``;
         events.forEach(event => {
