@@ -2,12 +2,12 @@ firebase.auth().onAuthStateChanged((User) => {
   if (User) {
     let active_events_list = document.getElementById("active_events_list");
     let closed_events_list = document.getElementById("closed_events_list");
-    enrollEventService.getEnrollsByUserUID(User.uid).then((events) => {
+    enrollEventService.getEnrollsByUserUID(User.uid).then((enroll_events) => {
       if (!(enroll_events.length === 0)){
         let card_active_event = ``;
         let card_closed_event = ``;
-        events.forEach(event => {
-            eventService.getEventByUID(event.uid).then(event =>{
+        enroll_events.forEach(enroll_events => {
+            eventService.getEventByUID(enroll_events.event_id).then(event =>{
               let card_event = `<span class="event_dados" id="${event.uid}">${event.dados.name} - ${event.dados.date}</span>`;
               card_coins = 
                     `<span id="coin" class="col-sm-3 ml-auto">`+
