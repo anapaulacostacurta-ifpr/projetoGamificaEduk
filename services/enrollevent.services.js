@@ -23,7 +23,6 @@ const enrollEventService = {
     },
     getEnrollsByUserUID: async (user_UID) => {
         const querySnapshot = await firebase.firestore().collection("enroll_events")
-        .where("event_id", "==", event_uid)
         .where("user_UID","==", user_UID)
         .get();
         console.log(querySnapshot);
