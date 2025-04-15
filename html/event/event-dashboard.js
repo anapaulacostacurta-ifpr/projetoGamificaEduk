@@ -7,8 +7,8 @@ firebase.auth().onAuthStateChanged((User) => {
         let card_active_event = ``;
         let card_closed_event = ``;
         enroll_events.forEach(enroll_event => {
-          eventService.getEventByUID(enroll_event.event_id).then(event =>{
-            var event_uid = enroll_event.event_id;
+          eventService.getEventByUID(enroll_event.dados.event_id).then(event =>{
+            var event_uid = enroll_event.dados.event_id;
             let card_event = `<span class="event_dados" id="${event_uid}">${event.name} - ${event.date}</span>`;
             card_coins = 
                   `<span id="coin" class="col-sm-3 ml-auto">`+
