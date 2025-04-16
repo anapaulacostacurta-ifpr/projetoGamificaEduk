@@ -12,22 +12,22 @@ firebase.auth().onAuthStateChanged((User) => {
             document.getElementById("points").innerHTML = checkin_ativity.dados.points;
             let menu = ``;
             taskActivityService.getTaskActivity(activity_uid).then(task_activity=>{
-              if(!(task_activity.quizzes_id==="")){
+              if ( (!(task_activity.quizzes_id===""))  && (!(task_activity.quizzes_id === undefined)) ){
                 menu = menu +`<p><button type="button" class="badge bg-primary p-2" id="btnQuiz" onclick="btnQuiz()">QUIZ</button></p>`;
               }
-              if(!(task_activity.challange_id==="")){
+              if( (!(task_activity.challange_id==="")) && (!(task_activity.quizzes_id === undefined)) ){
                 menu = menu + `<p><button type="button" class="badge bg-primary p-2" id="btnDesafio" onclick="btnDesafio()">DESAFIO</button></p>`;
               }
-              if(!(task_activity.orienteering_id==="")){
+              if( (!(task_activity.orienteering_id==="")) && (!(task_activity.quizzes_id === undefined)) ){
                 menu = menu + `<p><button type="button" class="badge bg-primary p-2" id="btnOrientacao" onclick="btnOrientacao()">ORIENTAÇÃO</button></p>`;
               }
-              if ( (!(task_activity.good_fortune_id==="")) && (!(task_activity.tough_luck_id==="")) ){
+              if( ( (!(task_activity.good_fortune_id==="")) && (!(task_activity.tough_luck_id==="")) ) && (!(task_activity.quizzes_id === undefined)) ){
                 menu = menu + `<p><button type="button" class="badge bg-primary p-2" id="btnSorte" onclick="btnSorteouReves()">SORTE OU REVÉS</button></p>`;
               }
-              if(!(task_activity.bonus_id==="")){
+              if( (!(task_activity.bonus_id==="")) && (!(task_activity.quizzes_id === undefined)) ){
                 menu = menu + `<p><button type="button" class="badge bg-warning p-2" id="btnTarefas" onclick="btnBonus()">TAREFAS</button></p>`; 
               }       
-              if(!(task_activity.quiz_final_id==="")){
+              if( (!(task_activity.quiz_final_id==="")) && (!(task_activity.quizzes_id === undefined)) ){
                 menu = menu + `<p><button type="button" class="badge bg-success p-2 border border-2 border-dark" id="btnQuizfinal" onclick="btnQuizfinal()">QUIZ FINAL</button></p>`;
               }
               main_menu.innerHTML = menu;
