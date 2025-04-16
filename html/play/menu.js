@@ -8,7 +8,7 @@ firebase.auth().onAuthStateChanged((User) => {
       activityService.getActivitybyUid(activity_uid).then((activity) => {
         let menu = ``;
         activityTaskService.getTaskActivity(activity_uid).then(activity_tasks => {
-          if(activity_tasks.length == 0){
+          if(!(activity_tasks.length == 0)){
             activity_tasks.forEach(activity_task => {           
                 if (!(activity_task.dados.quizzes_id==="")){
                   menu = menu +`<p><button type="button" class="badge bg-primary p-2" id="btnQuiz" onclick="btnQuiz()">QUIZ</button></p>`;
