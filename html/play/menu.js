@@ -31,6 +31,8 @@ firebase.auth().onAuthStateChanged((User) => {
                 menu = menu + `<p><button type="button" class="badge bg-success p-2 border border-2 border-dark" id="btnQuizfinal" onclick="btnQuizfinal()">QUIZ FINAL</button></p>`;
               }
               main_menu.innerHTML = menu;
+            }).catch(error => {
+              alert(error.message);
             })
           })
         })
