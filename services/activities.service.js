@@ -43,20 +43,12 @@ const activityService = {
             return activities;
 },
     getActivitybyUid: async (uid) => {
-        const querySnapshot = await firebase.firestore().collection("activities")
+        return await firebase.firestore().collection("activities")
             .doc(uid)
-            .get();
-            console.log(querySnapshot);
-
-            if(querySnapshot.empty){
-                throw new Error("01 - Não encontrado.");
-            }
-            var activities = new Array();
-            const dados = querySnapshot.data();
-            var activity = {uid,dados};
-            activities.push(activity);
-            console.log(activities);
-            return activities;
+            .get()
+            .then(doc => {
+                return doc.data();
+            });
     },
     getActivitybyPlayer: async (user_UID) => {
     const querySnapshot = await firebase.firestore().collection("activities")
