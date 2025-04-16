@@ -1,10 +1,3 @@
-var activity_id;
-var bonus_id;
-var challange_id;
-var good_fortune_id;
-var quiz_final_id; 
-var quizzes_id;
-var tough_luck_id;
 const taskActivityService = {
     getTaskActivity: async (activity_id) => {
         const querySnapshot = await firebase.firestore().collection("tasks_activities")
