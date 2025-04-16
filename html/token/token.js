@@ -13,12 +13,12 @@ firebase.auth().onAuthStateChanged( (User) => {
             tokens_array.forEach(token_array =>{          
                 tokens = token_array.players;  
             })
-            logActivityService.getAtivitityByUserUID(activity_uid,User.uid).then(log_activities =>{
-                log_activities.forEach(log_activity => {
-                    let tokenid = log_activity.tokenid;
-                    tokens_used.push(tokenid);
-                });
-            })
+          });
+          logActivityService.getAtivitityByUserUID(activity_uid,User.uid).then(log_activities =>{
+            log_activities.forEach(log_activity => {
+                let tokenid = log_activity.tokenid;
+                tokens_used.push(tokenid);
+            });
           });
           
           document.getElementById("play-form").addEventListener("submit", function(event) {
