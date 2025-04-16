@@ -5,19 +5,18 @@ const logActivityService = {
             .doc()
             .set(log_activities);
     },
-    getLogboardgameByUserUID: async (user_UID,level) => {
+    getAtivitityByUserUID: async (activity_uid,user_UID) => {
         const querySnapshot = await firebase.firestore().collection("log_activities")
+        .where("activity_uid", "==", activity_uid)
         .where('user_UID','==',user_UID)
-        .where('level','==',level)
-        .orderby('data')
         .get();
         console.log(querySnapshot);
 
         if(querySnapshot.empty){
-            throw new Error("Log não encontrada para o usuário:" + user_UID+ ","+ level + ".");
+            return [];
         }
-        const logboardgames = querySnapshot.docs.map(doc=>doc.data());
-        console.log(logboardgames);
-        return logboardgames;
+        const log_activity = querySnapshot.docs.map(doc=>doc.data());
+        console.log(log_activity);
+        return log_activity;
 },
 };

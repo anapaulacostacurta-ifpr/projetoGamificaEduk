@@ -1,17 +1,17 @@
 const tokenService = {
-    getTokens:  async () => {
+    getTokenByActivityUid:  async (activity_uid) => {
     try {
         const querySnapshot = await firebase.firestore().collection("tokens")
+        .where("activity_id", "==", activity_uid)
         .get();
 
         if(querySnapshot.empty){
-            throw new Error("Banco de Token vazio!");
+           return [];
         }
         const tokens = querySnapshot.docs.map(doc=>doc.data());
         return tokens;
     } catch (error) {
-            console.error("Erro ao carregar perguntas:", error);
-            alert("Erro ao carregar perguntas:" + error);
+            console.error("Erro ao carregar tokens:", error);
             return [];
     }
    },
