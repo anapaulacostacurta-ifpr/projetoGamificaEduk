@@ -1,9 +1,13 @@
 const taskActivityService = {
     getTaskActivity: async (activity_id) => {
         try{
-            const querySnapshot = await firebase.firestore().collection("tasks_activities")
-                .where('activity_id','==',"nXrhex9iArUIBvhAG0wT")
-                .get();
+            const querySnapshot = await firebase.firestore().collection("tasks_activities").get();
+                 querySnapshot.forEach(doc => {
+                    console.log("DOC ID:", doc.id);
+                    console.log("activity_id:", doc.data().activity_id);
+                });
+                //.where('activity_id','==',"nXrhex9iArUIBvhAG0wT")
+                //.get();
                 console.log(querySnapshot);
                 
                 if(querySnapshot.empty){
