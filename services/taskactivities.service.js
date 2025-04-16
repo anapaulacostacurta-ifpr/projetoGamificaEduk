@@ -8,7 +8,7 @@ var tough_luck_id;
 const taskActivityService = {
     getTaskActivity: async (activity_id) => {
         const querySnapshot = await firebase.firestore().collection("tasks_activities")
-                .where("activity_id", '==',activity_id)
+                .where("activity_id","==",activity_id)
                 .get();
                 console.log(querySnapshot);
 
