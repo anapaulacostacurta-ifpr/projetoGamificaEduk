@@ -31,7 +31,7 @@ firebase.auth().onAuthStateChanged((User) => {
                 menu = menu + `<p><button type="button" class="badge bg-success p-2 border border-2 border-dark" id="btnQuizfinal" onclick="btnQuizfinal()">QUIZ FINAL</button></p>`;
               }
               if(menu === "") {
-                menu = "Nenhuma atividade cadatrada. Fale com o Administrado do Evento!"
+                menu = "Nenhuma atividade cadatrada. Fale com o Administrador do Evento!"
               }
               main_menu.innerHTML = menu;
             }).catch(error => {
