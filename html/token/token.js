@@ -11,13 +11,13 @@ firebase.auth().onAuthStateChanged( (User) => {
 
           tokenService.getTokenByActivityUid(activity_uid).then(tokens_array =>{
             tokens_array.forEach(token_array =>{          
-                tokens = token_array.players;
-                logActivityService.getAtivitityByUserUID(activity_uid,User.uid).then(log_activities =>{
-                    log_activities.forEach(log_activity => {
-                        let tokenid = log_activity.tokenid;
-                        tokens_used.push(tokenid);
-                    });
-                })
+                tokens = token_array.players;  
+            })
+            logActivityService.getAtivitityByUserUID(activity_uid,User.uid).then(log_activities =>{
+                log_activities.forEach(log_activity => {
+                    let tokenid = log_activity.tokenid;
+                    tokens_used.push(tokenid);
+                });
             })
           });
           
