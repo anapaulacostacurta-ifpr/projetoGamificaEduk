@@ -32,7 +32,7 @@ firebase.auth().onAuthStateChanged((User) => {
               }
               main_menu.innerHTML = menu;
             }).catch(error => {
-              alert(error.message);
+             main_menu.innerHTML = error.message;
             })
           })
         })
