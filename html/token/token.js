@@ -10,7 +10,7 @@ firebase.auth().onAuthStateChanged( (User) => {
           activity_uid = params.get('activity_uid');
 
           tokenService.getTokenByActivityUid(activity_uid).then(tokens_array =>{
-            tokens = tokens_array;
+            tokens = tokens_array.players;
             logActivityService.getAtivitityByUserUID(activity_uid,User.uid).then(log_activities =>{
                 log_activities.forEach(log_activity => {
                     let tokenid = log_activity.tokenid;
