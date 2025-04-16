@@ -7,23 +7,23 @@ firebase.auth().onAuthStateChanged((User) => {
       activity_uid = params.get('activity_uid');
       activityService.getActivitybyUid(activity_uid).then((activity) => {
         let menu = ``;
-        taskActivityService.getTaskActivity(activity_uid).then(task_activity=>{
-          if ( (!(task_activity.quizzes_id===""))  && (!(task_activity.quizzes_id === undefined)) ){
+        activityTaskService.getTaskActivity(activity_uid).then(activity_task => {
+          if ( (!(activity_task.quizzes_id===""))  && (!(activity_task.quizzes_id === undefined)) ){
             menu = menu +`<p><button type="button" class="badge bg-primary p-2" id="btnQuiz" onclick="btnQuiz()">QUIZ</button></p>`;
           }
-          if( (!(task_activity.challange_id==="")) && (!(task_activity.quizzes_id === undefined)) ){
+          if( (!(activity_task.challange_id==="")) && (!(activity_task.quizzes_id === undefined)) ){
             menu = menu + `<p><button type="button" class="badge bg-primary p-2" id="btnDesafio" onclick="btnDesafio()">DESAFIO</button></p>`;
           }
-          if( (!(task_activity.orienteering_id==="")) && (!(task_activity.quizzes_id === undefined)) ){
+          if( (!(activity_task.orienteering_id==="")) && (!(activity_task.quizzes_id === undefined)) ){
             menu = menu + `<p><button type="button" class="badge bg-primary p-2" id="btnOrientacao" onclick="btnOrientacao()">ORIENTAÇÃO</button></p>`;
           }
-          if( ( (!(task_activity.good_fortune_id==="")) && (!(task_activity.tough_luck_id==="")) ) && (!(task_activity.quizzes_id === undefined)) ){
+          if( ( (!(activity_task.good_fortune_id==="")) && (!(activity_task.tough_luck_id==="")) ) && (!(activity_task.quizzes_id === undefined)) ){
             menu = menu + `<p><button type="button" class="badge bg-primary p-2" id="btnSorte" onclick="btnSorteouReves()">SORTE OU REVÉS</button></p>`;
           }
-          if( (!(task_activity.bonus_id==="")) && (!(task_activity.quizzes_id === undefined)) ){
+          if( (!(activity_task.bonus_id==="")) && (!(activity_task.quizzes_id === undefined)) ){
             menu = menu + `<p><button type="button" class="badge bg-warning p-2" id="btnTarefas" onclick="btnBonus()">TAREFAS</button></p>`; 
           }       
-          if( (!(task_activity.quiz_final_id==="")) && (!(task_activity.quizzes_id === undefined)) ){
+          if( (!(activity_task.quiz_final_id==="")) && (!(activity_task.quizzes_id === undefined)) ){
             menu = menu + `<p><button type="button" class="badge bg-success p-2 border border-2 border-dark" id="btnQuizfinal" onclick="btnQuizfinal()">QUIZ FINAL</button></p>`;
           }
           if(menu === "") {
@@ -37,7 +37,7 @@ firebase.auth().onAuthStateChanged((User) => {
             })
           })
         }).catch(error => {
-         main_menu.innerHTML = error.message;
+          main_menu.innerHTML = error.message;
         })
       })
     })
