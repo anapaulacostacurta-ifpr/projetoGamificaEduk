@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged((User) => {
                   `<span id="score" class="badge bg-light text-dark border border-2 border-dark">${checkin_ativity.dados.points}</span>&nbsp;PONTOS`+
               `</span>`+
             `</span>`;
-            let btn_activity = `<button type="button" class="btn btn-btn-primary rounded-pill" onclick="cardActiveSelected(${activity.uid})">Entrar</span>`
+            let btn_activity = `<button type="button" class="btn btn-primary rounded-pill" onclick="cardActiveSelected(${activity.uid})">Entrar</span>`
             if (activity.dados.state === "started"){
               started_activities_list.innerHTML = started_activities_list.innerHTML +`<div class="card">${card_activity}${periodo}${card_points}${btn_activity}</div>`;
             }
