@@ -1,49 +1,50 @@
-var question;
+var question ;
 var activity;
 var tokenid;
 var user_UID;
 var activity_uid;
 var question_uid;
+var points;
+const question_box = document.getElementById("question_box");
+const que_text = document.getElementById("que_text");
+const option_list = document.getElementById("option_list");
+const timeText = document.getElementById("time_left_txt");
+const timeCount = document.getElementById("timer_sec");
 
 firebase.auth().onAuthStateChanged((User) => {
-  const question_box = document.getElementById("question_box");
-  const que_text = document.getElementById("que_text");
-  const option_list = document.getElementById("option_list");
-  const timeText = document.getElementById("time_left_txt");
-  const timeCount = document.getElementById("timer_sec");
-  var player;
-
   if (User) {
       user_UID = User.uid;
       const params = new URLSearchParams(window.location.search);
       activity_uid = params.get('activity_uid');
       tokenid = params.get('tokenid');
-      activityService.getActivitybyUid(activity_uid).then((activityfind) => {
-        activity = activityfind.dados;
-        playerService.getPlayerByActivity(activity_uid,User.uid).then(players =>{
-          var players = activityfind.dados.players;
-          players.forEach(t_player => {
-            if(t_player.dados.user_UID == User.uid){
-                player = t_player;      
+      
+      activityService.getActivitybyUid(activity_uid).then((activity_find) => {
+        activity = activity_find;
+        checkinactivityService.getcheckinbyPlayer(activity_uid, user_UID).then(checkin_ativities =>{
+          if (checkin_ativities.length>0){
+            points = checkin_ativities.dados.points;
+            //Usuário realizou Ckeckin
+            question_uid = getAtualQuiz();
+            if(!(question_uid ==="")){
+              questionsService.findByUid(question_uid).then(question_find =>{
+              question = question_find;
+                //Verifica se o jogador já respondeu todas as perguntas
+                if(question == null){
+                  alert("Não existe nenhum quiz para ser respondido!");
+                  window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
+                }else{
+                  showQuestion();
+                  startTimer(30);
+                }
+              })
             }
-          })
-          question_uid = getAtualQuiz();
-          questionsService.findByUid(question_uid).then(question_find =>{
-            question = question_find;
-            //Verifica se o jogador já respondeu todas as perguntas
-            if(question == null){
-              alert("Não existe nenhum quiz para ser respondido!");
-              window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
-            }else{
-              showQuestion();
-              startTimer(30);
-            }
-          });
-        });
-      })
+          }
+        })
+    })
+  
 
       function showQuestion(){
-        let que_tag = '<span class="fw-bold">' +  question.numb +".</span>"+'<span class="fw-bold">' +  question.text +"</span>";
+        let que_tag = `<span class="fw-bold">${question.text}</span>`;
         let option_tag = 
         '<div class="option"><span class="choice-prefix m-2 p-2">A</span><span class="choice-text card m-2 p-2" style="width:380px" data-number="1"><span class="question">' +
           question.options[0] +
@@ -100,16 +101,31 @@ firebase.auth().onAuthStateChanged((User) => {
       }
       
       function getAtualQuiz(){
-        let atual_quiz;
-        let answered_quizzes = player.dados.quiz_answered;
-        let quizzes_questions = activity.schedule.quiz.questions;
-        let stop = quizzes_questions.length;
-        for(i=0;i<stop;i++){
-          if (answered_quizzes.indexOf(quizzes_questions[i]) == -1){ // Não foi respondida
-            atual_quiz = quizzes_questions[i];
-            i=stop;
-          }
-        }
+        let atual_quiz ="";
+        let answered_quizzes = new Array();
+        logActivityService.getAtivitityByUserUID(activity_uid, user_UID).then(log_activities =>{
+          activityTaskService.getTaskActivity(activity_uid).then(activityTasks => {
+            activityTasks.forEach(activityTask => {
+              quizService.getQuizzesByUid(activityTask.dados.quizzes_id).then(quizzes =>{
+                log_activities.forEach(log_activity =>{
+                  if(log_activity.category === "quiz"){
+                    let question = log_activity.question.id;
+                    answered_quizzes.push(question);
+                  }
+                })
+                quizzes.forEach(quiz =>{
+                  let questions = quiz.questions;
+                  questions.forEach(question =>{
+                    if (answered_quizzes.indexOf(question) == -1){ //Se encontrado foi respondida. retorna -1 Não encontrado.
+                      atual_quiz = question;
+                      return atual_quiz;
+                    }
+                  })
+                })
+              })
+            })
+          })
+        })
         return atual_quiz;
       }
       
@@ -148,58 +164,40 @@ firebase.auth().onAuthStateChanged((User) => {
       }
       
       function setPoints(corret,  user_answer){
-        let points_old = player.dados.points;
-        let points;
-        var log_answers;
-      
-        //Atualizar os quizzes respondidos gravando o UID da questão.
-        let old_quiz_answered = player.dados.quiz_answered;
-        let old_quiz_tokens_used = player.dados.quiz_tokens_used;
-      
-        let quiz_answered = new Array();
-        let last_quiz_answered = old_quiz_answered.length;
-        for (i=0;i<last_quiz_answered;i++){
-          quiz_answered[i] = old_quiz_answered[i];
-        }
-        quiz_answered[last_quiz_answered] = question_uid;
-      
-        let quiz_tokens_used = new Array();
-        let last_quiz_tokens_used = old_quiz_tokens_used.length;
-        for (i=0;i<last_quiz_tokens_used;i++){
-          quiz_tokens_used[i] = old_quiz_tokens_used[i];
-        }
-        quiz_tokens_used[last_quiz_tokens_used] = tokenid;
+        let points_old = points;
+        let points_new;
+        let level = activity.level;
+        let category =  question.category;
+        let type = question.type;
+        const time = (new Date()).toLocaleTimeString('pt-BR');
+        const data = (new Date()).toLocaleDateString('pt-BR');
       
         //Atualizar points
         if (corret){
-          points = points_old + question.points;
+          points_new = points_old + question.points;
         }else{
-          points = points_old - question.lose_points;
+          points_new = points_old - question.lose_points;
         }
-      
-        timestamp = new Date().getTime();
-        const hora = (new Date()).toLocaleTimeString('pt-BR');
-        const data = (new Date()).toLocaleDateString('pt-BR');
-        let level = activity.level;
-        let category =  question.category;
-        let points_new = points;
-      
-        const players = {
-          points, 
-          quiz_answered, 
-          quiz_tokens_used, 
-          timestamp,
-        }
-      
-        //Gravar Dados
-        playerService.update(player.uid, players);
-      
+
+        var log_activities ={
+          activity_uid,
+          category, //quiz
+          type, //multiple
+          data,
+          time,
+          level, 
+          question_uid,
+          points_new,
+          points_old,
+          tokenid,
+          user_UID,
+          user_answer
+        };
         //gravar na Log as resposta selecionadas
-        log_answers = {user_UID, data, hora, level, activity_uid, category, question_uid,  user_answer, points_old, points_new, tokenid};
-        logActivityService.save(log_answers);
+        logActivityService.save(log_activities);
       }  
   }
-})
+});
 
 function fechar(){
   window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
