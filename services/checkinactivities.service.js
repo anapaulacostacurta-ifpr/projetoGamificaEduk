@@ -4,6 +4,7 @@ const checkinactivityService = {
                 .where("activity_id", "==", activity_uid)
                 .where("user_UID", "==", user_UID)
                 .orderBy("date", "asc")
+                .orderBy("time", "asc")
                 .get();
                 console.log(querySnapshot);
     

@@ -5,6 +5,7 @@ var user_UID;
 var activity_uid;
 var question_uid;
 var qrcode;
+var orienteering_id;
 
 firebase.auth().onAuthStateChanged((User) => {
   const question_box = document.getElementById("question_box");
@@ -12,7 +13,6 @@ firebase.auth().onAuthStateChanged((User) => {
   const option_list = document.getElementById("option_list");
   const timeText = document.getElementById("time_left_txt");
   const timeCount = document.getElementById("timer_sec");
-  var player;
 
   if (User) {
       user_UID = User.uid;
@@ -22,36 +22,36 @@ firebase.auth().onAuthStateChanged((User) => {
       qrcode = params.get('qrcode');
       activityService.getActivitybyUid(activity_uid).then((activityfind) => {
         activity = activityfind.dados;
-        playerService.getPlayerByActivity(activity_uid,User.uid).then(players =>{
-          var players = activityfind.dados.players;
-          players.forEach(t_player => {
-            if(t_player.dados.user_UID == User.uid){
-                player = t_player;      
-            }
-          })
+        //Verificar se o QRcode lido é o correto do caminho
+        ground_control_point_id =getControlPoint(qrcode);
+        // Se retornou vazio é porque o QRcode não é Valido
+        if (ground_control_point_id ===""){
+          //QRCode Valido Buscar a questão que deve respoder.
           question_uid = getAtualChallange();
-          questionsService.findByUid(question_uid).then(question_find =>{
-            question = question_find;
-            //Verifica se o jogador já respondeu todas as perguntas
-            if(question == null){
-              alert("Não existe nenhum desafio para ser respondido!");
-              window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
-            }else{
-              if (question.type === "treasure_hunt"){
-                  qrcode;
-                  showTreasure();
+            questionsService.findByUid(question_uid).then(question_find =>{
+              question = question_find;
+              //Verifica se o jogador já respondeu todas as perguntas
+              if(question == null){
+                alert("Não existe nenhum desafio para ser respondido!");
+                voltar();
               }else{
-                if (question.type === "puzzle"){
-                  showPuzzle();
-                  startTimer(30);
+                if (question.type === "orienteering"){
+                    showOrienteering();
                 }else{
-                  showQuestion();
-                  startTimer(30);
+                  if (question.type === "puzzle"){
+                    showPuzzle();
+                    startTimer(30);
+                  }else{
+                    showQuestion();
+                    startTimer(30);
+                  }
                 }
               }
-            }
-          });
-        });
+            });
+        }else{
+          alert("QRCode lido não é o Correto para o seu caminho!");
+          voltar();
+        }
       })
 
       function showQuestion(){
@@ -110,18 +110,78 @@ firebase.auth().onAuthStateChanged((User) => {
           }
         }
       }
-      
+      function getControlPoint(qrcode){
+        let ground_control_point_passed;
+        activityTaskService.getTaskActivity(activity_uid).then(activityTasks => {
+          activityTasks.forEach(activityTask => {
+            challangeService.getChallangesByUid(activityTask.dados.challanges_id).then(challanges =>{
+              log_activities.forEach(log_activity =>{
+                if(log_activity.category === "challange"){
+                  ground_control_point_passed.push(log_activity.ground_control_point_id);
+                }
+              })
+              challanges.forEach(challange =>{
+                orienteering_id = challange.orienteering_id;
+                orienteeringService.getOrienteeringByUid(orienteering_id).then(orienteering =>{
+                  let pathway = orienteering.pathway; // ground_control_point_id
+                  let pos_path = pathway.indexOf(qrcode); //posição do ponto de controle no array
+                  let last_pc = ground_control_point_passed.length-1 ;
+                  let pc = ground_control_point_passed[last_pc];
+                  let path_anterior = pathway[pos_path-1];
+                  if(pc == path_anterior){
+                    // path está correto
+                    return qrcode;
+                  }else{
+                    //Code lido Não é o correto.
+                    return "";
+                  }
+                })
+              })
+            })
+          })
+        })
+      }
+
       function getAtualChallange(){
         let atual_challange;
-        let answered_challanges = player.dados.challange_answered;
-        let challanges_questions = activity.schedule.challange.questions;
-        let stop = challanges_questions.length;
-        for(i=0;i<stop;i++){
-          if (answered_challanges.indexOf(challanges_questions[i]) == -1){ // Não foi respondida
-            atual_challange = challanges_questions[i];
-            i=stop;
-          }
-        }
+        let answered_challange;
+        let ground_control_point_passed;
+        logActivityService.getAtivitityByUserUID(activity_uid, user_UID).then(log_activities =>{
+          activityTaskService.getTaskActivity(activity_uid).then(activityTasks => {
+            activityTasks.forEach(activityTask => {
+              challangeService.getChallangesByUid(activityTask.dados.challanges_id).then(challanges =>{
+                log_activities.forEach(log_activity =>{
+                  if(log_activity.category === "challange"){
+                    let question = log_activity.question_uid;
+                    answered_challange.push(question);
+                    ground_control_point_passed.push(log_activity.ground_control_point_id);
+                  }
+                })
+                challanges.forEach(challange =>{
+                  orienteering_id = challange.orienteering_id;
+                  orienteeringService.getOrienteeringByUid(orienteering_id).then(orienteering =>{
+                    let pathway = orienteering.pathway; // ground_control_point_id
+                    let questions = challange.questions;
+                    for (i=0; i<pathway.length;i++){
+                      if(ground_control_point_passed.indexOf(pathway[i]) == -1){
+                      
+                      }else{
+                        
+                      }
+                      if(ground_control_point_passed.indexOf(path)>-1){ //Se encontrado passado pelo ponto de controle. Retorna -1 não encontrado.
+                        questions.forEach(question =>{
+                          if (answered_challange.indexOf(question) == -1){ //Se encontrado foi respondida. retorna -1 Não encontrado.
+                            atual_challange = question;
+                            return atual_challange;
+                          }
+                        })
+                      }
+                    })
+                  })
+                })
+              })
+            })
+          })
         return atual_challange;
       }
       
@@ -160,61 +220,45 @@ firebase.auth().onAuthStateChanged((User) => {
       }
       
       function setPoints(corret,  user_answer){
-        let points_old = player.dados.points;
-        let points;
-        var log_answers;
-      
-        //Atualizar os quizzes respondidos gravando o UID da questão.
-        let old_challange_answered = player.dados.challange_answered;
-        let old_challange_tokens_used = player.dados.challange_tokens_used;
-      
-        let challange_answered = new Array();
-        let last_challange_answered = old_challange_answered.length;
-        for (i=0;i<last_challange_answered;i++){
-          challange_answered[i] = old_challange_answered[i];
-        }
-        challange_answered[last_challange_answered] = question_uid;
-      
-        let challange_tokens_used = new Array();
-        let last_challange_tokens_used = old_challange_tokens_used.length;
-        for (i=0;i<last_challange_tokens_used;i++){
-          challange_tokens_used[i] = old_challange_tokens_used[i];
-        }
-        challange_tokens_used[last_challange_tokens_used] = tokenid;
+        let points_old = points;
+        let points_new;
+        let level = activity.level;
+        let category =  question.category;
+        let type = question.type;
+        const time = (new Date()).toLocaleTimeString('pt-BR');
+        const data = (new Date()).toLocaleDateString('pt-BR');
       
         //Atualizar points
         if (corret){
-          points = points_old + question.points;
+          points_new = points_old + question.points;
         }else{
-          points = points_old - question.lose_points;
+          points_new = points_old - question.lose_points;
         }
-      
-        timestamp = new Date().getTime();
-        const hora = (new Date()).toLocaleTimeString('pt-BR');
-        const data = (new Date()).toLocaleDateString('pt-BR');
-        let level = activity.level;
-        let category =  question.category;
-        let points_new = points;
-      
-        const players = {
-          points, 
-          challange_answered, 
-          challange_tokens_used, 
-          timestamp,
-        }
-      
-        //Gravar Dados
-        playerService.update(player.uid, players);
-      
+
+        var log_activities ={
+          activity_uid,
+          category, //quiz
+          type, // {puzzle ou orienteering}`
+          ground_control_point_id, // if orienteering para verificar o ponto de control passado
+          data,
+          time,
+          level, 
+          question_uid,
+          points_new,
+          points_old,
+          tokenid,
+          user_UID,
+          user_answer
+        };
         //gravar na Log as resposta selecionadas
-        log_answers = {user_UID, data, hora, level, activity_uid, category, question_uid,  user_answer, points_old, points_new, tokenid};
-        logActivityService.save(log_answers);
-      }  
+        logActivityService.save(log_activities);
+      } 
   }
 })
 
-function fechar(){
-  window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
+function voltar(){
+  window.location.href = "../play/menu.html?activity_uid="+activity_uid;
 }
+
 
 

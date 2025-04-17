@@ -9,6 +9,8 @@ const logActivityService = {
         const querySnapshot = await firebase.firestore().collection("log_activities")
         .where("activity_uid", "==", activity_uid)
         .where('user_UID','==',user_UID)
+        .orderBy("date", "asc")
+        .orderBy("time", "asc")
         .get();
         console.log(querySnapshot);
 
