@@ -11,7 +11,7 @@ firebase.auth().onAuthStateChanged( (User) => {
     const que_text = document.getElementById("que_text");
     const que_points = document.getElementById("que_points");
     const params = new URLSearchParams(window.location.search);
-    activity_uid = params.get('activity_uid');
+    activity_id = params.get('activity_id');
     tokenid = params.get('tokenid');
     type = params.get('type');
     activityService.getActivitybyUid(activity_uid).then((activities) => {
@@ -164,5 +164,5 @@ firebase.auth().onAuthStateChanged( (User) => {
 });
 
 function fechar(){
-  window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
+  window.location.href = "../play/menu.html?activity_id="+activity_id;
 }

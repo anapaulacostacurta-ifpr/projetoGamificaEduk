@@ -6,8 +6,8 @@ firebase.auth().onAuthStateChanged((User) => {
       if (!(enroll_events.length === 0)){
         enroll_events.forEach(enroll_event => {
           eventService.getEventByUID(enroll_event.dados.event_id).then(event =>{
-            var event_uid = enroll_event.dados.event_id;
-            let card_event = `<span class="event_dados" id="${event_uid}">${event.name} - ${enroll_event.dados.date} - ${enroll_event.dados.time}</span>`;
+            var event_id = enroll_event.dados.event_id;
+            let card_event = `<span class="event_dados" id="${event_id}">${event.name} - ${enroll_event.dados.date} - ${enroll_event.dados.time}</span>`;
             card_coins = 
                   `<span id="coin" class="col-sm-3 ml-auto">`+
                     `<span class="badge rounded-pill bg-success">`+
@@ -32,12 +32,12 @@ firebase.auth().onAuthStateChanged((User) => {
 
   //if user clicked on card
   function cardActiveSelected(eventuid) {
-    let event_uid = eventuid.id;
-    window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}`;
+    let event_id = eventuid.id;
+    window.location.href = `./activities-event-dashboard.html?event_id=${event_id}`;
   }
 
   //if user clicked on card
   function cardClosedSelected(eventuid) {
-    let event_uid = eventuid.id;
-    window.location.href = `./activities-event-dashboard.html?event_uid=${event_uid}`;
+    let event_id = eventuid.id;
+    window.location.href = `./activities-event-dashboard.html?event_id=${event_id}`;
   }

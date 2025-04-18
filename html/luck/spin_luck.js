@@ -47,9 +47,9 @@ firebase.auth().onAuthStateChanged( (User) => {
     document.getElementById("roleta-form").addEventListener("submit", function(event) {
       event.preventDefault();
       const params = new URLSearchParams(window.location.search);
-      activity_uid = params.get('activity_uid');
+      activity_id = params.get('activity_id');
       tokenid = params.get('tokenid');
-      window.location.href = "../luck/luck.html?activity_uid="+activity_uid+"&tokenid="+tokenid+"&type="+type;
+      window.location.href = `./luck/luck.html?activity_id=${activity_id}&tokenid=${tokenid}&type=${type}`;
     })
   }
 })

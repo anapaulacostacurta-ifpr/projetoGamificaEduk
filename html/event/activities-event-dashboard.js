@@ -5,8 +5,8 @@ firebase.auth().onAuthStateChanged((User) => {
     const started_activities_list = document.getElementById("started_activities_list");
     const finished_activities_list = document.getElementById("finished_activities_list");
     const params = new URLSearchParams(window.location.search);
-    var event_uid = params.get('event_uid');
-    activityService.getActivitiesbyEventUID(event_uid).then((activities) => {
+    var event_id = params.get('event_uid');
+    activityService.getActivitiesbyEventUID(event_id).then((activities) => {
       activities.forEach(activity => {
         checkinactivityService.getcheckinbyPlayer(activity.uid,User.uid).then(checkin_ativities =>{
           checkin_ativities.forEach(checkin_ativity => {
@@ -32,12 +32,12 @@ firebase.auth().onAuthStateChanged((User) => {
 })
 
 
-function cardActiveSelected(activityuid) {
-  let activity_uid = activityuid.id;
+function cardActiveSelected(activity_ID) {
+  let activity_id = activity_ID;
   firebase.auth().onAuthStateChanged((User) => {
     if (User) {
       let date = new Date();
-      activityService.getActivitybyUid(activity_uid).then((activity) => {
+      activityService.getActivitybyUid(activity_id).then((activity) => {
         let data_start = activity.date_start.split("/");
         let time_start = activity.time_start.split(":");
         let data_time_start = new Date(data_start[2],data_start[1]-1,data_start[0],time_start[0],time_start[1]);
@@ -46,7 +46,7 @@ function cardActiveSelected(activityuid) {
         let data_time_final = new Date(data_final[2],data_final[1]-1,data_final[0],time_final[0],time_final[1]);
         if(date >= data_time_start &&  date <= data_time_final){    
           alert('Retornando para o Jogo!');
-          window.location.href = "../play/menu.html?activity_uid="+activity_uid;
+          window.location.href = "../play/menu.html?activity_id="+activity_id;
         }else{
           msg_error.innerHTML= "Atividade fora do prazo!";
           alert_error.classList.add("show");
@@ -59,6 +59,6 @@ function cardActiveSelected(activityuid) {
 
 //if user clicked on card
 function cardClosedSelected(activityuid) {
-  let activity_uid = activityuid.id;
+  let activity_id = activityuid.id;
   alert("em desenvolvimento!");
 }

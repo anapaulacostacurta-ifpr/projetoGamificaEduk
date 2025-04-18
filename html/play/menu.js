@@ -1,13 +1,13 @@
-var activity_uid;
+var activity_id;
 firebase.auth().onAuthStateChanged((User) => {
   if (User) {
     const main_menu = document.getElementById("main_menu");
     userService.findByUid(User.uid).then(user=>{
       const params = new URLSearchParams(window.location.search);
-      activity_uid = params.get('activity_uid');
-      activityService.getActivitybyUid(activity_uid).then((activity) => {
+      activity_id = params.get('activity_id');
+      activityService.getActivitybyUid(activity_id).then((activity) => {
         let menu = ``;
-        activityTaskService.getTaskActivity(activity_uid).then(activity_tasks => {
+        activityTaskService.getTaskActivity(activity_id).then(activity_tasks => {
           if(!(activity_tasks.length == 0)){
             activity_tasks.forEach(activity_task => {           
                 if (!(activity_task.dados.quizzes_id==="")){
@@ -30,7 +30,7 @@ firebase.auth().onAuthStateChanged((User) => {
                 }
                 main_menu.innerHTML = menu;         
                 document.getElementById("level").innerHTML = activity.level;
-                checkinactivityService.getcheckinbyPlayer(activity_uid,User.uid).then(checkin_ativities =>{
+                checkinactivityService.getcheckinbyPlayer(activity_id,User.uid).then(checkin_ativities =>{
                   checkin_ativities.forEach(checkin_ativity => {
                     document.getElementById("points").innerHTML = checkin_ativity.dados.points;
                   })
@@ -46,26 +46,26 @@ firebase.auth().onAuthStateChanged((User) => {
 });
 
 function btnQuiz() {
-  window.location.href = "../token/token.html?category=quiz&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=quiz&activity_id="+activity_id;
 }
 
 function btnDesafio() {
-  window.location.href = "../token/token.html?category=challange&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=challange&activity_id="+activity_id;
 }
 
 function btnOrientacao() {
-  window.location.href = "../qrcode/scan_qrcode?category=challange&type=orienteering&activity_uid="+activity_uid;
+  window.location.href = "../qrcode/scan_qrcode?category=challange&type=orienteering&activity_id="+activity_id;
 }
 
 function btnSorteouReves() {
-  window.location.href = "../token/token.html?category=good_fortune&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=good_fortune&activity_id="+activity_id;
 }
 
 function btnBonus(){
-  window.location.href = "../token/token.html?category=bonus&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=bonus&activity_id="+activity_id;
 }
 
 function btnQuizfinal(){
-  window.location.href = "../token/token.html?category=quiz_final&activity_uid="+activity_uid;
+  window.location.href = "../token/token.html?category=quiz_final&activity_id="+activity_id;
 }
 
