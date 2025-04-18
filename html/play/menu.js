@@ -54,7 +54,7 @@ function btnDesafio() {
 }
 
 function btnOrientacao() {
-  window.location.href = "../qrcode/scan_qrcode?category=challange&activity_uid="+activity_uid;
+  window.location.href = "../qrcode/scan_qrcode?category=challange&type=orienteering&activity_uid="+activity_uid;
 }
 
 function btnSorteouReves() {

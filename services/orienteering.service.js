@@ -1,10 +1,14 @@
 const orienteeringService = {
-    getOrienteeringByUid: async (id) => {
-        return await firebase.firestore().collection("orienteering")
-            .doc(id)
-            .get()
-            .then(doc => {
-                return doc.data();
-            });
+    getOrienteeringByGroupId: async (group_id) => {
+        const querySnapshot = await firebase.firestore().collection("orienteering")
+        .where('group_id','==',group_id)
+        .get();
+
+        if(querySnapshot.empty){
+            throw [];
+        }
+        const orienteering = querySnapshot.docs.map(doc=>doc.data());
+        console.log(orienteering);            
+        return orienteering;
     }
 }
