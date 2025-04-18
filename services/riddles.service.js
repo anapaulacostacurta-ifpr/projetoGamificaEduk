@@ -9,8 +9,16 @@ const riddleService = {
         if(querySnapshot.empty){
            return [];
         }
-        const tokens = querySnapshot.docs.map(doc=>doc.data());
-        return tokens;
+
+        const riddles = new Array();
+            querySnapshot.forEach(doc => {
+                var uid = doc.id;
+                var dados = doc.data();
+                var riddle = {uid,dados};
+                riddles.push(riddle);
+            });
+            console.log(riddles);
+            return riddles; 
     } catch (error) {
             console.error("Erro ao carregar Riddle:", error);
             return [];
