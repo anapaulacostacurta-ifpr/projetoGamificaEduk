@@ -8,8 +8,8 @@ firebase.auth().onAuthStateChanged((User) => {
       event.preventDefault();
       // Captura os dados do formulário
       activity_id = document.getElementById("activity_id").value;
-      const activity = getActivitiesByID(activity_id);
-      if(activity.length > 0){
+      var noPrazo = verificarAtividade(activity_id);
+      if(noPrazo){
         try{
           const ckeckin_player = getcheckinbyPlayer(activity.uid, user_UID);
           if(ckeckin_player.length > 0){
@@ -38,6 +38,15 @@ firebase.auth().onAuthStateChanged((User) => {
         }
       }
 
+      async function verificarAtividade(activity_id) {
+        const activity = await getActivitiesByID(activity_id);
+          if (activity != null) {
+            return true;
+          } else {
+            return false;
+          }
+      }
+
       async function getActivitiesByID(activity_id) {
         let date = new Date();
         const activities =  await activityService.getActivities(activity_id);
@@ -59,7 +68,7 @@ firebase.auth().onAuthStateChanged((User) => {
                 return activities[0];
               }else{
                 alert("Atividade fora do prazo!")
-                return [];
+                return null;
               }
             }
           }
