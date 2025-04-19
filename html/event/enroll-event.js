@@ -27,7 +27,7 @@ firebase.auth().onAuthStateChanged((User) => {
             if(date >= data_time_start &&  date <= data_time_final){
               event_uid = event.uid; // UID do doc no firestone
               enrollEventService.getEnrollsByEventUidUserUid(event_uid,user_UID).then(enroll_events => {
-                if (!(enroll_events.length === 0)){
+                if (!(enroll_events.length > 0)){
                   let event_id = event_uid;
                   let new_date = new Date();
                   let date = new_date.toLocaleDateString('pt-BR');
