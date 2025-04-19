@@ -31,12 +31,12 @@ firebase.auth().onAuthStateChanged((User) => {
                   user_UID
                 };
                 try{
-                  var result = checkinactivityService.save(activities);
-                  if (!(result.empty)){
-                    alert("Checkin Finalizado! Verificar Inclusão!");
-                  }else{
-                    alert(result.doc.data());
-                  }
+                  alert("")
+                  do{
+                    var result = checkinactivityService.save(activities);              
+                    console.log("aguardando finalizar a inclusão...");
+                  }while(result.empty)
+                  alert("Check-in na atividade finalizado! Encaminhando para o menu de tarefas...");
                   menu();
                 }catch(error){
                   alert(error.message);
@@ -53,7 +53,7 @@ firebase.auth().onAuthStateChanged((User) => {
         console.error(error);
       }
       
-      });
+    });
 
       function menu(){
         window.location.href = "./menu.html?activity_id="+activity_id;
