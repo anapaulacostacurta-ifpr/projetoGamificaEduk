@@ -23,7 +23,8 @@ const checkinactivityService = {
         },
         save: async (checkin_activities) => {
             try{
-                const querySnapshot = await firebase.firestore().collection("checkin_activities")
+                const querySnapshot = await firebase.firestore()
+                .collection("checkin_activities")
                 .doc()
                 .set(checkin_activities);
                 return querySnapshot;

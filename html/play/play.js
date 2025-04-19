@@ -17,11 +17,27 @@ firebase.auth().onAuthStateChanged((User) => {
               var checkin_player = (checkin_activities.length === 1) ? checkin_activities[0] : null;
               if (checkin_player != null) {
                 alert('Retornando para atividade!');
+                menu();
               } else {
                 alert('Realizado check-in na atividade!');
-                doCheckin(activity_id, user_UID); 
+                const date = (new Date()).toLocaleDateString('pt-BR');
+                const time = (new Date()).toLocaleTimeString('pt-BR');
+                const points = parseInt("0");
+  
+                const checkin_activities = {
+                  activity_id,
+                  date,
+                  time,
+                  points,
+                  user_UID,
+                };
+                try{
+                  checkinactivityService.save(checkin_activities).then(menu());
+                }catch(error){
+                  alert(error.message);
+                }; 
               }
-              window.location.href = "./menu.html?activity_id="+activity_id;
+             
             })
           } else {
             console.log("Atividade fora do prazo!");
@@ -34,6 +50,9 @@ firebase.auth().onAuthStateChanged((User) => {
       
       });
 
+      function menu(){
+        window.location.href = "./menu.html?activity_id="+activity_id;
+      }
    
       function validarAtivities(activities, activity_ID) {
           if (activities.length > 1) {
@@ -62,21 +81,6 @@ firebase.auth().onAuthStateChanged((User) => {
               return null;
             }
           }
-      }
-
-      async function doCheckin(activity_id, user_UID) {
-        const date = (new Date()).toLocaleDateString('pt-BR');
-        const time = (new Date()).toLocaleTimeString('pt-BR');
-        const points = 0;
-  
-        const checkin_activities = {
-          activity_id,
-          date,
-          time,
-          points,
-          user_UID,
-        };
-        await checkinactivityService.save(checkin_activities); // usando await para garantir que salve antes de prosseguir
       }
   }
 });
