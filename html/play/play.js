@@ -7,7 +7,7 @@ firebase.auth().onAuthStateChanged((User) => {
       event.preventDefault();
       let activity_ID = document.getElementById("activity_id").value;
       try {
-        activityService.getActivities(activity_ID).then (activities => {
+        await activityService.getActivities(activity_ID).then (activities => {
           var activity = validarAtivities(activities, activity_ID);
           if (activity != null){
             let activity_id = activity.uid;
@@ -31,7 +31,13 @@ firebase.auth().onAuthStateChanged((User) => {
                   user_UID
                 };
                 try{
-                  checkinactivityService.save(activities).then(menu());
+                  var result = checkinactivityService.save(activities);
+                  if (!(result.empty)){
+                    alert("Checkin Finalizado! Verificar Inclusão!");
+                  }else{
+                    alert(result.doc.data());
+                  }
+                  menu();
                 }catch(error){
                   alert(error.message);
                 }; 
