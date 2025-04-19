@@ -31,12 +31,12 @@ firebase.auth().onAuthStateChanged((User) => {
                   user_UID
                 };
                 try{
-                  alert("")
                   do{
                     var result = checkinactivityService.save(activities);              
-                    console.log("aguardando finalizar a inclusão...");
+                    console.log("aguardando finalizar o Checkin na atividade...");
                   }while(result.empty)
                   alert("Check-in na atividade finalizado! Encaminhando para o menu de tarefas...");
+                  console.log(result);
                   menu();
                 }catch(error){
                   alert(error.message);
