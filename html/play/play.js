@@ -11,15 +11,15 @@ firebase.auth().onAuthStateChanged((User) => {
       var noPrazo = verificarAtividade(activity_id);
       if(noPrazo){
         try{
-          const ckeckin_player = getcheckinbyPlayer(activity.uid, user_UID);
-          if(ckeckin_player.length > 0){
-            points = ckeckin_player.points;
-            alert('Retornando para atividade!');
-          }else{
-            // Checkin vazio.
-            alert('Realizado check-in na atividade!');
-            doCheckin();
-          }
+            var checki_ok = verificarCheckin(activity_id, user_UID);
+            if(checki_ok){
+              points = ckeckin_player.points;
+              alert('Retornando para atividade!');
+            }else{
+              // Checkin vazio.
+              alert('Realizado check-in na atividade!');
+              doCheckin();
+            }
         }catch(error){
           alert(error.message);
         }
@@ -29,12 +29,22 @@ firebase.auth().onAuthStateChanged((User) => {
       //window.location.href = "./menu.html?activity_id="+activity_id;
       });
 
+      async function verificarCheckin(activity_id, user_UID) {
+        const ckeckin_player = await getcheckinbyPlayer(activity.uid, user_UID);
+          if(ckeckin_player != null){
+            return true;
+          } else {
+            console.log("Problemas na Validação do Checkin!")
+            return false;
+          }
+      }
+
       async function getcheckinbyPlayer(activity_id, User_uid) {
         const checkin_ativities = await checkinactivityService.getcheckinbyPlayer(activity_id,User_uid);
         if(checkin_ativities.length == 1){
           return checkin_ativities[0];
         }else{
-          throw "Problemas de configuração. Entre em contato com Administrador do Evento!";
+          return null;
         }
       }
 
@@ -43,6 +53,7 @@ firebase.auth().onAuthStateChanged((User) => {
           if (activity != null) {
             return true;
           } else {
+            console.log("Problemas na Validação da Atividade!");
             return false;
           }
       }
