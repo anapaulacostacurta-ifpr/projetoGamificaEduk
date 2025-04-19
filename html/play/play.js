@@ -11,9 +11,9 @@ firebase.auth().onAuthStateChanged((User) => {
        
         activityService.getActivities(activity_ID).then (activities => {
           var activity = validarAtivities(activities, activity_ID);
-          checkinactivityService.getcheckinbyPlayer(activity_id, user_UID).then(checkin_activities =>{
-            if (activity !== null){
-              activity_id = activity.uid;
+          if (activity != null){
+            activity_id = activity.uid;
+            checkinactivityService.getcheckinbyPlayer(activity_id, user_UID).then(checkin_activities =>{
               var checkin_player = (checkin_activities.length === 1) ? checkin_activities[0] : null;
               if (checkin_player != null) {
                 alert('Retornando para atividade!');
@@ -22,10 +22,10 @@ firebase.auth().onAuthStateChanged((User) => {
                 doCheckin(activity_id, user_UID); 
               }
               window.location.href = "./menu.html?activity_id="+activity_id;
-            } else {
-              console.log("Atividade fora do prazo!");
-            }
-          })
+            })
+          } else {
+            console.log("Atividade fora do prazo!");
+          }
         })
       }catch (error) {
         alert("Erro: " + error.message);
