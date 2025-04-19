@@ -34,11 +34,13 @@ firebase.auth().onAuthStateChanged((User) => {
         await getcheckinbyPlayer(activity_id, user_UID).then(checkin_player =>{
           if (checkin_player != null) {
             // points = checkin_player.points; // se precisar usar
-            return true;
+            checkin_ok = true;
           } else {
-            return false;
+            checkin_ok = false;
           }
+          return checkin_ok;
         });
+        
       }
 
       async function getcheckinbyPlayer(activity_id, user_UID) {
@@ -49,7 +51,8 @@ firebase.auth().onAuthStateChanged((User) => {
   
       async function verificarAtividade(activity_id) {
         await getActivitiesByID(activity_id).then(activity => {
-          return (activity !== null); // true se dentro do prazo
+          var noPrazo = (activity !== null)
+          return noPrazo; // true se dentro do prazo
         })
       }
 
@@ -94,7 +97,7 @@ firebase.auth().onAuthStateChanged((User) => {
           points,
           user_UID
         };
-        await checkinactivityService.save(checkin_data); // usando await para garantir que salve antes de prosseguir
+        checkinactivityService.save(checkin_data); // usando await para garantir que salve antes de prosseguir
       }
   }
 });
