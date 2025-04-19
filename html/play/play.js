@@ -69,14 +69,14 @@ firebase.auth().onAuthStateChanged((User) => {
         const time = (new Date()).toLocaleTimeString('pt-BR');
         const points = 0;
   
-        const checkin_data = {
+        const checkin_activities = {
           activity_id,
           date,
           time,
           points,
-          user_UID
+          user_UID,
         };
-        await checkinactivityService.save(checkin_data); // usando await para garantir que salve antes de prosseguir
+        await checkinactivityService.save(checkin_activities); // usando await para garantir que salve antes de prosseguir
       }
   }
 });

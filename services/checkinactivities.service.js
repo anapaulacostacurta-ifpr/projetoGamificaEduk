@@ -21,11 +21,11 @@ const checkinactivityService = {
                 console.log(activities);
                 return activities;
         },
-        save: async (checkin_activity) => {
+        save: async (checkin_activities) => {
             try{
                 const querySnapshot = await firebase.firestore().collection("checkin_activities")
                 .doc()
-                .set(checkin_activity);
+                .set(checkin_activities);
                 return querySnapshot;
             }catch (error) {
                 throw error;
