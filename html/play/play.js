@@ -64,7 +64,7 @@ firebase.auth().onAuthStateChanged((User) => {
           }
       }
 
-      function doCheckin(activity_id, user_UID) {
+      async function doCheckin(activity_id, user_UID) {
         const date = (new Date()).toLocaleDateString('pt-BR');
         const time = (new Date()).toLocaleTimeString('pt-BR');
         const points = 0;
@@ -76,7 +76,7 @@ firebase.auth().onAuthStateChanged((User) => {
           points,
           user_UID
         };
-        checkinactivityService.save(checkin_data); // usando await para garantir que salve antes de prosseguir
+        await checkinactivityService.save(checkin_data); // usando await para garantir que salve antes de prosseguir
       }
   }
 });
