@@ -9,13 +9,13 @@ firebase.auth().onAuthStateChanged((User) => {
       try {
         await activityService.getActivities(activity_ID).then (activities => {
           var activity = validarAtivities(activities, activity_ID);
-          if (activity != null){
+          if (validarValor(activity)){
             let activity_id = activity.uid;
             checkinactivityService.getcheckinbyPlayer(activity_id, User.uid).then(checkin_activities =>{
               var checkin_player = (checkin_activities.length === 1) ? checkin_activities[0] : null;
-              if (checkin_player != null) {
+              if (validarValor(checkin_player)) {
                 alert('Retornando para atividade!');
-                menu();
+                menu(activity_id);
               } else {
                 alert('Realizado check-in na atividade!');
                 let new_date = new Date();
@@ -55,8 +55,15 @@ firebase.auth().onAuthStateChanged((User) => {
       
     });
 
-      function menu(){
+      function menu(activity_id){
         window.location.href = "./menu.html?activity_id="+activity_id;
+      }
+
+      function validarValor(valor) {
+        if (valor === null) {
+          return false;
+        }
+        return true;
       }
    
       function validarAtivities(activities, activity_ID) {
