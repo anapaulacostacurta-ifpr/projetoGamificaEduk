@@ -29,7 +29,7 @@ firebase.auth().onAuthStateChanged((User) => {
       });
 
       async function verificarCheckin(activity_id, user_UID) {
-        const ckeckin_player = await getcheckinbyPlayer(activity.uid, user_UID);
+        const ckeckin_player = await getcheckinbyPlayer(activity_id, user_UID);
           if(ckeckin_player != null){
             points = ckeckin_player.points;
             return true;
