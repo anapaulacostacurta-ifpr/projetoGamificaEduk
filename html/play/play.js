@@ -85,7 +85,7 @@ firebase.auth().onAuthStateChanged((User) => {
         })
       }
 
-      async function doCheckin(activity_id, user_UID) {
+      function doCheckin(activity_id, user_UID) {
         const date = (new Date()).toLocaleDateString('pt-BR');
         const time = (new Date()).toLocaleTimeString('pt-BR');
         const points = 0;
