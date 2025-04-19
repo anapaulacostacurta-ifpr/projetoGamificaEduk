@@ -30,8 +30,8 @@ firebase.auth().onAuthStateChanged((User) => {
       });
 
       async function getcheckinbyPlayer(activity_id, User_uid) {
-        const checkin_ativities = checkinactivityService.getcheckinbyPlayer(activity_id,User_uid);
-        if((await checkin_ativities).length == 1){
+        const checkin_ativities = await checkinactivityService.getcheckinbyPlayer(activity_id,User_uid);
+        if(checkin_ativities.length == 1){
           return checkin_ativities[0];
         }else{
           throw "Problemas de configuração. Entre em contato com Administrador do Evento!";
@@ -40,8 +40,8 @@ firebase.auth().onAuthStateChanged((User) => {
 
       async function getActivitiesByID(activity_id) {
         let date = new Date();
-        const activities =  activityService.getActivities(activity_id);
-          if ((await activities).length > 1){
+        const activities =  await activityService.getActivities(activity_id);
+          if (activities.length > 1){
             alert("Verificar com o administrador do Evento a configuração da atividade");
           }else{
             var activity = activities[0].dados;
