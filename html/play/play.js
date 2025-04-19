@@ -16,6 +16,7 @@ firebase.auth().onAuthStateChanged((User) => {
               var checkin_player = (checkin_activities.length === 1) ? checkin_activities[0] : null;
               if (checkin_player != null) {
                 alert('Retornando para atividade!');
+
               } else {
                 alert('Realizado check-in na atividade!');
                 doCheckin(activity_id, user_UID); 
@@ -29,8 +30,7 @@ firebase.auth().onAuthStateChanged((User) => {
         alert("Erro: " + error.message);
         console.error(error);
       }
-      
-      //window.location.href = "./menu.html?activity_id="+activity_id;
+      window.location.href = "./menu.html?activity_id="+activity_id;
       });
 
    
