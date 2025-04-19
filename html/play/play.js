@@ -25,12 +25,13 @@ firebase.auth().onAuthStateChanged((User) => {
           } else {
             console.log("Atividade fora do prazo!");
           }
+          window.location.href = "./menu.html?activity_id="+activity_id;
         })
       }catch (error) {
         alert("Erro: " + error.message);
         console.error(error);
       }
-      window.location.href = "./menu.html?activity_id="+activity_id;
+      
       });
 
    
