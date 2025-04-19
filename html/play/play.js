@@ -3,20 +3,20 @@ firebase.auth().onAuthStateChanged((User) => {
     const alert_error = document.getElementById("alert_error");
     const msg_error = document.getElementById("res_error");
     const user_UID = User.uid;
-    
+    var activity_id;
     document.getElementById("play-form").addEventListener("submit", async function(event) {
       event.preventDefault();
-      const activity_id = document.getElementById("activity_id").value;
+      let activity_ID = document.getElementById("activity_id").value;
       try {
        
-        activityService.getActivities(activity_id).then (activities => {
-          var activity = validarAtivities(activities);
+        activityService.getActivities(activity_ID).then (activities => {
+          var activity = validarAtivities(activities, activity_ID);
           if (activity !== null){
+            activity_id = activity.uid;
             checkinactivityService.getcheckinbyPlayer(activity_id, user_UID).then(checkin_activities =>{
               var checkin_player = (checkin_activities.length === 1) ? checkin_activities[0] : null;
               if (checkin_player != null) {
                 alert('Retornando para atividade!');
-
               } else {
                 alert('Realizado check-in na atividade!');
                 doCheckin(activity_id, user_UID); 
@@ -34,14 +34,14 @@ firebase.auth().onAuthStateChanged((User) => {
       });
 
    
-      function validarAtivities(activities) {
+      function validarAtivities(activities, activity_ID) {
           if (activities.length > 1) {
             alert("Verificar com o administrador do Evento a configuração da atividade");
             return null;
           }else{
             if (activities.length === 1) {
               const activity = activities[0].dados;
-              if (activity.id === activity_id) {
+              if (activity.id === activity_ID) {
                 const [dStart, mStart, yStart] = activity.date_start.split("/");
                 const [hStart, minStart] = activity.time_start.split(":");
                 const data_time_start = new Date(yStart, mStart - 1, dStart, hStart, minStart);
