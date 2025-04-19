@@ -43,6 +43,7 @@ firebase.auth().onAuthStateChanged((User) => {
             if (activities.length === 1) {
               const activity = activities[0].dados;
               if (activity.id === activity_ID) {
+                let date = new Date();
                 const [dStart, mStart, yStart] = activity.date_start.split("/");
                 const [hStart, minStart] = activity.time_start.split(":");
                 const data_time_start = new Date(yStart, mStart - 1, dStart, hStart, minStart);
