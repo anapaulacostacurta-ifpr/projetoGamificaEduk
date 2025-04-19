@@ -11,9 +11,8 @@ firebase.auth().onAuthStateChanged((User) => {
       var noPrazo = verificarAtividade(activity_id);
       if(noPrazo){
         try{
-            var checki_ok = verificarCheckin(activity_id, user_UID);
-            if(checki_ok){
-              points = ckeckin_player.points;
+            var checkin_ok = verificarCheckin(activity_id, user_UID);
+            if(checkin_ok){
               alert('Retornando para atividade!');
             }else{
               // Checkin vazio.
@@ -32,6 +31,7 @@ firebase.auth().onAuthStateChanged((User) => {
       async function verificarCheckin(activity_id, user_UID) {
         const ckeckin_player = await getcheckinbyPlayer(activity.uid, user_UID);
           if(ckeckin_player != null){
+            points = ckeckin_player.points;
             return true;
           } else {
             console.log("Problemas na Validação do Checkin!")
