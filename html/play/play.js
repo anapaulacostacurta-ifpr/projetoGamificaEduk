@@ -24,7 +24,7 @@ firebase.auth().onAuthStateChanged((User) => {
           alert(error.message);
         }
       }else{
-        conole.log("Atividade fora do prazo!");
+        console.log("Atividade fora do prazo!");
       }
       //window.location.href = "./menu.html?activity_id="+activity_id;
       });
