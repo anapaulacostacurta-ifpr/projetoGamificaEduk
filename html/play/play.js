@@ -2,37 +2,36 @@ firebase.auth().onAuthStateChanged((User) => {
   if (User) {
     const alert_error = document.getElementById("alert_error");
     const msg_error = document.getElementById("res_error");
-    const user_UID = User.uid;
-    var activity_id;
+    //var user_UID = User.uid;
     document.getElementById("play-form").addEventListener("submit", async function(event) {
       event.preventDefault();
       let activity_ID = document.getElementById("activity_id").value;
       try {
-       
         activityService.getActivities(activity_ID).then (activities => {
           var activity = validarAtivities(activities, activity_ID);
           if (activity != null){
-            activity_id = activity.uid;
-            checkinactivityService.getcheckinbyPlayer(activity_id, user_UID).then(checkin_activities =>{
+            let activity_id = activity.uid;
+            checkinactivityService.getcheckinbyPlayer(activity_id, User.uid).then(checkin_activities =>{
               var checkin_player = (checkin_activities.length === 1) ? checkin_activities[0] : null;
               if (checkin_player != null) {
                 alert('Retornando para atividade!');
                 menu();
               } else {
                 alert('Realizado check-in na atividade!');
-                const date = (new Date()).toLocaleDateString('pt-BR');
-                const time = (new Date()).toLocaleTimeString('pt-BR');
-                const points = parseInt("0");
-  
-                const checkin_activities = {
+                let new_date = new Date();
+                let date = new_date.toLocaleDateString('pt-BR');
+                let time = new_date.toLocaleTimeString('pt-BR');
+                let points = 0;
+                let user_UID = User.uid;
+                const activities = {
                   activity_id,
                   date,
                   time,
                   points,
-                  user_UID,
+                  user_UID
                 };
                 try{
-                  checkinactivityService.save(checkin_activities).then(menu());
+                  checkinactivityService.save(activities).then(menu());
                 }catch(error){
                   alert(error.message);
                 }; 
