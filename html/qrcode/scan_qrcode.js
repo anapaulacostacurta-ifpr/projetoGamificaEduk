@@ -3,7 +3,7 @@ firebase.auth().onAuthStateChanged((User) => {
         user_UID = User.uid;var now = new Date();
         var dateStringWithTime = moment(now).format('YYYY-MM-DD HH:mm:ss');
         const params = new URLSearchParams(window.location.search);
-        activity_uid = params.get('activity_uid');
+        activity_id = params.get('activity_id');
         tokenid = params.get('tokenid');
         let scanner = new Instascan.Scanner(
             {
@@ -12,7 +12,7 @@ firebase.auth().onAuthStateChanged((User) => {
         );
         scanner.addListener('scan', function(content) {
             alert('QRCODE: ' + content + ' - Data: '+ dateStringWithTime);
-            window.location.href = "../challange/challange.html?activity_uid="+activity_uid+"&qrcode="+content;
+            window.location.href = `../challange/challange.html?activity_uid=${activity_uid}&qrcode=${content}`;
         });
         Instascan.Camera.getCameras().then(cameras => 
         {
