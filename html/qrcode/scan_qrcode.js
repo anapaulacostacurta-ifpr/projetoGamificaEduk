@@ -12,7 +12,7 @@ firebase.auth().onAuthStateChanged((User) => {
         );
         scanner.addListener('scan', function(content) {
             alert('QRCODE: ' + content + ' - Data: '+ dateStringWithTime);
-            window.location.href = `../challenge/challenge.html?activity_id=${activity_id}&qrcode=${content.trim()}`;
+            window.location.href = `../challenge/challenge.html?activity_id=${activity_id}&type="orienteering&qrcode=${content.trim()}`;
         });
         Instascan.Camera.getCameras().then(cameras => 
         {
