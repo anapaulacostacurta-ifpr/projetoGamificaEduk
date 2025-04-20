@@ -1,37 +1,37 @@
-var question;
-var activity; //OK
-var tokenid; //OK
-var user_UID; //OK
-var activity_uid; //OK
-var question_uid;
-var group_id; // ground_control_point_id vinculdado ao riddle_id
 
 firebase.auth().onAuthStateChanged((User) => {
   const que_text = document.getElementById("que_text");
   const option_list = document.getElementById("option_list");
   const timeText = document.getElementById("time_left_txt");
   const timeCount = document.getElementById("timer_sec");
-
+  const btn_voltar_tag = document.getElementById("btn_voltar");
+  var question;
+  var activity; //OK
+  var tokenid; //OK
+  var user_UID; //OK
+  var activity_id; //OK
+  
   if (User) {
       user_UID = User.uid; 
       const params = new URLSearchParams(window.location.search);
-      activity_uid = params.get('activity_uid'); 
+      activity_id = params.get('activity_id'); 
       tokenid = params.get('tokenid'); 
       type = params.get('type'); 
-      activity = getActivity(activity_uid); 
+      activity = getActivity(activity_id); 
+      btn_voltar_tag.innerHTML = `<button class="badge bg-success p-2" onclick="voltar(${activity_id})" type="button">VOLTAR</button>`;
       //Verificar se o QRcode lido é o correto do caminho
       if(type === "orienteering"){
-        window.location.href = `./orienteering.html?activity_uid=${activity_uid}&qrcode=${qrcode}`;
+        window.location.href = `./orienteering.html?activity_id=${activity_id}&qrcode=${qrcode}`;
       }else{ 
         if (question.type === "puzzle"){
-          window.location.href = `./puzzle.html?activity_uid=${activity_uid}&tokeid=${tokenid}`;
+          window.location.href = `./puzzle.html?activity_id=${activity_id}&tokeid=${tokenid}`;
         }else{
-
+          //Desenvolver...
         }
       }
 
-      async function getActivity(activity_uid) {
-        return activity = await activityService.getActivitybyUid(activity_uid);
+      async function getActivity(activity_id) {
+        return activity = await activityService.getActivitybyUid(activity_id);
       }
        
       // creating the new div tags which for icons
@@ -71,8 +71,8 @@ firebase.auth().onAuthStateChanged((User) => {
   }
 })
 
-function voltar(){
-  window.location.href = "../play/menu.html?activity_uid="+activity_uid;
+function voltar(activity_id){
+  window.location.href = "../play/menu.html?activity_id="+activity_id;
 }
 
 
