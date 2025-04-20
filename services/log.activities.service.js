@@ -5,9 +5,9 @@ const logActivityService = {
             .doc()
             .set(log_activities);
     },
-    getAtivitityByUserUID: async (activity_uid,user_UID) => {
+    getAtivitityByUserUID: async (activity_id,user_UID) => {
         const querySnapshot = await firebase.firestore().collection("log_activities")
-        .where("activity_uid", "==", activity_uid)
+        .where("activity_id", "==", activity_id)
         .where('user_UID','==',user_UID)
         .orderBy("date", "asc")
         .orderBy("time", "asc")
@@ -15,7 +15,7 @@ const logActivityService = {
         console.log(querySnapshot);
 
         if(querySnapshot.empty){
-            return [];
+            return null;
         }
         const log_activity = querySnapshot.docs.map(doc=>doc.data());
         console.log(log_activity);

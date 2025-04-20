@@ -5,7 +5,7 @@ const orienteeringService = {
         .get();
 
         if(querySnapshot.empty){
-            throw [];
+            throw null;
         }
         const orienteering = querySnapshot.docs.map(doc=>doc.data());
         console.log(orienteering);            
