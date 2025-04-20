@@ -21,10 +21,12 @@ firebase.auth().onAuthStateChanged((User) => {
       let ground_control_point = verificaQRcode(qrcode, activity_id, user_UID);
       if(!(validarValor(ground_control_point))){
         setLogQRCode(qrcode, true, activity_id);
-        question = getAtualChallange(activity_id);
-        if(!(validarValor(question))){
-          showOrienteering(activity_id, question);
-          startTimer(30);
+        if(isChallenge(qrcode)){
+          question = getAtualChallenge(activity_id);
+          if(!(validarValor(question))){
+            showOrienteering(activity_id, question);
+            startTimer(30);
+          }
         }
       }else{ // QRCode Incorreto, perde pontos.
         setLogQRCode(qrcode, false, activity_id);
@@ -92,21 +94,24 @@ firebase.auth().onAuthStateChanged((User) => {
             } else {
               // Nenhum ponto foi respondido — tentativa de início
               var group_id = qrcode;
-              const pathway = getOrienteeringData(qrcode);
-              if (pathway.length > 0) {
-                // Atualiza controle de início
-                const ground_control_point = {
-                  ground_control_point_id: qrcode,
-                  pos_ground_control_point: -1,
-                  ground_control_point_next:  pathway[0],
-                  group_id: qrcode,
-                };
-                alert("Primeiro QRCode válido.");
-                return ground_control_point;
-              } else {
-                alert("Primeiro QRCode inválido. Início incorreto.");
-                return null;
-              }
+              orienteeringService.getOrienteeringByGroupId(group_id).then(orienteering =>{
+                if(!(validarValor(orienteering))){
+                  if (pathway.length > 0) {
+                    // Atualiza controle de início
+                    const ground_control_point = {
+                      ground_control_point_id: qrcode,
+                      pos_ground_control_point: -1,
+                      ground_control_point_next:  pathway[0],
+                      group_id: qrcode,
+                    };
+                    alert("Primeiro QRCode válido.");
+                    return ground_control_point;
+                  } else {
+                    alert("Primeiro QRCode inválido. Início incorreto.");
+                    return null;
+                  }
+                }
+              })
             } 
           })
         }catch (error) {
@@ -123,8 +128,15 @@ firebase.auth().onAuthStateChanged((User) => {
       return true;
     }
 
+    async function isChallenge(group_id){
+      orienteeringService.getOrienteeringByGroupId(group_id).then(orienteering =>{
+        if(!(validarValor(orienteering))){
+          return orienteering.challenge;
+        }
+      })
+    }
 
-    async function getAtualChallange(activity_id) {
+    async function getAtualChallenge(activity_id) {
       let answered_challange = [];
       try {
         // Obtem todas as atividades (questões) da atividade principal
