@@ -14,8 +14,8 @@ firebase.auth().onAuthStateChanged((User) => {
   if (User) {
     user_UID = User.uid; 
     const params = new URLSearchParams(window.location.search);
-    activity_uid = params.get('activity_uid'); 
-    checkin_ativities(activity_uid, user_UID);
+    activity_id = params.get('activity_id'); 
+    checkin_ativities(activity_id, user_UID);
     first_point = params.get('first_point'); 
     if(first_point){
       ground_control_point_id = params.get('ground_control_point_id'); //OK
@@ -70,11 +70,11 @@ firebase.auth().onAuthStateChanged((User) => {
   function setLogFirstQRCode(riddle_id){
       const time = (new Date()).toLocaleTimeString('pt-BR');
       const data = (new Date()).toLocaleDateString('pt-BR');
-      let category = "challange";
+      let category = "challenge";
       let type = "orienteering";
       let tokenid = qrcode;// orienteering_id
       let level = activity.level;
-      let question_uid = "";
+      let question_id = "";
       let points_new = points;
       let points_old = points; 
 
@@ -91,7 +91,7 @@ firebase.auth().onAuthStateChanged((User) => {
         level, 
         points_new, 
         points_old,
-        question_uid, 
+        question_id, 
         riddle_id,
         tokenid,
         user_UID
@@ -103,5 +103,5 @@ firebase.auth().onAuthStateChanged((User) => {
 })
 
 function voltar(){
-  window.location.href = "../play/menu.html?activity_uid="+activity_uid;
+  window.location.href = "../play/menu.html?activity_id="+activity_id;
 }

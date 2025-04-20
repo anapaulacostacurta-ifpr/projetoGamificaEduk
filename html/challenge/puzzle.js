@@ -2,8 +2,8 @@ var question ;
 var activity;
 var tokenid;
 var user_UID;
-var activity_uid;
-var question_uid;
+var activity_id;
+var question_id;
 var points;
 const question_box = document.getElementById("question_box");
 const que_text = document.getElementById("que_text");
@@ -15,18 +15,18 @@ firebase.auth().onAuthStateChanged((User) => {
   if (User) {
       user_UID = User.uid;
       const params = new URLSearchParams(window.location.search);
-      activity_uid = params.get('activity_uid');
+      activity_id = params.get('activity_id');
       tokenid = params.get('tokenid');
       
-      activityService.getActivitybyUid(activity_uid).then((activity_find) => {
+      activityService.getActivitybyUid(activity_id).then((activity_find) => {
         activity = activity_find;
-        checkinactivityService.getcheckinbyPlayer(activity_uid, user_UID).then(checkin_ativities =>{
+        checkinactivityService.getcheckinbyPlayer(activity_id, user_UID).then(checkin_ativities =>{
           if (checkin_ativities.length>0){
             points = checkin_ativities.dados.points;
             //Usuário realizou Ckeckin
-            question_uid = getAtualQuiz();
-            if(!(question_uid ==="")){
-              questionsService.findByUid(question_uid).then(question_find =>{
+            question_id = getAtualQuiz();
+            if(!(question_id ==="")){
+              questionsService.findByUid(question_id).then(question_find =>{
               question = question_find;
                 //Verifica se o jogador já respondeu todas as perguntas
                 if(question == null){
@@ -103,8 +103,8 @@ firebase.auth().onAuthStateChanged((User) => {
       function getAtualQuiz(){
         let atual_quiz ="";
         let answered_quizzes = new Array();
-        logActivityService.getAtivitityByUserUID(activity_uid, user_UID).then(log_activities =>{
-          activityTaskService.getTaskActivity(activity_uid).then(activityTasks => {
+        logActivityService.getAtivitityByUserUID(activity_id, user_UID).then(log_activities =>{
+          activityTaskService.getTaskActivity(activity_id).then(activityTasks => {
             activityTasks.forEach(activityTask => {
               quizService.getQuizzesByUid(activityTask.dados.quizzes_id).then(quizzes =>{
                 log_activities.forEach(log_activity =>{
@@ -180,13 +180,13 @@ firebase.auth().onAuthStateChanged((User) => {
         }
 
         var log_activities ={
-          activity_uid,
+          activity_id,
           category, //quiz
           type, //multiple
           data,
           time,
           level, 
-          question_uid,
+          question_id,
           points_new,
           points_old,
           tokenid,
@@ -200,5 +200,5 @@ firebase.auth().onAuthStateChanged((User) => {
 });
 
 function fechar(){
-  window.location.href = "../../play/menu.html?activity_uid="+activity_uid;
+  window.location.href = "../../play/menu.html?activity_id="+activity_id;
 }

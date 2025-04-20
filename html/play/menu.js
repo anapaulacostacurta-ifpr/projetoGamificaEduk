@@ -13,7 +13,7 @@ firebase.auth().onAuthStateChanged((User) => {
                 if (!(activity_task.dados.quizzes_id==="")){
                   menu = menu +`<p><button type="button" class="badge bg-primary p-2" id="btnQuiz" onclick="btnQuiz()">QUIZ</button></p>`;
                 }
-                if(!(activity_task.dados.challange_id==="")){
+                if(!(activity_task.dados.challenge_id==="")){
                   menu = menu + `<p><button type="button" class="badge bg-primary p-2" id="btnDesafio" onclick="btnDesafio()">DESAFIO</button></p>`;
                 }
                 if(!(activity_task.dados.orienteering_id==="")) {
@@ -50,11 +50,11 @@ function btnQuiz() {
 }
 
 function btnDesafio() {
-  window.location.href = "../token/token.html?category=challange&activity_id="+activity_id;
+  window.location.href = "../token/token.html?category=challenge&activity_id="+activity_id;
 }
 
 function btnOrientacao() {
-  window.location.href = "../qrcode/scan_qrcode?category=challange&type=orienteering&activity_id="+activity_id;
+  window.location.href = "../qrcode/scan_qrcode?category=challenge&type=orienteering&activity_id="+activity_id;
 }
 
 function btnSorteouReves() {
