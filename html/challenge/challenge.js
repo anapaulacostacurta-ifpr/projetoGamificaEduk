@@ -5,19 +5,16 @@ firebase.auth().onAuthStateChanged((User) => {
   const timeText = document.getElementById("time_left_txt");
   const timeCount = document.getElementById("timer_sec");
   const btn_voltar_tag = document.getElementById("btn_voltar");
-  var question;
-  var activity; //OK
-  var tokenid; //OK
-  var user_UID; //OK
-  var activity_id; //OK
-  
-  if (User) {
-      user_UID = User.uid; 
+  //var question;
+  //var user_UID; //OK
+   if (User) {
+      //user_UID = User.uid; 
       const params = new URLSearchParams(window.location.search);
-      activity_id = params.get('activity_id'); 
-      tokenid = params.get('tokenid'); 
-      type = params.get('type'); 
-      activity = getActivity(activity_id); 
+      var activity_id = params.get('activity_id'); 
+      var tokenid = params.get('tokenid'); 
+      var type = params.get('type'); 
+      var activity = getActivity(activity_id); 
+      var qrcode = params.get('qrcode'); //OK
       btn_voltar_tag.innerHTML = `<button class="badge bg-success p-2" onclick="voltar(${activity_id})" type="button">VOLTAR</button>`;
       //Verificar se o QRcode lido é o correto do caminho
       if(type === "orienteering"){
