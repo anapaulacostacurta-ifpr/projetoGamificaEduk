@@ -87,3 +87,7 @@ const form = {
     passwordRequiredError: () => document.getElementById('password-required-error'),
     registerButton: () => document.getElementById('register-button')
 }
+
+function validateEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+}
