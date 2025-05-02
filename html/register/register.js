@@ -1,8 +1,8 @@
-form.emailRequiredError().style.display = "none";
-form.emailInvalidError().style.display = "none";
-form.passwordRequiredError().style.display = "none";
-form.passwordMinLengthError().style.display = "none";
-form.confirmPasswordDoesntMatchError().style.display = "none";
+document.getElementById('email-required-error').style.display = "none";
+document.getElementById('email-invalid-error').style.display = "none";
+document.getElementById('password-required-error').style.display = "none";
+document.getElementById('password-min-length-error').style.display = "none";
+document.getElementById('password-doesnt-match-error').style.display = "none";
 
 function voltar(){
     window.location.href = "../login/login.html";
