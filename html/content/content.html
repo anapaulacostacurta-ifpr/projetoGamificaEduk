@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Question</title>
+  <title>Conteúdo</title>
   <link rel="shortcut icon" href="../../assets/img/favicon.png">
   <link rel="stylesheet" href="../../assets/css/style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -16,39 +16,38 @@
   <script src="../../services/user.service.js"></script>
   <script src="../../services/activities.service.js"></script>
   <script src="../../services/log.activities.service.js"></script>
-  <script src="../../services/challenges.service.js"></script>
-  <script src="../../services/orienteering.service.js"></script>
+  <script src="../../services/log.contents.js"></script>
   <script src="../../services/checkin.activities.service.js"></script>
-  <script src="../../services/riddles.service.js"></script>
-  <script src="../../services/questions.service.js"></script>
-  <script src="../../services/orienteering.groups.service.js"></script>
+  <script src="../../services/contents.services.js"></script>
 </head>
 <body>
   <div class="container">
     <div class="card card-container">
-      <div id="orienteering_box>
-        <header class="d-flex justify-content-center">
-          <div class="timer card m-1 p-1 bg-primary" style="width:150px">
-              <div id="time_left_txt" class="bg-primary text-center m-1 p-1">Tempo Restante</div>
-              <div id="timer_sec" class="badge rounded-pill bg-warning m-1 p-1"">15</div>
-          </div>
-          <div id="time_line"></div>
-        </header>
-        <hr class="colorgraph">
-        <section>
-            <div id="riddle_box"></div>
-            <div id="que_text"></div>
-            <div id="option_list"></div>
+      <form id="content-form">
+        <div id="content_box">
+          <hr class="colorgraph">
+          <section>
+              <div id="title_text"></div>
+              <div id="didyouknow_text"></div>
+              <div id="example_text"></div>
+              <div id="curiosity_text"></div>
+              <div id="tip_text"></div>
         </section>
-        <hr class="colorgraph">
-        <section class="d-flex flex-row-reverse">
-          <span class="btn-menu">   
-            <button class="badge bg-success p-2" onclick="voltar()" type="button">VOLTAR</button>
-          </span>
-        </section>
-      </div>
+          <hr class="colorgraph">
+          <section class="d-flex flex-row-reverse">
+            <span class="btn-menu">
+              <span class="btn-menu" id="btn_voltar">
+                <button type="button" class="badge bg-success p-2" onclick="voltar()">OK</button>
+              </span> 
+              <span class="btn-menu" id="btn_next">
+                <button type="submit" class="badge bg-success p-2">PROXIMO</button>
+              </span>  
+            </span>
+          </section>
+        </div>
+      </form>
     </div>
   </div>       
-  <script src="orienteering.js"></script>
+  <script src="content.js"></script>
 </body>
 </html>

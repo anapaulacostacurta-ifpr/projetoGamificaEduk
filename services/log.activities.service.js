@@ -21,14 +21,15 @@ const logActivityService = {
         console.log(log_activity);
         return log_activity;
     },
-    getAtivitityByChallenge: async (activity_id,user_UID, category) => {
+    getAtivitityByChallenge: async (activity_id,user_UID, category, type) => {
         const querySnapshot = await firebase.firestore().collection("log_activities")
         .where("activity_id", "==", activity_id)
         .where('user_UID','==',user_UID)
         .where('category','==',category)
-        .orderBy("date", "asc")
-        .orderBy("time", "asc")
-        .orderBy("pos_control_point","asc")
+        .where('type','==',type)
+        //.orderBy("date", "asc")
+        //.orderBy("time", "asc")
+        //.orderBy("pos_ground_control_point","asc")
         .get();
         console.log(querySnapshot);
 
