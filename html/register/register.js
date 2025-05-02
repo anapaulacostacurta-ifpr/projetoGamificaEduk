@@ -1,3 +1,9 @@
+form.emailRequiredError().style.display = "none";
+form.emailInvalidError().style.display = "none";
+form.passwordRequiredError().style.display = "none";
+form.passwordMinLengthError().style.display = "none";
+form.confirmPasswordDoesntMatchError().style.display = "none";
+
 function voltar(){
     window.location.href = "../login/login.html";
 }
