@@ -1,19 +1,23 @@
 firebase.auth().onAuthStateChanged((User) => {
-    if (User) {
+    if (!User) {
+        window.location.href = "../login/login.html";
+    }else{
         userService.findByUid(User.uid).then(user=>{
-            if(user.admin){
-                window.location.href = "../home/home.html";
+            if(user.profile === "host"){
                 document.getElementById("nameUser").innerHTML = user.nickname;
                 var avatar = user.avatar;
                 document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
+                //document.getElementById("coins").innerHTML = user.coins;
             }else{
-                window.location.href = "../../home/home.html";
+                alert("Seu perfil não tem acesso a essa página.");
             }
         }).catch(error => {
-            console.log(error.message);
-            window.location.href = "../../home/home.html";
+            if(error.message === "01 - Não encontrado."){
+                alert("Seu perfil precisa ser atualizado e ativado!Acesse o menu perfil.");
+                window.location.href = "./atualizacao.html";
+            }
+            console.log(error);
         });
-        window.location.href = "../../home/home.html";
     }
 })
 

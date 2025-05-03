@@ -15,21 +15,31 @@
         <script src="../../services/log.profile.service.js"></script>
     </head>
     <body>     
-        <form id="profile-form">
+        <form id="profile-form col-sm-12">
             <hr class="colorgraph">
-            <h3 class="text-center">Ativar Perfil</h3>
+            <h3 class="text-center">Atualizar</h3>
             <hr class="colorgraph">
-            <div id="list_players"></div>
+            <label class="form-label" for="name"><strong>Nome Completo:</strong>
+                <textarea class="form-control form-control-sm" rows="1" cols="100" type="text" id="name" name="name"></textarea>
+            </label>
+            <label class="form-label" for="nickname"><strong>Apelido:</strong>
+                <textarea class="form-control form-control-sm" rows="1" cols="100" type="text" id="nickname" name="nickname"></textarea>
+            </label>
+            <label class="form-label" for="profile"><strong>Perfil:</strong>
+                <select id="profile" name="profile" class="form-control form-control-sm">
+                    <option value="none">Selecione o perfil</option>
+                    <option value="player">Jogador</option>
+                    <option value="host">Anfitrião</option>
+                </select>
+            </label>
+            <div id="list_hosts" style="display: none;"></div>
             <hr class="colorgraph">
+            <span>     
+                
+            </span>
             <div class="col-md-12 d-flex align-items-center">
-                <div class="col-4 text-center">     
-                    <button id="ativate" class="col-8 badge bg-success p-2" onclick="ativar()" type="button">ATIVAR</button>
-                </div>
-                <div class="col-4 text-center">
-                    <button id="disable" class="col-8 badge bg-danger p-2" onclick="desativar()" type="button">DESATIVAR</button>
-                </div>
-                <div class="col-4 text-center">
-                    <button id="refresh" class="col-8 badge bg-primary p-2" onclick="refresh()" type="button">ATUALIZAR</button>
+                <div class="col-12 text-center">     
+                    <button id="save" class="col-4 badge bg-success p-2" type="submit">SALVAR</button>
                 </div>
             </div>
             <div id="alert_sucesso" class="alert alert-success fade">
@@ -39,6 +49,6 @@
                 <strong id="res_error"></strong>
               </div>
         </form>
-        <script src="actions-profile.js"></script>
+        <script src="update-profile.js"></script>
     </body>
 </html>

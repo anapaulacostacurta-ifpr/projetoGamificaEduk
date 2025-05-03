@@ -1,19 +1,29 @@
 firebase.auth().onAuthStateChanged((User) => {
     if (User){
-        var name;
-        var admin;
-        var nickname;
-        var profile;
-        var avatar
         var status;
+        var avatar = "avatar1";
+        let profile_options = document.getElementById("profile");
+        var profile = profile_options.options[profile_options.selectedIndex].value;
+        let hosts_options = document.getElementById("hosts");
+        var host = hosts_options.options[hosts_options.selectedIndex].value;
+        let name = document.getElementById("name").value;
+        let nickname = document.getElementById("nickname").value;
+        let uid = User.uid;
+        let coins = 0;
         userService.findByUid(User.uid).then(user=>{
-            name = user.name;
-            nickname = user.nickname;
-            avatar = user.avatar;
-            profile = user.profile;
-            admin = user.admin;
             status = user.status;
-            document.getElementById("avatar").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
+            var user = {uid, name, nickname, host, profile, avatar, coins};
+            userService.update(uid, user);
+            
+            let profile_update = uid;
+            let profile_name = name;
+            let date_update = (new Date()).toLocaleDateString('pt-BR');
+            let time_update = (new Date()).toLocaleTimeString('pt-BR');
+            let profile_state = state;
+            let type = "update";
+
+            const log_profile = {type, profile_update, profile_name, date_update,time_update, profile_state};
+            logprofileService.save(log_profile);
         }).catch(error => {
             console.log(error.message);
             status = false;
@@ -31,7 +41,7 @@ function logout() {
 }
 
 function voltar(){
-    window.location.href = "home.html";
+    window.location.href = "../home.html";
 }
 
 function buscarAvatar(){

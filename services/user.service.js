@@ -48,7 +48,7 @@ const userService = {
             throw error;
         }
     },
-    update: async (id,user) => {
+    update: async (id, user) => {
         return await firebase.firestore()
             .collection("users")
             .doc(id)
