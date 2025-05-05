@@ -1,6 +1,6 @@
 firebase.auth().onAuthStateChanged((User) => {
     if (!User) {
-        window.location.href = "../login/login.html";
+        window.location.href = "../../login/login.html";
     }else{
         userService.findByUid(User.uid).then(user=>{
             if(user.profile === "player"){
