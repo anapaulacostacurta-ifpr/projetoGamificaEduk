@@ -31,7 +31,7 @@ firebase.auth().onAuthStateChanged((User) => {
 
         
     }
-});
+})
 
 function ativar() {
     firebase.auth().onAuthStateChanged((User) => {
@@ -68,9 +68,10 @@ function ativar() {
             })
         }
     })
-};
+}
 
-function refresh(){
+
+function atualizar(){
     location.reload();
 }
 
