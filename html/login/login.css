@@ -110,3 +110,9 @@ body, html {
 .forgot-password:focus{
     color: rgb(12, 97, 33);
 }
+
+.error {
+    background: red;
+    color: white;
+    display: none;
+} 
