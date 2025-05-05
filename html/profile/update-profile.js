@@ -1,7 +1,6 @@
 const list_host = document.getElementById("list_hosts");
 list_host.style.display = "none";
 
-
 firebase.auth().onAuthStateChanged((User) => {
     if (User){
         var status;
