@@ -1,7 +1,5 @@
 firebase.auth().onAuthStateChanged((User) => {
-    if (!User) {
-        window.location.href = "../../login/login.html";
-    }else{
+    if (User) {
         userService.findByUid(User.uid).then(user=>{
             if(user.profile === "host"){
                 document.getElementById("nameUser").innerHTML = user.nickname;
