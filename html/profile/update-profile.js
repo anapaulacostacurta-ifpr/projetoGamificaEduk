@@ -21,8 +21,10 @@ firebase.auth().onAuthStateChanged((User) => {
             let nickname = document.getElementById("nickname").value;
             let uid = User.uid;
             let coins = 0;
-            var user = {uid, name, nickname, host, profile, avatar, coins};
-            userService.update(uid, user);
+            let state = false;
+            let admin = false;
+            var user = {uid, name, nickname, host, profile, avatar, state, admin, coins};
+            userService.save(uid, user);
             
             let profile_update = uid;
             let profile_name = name;
@@ -30,9 +32,10 @@ firebase.auth().onAuthStateChanged((User) => {
             let date_update = new_date.toLocaleDateString('pt-BR');
             let time_update = new_date.toLocaleTimeString('pt-BR');
             let profile_state = state;
+            let profile_admin = admin;
             let type = "update";
 
-            const log_profile = {type, profile_update, profile_name, date_update,time_update, profile_state};
+            const log_profile = {type, profile_update, profile_name, date_update, time_update, profile_state, profile_admin};
             logprofileService.save(log_profile);
             msg_sucesso.innerHTML= "Cadastrado atualizado com sucesso! Aguarde seu perfil ser ativado pelo Anfitrião do Evento.";
             alert_sucesso.classList.add("show");
