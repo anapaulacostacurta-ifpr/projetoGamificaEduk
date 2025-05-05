@@ -54,7 +54,7 @@ function ativar() {
                         const log_profile = {type, profile_approver, date_approval, time_approval, profile_activated};
 
                         //Realiza a ativação do usuário
-                        userService.update({users});
+                        userService.update(player_uid, users);
 
                         //Grava logo da aprocação e ativação do usuário
                         logprofileService.save(log_profile);
@@ -92,7 +92,7 @@ function desativar() {
                         const log_profile = {type, profile_disabler, date_disable, time_disable, profile_disactivated};
                         
                         //Realiza a ativação do usuário
-                        userService.update({users});
+                        userService.update(player_uid, users);
                     
                         //Grava logo da aprocação e ativação do usuário
                         logprofileService.save(log_profile);
