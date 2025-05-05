@@ -45,6 +45,8 @@ function onChangePerfil(){
     var profile = profile_options.options[profile_options.selectedIndex].value;
     if(profile === "player"){
         list_host.style.display = "block";
+    }else{
+        list_host.style.display = "none";
     }
 }
 
