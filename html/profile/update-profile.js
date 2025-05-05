@@ -1,3 +1,5 @@
+const list_host = document.getElementById("list_hosts");
+list_host.style.display = "none";
 popularSelectHosts();
 
 firebase.auth().onAuthStateChanged((User) => {
@@ -7,7 +9,10 @@ firebase.auth().onAuthStateChanged((User) => {
         let profile_options = document.getElementById("profile");
         var profile = profile_options.options[profile_options.selectedIndex].value;
         let hosts_options = document.getElementById("hosts");
-        var host = hosts_options.options[hosts_options.selectedIndex].value;
+        var host = "";
+        if(profile === "player"){
+            host = hosts_options.options[hosts_options.selectedIndex].value;
+        }
         let name = document.getElementById("name").value;
         let nickname = document.getElementById("nickname").value;
         let uid = User.uid;
@@ -34,6 +39,14 @@ firebase.auth().onAuthStateChanged((User) => {
         
     }
 });
+
+function onChangePerfil(){
+    let profile_options = document.getElementById("profile");
+    var profile = profile_options.options[profile_options.selectedIndex].value;
+    if(profile === "player"){
+        list_host.style.display = "block";
+    }
+}
 
 function logout() {
     firebase.auth().signOut().then(() => {
