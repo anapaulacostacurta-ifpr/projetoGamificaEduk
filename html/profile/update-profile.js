@@ -1,10 +1,12 @@
 const list_host = document.getElementById("list_hosts");
 list_host.style.display = "none";
+var alert_sucesso = document.getElementById("alert_sucesso");
+var alert_error = document.getElementById("alert_error");
+var msg_sucesso = document.getElementById("res_sucesso");
+var msg_error = document.getElementById("res_error");  
 
 firebase.auth().onAuthStateChanged((User) => {
     if (User){
-        
-        
         document.getElementById("profile-form").addEventListener("submit", function(event) {
             event.preventDefault();
             var avatar = "avatar1";
@@ -32,8 +34,9 @@ firebase.auth().onAuthStateChanged((User) => {
 
             const log_profile = {type, profile_update, profile_name, date_update,time_update, profile_state};
             logprofileService.save(log_profile);
+            msg_sucesso.innerHTML= "Cadastrado atualizado com sucesso! Aguarde seu perfil ser ativado pelo Anfitrião do Evento.";
+            alert_sucesso.classList.add("show");
         })
-        
     }
 });
 
