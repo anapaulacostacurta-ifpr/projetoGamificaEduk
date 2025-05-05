@@ -50,6 +50,15 @@ function onChangePerfil(){
     }
 }
 
+function popularSelectHosts() {
+    let Hosts = document.getElementById("hosts");
+    userService.getHosts().then(hosts=>{
+        hosts.forEach(host => {
+        Hosts.innerHTML = Hosts.innerHTML +`<option value="${host.uid}">${host.name}</option>`;
+        });
+    });
+}
+
 function logout() {
     firebase.auth().signOut().then(() => {
         window.location.href = "../login/login.html";
@@ -76,18 +85,8 @@ function buscarAvatar(){
     lista_avatars.innerHTML = table;
 }
 
-function popularSelectHosts() {
-    firebase.auth().onAuthStateChanged((User) => {
-        if (User) {
-        let Hosts = document.getElementById("hosts");
-        userService.getHosts().then(hosts=>{
-            hosts.forEach(host => {
-            Hosts.innerHTML = Hosts.innerHTML +`<option value="${host.uid}">${host.name}</option>`;
-            });
-        });
-        }
-    })
-}
+
+
 
 
 
