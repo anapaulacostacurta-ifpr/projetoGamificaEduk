@@ -4,7 +4,7 @@ firebase.auth().onAuthStateChanged((User) => {
             if(user.profile === "host"){
                 document.getElementById("nameUser").innerHTML = user.nickname;
                 var avatar = user.avatar;
-                document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
+                document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
                 //document.getElementById("coins").innerHTML = user.coins;
             }else{
                 alert("Seu perfil não tem acesso a essa página.");
