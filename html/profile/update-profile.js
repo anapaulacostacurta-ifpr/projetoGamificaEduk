@@ -1,6 +1,6 @@
 const list_host = document.getElementById("list_hosts");
 list_host.style.display = "none";
-popularSelectHosts();
+
 
 firebase.auth().onAuthStateChanged((User) => {
     if (User){
@@ -45,6 +45,7 @@ function onChangePerfil(){
     var profile = profile_options.options[profile_options.selectedIndex].value;
     if(profile === "player"){
         list_host.style.display = "block";
+        popularSelectHosts();
     }else{
         list_host.style.display = "none";
     }
