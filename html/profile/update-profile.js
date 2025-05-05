@@ -1,3 +1,5 @@
+popularSelectHosts();
+
 firebase.auth().onAuthStateChanged((User) => {
     if (User){
         var status;
@@ -17,8 +19,9 @@ firebase.auth().onAuthStateChanged((User) => {
             
             let profile_update = uid;
             let profile_name = name;
-            let date_update = (new Date()).toLocaleDateString('pt-BR');
-            let time_update = (new Date()).toLocaleTimeString('pt-BR');
+            let new_date = new Date();
+            let date_update = new_date.toLocaleDateString('pt-BR');
+            let time_update = new_date.toLocaleTimeString('pt-BR');
             let profile_state = state;
             let type = "update";
 
@@ -56,6 +59,19 @@ function buscarAvatar(){
     let thead = '<thead><tr><th></th><th>Atividade</th><th>Level</th><th>Inicio</th><th>Fim</th><th>Status</th></tr></thead>';     
     let table = '<table class="table table-hover" align="center">'+ thead + tbody+'</table>';
     lista_avatars.innerHTML = table;
+}
+
+function popularSelectHosts() {
+    firebase.auth().onAuthStateChanged((User) => {
+        if (User) {
+        let Hosts = document.getElementById("hosts");
+        userService.getHosts().then(hosts=>{
+            hosts.forEach(host => {
+            Hosts.innerHTML = Hosts.innerHTML +`<option value="${host.uid}">${host.name}</option>`;
+            });
+        });
+        }
+    })
 }
 
 
