@@ -23,7 +23,7 @@ const eventService = {
     getEventsByID: async (event_id) => {
         const querySnapshot = await firebase.firestore().collection("events")
         .where('id','==',event_id)
-        .where('state','==','started')
+        //.where('state','==','started')
         .get();
         console.log(querySnapshot);
 
