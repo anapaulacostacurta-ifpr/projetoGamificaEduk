@@ -1,64 +1,79 @@
+const alert_sucesso = document.getElementById("alert_sucesso");
+const alert_error = document.getElementById("alert_error");
+const msg_sucesso = document.getElementById("res_sucesso");
+const msg_error = document.getElementById("res_error");  
+
 firebase.auth().onAuthStateChanged((User) => {
   if (User) {
-    var alert_sucesso = document.getElementById("alert_sucesso");
-    var alert_error = document.getElementById("alert_error");
-    var msg_sucesso = document.getElementById("res_sucesso");
-    var msg_error = document.getElementById("res_error");  
-
-    document.getElementById("enroll-form").addEventListener("submit", function(event) {
-      event.preventDefault();
-      // Captura os dados do formulário
-      let id = document.getElementById("event_id").value;
-      let event_uid; // UID do doc no firestone
-      let coins = 0;
-      let user_UID = User.uid;
-      
-      eventService.getEventsByID(id).then((events) => {
-        events.forEach(event => {
-          if(event.dados.id == id){
-            if(event.dados.state === "started"){
-              if(deadline(event)){
-                event_uid = event.uid; // UID do doc no firestone
-                enrollEventService.getEnrollsByEventUidUserUid(event_uid,user_UID).then(enroll_events => {
-                  if (!(enroll_events.length > 0)){
-                    let event_id = event_uid;
-                    let new_date = new Date();
-                    let date = new_date.toLocaleDateString('pt-BR');
-                    let time = new_date.toLocaleTimeString('pt-BR');
-                    let enroll_events = {user_UID,coins,date,time,event_id};
-                    enrollEventService.save(enroll_events);
-                    msg_sucesso.innerHTML= "Inscrição no evento realizada com sucesso!";
-                    alert_sucesso.classList.add("show");
-                    document.getElementById("bt-success").disabled = true;
-                  }else{
-                    msg_error.innerHTML= "Inscrição já foi realizada para este evento!";
+    userService.findByUid(User.uid).then(user=>{
+      let host = user.host;
+      let profile = user.profile;
+      if(profile === "player"){
+        document.getElementById("enroll-form").addEventListener("submit", function(event) {
+          event.preventDefault();
+          // Captura os dados do formulário
+          let id = document.getElementById("event_id").value;
+          let event_uid; // UID do doc no firestone
+          let coins = 0;
+          let user_UID = User.uid;
+          
+          eventService.getEventsByID(id).then((events) => {
+            events.forEach(event => {
+              if(event.dados.id == id){
+                if(event.dados.state === "started"){
+                  if(event.dados.host === host){
+                    if(deadline(event)){
+                      event_uid = event.uid; // UID do doc no firestone
+                      enrollEventService.getEnrollsByEventUidUserUid(event_uid,user_UID).then(enroll_events => {
+                        if (!(enroll_events.length > 0)){
+                          let event_id = event_uid;
+                          let new_date = new Date();
+                          let date = new_date.toLocaleDateString('pt-BR');
+                          let time = new_date.toLocaleTimeString('pt-BR');
+                          let enroll_events = {user_UID,coins,date,time,event_id};
+                          enrollEventService.save(enroll_events);
+                          msg_sucesso.innerHTML= "Inscrição no evento realizada com sucesso!";
+                          alert_sucesso.classList.add("show");
+                          document.getElementById("bt-success").disabled = true;
+                        }else{
+                          msg_error.innerHTML= "Inscrição já foi realizada para este evento!";
+                          alert_error.classList.add("show");
+                          document.getElementById("bt-success").disabled = true;
+                        }
+                      })             
+                    }else{
+                      msg_error.innerHTML= "Evento fora do prazo!";
+                      alert_error.classList.add("show");
+                      document.getElementById("bt-success").disabled = true;
+                    }
+                  }else{ // Evento não é do mesmo anfitrião que aprovou o cadastro!
+                    msg_error.innerHTML= "Evento de outro Anfitrião!";
                     alert_error.classList.add("show");
                     document.getElementById("bt-success").disabled = true;
                   }
-                })             
+                }else{
+                  msg_error.innerHTML= "Evento não está ativo!";
+                  alert_error.classList.add("show");
+                  document.getElementById("bt-success").disabled = true;
+                }
               }else{
-                msg_error.innerHTML= "Evento fora do prazo!";
+                msg_error.innerHTML= "Evento não encontrado!";
                 alert_error.classList.add("show");
                 document.getElementById("bt-success").disabled = true;
-              }
-            }else{
-              msg_error.innerHTML= "Evento não está ativo!";
-              alert_error.classList.add("show");
-              document.getElementById("bt-success").disabled = true;
-            }
-          }else{
-            msg_error.innerHTML= "Evento não encontrado!";
+              }  
+            });
+          }).catch((error) => {
+            msg_error.innerHTML= "Evento não encontrado:"+error.menssage;
             alert_error.classList.add("show");
             document.getElementById("bt-success").disabled = true;
-          }  
-        });
-      }).catch((error) => {
-        msg_error.innerHTML= "Evento não encontrado:"+error.menssage;
+          })
+        })
+      }else{// Revisar mensagem
+        msg_error.innerHTML= "Sem permissão de acesso a funcionalidade!";
         alert_error.classList.add("show");
         document.getElementById("bt-success").disabled = true;
-      })
+      }
     })
-    
   }
 });
 
