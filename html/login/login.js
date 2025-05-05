@@ -5,14 +5,21 @@ firebase.auth().onAuthStateChanged( (User) => {
 })
 
 function login() {
-    firebase.auth().signInWithEmailAndPassword(
-        form.email().value, form.password().value
-    ).then((userCredential) => {
-        user = userCredential.user.auth.currentUser;
-        console.log("Usuário logou:" + userCredential.user.uid);
-    }).catch(error => {
-        console.log(getErrorMessage(error));
-    });
+    const emailValid = isEmailValid();
+    const passwordValid = isPasswordValid();
+    if (emailValid || passwordValid){
+        firebase.auth().signInWithEmailAndPassword(
+            form.email().value, form.password().value
+        ).then((userCredential) => {
+            user = userCredential.user.auth.currentUser;
+            console.log("Usuário logou:" + userCredential.user.uid);
+        }).catch(error => {
+            console.log(getErrorMessage(error));
+        });
+    }else{
+        onChangeEmail();
+        onChangePassword();
+    }
 }
 
 function register() {
@@ -60,11 +67,11 @@ function togglePasswordErrors() {
 }
 
 function toggleButtonsDisable() {
-    const emailValid = isEmailValid();
-    form.recoverPasswordButton().disabled = !emailValid;
+    const emailValid = !isEmailValid();
+    form.recoverPasswordButton().disabled = emailValid;
 
-    const passwordValid = isPasswordValid();
-    form.loginButton().disabled = !emailValid || !passwordValid;
+    const passwordValid = !isPasswordValid();
+    form.loginButton().disabled = emailValid || passwordValid;
 }
 
 function isEmailValid() {
