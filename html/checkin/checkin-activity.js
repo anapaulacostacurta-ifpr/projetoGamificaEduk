@@ -37,7 +37,7 @@ firebase.auth().onAuthStateChanged((User) => {
                   }while(result.empty)
                   alert("Check-in na atividade finalizado! Encaminhando para o menu de tarefas...");
                   console.log(result);
-                  menu();
+                  menu(activity_id);
                 }catch(error){
                   alert(error.message);
                 }; 
