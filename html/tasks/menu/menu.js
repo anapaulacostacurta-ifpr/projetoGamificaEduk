@@ -11,13 +11,13 @@ firebase.auth().onAuthStateChanged((User) => {
           if(!(activity_tasks.length == 0)){
             activity_tasks.forEach(activity_task => {
               if (!(activity_task.dados.activity_contents_id === "")){
-                menu = menu +`<p><button type="button" class="badge bg-primary p-2" id="btnConteudo" onclick="btnConteudo()">CONTEÚDO</button></p>`;
+                menu = menu +`<p><button type="button" class="badge bg-primary p-2 btnConteudo" id="${activity_task.dados.activity_contents_id}" onclick="btnConteudo()">CONTEÚDO</button></p>`;
               }
               if (!(activity_task.dados.quizzes_id==="")){
                 menu = menu +`<p><button type="button" class="badge bg-primary p-2 btnQuiz" id="${activity_task.dados.quizzes_id}" onclick="btnQuiz()">QUIZ</button></p>`;
               }
-              if(!(activity_task.dados.challenge_id==="")){
-                menu = menu + `<p><button type="button" class="badge bg-primary p-2 btnDesafio" id="${challenge_id}" onclick="btnDesafio()">DESAFIO</button></p>`;
+              if(!(activity_task.dados.challenges_groups_id==="")){
+                menu = menu + `<p><button type="button" class="badge bg-primary p-2 btnDesafio" id="${activity_task.dados.challenges_groups_id}" onclick="btnDesafio()">DESAFIO</button></p>`;
               }
               if(!(activity_task.dados.orienteering_groups_id ==="")) {
                 menu = menu + `<p><button type="button" class="badge bg-primary p-2 btnOrientacao" id="${activity_task.dados.orienteering_groups_id}" onclick="btnOrientacao()">ORIENTAÇÃO</button></p>`;
@@ -64,7 +64,9 @@ function btnQuiz() {
 }
 
 function btnConteudo() {
-  window.location.href = "../content/content.html?activity_id="+activity_id;
+  let botao = document.querySelector('.btnConteudo');
+  let activity_contents_id = botao.id;
+  window.location.href = `../content/content.html?activity_contents_id=${activity_contents_id}&activity_id=${activity_id}`;
 }
 
 function btnDesafio() {
