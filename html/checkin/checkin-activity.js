@@ -56,7 +56,7 @@ firebase.auth().onAuthStateChanged((User) => {
     });
 
       function menu(activity_id){
-        window.location.href = "./menu.html?activity_id="+activity_id;
+        window.location.href = "../tasks/menu.html?activity_id="+activity_id;
       }
 
       function validarValor(valor) {
