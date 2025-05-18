@@ -52,11 +52,19 @@ function recoverPassword() {
 function getErrorMessage(error) {
     switch (error.code) {
         case "auth/user-not-found":
-            return "Usuário não encontrado";
+            return "Usuário não encontrado. Verifique o email digitado.";
         case "auth/wrong-password":
-            return "Senha inválida";
+            return "Senha incorreta. Tente novamente.";
+        case "auth/invalid-email":
+            return "O formato do email está inválido.";
+        case "auth/invalid-login-credentials":
+            // Erro genérico quando email/senha não batem
+            return "Credenciais inválidas. Verifique seu email e senha.";
+        case "auth/too-many-requests":
+            return "Muitas tentativas. Tente novamente mais tarde.";
         default:
-            return error.message;
+            // Fallback para mensagens que não foram mapeadas
+            return "Erro ao fazer login: " + error.message;
     }
 }
 
