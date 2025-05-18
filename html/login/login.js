@@ -1,101 +1,122 @@
-firebase.auth().onAuthStateChanged( (User) => {
-    if (User) {
+// Redireciona usuário autenticado para a home
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
         window.location.href = "../home/home.html";
     }
-})
+});
 
+// Função de login
 function login() {
     const emailValid = isEmailValid();
     const passwordValid = isPasswordValid();
-    if (emailValid || passwordValid){
+
+    // Corrigido: login só ocorre se ambos forem válidos
+    if (emailValid && passwordValid) {
         firebase.auth().signInWithEmailAndPassword(
-            form.email().value, form.password().value
-        ).then((userCredential) => {
-            user = userCredential.user.auth.currentUser;
-            console.log("Usuário logou:" + userCredential.user.uid);
+            form.email().value,
+            form.password().value
+        ).then(userCredential => {
+            const user = userCredential.user;
+            console.log("Usuário logado:", user.uid);
         }).catch(error => {
-            console.log(getErrorMessage(error));
+            alert(getErrorMessage(error));
         });
-    }else{
+    } else {
         onChangeEmail();
         onChangePassword();
     }
 }
 
+// Redireciona para tela de registro
 function register() {
     window.location.href = "../register/register.html";
 }
 
+// Envia email de recuperação de senha
 function recoverPassword() {
-    firebase.auth().sendPasswordResetEmail(form.email().value).then(() => {
-        alert('Email enviado com sucesso');
-    }).catch(error => {
-        console.log(getErrorMessage(error));
-    });
+    const email = form.email().value;
+    if (!email || !validateEmail(email)) {
+        alert("Por favor, insira um email válido para recuperar a senha.");
+        return;
+    }
+
+    firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+            alert('Email enviado com sucesso');
+        }).catch(error => {
+            alert(getErrorMessage(error));
+        });
 }
 
+// Interpreta erros do Firebase
 function getErrorMessage(error) {
-    if (error.code == "auth/user-not-found") {
-        return "Usuário nao encontrado";
+    switch (error.code) {
+        case "auth/user-not-found":
+            return "Usuário não encontrado";
+        case "auth/wrong-password":
+            return "Senha inválida";
+        default:
+            return error.message;
     }
-    if (error.code == "auth/wrong-password") {
-        return "Senha inválida";
-    }
-    return error.message;
 }
 
+// Validações ao alterar email
 function onChangeEmail() {
     toggleButtonsDisable();
     toggleEmailErrors();
 }
 
+// Validações ao alterar senha
 function onChangePassword() {
     toggleButtonsDisable();
     togglePasswordErrors();
 }
 
+// Exibe mensagens de erro de email dinamicamente
 function toggleEmailErrors() {
     const email = form.email().value;
-    form.emailRequiredError().style.display = email ? "none" : "block";
-    
-    form.emailInvalidError().style.display = validateEmail(email) ? "none" : "block";
+    form.emailRequiredError().classList.toggle("visually-hidden", !!email);
+    form.emailInvalidError().classList.toggle("visually-hidden", validateEmail(email));
 }
 
+// Exibe mensagens de erro de senha dinamicamente
 function togglePasswordErrors() {
     const password = form.password().value;
-    form.passwordRequiredError().style.display = password ? "none" : "block";
+    form.passwordRequiredError().classList.toggle("visually-hidden", !!password);
 }
 
+// Ativa ou desativa botões com base na validade dos campos
 function toggleButtonsDisable() {
-    const emailValid = !isEmailValid();
-    form.recoverPasswordButton().disabled = emailValid;
+    const emailValid = isEmailValid();
+    const passwordValid = isPasswordValid();
 
-    const passwordValid = !isPasswordValid();
-    form.loginButton().disabled = emailValid || passwordValid;
+    form.recoverPasswordButton().disabled = !emailValid;
+    form.loginButton().disabled = !(emailValid && passwordValid);
 }
 
+// Verifica se o email está em formato válido
 function isEmailValid() {
     const email = form.email().value;
-    if (!email) {
-        return false;
-    }
-    return validateEmail(email);
+    return !!email && validateEmail(email);
 }
 
+// Verifica se há senha preenchida
 function isPasswordValid() {
-    return form.password().value ? true : false;
+    return !!form.password().value;
 }
 
+// Regex simples para validar email
 function validateEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
 }
 
+// Mapeamento de elementos HTML
 const form = {
     email: () => document.getElementById("email"),
-    emailInvalidError: () => document.getElementById("email-invalid-error"),
-    emailRequiredError: () => document.getElementById("email-required-error"),
-    loginButton: () => document.getElementById("login-button"),
     password: () => document.getElementById("password"),
-    passwordRequiredError: () => document.getElementById("password-required-error"),
+    loginButton: () => document.getElementById("login-button"),
     recoverPasswordButton: () => document.getElementById("recover-password-button"),
-} 
+    emailRequiredError: () => document.getElementById("email-required-error"),
+    emailInvalidError: () => document.getElementById("email-invalid-error"),
+    passwordRequiredError: () => document.getElementById("password-required-error")
+};
