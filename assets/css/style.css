@@ -43,15 +43,8 @@ body, html {
 .card-container.card {
     max-width: 500px;
     height: 350%;
-    padding: 10px 10px;
-    margin: 50px auto;
-}
-
-/* Card específico de perfil */
-.card-perfil {
-    width: 20px;
-    margin: 0 auto 0px;
-    padding: 2px 2px 2px;
+    padding: 25px 25px;
+    margin: 25px auto;
 }
 
 /* ==================================================
