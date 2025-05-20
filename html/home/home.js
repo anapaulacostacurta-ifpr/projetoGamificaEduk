@@ -1,43 +1,42 @@
-// Escuta mudanças na autenticação
-firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        // Busca dados do usuário autenticado
-        userService.findByUid(user.uid)
-            .then(userData => {
-                switch (userData.profile) {
-                    case "player":
-                        window.location.href = "./home-player/home-player.html";
-                        break;
-                    case "host":
-                        window.location.href = "./home-host/home-host.html";
-                        break;
-                    default:
-                        alert("Perfil desconhecido.");
-                        break;
-                }
-            })
-            .catch(error => {
-                // Se o erro for perfil não encontrado
-                if (error.message === "01 - Não encontrado.") {
-                    alert("Seu perfil precisa ser atualizado e ativado! Acesse o menu perfil.");
-                    window.location.href = "../profile/update-profile.html";
-                } else {
-                    console.error("Erro ao buscar perfil:", error);
-                }
-            });
-    }
-});
+// home.js
 
-// Realiza logout do Firebase
-function logout() {
-    firebase.auth().signOut()
-        .then(() => {
-            window.location.href = "../login/login.html";
-        })
-        .catch(() => {
-            alert("Erro ao fazer logout!");
-        });
-}
+/**
+ * Verifica o estado de autenticação do usuário com Firebase.
+ * Redireciona para a home específica com base no perfil (player, host).
+ * Se o perfil não estiver cadastrado, redireciona para atualização de perfil.
+ */
+
+// Escuta mudanças na autenticação
+document.addEventListener("DOMContentLoaded", () => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      // Se não houver usuário autenticado, redireciona para login
+      window.location.href = "../login/login.html";
+      return;
+    }
+
+    // Busca dados do usuário autenticado no Firestore
+    userService.findByUid(user.uid)
+      .then(userData => {
+        // Redireciona de acordo com o perfil do usuário
+        switch (userData.profile) {
+          case "player":
+            window.location.href = "./home-player/home-player.html";
+            break;
+          case "host":
+            window.location.href = "./home-host/home-host.html";
+            break;
+          default:
+            alert("Perfil desconhecido.");
+            break;
+        }
+      }).catch(error => {
+        console.error("Erro ao buscar dados do usuário:", error);
+        alert("Erro ao carregar seu perfil. Tente novamente.");
+        window.location.href = "../../login/login.html";
+      });
+  });
+});
 
 
 

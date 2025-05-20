@@ -1,30 +1,58 @@
-firebase.auth().onAuthStateChanged((User) => {
-    if (User) {
-        userService.findByUid(User.uid).then(user=>{
-            if(user.profile === "player"){
-                document.getElementById("nameUser").innerHTML = user.nickname;
-                var avatar = user.avatar;
-                document.getElementById("avatarUser").innerHTML ='<img class="img-fluid rounded-circle img-thumbnail" src="../../../assets/img/perfil/'+avatar+'.png" width="50" height="50"></img>';
-                //document.getElementById("coins").innerHTML = user.coins;
-            }else{
-                alert("Seu perfil não tem acesso a essa página.");
-            }
-        }).catch(error => {
-            if(error.message === "01 - Não encontrado."){
-                alert("Seu perfil precisa ser atualizado e ativado!Acesse o menu perfil.");
-                window.location.href = "./atualizacao.html";
-            }
-            console.log(error);
-        });
-    }
-})
+// home-player.js
 
-function logout() {
-    firebase.auth().signOut().then(() => {
+/**
+ * Este script é responsável por carregar as informações do jogador autenticado
+ * na Home do Jogador, validando seu perfil e exibindo avatar e nome na interface.
+ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Escuta mudanças no estado de autenticação
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      // Se não estiver logado, redireciona para o login
+      window.location.href = "../../login/login.html";
+      return;
+    }
+
+    // Busca os dados do usuário logado no Firestore
+    userService.findByUid(user.uid)
+      .then(userData => {
+        // Verifica se o perfil é jogador
+        if (userData.profile === "player") {
+          // Exibe nome e avatar
+          const nameUserElement = document.getElementById("nameUser");
+          const avatarUserElement = document.getElementById("avatarUser");
+
+          if (nameUserElement) {
+            nameUserElement.textContent = userData.nickname;
+          }
+
+          if (avatarUserElement) {
+            const avatarPath = `../../../assets/img/perfil/${userData.avatar}.png`;
+            avatarUserElement.innerHTML = `
+              <img 
+                src="${avatarPath}" 
+                class="img-fluid rounded-circle img-thumbnail" 
+                alt="Avatar de ${userData.nickname}" 
+                width="50" 
+                height="50"
+              />
+            `;
+          }
+
+        } else {
+          // Usuário com perfil diferente → acesso negado
+          alert("Seu perfil não tem acesso a essa página.");
+          window.location.href = "../../login/login.html";
+        }
+      })
+      .catch(error => {
+        console.error("Erro ao buscar dados do usuário:", error);
+        alert("Erro ao carregar seu perfil. Tente novamente.");
         window.location.href = "../../login/login.html";
-    }).catch(() => {
-        alert('Erro ao fazer logout');
-    })
-}
+      });
+  });
+});
+
 
 
