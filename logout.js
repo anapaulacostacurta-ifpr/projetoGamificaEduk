@@ -11,7 +11,7 @@ function logout() {
     .then(() => {
       // Logout bem-sucedido → redirecionar para login
       console.log("Logout realizado com sucesso.");
-      window.location.href = "/html/login/login.html";
+      window.location.href = "./html/login/login.html";
     })
     .catch(error => {
       // Erro ao tentar fazer logout
