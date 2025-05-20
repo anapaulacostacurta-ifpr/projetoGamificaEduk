@@ -21,7 +21,7 @@
 /* ==================================================
    BACKGROUND PARA HTML E BODY
    -------------------------------------------------- */
-body, html {
+.wallpaper {
     height: 100%;
     margin: 0;
     background-repeat: no-repeat;
