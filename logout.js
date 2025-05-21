@@ -9,12 +9,12 @@
 function logout() {
   firebase.auth().signOut()
     .then(() => {
-      // Logout bem-sucedido → redirecionar para login
+      // Redirecionamento absoluto baseado na origem atual do site
+      const loginUrl = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
       console.log("Logout realizado com sucesso.");
-      window.location.href = "./html/login/login.html";
+      window.location.href = loginUrl;
     })
     .catch(error => {
-      // Erro ao tentar fazer logout
       console.error("Erro ao fazer logout:", error);
       alert("Erro ao fazer logout! Tente novamente.");
     });

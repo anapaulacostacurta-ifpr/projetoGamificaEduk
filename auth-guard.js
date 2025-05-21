@@ -11,8 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   firebase.auth().onAuthStateChanged(user => {
     if (!user) {
       // Usuário não autenticado → redirecionar
+      const loginUrl = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
       console.warn("Acesso negado: sessão inexistente. Redirecionando para login...");
-      window.location.href = "./html/login/login.html";
+      window.location.href = loginUrl;
       return;
     }
 
@@ -25,8 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(error => {
         // Se o erro for perfil não encontrado
         if (error.message === "01 - Não encontrado.") {
+          const profileUpdateUrl = `${location.origin}/projetoGamificaEduk/html/profile/update-profile.html`;
           alert("Seu perfil precisa ser atualizado e ativado! Acesse o menu perfil.");
-          window.location.href = "./html/profile/update-profile.html";
+          window.location.href = profileUpdateUrl;
         } else {
           console.error("Erro ao buscar perfil:", error);
         }
