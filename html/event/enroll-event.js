@@ -22,8 +22,7 @@ firebase.auth().onAuthStateChanged(user => {
   }
 
   // Busca dados do usuário autenticado
-  userService.findByUid(user.uid)
-    .then(userData => {
+  userService.findByUid(user.uid).then(userData => {
       const isHost = userData.host;
       const profile = userData.profile;
 
@@ -41,8 +40,7 @@ firebase.auth().onAuthStateChanged(user => {
         const inputId = document.getElementById("event_id").value;
         const userUID = user.uid;
 
-        try {
-          const events = await eventService.getEventsByID(inputId);
+        eventService.getEventsByID(inputId).then(events =>{
           let foundEvent = events.find(ev => ev.dados.id === inputId);
 
           if (!foundEvent) {
@@ -67,33 +65,33 @@ firebase.auth().onAuthStateChanged(user => {
             return;
           }
 
-          const enrolls = await enrollEventService.getEnrollsByEventUidUserUid(foundEvent.uid, userUID);
+          enrollEventService.getEnrollsByEventUidUserUid(foundEvent.uid, userUID).then (enrolls => {
 
-          if (enrolls.length > 0) {
-            showError("Inscrição já foi realizada para este evento!");
-            return;
-          }
+            if (enrolls.length > 0) {
+              showError("Inscrição já foi realizada para este evento!");
+              return;
+            }
 
-          // Monta objeto de inscrição
-          const now = new Date();
-          const newEnroll = {
-            user_UID: userUID,
-            coins: 0,
-            date: now.toLocaleDateString("pt-BR"),
-            time: now.toLocaleTimeString("pt-BR"),
-            event_id: foundEvent.uid
-          };
+            // Monta objeto de inscrição
+            const now = new Date();
+            const newEnroll = {
+              user_UID: userUID,
+              coins: 0,
+              date: now.toLocaleDateString("pt-BR"),
+              time: now.toLocaleTimeString("pt-BR"),
+              event_id: foundEvent.uid
+            };
 
-          await enrollEventService.save(newEnroll);
+            enrollEventService.save(newEnroll);
 
-          showSuccess("Inscrição no evento realizada com sucesso!");
-        } catch (error) {
+            showSuccess("Inscrição no evento realizada com sucesso!");
+          });  
+        }).catch ( error => {
           console.error("Erro durante a inscrição:", error);
           showError("Erro inesperado ao processar a inscrição.");
-        }
+        })
       });
-    })
-    .catch(() => {
+    }).catch(() => {
       showError("Erro ao carregar os dados do usuário.");
     });
 });
