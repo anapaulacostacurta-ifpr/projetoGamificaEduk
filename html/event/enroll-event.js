@@ -42,6 +42,11 @@ firebase.auth().onAuthStateChanged(user => {
 
         // Consulta Evento por ID no Firebase
         eventService.getEventsByID(inputId).then(events =>{
+          if (!(validarValor(events))){
+            showError("Evento não encontrado!");
+            return;
+          }
+
           let foundEvent = events.find(ev => ev.dados.id === inputId);
 
           if (!foundEvent) {
@@ -125,6 +130,13 @@ function showError(message) {
   messageError.textContent = message;
   alertError.classList.add("show");
   disableButton();
+}
+
+function validarValor(valor) {
+  if (valor === null) {
+    return false;
+  }
+  return true;
 }
 
 /**

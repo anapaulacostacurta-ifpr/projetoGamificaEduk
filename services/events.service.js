@@ -7,11 +7,11 @@
 
 const eventService = {
   /**
-   * Busca eventos por ID, data de início e estado (ex: "started").
+   * Busca eventos por ID, data de início e estado.
    * @param {string} eventId - Código do evento.
    * @param {string} eventDate - Data de início no formato DD/MM/AAAA.
    * @param {string} eventState - Estado do evento (ex: "started").
-   * @returns {Promise<Array>} Lista de eventos encontrados.
+   * @returns {Promise<Array|null>} Lista de eventos encontrados ou null se vazio.
    */
   getEventsByDateStart: async (eventId, eventDate, eventState) => {
     const snapshot = await firebase.firestore()
@@ -22,7 +22,7 @@ const eventService = {
       .get();
 
     if (snapshot.empty) {
-      throw new Error("01 - Não encontrado.");
+      return null;
     }
 
     return snapshot.docs.map(doc => ({
@@ -32,9 +32,9 @@ const eventService = {
   },
 
   /**
-   * Busca eventos por ID.
+   * Busca eventos por ID (sem verificar estado).
    * @param {string} eventId - Código do evento.
-   * @returns {Promise<Array>} Lista de eventos encontrados.
+   * @returns {Promise<Array|null>} Lista de eventos ou null se nenhum encontrado.
    */
   getEventsByID: async (eventId) => {
     const snapshot = await firebase.firestore()
@@ -43,7 +43,7 @@ const eventService = {
       .get();
 
     if (snapshot.empty) {
-      throw new Error("01 - Não encontrado.");
+      return null; // 01 - Evento não encontrado
     }
 
     return snapshot.docs.map(doc => ({
@@ -53,9 +53,9 @@ const eventService = {
   },
 
   /**
-   * Retorna os dados de um evento pelo UID do documento no Firestore.
-   * @param {string} eventUID - UID do documento.
-   * @returns {Promise<Object>} Dados do evento.
+   * Obtém dados completos de um evento a partir do UID.
+   * @param {string} eventUID - UID do documento do evento.
+   * @returns {Promise<Object|null>} Objeto de dados do evento ou null.
    */
   getEventByUID: async (eventUID) => {
     const doc = await firebase.firestore()
@@ -64,15 +64,15 @@ const eventService = {
       .get();
 
     if (!doc.exists) {
-      throw new Error("01 - Não encontrado.");
+      return null;
     }
 
     return doc.data();
   },
 
   /**
-   * Retorna todos os eventos com data ordenada, excluindo os finalizados.
-   * @returns {Promise<Array>} Lista de eventos ativos ou pendentes.
+   * Retorna todos os eventos não finalizados, ordenados por data de início.
+   * @returns {Promise<Array|null>} Lista de eventos ou null se nenhum encontrado.
    */
   getEvents: async () => {
     const snapshot = await firebase.firestore()
@@ -81,7 +81,7 @@ const eventService = {
       .get();
 
     if (snapshot.empty) {
-      throw new Error("01 - Não encontrado.");
+      return null;
     }
 
     return snapshot.docs
@@ -94,7 +94,7 @@ const eventService = {
 
   /**
    * Salva um novo evento na coleção.
-   * @param {Object} eventData - Objeto com dados do evento.
+   * @param {Object} eventData - Objeto contendo os dados do novo evento.
    * @returns {Promise<void>}
    */
   save: async (eventData) => {
@@ -104,14 +104,14 @@ const eventService = {
         .doc()
         .set(eventData);
     } catch (error) {
-      throw error;
+      throw new Error("Erro ao salvar evento: " + error.message);
     }
   },
 
   /**
-   * Atualiza os dados de um evento existente.
-   * @param {string} id - UID do documento a ser atualizado.
-   * @param {Object} eventData - Novos dados para o evento.
+   * Atualiza dados de um evento existente a partir do UID.
+   * @param {string} id - UID do evento.
+   * @param {Object} eventData - Dados atualizados do evento.
    * @returns {Promise<void>}
    */
   update: async (id, eventData) => {
@@ -121,7 +121,7 @@ const eventService = {
         .doc(id)
         .update(eventData);
     } catch (error) {
-      throw error;
+      throw new Error("Erro ao atualizar evento: " + error.message);
     }
   }
 };
