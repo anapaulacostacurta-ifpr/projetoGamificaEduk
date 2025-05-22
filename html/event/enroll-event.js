@@ -40,6 +40,7 @@ firebase.auth().onAuthStateChanged(user => {
         const inputId = document.getElementById("event_id").value;
         const userUID = user.uid;
 
+        // Consulta Evento por ID no Firebase
         eventService.getEventsByID(inputId).then(events =>{
           let foundEvent = events.find(ev => ev.dados.id === inputId);
 
@@ -64,7 +65,8 @@ firebase.auth().onAuthStateChanged(user => {
             showError("Evento fora do prazo!");
             return;
           }
-
+          
+          //Consulta os Eventos por UID que por UserUID que já foi realizado inscrição.
           enrollEventService.getEnrollsByEventUidUserUid(foundEvent.uid, userUID).then (enrolls => {
 
             if (enrolls.length > 0) {
@@ -82,8 +84,10 @@ firebase.auth().onAuthStateChanged(user => {
               event_id: foundEvent.uid
             };
 
+            //Realiza a Inscrição no Evento
             enrollEventService.save(newEnroll);
 
+            //Mensagem de Sucesso de Inscrição no Evento
             showSuccess("Inscrição no evento realizada com sucesso!");
           });  
         }).catch ( error => {
