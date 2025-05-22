@@ -1,89 +1,143 @@
-const alert_sucesso = document.getElementById("alert_sucesso");
-const alert_error = document.getElementById("alert_error");
-const msg_sucesso = document.getElementById("res_sucesso");
-const msg_error = document.getElementById("res_error");  
+// event-enroll.js
 
-firebase.auth().onAuthStateChanged((User) => {
-  if (User) {
-    userService.findByUid(User.uid).then(user=>{
-      let host = user.host;
-      let profile = user.profile;
-      if(profile === "player"){
-        document.getElementById("enroll-form").addEventListener("submit", function(event) {
-          event.preventDefault();
-          // Captura os dados do formulário
-          let id = document.getElementById("event_id").value;
-          let event_uid; // UID do doc no firestone
-          let coins = 0;
-          let user_UID = User.uid;
-          
-          eventService.getEventsByID(id).then((events) => {
-            events.forEach(event => {
-              if(event.dados.id == id){
-                if(event.dados.state === "started"){
-                  if(event.dados.host === host){
-                    if(deadline(event)){
-                      event_uid = event.uid; // UID do doc no firestone
-                      enrollEventService.getEnrollsByEventUidUserUid(event_uid,user_UID).then(enroll_events => {
-                        if (!(enroll_events.length > 0)){
-                          let event_id = event_uid;
-                          let new_date = new Date();
-                          let date = new_date.toLocaleDateString('pt-BR');
-                          let time = new_date.toLocaleTimeString('pt-BR');
-                          let enroll_events = {user_UID,coins,date,time,event_id};
-                          enrollEventService.save(enroll_events);
-                          msg_sucesso.innerHTML= "Inscrição no evento realizada com sucesso!";
-                          alert_sucesso.classList.add("show");
-                          document.getElementById("bt-success").disabled = true;
-                        }else{
-                          msg_error.innerHTML= "Inscrição já foi realizada para este evento!";
-                          alert_error.classList.add("show");
-                          document.getElementById("bt-success").disabled = true;
-                        }
-                      })             
-                    }else{
-                      msg_error.innerHTML= "Evento fora do prazo!";
-                      alert_error.classList.add("show");
-                      document.getElementById("bt-success").disabled = true;
-                    }
-                  }else{ // Evento não é do mesmo anfitrião que aprovou o cadastro!
-                    msg_error.innerHTML= "Evento de outro Anfitrião!";
-                    alert_error.classList.add("show");
-                    document.getElementById("bt-success").disabled = true;
-                  }
-                }else{
-                  msg_error.innerHTML= "Evento não está ativo!";
-                  alert_error.classList.add("show");
-                  document.getElementById("bt-success").disabled = true;
-                }
-              }else{
-                msg_error.innerHTML= "Evento não encontrado!";
-                alert_error.classList.add("show");
-                document.getElementById("bt-success").disabled = true;
-              }  
-            });
-          }).catch((error) => {
-            msg_error.innerHTML= "Evento não encontrado:"+error.menssage;
-            alert_error.classList.add("show");
-            document.getElementById("bt-success").disabled = true;
-          })
-        })
-      }else{// Revisar mensagem
-        msg_error.innerHTML= "Sem permissão de acesso a funcionalidade!";
-        alert_error.classList.add("show");
-        document.getElementById("bt-success").disabled = true;
-      }
-    })
+/**
+ * Script responsável por validar e processar a inscrição do jogador em um evento.
+ * Utiliza Firebase Auth para autenticação, Firestore para verificação do evento e
+ * serviços customizados para inscrição.
+ */
+
+// Seletores de elementos de feedback
+const alertSuccess = document.getElementById("alert_sucesso");
+const alertError = document.getElementById("alert_error");
+const messageSuccess = document.getElementById("res_sucesso");
+const messageError = document.getElementById("res_error");
+const submitButton = document.getElementById("bt-success");
+
+// Verifica autenticação
+firebase.auth().onAuthStateChanged(user => {
+  if (!user) {
+    // Redireciona para login se não houver sessão
+    window.location.href = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
+    return;
   }
+
+  // Busca dados do usuário autenticado
+  userService.findByUid(user.uid)
+    .then(userData => {
+      const isHost = userData.host;
+      const profile = userData.profile;
+
+      if (profile !== "player") {
+        showError("Sem permissão de acesso à funcionalidade!");
+        return;
+      }
+
+      // Adiciona ouvinte ao formulário
+      const form = document.getElementById("enroll-form");
+      form.addEventListener("submit", async event => {
+        event.preventDefault();
+        disableButton();
+
+        const inputId = document.getElementById("event_id").value;
+        const userUID = user.uid;
+
+        try {
+          const events = await eventService.getEventsByID(inputId);
+          let foundEvent = events.find(ev => ev.dados.id === inputId);
+
+          if (!foundEvent) {
+            showError("Evento não encontrado!");
+            return;
+          }
+
+          const dados = foundEvent.dados;
+
+          if (dados.state !== "started") {
+            showError("Evento não está ativo!");
+            return;
+          }
+
+          if (dados.host !== isHost) {
+            showError("Evento de outro Anfitrião!");
+            return;
+          }
+
+          if (!isWithinDeadline(dados)) {
+            showError("Evento fora do prazo!");
+            return;
+          }
+
+          const enrolls = await enrollEventService.getEnrollsByEventUidUserUid(foundEvent.uid, userUID);
+
+          if (enrolls.length > 0) {
+            showError("Inscrição já foi realizada para este evento!");
+            return;
+          }
+
+          // Monta objeto de inscrição
+          const now = new Date();
+          const newEnroll = {
+            user_UID: userUID,
+            coins: 0,
+            date: now.toLocaleDateString("pt-BR"),
+            time: now.toLocaleTimeString("pt-BR"),
+            event_id: foundEvent.uid
+          };
+
+          await enrollEventService.save(newEnroll);
+
+          showSuccess("Inscrição no evento realizada com sucesso!");
+        } catch (error) {
+          console.error("Erro durante a inscrição:", error);
+          showError("Erro inesperado ao processar a inscrição.");
+        }
+      });
+    })
+    .catch(() => {
+      showError("Erro ao carregar os dados do usuário.");
+    });
 });
 
-function deadline(event){
-  let date = new Date();
-  let data_start = event.dados.date_start.split("/");
-  let time_start = event.dados.time_start.split(":");
-  let data_time_start = new Date(data_start[2],data_start[1]-1,data_start[0],time_start[0],time_start[1]);
-  let data_final = event.dados.date_final.split("/");
-  let time_final = event.dados.time_final.split(":");
-  let data_time_final = new Date(data_final[2],data_final[1]-1,data_final[0],time_final[0],time_final[1]);
-  return (date >= data_time_start &&  date <= data_time_final);
+/**
+ * Verifica se a data atual está dentro do prazo do evento.
+ * @param {Object} event - Dados do evento com campos de data e hora.
+ * @returns {boolean}
+ */
+function isWithinDeadline(event) {
+  const now = new Date();
+
+  const [dStart, tStart] = [event.date_start.split("/"), event.time_start.split(":")];
+  const [dEnd, tEnd] = [event.date_final.split("/"), event.time_final.split(":")];
+
+  const startDate = new Date(dStart[2], dStart[1] - 1, dStart[0], tStart[0], tStart[1]);
+  const endDate = new Date(dEnd[2], dEnd[1] - 1, dEnd[0], tEnd[0], tEnd[1]);
+
+  return now >= startDate && now <= endDate;
+}
+
+/**
+ * Exibe mensagem de erro formatada.
+ * @param {string} message - Texto de erro a exibir.
+ */
+function showError(message) {
+  messageError.textContent = message;
+  alertError.classList.add("show");
+  disableButton();
+}
+
+/**
+ * Exibe mensagem de sucesso formatada.
+ * @param {string} message - Texto de sucesso a exibir.
+ */
+function showSuccess(message) {
+  messageSuccess.textContent = message;
+  alertSuccess.classList.add("show");
+  disableButton();
+}
+
+/**
+ * Desativa o botão de submissão para evitar múltiplos envios.
+ */
+function disableButton() {
+  submitButton.disabled = true;
 }
