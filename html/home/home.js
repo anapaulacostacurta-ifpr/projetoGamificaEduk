@@ -1,42 +1,39 @@
 // home.js
 
 /**
- * Verifica o estado de autenticação do usuário com Firebase.
- * Redireciona para a home específica com base no perfil (player, host).
- * Se o perfil não estiver cadastrado, redireciona para atualização de perfil.
+ * Este script detecta o usuário autenticado e redireciona para a home correta com base no perfil (player, host).
+ * Usa location.origin para garantir caminhos absolutos consistentes, mesmo em subpastas ou em produção (GitHub Pages).
  */
 
-// Escuta mudanças na autenticação
 document.addEventListener("DOMContentLoaded", () => {
   firebase.auth().onAuthStateChanged(user => {
     if (!user) {
-      // Se não houver usuário autenticado, redireciona para login
-      window.location.href = "../login/login.html";
+      // Usuário não autenticado → redirecionar para login absoluto
+      window.location.href = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
       return;
     }
 
     // Busca dados do usuário autenticado no Firestore
-    userService.findByUid(user.uid)
-      .then(userData => {
-        // Redireciona de acordo com o perfil do usuário
+    userService.findByUid(user.uid).then(userData => {
+        // Redirecionamento com base no perfil
+        const base = `${location.origin}/projetoGamificaEduk/html/home`;
+
         switch (userData.profile) {
           case "player":
-            window.location.href = "./home-player/home-player.html";
+            window.location.href = `${base}/home-player/home-player.html`;
             break;
           case "host":
-            window.location.href = "./home-host/home-host.html";
+            window.location.href = `${base}/home-host/home-host.html`;
             break;
           default:
-            alert("Perfil desconhecido.");
+            alert("Perfil desconhecido. Acesso negado.");
+            window.location.href = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
             break;
         }
       }).catch(error => {
         console.error("Erro ao buscar dados do usuário:", error);
         alert("Erro ao carregar seu perfil. Tente novamente.");
-        window.location.href = "../../login/login.html";
+        window.location.href = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
       });
-  });
-});
-
-
-
+  })
+})
