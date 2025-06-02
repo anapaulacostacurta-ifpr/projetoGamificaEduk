@@ -9,9 +9,6 @@
 // Seletores de elementos de feedback
 const alertSuccess = document.getElementById("alert_sucesso");
 const alertError = document.getElementById("alert_error");
-const messageSuccess = document.getElementById("res_sucesso");
-const messageError = document.getElementById("res_error");
-const submitButton = document.getElementById("bt-success");
 
 document.addEventListener("DOMContentLoaded", () => {
     // Verifica autenticação
@@ -151,7 +148,6 @@ function validarValor(valor) {
  * @param {string} message - Texto de sucesso a exibir.
  */
 function showSuccess(message) {
-  messageSuccess.textContent = message;
   alertSuccess.classList.add("show");
   alertSuccess.classList.add("alert-dismissible");
   alertSuccess.innerHTML = `
@@ -161,9 +157,3 @@ function showSuccess(message) {
   bootstrap.Alert.getOrCreateInstance(alertSuccess).show();
 }
 
-/**
- * Desativa o botão de submissão para evitar múltiplos envios.
- */
-function disableButton() {
-  submitButton.disabled = true;
-}
