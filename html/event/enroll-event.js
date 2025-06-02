@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const form = document.getElementById("enroll-form");
           form.addEventListener("submit", async event => {
             event.preventDefault();
-            disableButton();
+            //disableButton();
 
             const inputId = document.getElementById("event_id").value;
             const userUID = user.uid;
