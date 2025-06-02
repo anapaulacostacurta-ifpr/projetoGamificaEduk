@@ -126,7 +126,6 @@ function isWithinDeadline(event) {
  * @param {string} message - Texto de erro a exibir.
  */
 function showError(message) {
-  messageError.textContent = message;
   alertError.classList.add("show");
   alertError.classList.add("alert-dismissible");
   alertError.innerHTML = `
