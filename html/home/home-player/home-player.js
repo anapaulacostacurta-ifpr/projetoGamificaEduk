@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   firebase.auth().onAuthStateChanged(user => {
     if (!user) {
       // Se não estiver logado, redireciona para o login
-      window.location.href = "../../login/login.html";
+      window.location.href = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
       return;
     }
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           if (avatarUserElement) {
-            const avatarPath = `../../../assets/img/perfil/${userData.avatar}.png`;
+            const avatarPath = `${location.origin}/projetoGamificaEduk/assets/img/perfil/${userData.avatar}.png`;
             avatarUserElement.innerHTML = `
               <img 
                 src="${avatarPath}" 
@@ -36,20 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 alt="Avatar de ${userData.nickname}" 
                 width="50" 
                 height="50"
-              />
-            `;
+              />`;
           }
 
         } else {
           // Usuário com perfil diferente → acesso negado
           alert("Seu perfil não tem acesso a essa página.");
-          window.location.href = "../../login/login.html";
+          window.location.href = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
         }
       })
       .catch(error => {
         console.error("Erro ao buscar dados do usuário:", error);
         alert("Erro ao carregar seu perfil. Tente novamente.");
-        window.location.href = "../../login/login.html";
+        window.location.href = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
       });
   });
 });

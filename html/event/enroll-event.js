@@ -13,96 +13,98 @@ const messageSuccess = document.getElementById("res_sucesso");
 const messageError = document.getElementById("res_error");
 const submitButton = document.getElementById("bt-success");
 
-// Verifica autenticação
-firebase.auth().onAuthStateChanged(user => {
-  if (!user) {
-    // Redireciona para login se não houver sessão
-    window.location.href = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
-    return;
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  // Verifica autenticação
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      // Redireciona para login se não houver sessão
+      window.location.href = `${location.origin}/projetoGamificaEduk/html/login/login.html`;
+      return;
+    }
 
-  // Busca dados do usuário autenticado
-  userService.findByUid(user.uid).then(userData => {
-      const isHost = userData.host;
-      const profile = userData.profile;
+    // Busca dados do usuário autenticado
+    userService.findByUid(user.uid).then(userData => {
+        const isHost = userData.host;
+        const profile = userData.profile;
 
-      if (profile !== "player") {
-        showError("Sem permissão de acesso à funcionalidade!");
-        return;
-      }
+        if (profile !== "player") {
+          showError("Sem permissão de acesso à funcionalidade!");
+          return;
+        }
 
-      // Adiciona ouvinte ao formulário
-      const form = document.getElementById("enroll-form");
-      form.addEventListener("submit", async event => {
-        event.preventDefault();
-        disableButton();
+        // Adiciona ouvinte ao formulário
+        const form = document.getElementById("enroll-form");
+        form.addEventListener("submit", async event => {
+          event.preventDefault();
+          disableButton();
 
-        const inputId = document.getElementById("event_id").value;
-        const userUID = user.uid;
+          const inputId = document.getElementById("event_id").value;
+          const userUID = user.uid;
 
-        // Consulta Evento por ID no Firebase
-        eventService.getEventsByID(inputId).then(events =>{
-          if (!(validarValor(events))){
-            showError("Evento não encontrado!");
-            return;
-          }
-
-          let foundEvent = events.find(ev => ev.dados.id === inputId);
-
-          if (!foundEvent) {
-            showError("Evento não encontrado!");
-            return;
-          }
-
-          const dados = foundEvent.dados;
-
-          if (dados.state !== "started") {
-            showError("Evento não está ativo!");
-            return;
-          }
-
-          if (dados.host !== isHost) {
-            showError("Evento de outro Anfitrião!");
-            return;
-          }
-
-          if (!isWithinDeadline(dados)) {
-            showError("Evento fora do prazo!");
-            return;
-          }
-          
-          //Consulta os Eventos por UID que por UserUID que já foi realizado inscrição.
-          enrollEventService.getEnrollsByEventUidUserUid(foundEvent.uid, userUID).then (enrolls => {
-
-            if (enrolls.length > 0) {
-              showError("Inscrição já foi realizada para este evento!");
+          // Consulta Evento por ID no Firebase
+          eventService.getEventsByID(inputId).then(events =>{
+            if (!(validarValor(events))){
+              showError("Evento não encontrado!");
               return;
             }
 
-            // Monta objeto de inscrição
-            const now = new Date();
-            const newEnroll = {
-              user_UID: userUID,
-              coins: 0,
-              date: now.toLocaleDateString("pt-BR"),
-              time: now.toLocaleTimeString("pt-BR"),
-              event_id: foundEvent.uid
-            };
+            let foundEvent = events.find(ev => ev.dados.id === inputId);
 
-            //Realiza a Inscrição no Evento
-            enrollEventService.save(newEnroll);
+            if (!foundEvent) {
+              showError("Evento não encontrado!");
+              return;
+            }
 
-            //Mensagem de Sucesso de Inscrição no Evento
-            showSuccess("Inscrição no evento realizada com sucesso!");
-          });  
-        }).catch ( error => {
-          console.error("Erro durante a inscrição:", error);
-          showError("Erro inesperado ao processar a inscrição.");
-        })
+            const dados = foundEvent.dados;
+
+            if (dados.state !== "started") {
+              showError("Evento não está ativo!");
+              return;
+            }
+
+            if (dados.host !== isHost) {
+              showError("Evento de outro Anfitrião!");
+              return;
+            }
+
+            if (!isWithinDeadline(dados)) {
+              showError("Evento fora do prazo!");
+              return;
+            }
+            
+            //Consulta os Eventos por UID que por UserUID que já foi realizado inscrição.
+            enrollEventService.getEnrollsByEventUidUserUid(foundEvent.uid, userUID).then (enrolls => {
+
+              if (enrolls.length > 0) {
+                showError("Inscrição já foi realizada para este evento!");
+                return;
+              }
+
+              // Monta objeto de inscrição
+              const now = new Date();
+              const newEnroll = {
+                user_UID: userUID,
+                coins: 0,
+                date: now.toLocaleDateString("pt-BR"),
+                time: now.toLocaleTimeString("pt-BR"),
+                event_id: foundEvent.uid
+              };
+
+              //Realiza a Inscrição no Evento
+              enrollEventService.save(newEnroll);
+
+              //Mensagem de Sucesso de Inscrição no Evento
+              showSuccess("Inscrição no evento realizada com sucesso!");
+            });  
+          }).catch ( error => {
+            console.error("Erro durante a inscrição:", error);
+            showError("Erro inesperado ao processar a inscrição.");
+          })
+        });
+      }).catch(() => {
+        showError("Erro ao carregar os dados do usuário.");
       });
-    }).catch(() => {
-      showError("Erro ao carregar os dados do usuário.");
-    });
+  });
 });
 
 /**
@@ -129,6 +131,12 @@ function isWithinDeadline(event) {
 function showError(message) {
   messageError.textContent = message;
   alertError.classList.add("show");
+  alertError.classList.add("alert-dismissible");
+  alertError.innerHTML = `
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    <strong>${message}</strong>
+  `;
+  bootstrap.Alert.getOrCreateInstance(alertError).show();
   disableButton();
 }
 
@@ -146,6 +154,12 @@ function validarValor(valor) {
 function showSuccess(message) {
   messageSuccess.textContent = message;
   alertSuccess.classList.add("show");
+  alertSuccess.classList.add("alert-dismissible");
+  alertSuccess.innerHTML = `
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    <strong>${message}</strong>
+  `;
+  bootstrap.Alert.getOrCreateInstance(alertSuccess).show();
   disableButton();
 }
 
