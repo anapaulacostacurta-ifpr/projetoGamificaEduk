@@ -132,7 +132,7 @@ function showError(message) {
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
     <strong>${message}</strong>
   `;
-  bootstrap.Alert.getOrCreateInstance(alertError).show();
+  //bootstrap.Alert.getOrCreateInstance(alertError).show();
 }
 
 function validarValor(valor) {
@@ -153,6 +153,6 @@ function showSuccess(message) {
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
     <strong>${message}</strong>
   `;
-  bootstrap.Alert.getOrCreateInstance(alertSuccess).show();
+  //bootstrap.Alert.getOrCreateInstance(alertSuccess).show();
 }
 
