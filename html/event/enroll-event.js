@@ -162,7 +162,7 @@ function showSuccess(message) {
 }
 
 function onChangeIdEvent(){
-  const idEvent = form.confirmIdEvent().value;
+  const idEvent = form.confirmIdEvent().value.trim();
   form.idEventRequiredError().style.display = idEvent ? "none" : "block";
   if (!idEvent) {
     disableButton(true);
