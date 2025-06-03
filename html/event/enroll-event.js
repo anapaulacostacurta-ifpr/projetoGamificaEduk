@@ -6,6 +6,12 @@
  * serviços customizados para inscrição.
  */
 
+const form = {
+    confirmIdEvent: () => document.getElementById('event_id'),
+    idEventRequiredError: () => document.getElementById('id-event-required-error'),
+    enrollButton: () => document.getElementById('bt-success')
+}
+
 // Seletores de elementos de feedback
 const alertSuccess = document.getElementById("alert_sucesso");
 const alertError = document.getElementById("alert_error");
@@ -169,8 +175,4 @@ function disableButton(value){
   form.enrollButton().disabled = value;
 }
 
-const form = {
-    confirmIdEvent: () => document.getElementById('event_id'),
-    idEventRequiredError: () => document.getElementById('id-event-required-error'),
-    enrollButton: () => document.getElementById('bt-success')
-}
+
