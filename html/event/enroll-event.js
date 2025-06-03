@@ -9,7 +9,7 @@
 // Seletores de elementos de feedback
 const alertSuccess = document.getElementById("alert_sucesso");
 const alertError = document.getElementById("alert_error");
-onChangeIdEvent();
+form.idEventRequiredError().style.display = "none";
 
 document.addEventListener("DOMContentLoaded", () => {
     // Verifica autenticação
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const form = document.getElementById("enroll-form");
           form.addEventListener("submit", async event => {
             event.preventDefault();
-            //disableButton();
+            disableButton(true);
 
             const inputId = document.getElementById("event_id").value;
             const userUID = user.uid;
@@ -159,10 +159,14 @@ function onChangeIdEvent(){
   const idEvent = form.confirmIdEvent().value;
   form.idEventRequiredError().style.display = idEvent ? "none" : "block";
   if (!idEvent) {
-    form.enrollButton().disabled = false;
+    disableButton(true);
   }else{
-    form.enrollButton().disabled = true;
+    disableButton(false);
   }
+}
+
+function disableButton(value){
+  form.enrollButton().disabled = value;
 }
 
 const form = {
