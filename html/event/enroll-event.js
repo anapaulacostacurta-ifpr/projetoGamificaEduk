@@ -16,6 +16,7 @@ const form = {
 const alertSuccess = document.getElementById("alert_sucesso");
 const alertError = document.getElementById("alert_error");
 form.idEventRequiredError().style.display = "none";
+disableButton(true);
 
 document.addEventListener("DOMContentLoaded", () => {
     // Verifica autenticação
@@ -35,13 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
             showError("Sem permissão de acesso à funcionalidade!");
             return;
           }
-
+          
           // Adiciona ouvinte ao formulário
           const form = document.getElementById("enroll-form");
           form.addEventListener("submit", async event => {
             event.preventDefault();
-            disableButton(true);
-
+            
             const inputId = document.getElementById("event_id").value;
             const userUID = user.uid;
 
