@@ -9,6 +9,7 @@
 // Seletores de elementos de feedback
 const alertSuccess = document.getElementById("alert_sucesso");
 const alertError = document.getElementById("alert_error");
+onChangeIdEvent();
 
 document.addEventListener("DOMContentLoaded", () => {
     // Verifica autenticação
