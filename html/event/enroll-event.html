@@ -41,9 +41,12 @@
             id="event_id" 
             name="event_id" 
             required 
-            aria-describedby="evento-ajuda"
-          />
-          <div id="evento-ajuda" class="form-text">Digite o código fornecido pelo organizador do evento.</div>
+            onchange="onChangeIdEvent()"
+            aria-describedby="evento-ajuda"/>
+            <div class="error" id="id-event-required-error">
+              ID do Evento é obrigatório!
+            </div>
+          <div id="evento-ajuda" class="form-text" hidden>Digite o código fornecido pelo organizador do evento.</div>
         </div>
 
         <hr class="colorgraph m-0 p-0" aria-hidden="true" />

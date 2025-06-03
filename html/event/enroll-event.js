@@ -132,7 +132,6 @@ function showError(message) {
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
     <strong>${message}</strong>
   `;
-  //bootstrap.Alert.getOrCreateInstance(alertError).show();
 }
 
 function validarValor(valor) {
@@ -153,6 +152,20 @@ function showSuccess(message) {
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
     <strong>${message}</strong>
   `;
-  //bootstrap.Alert.getOrCreateInstance(alertSuccess).show();
 }
 
+function onChangeIdEvent(){
+  const idEvent = form.confirmIdEvent().value;
+  form.idEventRequiredError().style.display = idEvent ? "none" : "block";
+  if (!idEvent) {
+    form.enrollButton().disabled = false;
+  }else{
+    form.enrollButton().disabled = true;
+  }
+}
+
+const form = {
+    confirmIdEvent: () => document.getElementById('event_id'),
+    idEventRequiredError: () => document.getElementById('id-event-required-error'),
+    enrollButton: () => document.getElementById('bt-success')
+}
