@@ -52,7 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
             eventService.getEventsByID(inputId).then(events =>{
               // FIM da medição de tempo
               const fim = performance.now();
-              console.log(`Tempo de busca dos eventos: ${(fim - inicio).toFixed(2)} ms`);
+              const message = `Tempo de busca dos eventos: ${(fim - inicio).toFixed(2)} ms`;
+              console.log(message);
               if (!(validarValor(events))){
                 showError("Evento não encontrado!");
                 return;
