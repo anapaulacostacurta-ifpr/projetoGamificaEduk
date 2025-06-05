@@ -5,6 +5,10 @@
  * na Home do Jogador, validando seu perfil e exibindo avatar e nome na interface.
  */
 
+// Seletores de elementos de feedback
+const alertSuccess = document.getElementById("alert_sucesso");
+const alertError = document.getElementById("alert_error");
+
 document.addEventListener("DOMContentLoaded", () => {
   // Escuta mudanças no estado de autenticação
   firebase.auth().onAuthStateChanged(user => {
@@ -55,3 +59,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+/**
+ * Exibe mensagem de sucesso formatada.
+ * @param {string} message - Texto de sucesso a exibir.
+ */
+function showSuccess(message) {
+  alertSuccess.classList.add("show");
+  alertSuccess.classList.add("alert-dismissible");
+  alertSuccess.innerHTML = `
+    <button id="btn-close-success" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+    <strong>${message}</strong>
+  `;
+
+  var bsAlertSuccess = new bootstrap.Alert(alertSuccess);
+  bootstrap.Alert.getInstance(bsAlertSuccess);
+  alertSuccess.alert();
+}
+
+/**
+ * Exibe mensagem de erro formatada.
+ * @param {string} message - Texto de erro a exibir.
+ */
+function showError(message) {
+  ;
+  alertError.classList.add("show");
+  alertError.classList.add("alert-dismissible");
+  alertError.innerHTML = `
+    <button id="btn-close-error" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    <strong>${message}</strong>
+  `;
+  var bsAlertError = new bootstrap.Alert(alertError)
+  bootstrap.Alert.getInstance(bsAlertError);
+  alertError.alert();
+}
+
+
+window.addEventListener('offline', () => {
+  showError("Você está offline. Verifique sua conexão com a internet.");
+});
+
+window.addEventListener('online', () => {
+  showSuccess("Conexão restaurada. Você pode prosseguir.");
+});

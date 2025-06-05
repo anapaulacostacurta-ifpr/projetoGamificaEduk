@@ -182,11 +182,4 @@ function disableButton(value){
   form.enrollButton().disabled = value;
 }
 
-window.addEventListener('offline', () => {
-  showError("Você está offline. Verifique sua conexão com a internet.");
-});
-
-window.addEventListener('online', () => {
-  showSuccess("Conexão restaurada. Você pode prosseguir.");
-});
 
