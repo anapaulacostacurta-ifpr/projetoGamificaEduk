@@ -45,8 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const inputId = document.getElementById("event_id").value;
             const userUID = user.uid;
 
+            // INÍCIO da medição de tempo
+            const inicio = performance.now();
+
             // Consulta Evento por ID no Firebase
             eventService.getEventsByID(inputId).then(events =>{
+              // FIM da medição de tempo
+              const fim = performance.now();
+              console.log(`Tempo de busca dos eventos: ${(fim - inicio).toFixed(2)} ms`);
               if (!(validarValor(events))){
                 showError("Evento não encontrado!");
                 return;
@@ -175,4 +181,11 @@ function disableButton(value){
   form.enrollButton().disabled = value;
 }
 
+window.addEventListener('offline', () => {
+  showError("Você está offline. Verifique sua conexão com a internet.");
+});
+
+window.addEventListener('online', () => {
+  showSuccess("Conexão restaurada. Você pode prosseguir.");
+});
 
