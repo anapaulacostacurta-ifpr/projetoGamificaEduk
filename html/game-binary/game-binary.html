@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>AnaBite - Missão Binária</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../assets/css/style.css"/>
+    </head>
+    <body class="bg-light">     
+        <div class="container my-4">
+            <ul class="nav nav-tabs mb-4" id="gameTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="game-tab" data-bs-toggle="tab" data-bs-target="#game-content" type="button" role="tab">🎮 Jogar Missão</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report-content" type="button" role="tab" onclick="loadReports()">📊 Desempenho & Ranking</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="gameTabsContent">
+                <div class="tab-pane fade show active" id="game-content" role="tabpanel">
+                    <div class="card p-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2>Fase <span id="current-phase">1</span>: Decodificador Base 2</h2>
+                            <span class="badge bg-warning text-dark fs-6">Moedas: <span id="player-coins">0</span> 🪙</span>
+                        </div>
+                        <p class="text-muted">Converta o número decimal abaixo para o seu correspondente binário de 4 bits.</p>
+                        <hr class="colorgraph">
+
+                        <div class="text-center my-4">
+                            <h3 class="display-4 text-primary">Converter o número: <strong id="decimal-target">5</strong></h3>
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-3 my-4">
+                            <div class="text-center">
+                                <div class="text-muted fw-bold">8</div>
+                                <button type="button" class="btn btn-outline-dark btn-lg bit-btn" id="bit3" onclick="toggleBit('bit3')">0</button>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-muted fw-bold">4</div>
+                                <button type="button" class="btn btn-outline-dark btn-lg bit-btn" id="bit2" onclick="toggleBit('bit2')">0</button>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-muted fw-bold">2</div>
+                                <button type="button" class="btn btn-outline-dark btn-lg bit-btn" id="bit1" onclick="toggleBit('bit1')">0</button>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-muted fw-bold">1</div>
+                                <button type="button" class="btn btn-outline-dark btn-lg bit-btn" id="bit0" onclick="toggleBit('bit0')">0</button>
+                            </div>
+                        </div>
+
+                        <div class="text-center fs-4 mb-4">
+                            Valor Atual Binário: <strong id="binary-preview" class="font-monospace">0000</strong> 
+                            (= Decimal: <strong id="decimal-preview">0</strong>)
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn btn-success btn-lg px-5" onclick="checkAnswer()">Enviar Resposta</button>
+                        </div>
+                        
+                        <div id="game-feedback" class="alert mt-3 d-none"></div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="report-content" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card p-4 shadow-sm h-100">
+                                <h3 class="text-center text-success">🏆 Ranking dos Players</h3>
+                                <hr class="colorgraph">
+                                <div class="table-responsive">
+                                    <table class="table table-striped align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>Posição</th>
+                                                <th>Apelido</th>
+                                                <th>Pontuação</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="ranking-table-body">
+                                            </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="card p-4 shadow-sm h-100">
+                                <h3 class="text-center text-primary">📊 Painel de Desempenho</h3>
+                                <hr class="colorgraph">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Aproveitamento</th>
+                                                <th>Fases Concluídas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="performance-table-body">
+                                            </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+        <script src="../../firebase-init.js"></script>
+        <script src="../../assets/js/game-binary/game-binary.js"></script>
+    </body>
+</html>
