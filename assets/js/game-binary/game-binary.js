@@ -9,11 +9,11 @@ let correctAttempts = 0;
 
 // Configurações do Caça-Palavras
 const gridData = [
-    ['B', 'I', 'T', 'X', 'Z', 'B'],
-    ['Y', 'A', 'K', 'O', 'E', 'A'],
-    ['T', 'X', 'U', 'M', 'R', 'S'],
-    ['E', 'S', 'O', 'M', 'A', 'E'],
-    ['Q', 'W', 'E', 'R', 'T', 'Y']
+    ['Q', 'B', 'I', 'T', 'Z', 'B'],
+    ['B', 'A', 'K', 'O', 'E', 'A'],
+    ['Y', 'X', 'U', 'M', 'R', 'S'],
+    ['T', 'S', 'O', 'M', 'A', 'E'],
+    ['E', 'W', 'E', 'R', 'T', 'Y']
 ];
 
 const targetWords = {
