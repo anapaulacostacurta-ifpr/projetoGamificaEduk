@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html lang="pt-BR">
+<html lang="pt-BR">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,7 +11,9 @@
         />
         <link rel="stylesheet" href="../../assets/css/style.css" />
         <style>
-            /* Estilos customizados para o Caça-Palavras */
+            /* --- OTIMIZAÇÃO PARA DISPOSITIVOS MÓVEIS --- */
+            
+            /* Configurações padrão para Computadores */
             #wordsearch-grid td {
                 width: 45px;
                 height: 45px;
@@ -20,6 +22,51 @@
                 font-weight: bold;
                 transition: background 0.2s ease;
             }
+
+            .bit-container {
+                gap: 1rem;
+            }
+
+            .bit-btn-custom {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            /* Ajustes específicos para Telemóveis / Ecrãs Pequenos (Mobile) */
+            @media (max-width: 576px) {
+                /* Reduz o tamanho do Caça-Palavras para não cortar no ecrã */
+                #wordsearch-grid td {
+                    width: 35px;
+                    height: 35px;
+                    font-size: 1.1rem !important;
+                }
+                
+                /* Ajusta os botões dos bits (0 / 1) para caberem lado a lado na vertical */
+                .bit-container {
+                    gap: 0.5rem !important;
+                }
+                
+                .bit-btn-custom {
+                    width: 45px;
+                    height: 45px;
+                    font-size: 1.2rem;
+                    padding: 0;
+                }
+
+                /* Melhora o espaçamento das abas em touchscreens */
+                .nav-tabs .nav-link {
+                    padding: 0.5rem 0.75rem;
+                    font-size: 0.9rem;
+                }
+
+                /* Reduz títulos gigantes para melhor leitura no telemóvel */
+                .display-4 {
+                    font-size: 1.8rem !important;
+                }
+            }
+
+            /* Efeitos visuais para células selecionadas */
             #wordsearch-grid td:hover {
                 background-color: #495057;
             }
@@ -30,241 +77,188 @@
         </style>
     </head>
     <body class="bg-light">     
-        <main class="container my-4" role="main">
-            <ul class="nav nav-tabs mb-4" id="gameTabs" role="tablist">
+        <main class="container my-3 px-2" role="main">
+            <ul class="nav nav-tabs mb-3 flex-nowrap overflow-x-auto text-nowrap" id="gameTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="learn-tab" data-bs-toggle="tab" data-bs-target="#learn-content" type="button" role="tab" aria-controls="learn-content" aria-selected="true">📖 Aprender (Microlearning)</button>
+                    <button class="nav-link active" id="learn-tab" data-bs-toggle="tab" data-bs-target="#learn-content" type="button" role="tab" aria-controls="learn-content" aria-selected="true">📖 Aprender</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="game-tab" data-bs-toggle="tab" data-bs-target="#game-content" type="button" role="tab" aria-controls="game-content" aria-selected="false">🎮 Jogar Missão</button>
+                    <button class="nav-link" id="game-tab" data-bs-toggle="tab" data-bs-target="#game-content" type="button" role="tab" aria-controls="game-content" aria-selected="false">🎮 Jogar</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report-content" type="button" role="tab" aria-controls="report-content" aria-selected="false" onclick="loadReports()">📊 Desempenho & Ranking</button>
+                    <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report-content" type="button" role="tab" aria-controls="report-content" aria-selected="false" onclick="loadReports()">📊 Desempenho</button>
                 </li>
             </ul>
 
             <div class="tab-content" id="gameTabsContent">
                 
                 <div class="tab-pane fade show active" id="learn-content" role="tabpanel" aria-labelledby="learn-tab">
-                    <div class="row g-3">
-                        <div class="col-md-4">
+                    <div class="row g-2">
+                        <div class="col-12 col-md-4">
                             <div class="card h-100 border-start border-primary border-4 shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title text-primary">💡 1. O que é um Bit?</h5>
-                                    <p class="card-text fs-6">Computadores não entendem "5" ou "A". Eles usam transistores que só têm dois estados: <strong>Ligado (1)</strong> ou <strong>Desligado (0)</strong>. Cada dígito desse é um <strong>bit</strong> (<i>Binary Digit</i>).</p>
-                                    <span class="badge bg-secondary">Tempo de leitura: 30s</span>
+                                <div class="card-body p-3">
+                                    <h5 class="card-title text-primary fs-6 fw-bold">💡 1. O que é um Bit?</h5>
+                                    <p class="card-text small">Computadores usam transístores que só têm dois estados: <strong>Ligado (1)</strong> ou <strong>Desligado (0)</strong>. Cada dígito é um <strong>bit</strong>.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-12 col-md-4">
                             <div class="card h-100 border-start border-success border-4 shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title text-success">🧮 2. O Segredo dos Pesos</h5>
-                                    <p class="card-text fs-6">No nosso sistema decimal, as casas valem $1, 10, 100...$ No binário, a base é 2, então os pesos dobram de valor a cada casa da direita para a esquerda:</p>
-                                    <div class="bg-dark text-light p-2 rounded text-center font-monospace mb-2">
+                                <div class="card-body p-3">
+                                    <h5 class="card-title text-success fs-6 fw-bold">🧮 2. O Segredo dos Pesos</h5>
+                                    <p class="card-text small">No binário, a base é 2, então os pesos dobram de valor a cada casa da direita para a esquerda:</p>
+                                    <div class="bg-dark text-light p-1 rounded text-center font-monospace small mb-1">
                                         8 ➔ 4 ➔ 2 ➔ 1
                                     </div>
-                                    <span class="badge bg-secondary">Tempo de leitura: 45s</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-12 col-md-4">
                             <div class="card h-100 border-start border-warning border-4 shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title text-warning text-dark">🚀 3. Como Converter?</h5>
-                                    <p class="card-text fs-6">Para formar um número, basta "ligar" (1) os pesos necessários para somar o valor desejado. <br><br><strong>Exemplo:</strong> Para fazer o <b>5</b>, precisamos de $4 + 1$. Ligamos o peso 4 e o peso 1: <code class="bg-light px-1 text-danger">0101</code></p>
-                                    <span class="badge bg-secondary">Tempo de leitura: 45s</span>
+                                <div class="card-body p-3">
+                                    <h5 class="card-title text-warning text-dark fs-6 fw-bold">🚀 3. Como Converter?</h5>
+                                    <p class="card-text small">Para formar um número, basta "ligar" (1) os pesos necessários. <br><strong>Exemplo (5):</strong> $4 + 1$ ligados = <code class="bg-light px-1 text-danger">0101</code></p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card mt-4 border-0 shadow-sm">
-                        <div class="card-body p-4">
-                            <h4 class="text-secondary mb-3">🧩 Desafio de Fixação: Caça-Termos Tecnológicos</h4>
-                            <p class="text-muted">Encontre as palavras-chave ocultas na matriz clicando sobre as letras: <strong>BIT, BYTE, BASE, SOMA, ZERO, UM</strong>.</p>
+                    <div class="card mt-3 border-0 shadow-sm">
+                        <div class="card-body p-3">
+                            <h5 class="fw-bold text-secondary mb-2">🧩 Caça-Termos Tecnológicos</h5>
+                            <p class="small text-muted mb-3">Encontre: <strong>BIT, BYTE, BASE, SOMA, ZERO, UM</strong>.</p>
                             
-                            <div class="row align-items-center">
-                                <div class="col-md-6 d-flex justify-content-center">
-                                    <div class="word-search-container bg-dark p-3 rounded shadow">
-                                        <table class="table table-bordered border-secondary text-center text-white m-0 font-monospace fs-4" id="wordsearch-grid" style="cursor: pointer; user-select: none;">
+                            <div class="row g-3 align-items-center">
+                                <div class="col-12 col-md-6 d-flex justify-content-center">
+                                    <div class="word-search-container bg-dark p-2 rounded shadow">
+                                        <table class="table table-bordered border-secondary text-center text-white m-0 font-monospace fs-5" id="wordsearch-grid" style="cursor: pointer; user-select: none;">
                                             </table>
                                     </div>
                                 </div>
                                 
-                                <div class="col-md-6 mt-3 mt-md-0">
-                                    <h5 class="fw-bold">Palavras para encontrar:</h5>
-                                    <div class="d-flex flex-wrap gap-2 fs-5" id="word-list-bank">
-                                        <span class="badge bg-outline-secondary border text-dark p-2" id="w-BIT">BIT</span>
-                                        <span class="badge bg-outline-secondary border text-dark p-2" id="w-BYTE">BYTE</span>
-                                        <span class="badge bg-outline-secondary border text-dark p-2" id="w-BASE">BASE</span>
-                                        <span class="badge bg-outline-secondary border text-dark p-2" id="w-SOMA">SOMA</span>
-                                        <span class="badge bg-outline-secondary border text-dark p-2" id="w-ZERO">ZERO</span>
-                                        <span class="badge bg-outline-secondary border text-dark p-2" id="w-UM">UM</span>
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex flex-wrap gap-1" id="word-list-bank">
+                                        <span class="badge bg-outline-secondary border text-dark p-2 small" id="w-BIT">BIT</span>
+                                        <span class="badge bg-outline-secondary border text-dark p-2 small" id="w-BYTE">BYTE</span>
+                                        <span class="badge bg-outline-secondary border text-dark p-2 small" id="w-BASE">BASE</span>
+                                        <span class="badge bg-outline-secondary border text-dark p-2 small" id="w-SOMA">SOMA</span>
+                                        <span class="badge bg-outline-secondary border text-dark p-2 small" id="w-ZERO">ZERO</span>
+                                        <span class="badge bg-outline-secondary border text-dark p-2 small" id="w-UM">UM</span>
                                     </div>
-                                    <div id="wordsearch-feedback" class="alert alert-success mt-3 d-none" role="alert">
-                                        🎉 Excelente! Você encontrou os termos fundamentais da arquitetura de computadores!
+                                    <div id="wordsearch-feedback" class="alert alert-success mt-2 p-2 small d-none" role="alert">
+                                        🎉 Excelente! Encontrou todos os termos!
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card mt-4 border-0 shadow-sm">
-                        <div class="card-body p-4">
-                            <h4 class="text-secondary mb-3">📝 Quiz Rápido: Teste seus Circuitos</h4>
-                            <p class="text-muted">Responda corretamente para liberar um bônus especial de <strong>+30 Moedas</strong> no seu perfil!</p>
-                            <hr>
+                    <div class="card mt-3 border-0 shadow-sm">
+                        <div class="card-body p-3">
+                            <h5 class="fw-bold text-secondary mb-2">📝 Quiz Rápido</h5>
+                            <hr class="my-2">
 
                             <form id="quiz-form" novalidate>
-                                <div class="mb-4 quiz-question" data-correct="B">
-                                    <h5 class="fw-bold">1. Se o bit 0 representa "Desligado", o que o bit 1 representa?</h5>
-                                    <div class="form-check mb-2">
+                                <div class="mb-3 quiz-question" data-correct="B">
+                                    <p class="fw-bold small mb-1">1. Se o bit 0 é "Desligado", o bit 1 representa:</p>
+                                    <div class="form-check small">
                                         <input class="form-check-input" type="radio" name="q1" id="q1a" value="A">
                                         <label class="form-check-label" for="q1a">A) Reiniciado</label>
                                     </div>
-                                    <div class="form-check mb-2">
+                                    <div class="form-check small">
                                         <input class="form-check-input" type="radio" name="q1" id="q1b" value="B">
                                         <label class="form-check-label" for="q1b">B) Ligado</label>
                                     </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="q1" id="q1c" value="C">
-                                        <label class="form-check-label" for="q1c">C) Quebrado</label>
-                                    </div>
                                 </div>
 
-                                <div class="mb-4 quiz-question" data-correct="C">
-                                    <h5 class="fw-bold">2. Qual é a sequência correta dos pesos dos bits de um número binário de 4 bits (da esquerda para a direita)?</h5>
-                                    <div class="form-check mb-2">
+                                <div class="mb-3 quiz-question" data-correct="C">
+                                    <p class="fw-bold small mb-1">2. Qual a sequência correta dos pesos (4 bits)?</p>
+                                    <div class="form-check small">
                                         <input class="form-check-input" type="radio" name="q2" id="q2a" value="A">
                                         <label class="form-check-label" for="q2a">A) 1, 2, 3, 4</label>
                                     </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="q2" id="q2b" value="B">
-                                        <label class="form-check-label" for="q2b">B) 10, 100, 1000, 10000</label>
-                                    </div>
-                                    <div class="form-check mb-2">
+                                    <div class="form-check small">
                                         <input class="form-check-input" type="radio" name="q2" id="q2c" value="C">
                                         <label class="form-check-label" for="q2c">C) 8, 4, 2, 1</label>
                                     </div>
                                 </div>
 
-                                <div class="mb-4 quiz-question" data-correct="A">
-                                    <h5 class="fw-bold">3. Como representamos o número decimal 3 em binário de 4 bits utilizando a soma de pesos?</h5>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="q3" id="q3a" value="A">
-                                        <label class="form-check-label" for="q3a">A) 0011 (porque 2 + 1 = 3)</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="q3" id="q3b" value="B">
-                                        <label class="form-check-label" for="q3b">B) 0101 (porque 4 + 1 = 5)</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="q3" id="q3c" value="C">
-                                        <label class="form-check-label" for="q3c">C) 1000 (porque o peso inicial é 8)</label>
-                                    </div>
-                                </div>
-
-                                <button type="button" class="btn btn-primary" id="btn-submit-quiz" onclick="validarQuiz()">Enviar Respostas</button>
+                                <button type="button" class="btn btn-primary btn-sm w-100" id="btn-submit-quiz" onclick="validarQuiz()">Enviar Respostas</button>
                             </form>
-
-                            <div id="quiz-feedback" class="alert mt-3 d-none" role="alert"></div>
+                            <div id="quiz-feedback" class="alert mt-2 p-2 small d-none" role="alert"></div>
                         </div>
                     </div>
 
-                    <div class="card mt-4 text-center p-4 bg-white border-0 shadow-sm">
-                        <h4>Pronto para testar seus novos circuitos mentais?</h4>
-                        <p class="text-muted">Vá para a próxima aba para inicializar o decodificador e coletar moedas!</p>
-                        <div>
-                            <button class="btn btn-success px-5 btn-lg" onclick="document.getElementById('game-tab').click()">Iniciar Missão Prática ➔</button>
-                        </div>
+                    <div class="card mt-3 text-center p-3 bg-white border-0 shadow-sm">
+                        <button class="btn btn-success w-100" onclick="document.getElementById('game-tab').click()">Iniciar Missão Prática ➔</button>
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="game-content" role="tabpanel" aria-labelledby="game-tab">
-                    <div class="card p-4 shadow-sm">
+                    <div class="card p-3 shadow-sm">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h2>Fase <span id="current-phase">1</span>: Decodificador Base 2</h2>
-                            <span class="badge bg-warning text-dark fs-6">Moedas: <span id="player-coins">0</span> 🪙</span>
+                            <h5 class="m-0 fw-bold">Fase <span id="current-phase">1</span></h5>
+                            <span class="badge bg-warning text-dark">Moedas: <span id="player-coins">0</span> 🪙</span>
                         </div>
-                        <p class="text-muted">Alterne o estado dos bits abaixo para que a soma corresponda ao número decimal solicitado.</p>
-                        <hr class="colorgraph" />
+                        <hr class="my-2" />
 
-                        <div class="text-center my-4">
-                            <h3 class="display-4 text-primary">Converter o número: <strong id="decimal-target">5</strong></h3>
-                        </div>
-
-                        <div class="d-flex justify-content-center gap-3 my-4">
-                            <div class="text-center">
-                                <div class="text-muted fw-bold mb-1">8</div>
-                                <button type="button" class="btn btn-outline-dark btn-lg bit-btn" id="bit3" onclick="toggleBit('bit3')">0</button>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-muted fw-bold mb-1">4</div>
-                                <button type="button" class="btn btn-outline-dark btn-lg bit-btn" id="bit2" onclick="toggleBit('bit2')">0</button>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-muted fw-bold mb-1">2</div>
-                                <button type="button" class="btn btn-outline-dark btn-lg bit-btn" id="bit1" onclick="toggleBit('bit1')">0</button>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-muted fw-bold mb-1">1</div>
-                                <button type="button" class="btn btn-outline-dark btn-lg bit-btn" id="bit0" onclick="toggleBit('bit0')">0</button>
-                            </div>
+                        <div class="text-center my-2">
+                            <span class="text-muted small d-block">Converta o número:</span>
+                            <h2 class="display-4 text-primary fw-bold m-0" id="decimal-target">5</h2>
                         </div>
 
-                        <div class="text-center fs-4 mb-4">
-                            Valor Binário Atual: <strong id="binary-preview" class="font-monospace text-success">0000</strong> 
+                        <div class="d-flex justify-content-center bit-container my-3">
+                            <div class="text-center">
+                                <div class="small text-muted mb-1">8</div>
+                                <button type="button" class="btn btn-outline-dark rounded-circle bit-btn-custom fw-bold" id="bit3" onclick="toggleBit('bit3')">0</button>
+                            </div>
+                            <div class="text-center">
+                                <div class="small text-muted mb-1">4</div>
+                                <button type="button" class="btn btn-outline-dark rounded-circle bit-btn-custom fw-bold" id="bit2" onclick="toggleBit('bit2')">0</button>
+                            </div>
+                            <div class="text-center">
+                                <div class="small text-muted mb-1">2</div>
+                                <button type="button" class="btn btn-outline-dark rounded-circle bit-btn-custom fw-bold" id="bit1" onclick="toggleBit('bit1')">0</button>
+                            </div>
+                            <div class="text-center">
+                                <div class="small text-muted mb-1">1</div>
+                                <button type="button" class="btn btn-outline-dark rounded-circle bit-btn-custom fw-bold" id="bit0" onclick="toggleBit('bit0')">0</button>
+                            </div>
+                        </div>
+
+                        <div class="text-center small mb-3">
+                            Binário: <strong id="binary-preview" class="font-monospace text-success">0000</strong> <br>
                             (= Decimal: <strong id="decimal-preview">0</strong>)
                         </div>
 
-                        <div class="text-center">
-                            <button class="btn btn-success btn-lg px-5" onclick="checkAnswer()">Enviar Resposta</button>
-                        </div>
-                        
-                        <div id="game-feedback" class="alert mt-3 d-none" role="alert"></div>
+                        <button class="btn btn-success w-100 py-2" onclick="checkAnswer()">Enviar Resposta</button>
+                        <div id="game-feedback" class="alert mt-2 p-2 small d-none" role="alert"></div>
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="report-content" role="tabpanel" aria-labelledby="report-tab">
-                    <div class="row">
-                        <div class="col-md-6 mb-4">
-                            <div class="card p-4 shadow-sm h-100">
-                                <h3 class="text-center text-success">🏆 Ranking dos Players</h3>
-                                <hr class="colorgraph" />
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="card p-3 shadow-sm">
+                                <h6 class="fw-bold text-success text-center">🏆 Ranking de Líderes</h6>
                                 <div class="table-responsive">
-                                    <table class="table table-striped align-middle">
-                                        <thead>
-                                            <tr>
-                                                <th>Posição</th>
-                                                <th>Apelido</th>
-                                                <th>Pontuação</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="ranking-table-body">
-                                            </tbody>
+                                    <table class="table table-sm table-striped align-middle small m-0">
+                                        <thead><tr><th>Pos</th><th>Apelido</th><th>Pontos</th></tr></thead>
+                                        <tbody id="ranking-table-body"></tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-4">
-                            <div class="card p-4 shadow-sm h-100">
-                                <h3 class="text-center text-primary">📊 Painel de Desempenho</h3>
-                                <hr class="colorgraph" />
+                        <div class="col-12">
+                            <div class="card p-3 shadow-sm">
+                                <h6 class="fw-bold text-primary text-center">📊 Desempenho Turma</h6>
                                 <div class="table-responsive">
-                                    <table class="table table-hover align-middle">
-                                        <thead>
-                                            <tr>
-                                                <th>Nome do Estudante</th>
-                                                <th>Aproveitamento</th>
-                                                <th>Fases Concluídas</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="performance-table-body">
-                                            </tbody>
+                                    <table class="table table-sm table-hover align-middle small m-0">
+                                        <thead><tr><th>Nome</th><th>% Acerto</th><th>Fases</th></tr></thead>
+                                        <tbody id="performance-table-body"></tbody>
                                     </table>
                                 </div>
                             </div>
