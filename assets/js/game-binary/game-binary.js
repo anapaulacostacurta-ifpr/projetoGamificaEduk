@@ -297,4 +297,37 @@ function loadReports() {
               position++;
           });
           
-          // CORREÇÃO: Usando estritamente a variável correta mape
+          // CORREÇÃO: Usando estritamente a variável correta mapeada no DOM
+          rankingTableBody.innerHTML = rowsHtml || `<tr><td colspan="3" class="text-center">Nenhum registro ainda.</td></tr>`;
+      })
+      .catch(err => {
+          console.error("Erro ao carregar ranking: ", err);
+          rankingTableBody.innerHTML = `<tr><td colspan="3" class="text-center text-danger">Erro ao carregar dados.</td></tr>`;
+      });
+
+    // 2. Atualização Corrigida do Painel de Desempenho
+    db.collection("scoreboards")
+      .orderBy("name", "asc")
+      .get()
+      .then((querySnapshot) => {
+          let rowsHtml = "";
+          
+          querySnapshot.forEach((doc) => {
+              const data = doc.data();
+              let badgeColor = data.accuracy >= 70 ? "bg-success" : (data.accuracy >= 50 ? "bg-warning text-dark" : "bg-danger");
+              
+              rowsHtml += `
+                <tr>
+                    <td>${data.name || "Estudante"} <small class="text-muted">(${data.nickname || "Anonimo"})</small></td>
+                    <td><span class="badge ${badgeColor}">${data.accuracy || 0}% de precisão</span></td>
+                    <td><span class="text-primary fw-bold">${(data.phasesCompleted || 1) - 1}</span> fases salvas</td>
+                </tr>`;
+          });
+          
+          performanceTableBody.innerHTML = rowsHtml || `<tr><td colspan="3" class="text-center">Nenhum dado analítico encontrado.</td></tr>`;
+      })
+      .catch(err => {
+          console.error("Erro ao carregar métricas: ", err);
+          performanceTableBody.innerHTML = `<tr><td colspan="3" class="text-center text-danger">Erro ao carregar métricas.</td></tr>`;
+      });
+}
