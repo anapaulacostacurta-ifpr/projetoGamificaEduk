@@ -7,6 +7,27 @@ let coins = 0;
 let totalAttempts = 0;
 let correctAttempts = 0;
 
+// Configurações do Caça-Palavras
+const gridData = [
+    ['B', 'I', 'T', 'X', 'Z', 'B'],
+    ['Y', 'A', 'K', 'O', 'E', 'A'],
+    ['T', 'X', 'U', 'M', 'R', 'S'],
+    ['E', 'S', 'O', 'M', 'A', 'E'],
+    ['Q', 'W', 'E', 'R', 'T', 'Y']
+];
+
+const targetWords = {
+    "BIT":  [[0,0], [0,1], [0,2]],
+    "BYTE": [[0,0], [1,0], [2,0], [3,0]],
+    "BASE": [[0,5], [1,5], [2,5], [3,5]],
+    "SOMA": [[3,1], [3,2], [3,3], [3,4]],
+    "ZERO": [[0,4], [1,4], [2,4]], 
+    "UM":   [[2,2], [2,3]]
+};
+
+let selectedCells = [];
+let foundWords = [];
+
 // Inicializa Autenticação e Carrega o Jogo
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -60,7 +81,6 @@ function updatePreview() {
 
 // Gera um novo número randômico dependendo da fase atual
 function generateNewChallenge() {
-    // Reseta botões para 0
     ['bit3', 'bit2', 'bit1', 'bit0'].forEach(id => {
         const btn = document.getElementById(id);
         btn.innerText = "0";
@@ -68,7 +88,6 @@ function generateNewChallenge() {
         btn.classList.add("btn-outline-dark");
     });
     
-    // Define limites baseados na fase (Gamificação por dificuldade)
     let max = phase <= 2 ? 7 : 15; 
     currentTargetDecimal = Math.floor(Math.random() * max) + 1;
     
@@ -86,17 +105,15 @@ function checkAnswer() {
 
     if (currentDecimalPreview === currentTargetDecimal) {
         correctAttempts++;
-        coins += 10; // Recompensa por acerto
-        phase++; // Avança fase de narrativa
+        coins += 10; 
+        phase++; 
         
         feedback.innerText = `🎉 Excelente! Você decodificou o número! +10 Moedas adicionadas.`;
         feedback.classList.add("alert-success");
         
-        // Atualiza interface do usuário local
         document.getElementById("player-coins").innerText = coins;
         document.getElementById("current-phase").innerText = phase;
 
-        // Salva dados no banco de dados para os relatórios
         saveScoreboardData();
         setTimeout(generateNewChallenge, 2000);
     } else {
@@ -107,15 +124,14 @@ function checkAnswer() {
 
 // Persiste o Score e Aproveitamento no Firestore
 function saveScoreboardData() {
-    const accuracy = Math.round((correctAttempts / totalAttempts) * 100);
+    const accuracy = totalAttempts > 0 ? Math.round((correctAttempts / totalAttempts) * 100) : 100;
     
-    // Busca o nickname do perfil do usuário para exibir corretamente nos rankings
     db.collection("users").doc(currentUser.uid).get().then(userDoc => {
         let nickname = "Player Anonimo";
         let name = "Estudante";
         if(userDoc.exists) {
-            nickname = userDoc.data().nickname || userDoc.data().name;
-            name = userDoc.data().name;
+            nickname = userDoc.data().nickname || userDoc.data().name || "Player Anonimo";
+            name = userDoc.data().name || "Estudante";
         }
 
         db.collection("scoreboards").doc(currentUser.uid).set({
@@ -126,12 +142,133 @@ function saveScoreboardData() {
             phasesCompleted: phase,
             accuracy: accuracy,
             lastPlayed: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
+        }, { merge: true }).then(() => {
+            console.log("Pontuação sincronizada com sucesso!");
+        });
     });
 }
 
 /* ==========================================
-   MÓDULO DE RELATÓRIOS E RANKINGS (FIRESTORE)
+   MÓDULO DE REQUISITOS EXTRA: CAÇA-PALAVRAS
+   ========================================== */
+function buildWordSearchGrid() {
+    const table = document.getElementById("wordsearch-grid");
+    if (!table) return;
+
+    let tableHtml = "";
+    for (let r = 0; r < gridData.length; r++) {
+        tableHtml += "<tr>";
+        for (let c = 0; c < gridData[r].length; c++) {
+            tableHtml += `<td id="cell-${r}-${c}" onclick="selectCell(${r}, ${c})">${gridData[r][c]}</td>`;
+        }
+        tableHtml += "</tr>";
+    }
+    table.innerHTML = tableHtml;
+}
+
+function selectCell(r, c) {
+    const cellId = `cell-${r}-${c}`;
+    const cellElement = document.getElementById(cellId);
+    
+    const index = selectedCells.findIndex(cell => cell.r === r && cell.c === c);
+    
+    if (index >= 0) {
+        selectedCells.splice(index, 1);
+        cellElement.classList.remove("bg-primary");
+    } else {
+        selectedCells.push({ r, c });
+        cellElement.classList.add("bg-primary");
+    }
+
+    checkSelectedWord();
+}
+
+function checkSelectedWord() {
+    for (let word in targetWords) {
+        if (foundWords.includes(word)) continue;
+
+        const coords = targetWords[word];
+        let match = coords.every(coord => 
+            selectedCells.some(selected => selected.r === coord[0] && selected.c === coord[1])
+        );
+
+        if (match) {
+            const wordBadge = document.getElementById(`w-${word}`);
+            if (wordBadge) {
+                wordBadge.classList.replace("bg-outline-secondary", "bg-success");
+                wordBadge.classList.add("text-white", "text-decoration-line-through");
+            }
+            
+            coords.forEach(coord => {
+                const cell = document.getElementById(`cell-${coord[0]}-${coord[1]}`);
+                cell.classList.remove("bg-primary");
+                cell.classList.add("bg-success");
+                cell.style.pointerEvents = "none";
+            });
+
+            foundWords.push(word);
+            selectedCells = [];
+        }
+    }
+
+    if (foundWords.length === Object.keys(targetWords).length) {
+        document.getElementById("wordsearch-feedback").classList.remove("d-none");
+    }
+}
+
+/* ==========================================
+   MÓDULO DE REQUISITOS EXTRA: QUIZ
+   ========================================== */
+function validarQuiz() {
+    const questions = document.querySelectorAll(".quiz-question");
+    let totalQuestions = questions.length;
+    let correctAnswersCount = 0;
+    let answeredCount = 0;
+
+    questions.forEach(q => q.classList.remove("text-success", "text-danger"));
+
+    questions.forEach((q, index) => {
+        const questionNum = index + 1;
+        const selectedRadio = q.querySelector(`input[name="q${questionNum}"]:checked`);
+        const correctAnswer = q.getAttribute("data-correct");
+
+        if (selectedRadio) {
+            answeredCount++;
+            if (selectedRadio.value === correctAnswer) {
+                correctAnswersCount++;
+                q.classList.add("text-success");
+            } else {
+                q.classList.add("text-danger");
+            }
+        }
+    });
+
+    const feedback = document.getElementById("quiz-feedback");
+    if (answeredCount < totalQuestions) {
+        feedback.className = "alert alert-warning mt-3 p-2 small";
+        feedback.innerText = "⚠️ Responda a todas as perguntas antes de enviar!";
+        feedback.classList.remove("d-none");
+        return;
+    }
+
+    feedback.classList.remove("d-none", "alert-success", "alert-danger", "alert-warning");
+
+    if (correctAnswersCount === totalQuestions) {
+        feedback.className = "alert alert-success mt-3 p-2 small";
+        feedback.innerHTML = `🎉 <strong>Gabaritou!</strong> +30 Moedas adicionadas à sua carteira!`;
+        document.getElementById("btn-submit-quiz").disabled = true;
+        
+        coins += 30;
+        document.getElementById("player-coins").innerText = coins;
+        saveScoreboardData();
+    } else {
+        feedback.className = "alert alert-danger mt-3 p-2 small";
+        feedback.innerHTML = `❌ Você acertou ${correctAnswersCount} de ${totalQuestions}. Revise e tente de novo!`;
+    }
+}
+
+/* ==========================================
+   MÓDULO DE RELATÓRIOS E RANKINGS (CORRIGIDO)
    ========================================== */
 function loadReports() {
     const rankingTableBody = document.getElementById("ranking-table-body");
@@ -140,7 +277,7 @@ function loadReports() {
     rankingTableBody.innerHTML = `<tr><td colspan="3" class="text-center">Carregando dados...</td></tr>`;
     performanceTableBody.innerHTML = `<tr><td colspan="3" class="text-center">Carregando dados...</td></tr>`;
 
-    // Consulta para o Ranking Geral (Ordenado por Maior Score de Moedas)
+    // 1. Atualização Corrigida do Ranking Geral
     db.collection("scoreboards")
       .orderBy("score", "desc")
       .limit(10)
@@ -148,37 +285,16 @@ function loadReports() {
       .then((querySnapshot) => {
           let rowsHtml = "";
           let position = 1;
+          
           querySnapshot.forEach((doc) => {
               const data = doc.data();
               rowsHtml += `
                 <tr>
                     <td><strong>${position}°</strong></td>
-                    <td>${data.nickname}</td>
-                    <td><span class="badge bg-warning text-dark">${data.score} 🪙</span></td>
+                    <td>${data.nickname || "Anonimo"}</td>
+                    <td><span class="badge bg-warning text-dark">${data.score || 0} 🪙</span></td>
                 </tr>`;
               position++;
           });
-          rankingTableBody.innerHTML = rowsHtml || `<tr><td colspan="3" class="text-center">Nenhum registro ainda.</td></tr>`;
-      }).catch(err => console.error("Erro ao carregar ranking: ", err));
-
-    // Consulta para o Painel de Desempenho / Professor (Ordenado por Nome do Estudante)
-    db.collection("scoreboards")
-      .orderBy("name", "asc")
-      .get()
-      .then((querySnapshot) => {
-          let rowsHtml = "";
-          querySnapshot.forEach((doc) => {
-              const data = doc.data();
-              // Determina a cor com base na taxa de acerto do aluno técnico
-              let badgeColor = data.accuracy >= 70 ? "bg-success" : (data.accuracy >= 50 ? "bg-warning text-dark" : "bg-danger");
-              
-              rowsHtml += `
-                <tr>
-                    <td>${data.name} <small class="text-muted">(${data.nickname})</small></td>
-                    <td><span class="badge ${badgeColor}">${data.accuracy}% de precisão</span></td>
-                    <td><span class="text-primary fw-bold">${data.phasesCompleted - 1}</span> fases salvas</td>
-                </tr>`;
-          });
-          performanceTableBody.innerHTML = rowsHtml || `<tr><td colspan="3" class="text-center">Nenhum dado analítico encontrado.</td></tr>`;
-      }).catch(err => console.error("Erro ao carregar métricas: ", err));
-}
+          
+          // CORREÇÃO: Usando estritamente a variável correta mape
