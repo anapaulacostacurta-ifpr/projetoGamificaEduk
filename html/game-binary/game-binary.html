@@ -11,9 +11,7 @@
         />
         <link rel="stylesheet" href="../../assets/css/style.css" />
         <style>
-            /* --- OTIMIZAÇÃO PARA DISPOSITIVOS MÓVEIS --- */
-            
-            /* Configurações padrão para Computadores */
+            /* --- OTIMIZAÇÃO E RESPONSIVIDADE (Celular A56) --- */
             #wordsearch-grid td {
                 width: 45px;
                 height: 45px;
@@ -33,16 +31,14 @@
                 font-size: 1.5rem;
             }
 
-            /* Ajustes específicos para Telemóveis / Ecrãs Pequenos (Mobile) */
+            /* Ajustes Mobile Extremamente Importantes */
             @media (max-width: 576px) {
-                /* Reduz o tamanho do Caça-Palavras para não cortar no ecrã */
                 #wordsearch-grid td {
                     width: 35px;
                     height: 35px;
                     font-size: 1.1rem !important;
                 }
                 
-                /* Ajusta os botões dos bits (0 / 1) para caberem lado a lado na vertical */
                 .bit-container {
                     gap: 0.5rem !important;
                 }
@@ -54,19 +50,16 @@
                     padding: 0;
                 }
 
-                /* Melhora o espaçamento das abas em touchscreens */
                 .nav-tabs .nav-link {
-                    padding: 0.5rem 0.75rem;
-                    font-size: 0.9rem;
+                    padding: 0.5rem 0.6rem;
+                    font-size: 0.85rem;
                 }
 
-                /* Reduz títulos gigantes para melhor leitura no telemóvel */
                 .display-4 {
                     font-size: 1.8rem !important;
                 }
             }
 
-            /* Efeitos visuais para células selecionadas */
             #wordsearch-grid td:hover {
                 background-color: #495057;
             }
@@ -78,21 +71,28 @@
     </head>
     <body class="bg-light">     
         <main class="container my-3 px-2" role="main">
+            
             <ul class="nav nav-tabs mb-3 flex-nowrap overflow-x-auto text-nowrap" id="gameTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="learn-tab" data-bs-toggle="tab" data-bs-target="#learn-content" type="button" role="tab" aria-controls="learn-content" aria-selected="true">📖 Aprender</button>
+                    <button class="nav-link active" id="learn-tab" data-bs-toggle="tab" data-bs-target="#learn-content" type="button" role="tab">📖 Conceitos</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="game-tab" data-bs-toggle="tab" data-bs-target="#game-content" type="button" role="tab" aria-controls="game-content" aria-selected="false">🎮 Jogar</button>
+                    <button class="nav-link" id="wordsearch-tab" data-bs-toggle="tab" data-bs-target="#wordsearch-content" type="button" role="tab" onclick="forçarRenderizacaoCacaPalavras()">🧩 Caça-Palavras</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report-content" type="button" role="tab" aria-controls="report-content" aria-selected="false" onclick="loadReports()">📊 Desempenho</button>
+                    <button class="nav-link" id="quiz-tab" data-bs-toggle="tab" data-bs-target="#quiz-content" type="button" role="tab">📝 Quiz</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="game-tab" data-bs-toggle="tab" data-bs-target="#game-content" type="button" role="tab">🎮 Jogar Missão</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report-content" type="button" role="tab" onclick="loadReports()">📊 Desempenho</button>
                 </li>
             </ul>
 
             <div class="tab-content" id="gameTabsContent">
                 
-                <div class="tab-pane fade show active" id="learn-content" role="tabpanel" aria-labelledby="learn-tab">
+                <div class="tab-pane fade show active" id="learn-content" role="tabpanel">
                     <div class="row g-2">
                         <div class="col-12 col-md-4">
                             <div class="card h-100 border-start border-primary border-4 shadow-sm">
@@ -102,19 +102,15 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-12 col-md-4">
                             <div class="card h-100 border-start border-success border-4 shadow-sm">
                                 <div class="card-body p-3">
                                     <h5 class="card-title text-success fs-6 fw-bold">🧮 2. O Segredo dos Pesos</h5>
                                     <p class="card-text small">No binário, a base é 2, então os pesos dobram de valor a cada casa da direita para a esquerda:</p>
-                                    <div class="bg-dark text-light p-1 rounded text-center font-monospace small mb-1">
-                                        8 ➔ 4 ➔ 2 ➔ 1
-                                    </div>
+                                    <div class="bg-dark text-light p-1 rounded text-center font-monospace small mb-1">8 ➔ 4 ➔ 2 ➔ 1</div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-12 col-md-4">
                             <div class="card h-100 border-start border-warning border-4 shadow-sm">
                                 <div class="card-body p-3">
@@ -124,11 +120,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card mt-3 text-center p-3 bg-white border-0 shadow-sm">
+                        <button class="btn btn-primary w-100" onclick="document.getElementById('wordsearch-tab').click()">Avançar para o Caça-Palavras ➔</button>
+                    </div>
+                </div>
 
-                    <div class="card mt-3 border-0 shadow-sm">
+                <div class="tab-pane fade" id="wordsearch-content" role="tabpanel">
+                    <div class="card border-0 shadow-sm">
                         <div class="card-body p-3">
                             <h5 class="fw-bold text-secondary mb-2">🧩 Caça-Termos Tecnológicos</h5>
-                            <p class="small text-muted mb-3">Encontre: <strong>BIT, BYTE, BASE, SOMA, ZERO, UM</strong>.</p>
+                            <p class="small text-muted mb-3">Clique nas letras para encontrar: <strong>BIT, BYTE, BASE, SOMA, ZERO, UM</strong>.</p>
                             
                             <div class="row g-3 align-items-center">
                                 <div class="col-12 col-md-6 d-flex justify-content-center">
@@ -137,7 +138,6 @@
                                             </table>
                                     </div>
                                 </div>
-                                
                                 <div class="col-12 col-md-6">
                                     <div class="d-flex flex-wrap gap-1" id="word-list-bank">
                                         <span class="badge bg-outline-secondary border text-dark p-2 small" id="w-BIT">BIT</span>
@@ -150,14 +150,18 @@
                                     <div id="wordsearch-feedback" class="alert alert-success mt-2 p-2 small d-none" role="alert">
                                         🎉 Excelente! Encontrou todos os termos!
                                     </div>
+                                    <button class="btn btn-primary w-100 mt-3" onclick="document.getElementById('quiz-tab').click()">Ir para o Quiz ➔</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card mt-3 border-0 shadow-sm">
+                <div class="tab-pane fade" id="quiz-content" role="tabpanel">
+                    <div class="card border-0 shadow-sm">
                         <div class="card-body p-3">
                             <h5 class="fw-bold text-secondary mb-2">📝 Quiz Rápido</h5>
+                            <p class="small text-muted">Gabarite para ganhar <strong>+30 moedas</strong> de bônus!</p>
                             <hr class="my-2">
 
                             <form id="quiz-form" novalidate>
@@ -188,15 +192,13 @@
                                 <button type="button" class="btn btn-primary btn-sm w-100" id="btn-submit-quiz" onclick="validarQuiz()">Enviar Respostas</button>
                             </form>
                             <div id="quiz-feedback" class="alert mt-2 p-2 small d-none" role="alert"></div>
+                            
+                            <button class="btn btn-success w-100 mt-3" onclick="document.getElementById('game-tab').click()">Avançar para a Missão Prática ➔</button>
                         </div>
-                    </div>
-
-                    <div class="card mt-3 text-center p-3 bg-white border-0 shadow-sm">
-                        <button class="btn btn-success w-100" onclick="document.getElementById('game-tab').click()">Iniciar Missão Prática ➔</button>
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="game-content" role="tabpanel" aria-labelledby="game-tab">
+                <div class="tab-pane fade" id="game-content" role="tabpanel">
                     <div class="card p-3 shadow-sm">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="m-0 fw-bold">Fase <span id="current-phase">1</span></h5>
@@ -238,7 +240,7 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="report-content" role="tabpanel" aria-labelledby="report-tab">
+                <div class="tab-pane fade" id="report-content" role="tabpanel">
                     <div class="row g-3">
                         <div class="col-12">
                             <div class="card p-3 shadow-sm">
@@ -251,7 +253,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-12">
                             <div class="card p-3 shadow-sm">
                                 <h6 class="fw-bold text-primary text-center">📊 Desempenho Turma</h6>
@@ -276,5 +277,14 @@
         <script src="../../firebase-init.js"></script>
         <script src="../../services/user.service.js"></script>
         <script src="game-binary.js"></script>
+
+        <script>
+            function forçarRenderizacaoCacaPalavras() {
+                if (typeof buildWordSearchGrid === 'function') {
+                    // Pequeno delay para esperar a aba terminar a animação de abertura do Bootstrap
+                    setTimeout(buildWordSearchGrid, 150);
+                }
+            }
+        </script>
     </body>
 </html>
